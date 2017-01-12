@@ -57,3 +57,4 @@ build.xml
 /src/main/resources/rebel.xml
 # External tool builders
 .externalToolBuilders/
+/Debug/

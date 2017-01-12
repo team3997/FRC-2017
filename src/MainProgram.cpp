@@ -4,7 +4,7 @@
 class MainProgram: public frc::IterativeRobot {
 public:
   MainProgram(void) {
-	  
+
   }
 private:
   void RobotInit() {
