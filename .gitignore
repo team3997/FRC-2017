@@ -47,6 +47,11 @@ tmp/**/*
 local.properties
 #.classpath
 sysProps.xml
+.classpath
+.cproject
+build.properties
+build.xml
+.project
 .settings/
 .loadpath
 /src/main/resources/rebel.xml
