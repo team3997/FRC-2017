@@ -69,5 +69,5 @@ void DriveController::TankDrive(double myLeft, double myRight) {
 }
 
 void DriveController::Reset() {
-    m_stateVal = kInitialize;
+  m_stateVal = kInitialize;
 }

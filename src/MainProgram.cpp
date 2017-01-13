@@ -3,6 +3,7 @@
 #include "DriveController.h"
 #include "RemoteControl.h"
 #include "ControlBoard.h"
+#include "DashboardLogger.h"
 #include <string.h>
 
 class MainProgram: public frc::IterativeRobot {
@@ -14,6 +15,8 @@ class MainProgram: public frc::IterativeRobot {
   RemoteControl *humanControl;
   //Creates a controller for drivetrain
   DriveController *driveController;
+  //Creates an object of Dashboardlogger
+  DashboardLogger *dashboardLogger;
 
   //Creates a time-keeper
   double currTimeSec;
@@ -24,6 +27,7 @@ public:
     robot = new RobotModel();
     humanControl = new ControlBoard();
     driveController = new DriveController(robot, humanControl);
+    dashboardLogger = new DashboardLogger(robot, humanControl);
 
     //Initializes timekeeper variables
     currTimeSec = 0.0;
@@ -37,7 +41,6 @@ private:
   }
 
   void AutonomousInit() {
-
     robot->ResetTimer();
 
     driveController->Reset();
@@ -49,11 +52,14 @@ private:
   }
 
   void AutonomousPeriodic() {
+    dashboardLogger->UpdateData();
 
     //Timer is updated
     lastTimeSec = currTimeSec;
     currTimeSec = robot->GetTime();
     deltaTimeSec = currTimeSec - lastTimeSec;
+
+    robot->UpdateCurrent();
   }
 
   void TeleopInit() {
@@ -70,6 +76,7 @@ private:
   }
 
   void TeleopPeriodic() {
+    dashboardLogger->UpdateData();
 
     //Updates timer
     lastTimeSec = currTimeSec;
@@ -90,7 +97,12 @@ private:
   }
 
   void DisabledPeriodic() {
+    dashboardLogger->UpdateData();
 
+    robot->UpdateCurrent();
+
+    //Reads controls and updates controllers accordingly
+    humanControl->ReadControls();
   }
 };
 

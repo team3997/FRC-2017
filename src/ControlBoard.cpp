@@ -34,14 +34,14 @@ void ControlBoard::ReadControls() {
 
   if (USING_WIN_DRIVER_STATION) {
     driverLeftJoyX = driverJoy->GetRawAxis(F310_WIN_LEFT_X_AXIS);
-    driverLeftJoyY = driverJoy->GetRawAxis(-F310_WIN_LEFT_Y_AXIS);
+    driverLeftJoyY = -driverJoy->GetRawAxis(F310_WIN_LEFT_Y_AXIS);
     driverRightJoyX = driverJoy->GetRawAxis(F310_WIN_RIGHT_X_AXIS);
-    driverRightJoyY = driverJoy->GetRawAxis(-F310_WIN_RIGHT_Y_AXIS);
+    driverRightJoyY = -driverJoy->GetRawAxis(F310_WIN_RIGHT_Y_AXIS);
 
     operatorLeftJoyX = operatorJoy->GetRawAxis(F310_WIN_LEFT_X_AXIS);
-    operatorLeftJoyY = operatorJoy->GetRawAxis(-F310_WIN_LEFT_Y_AXIS);
+    operatorLeftJoyY = -operatorJoy->GetRawAxis(F310_WIN_LEFT_Y_AXIS);
     operatorRightJoyX = operatorJoy->GetRawAxis(F310_WIN_RIGHT_X_AXIS);
-    operatorRightJoyY = operatorJoy->GetRawAxis(-F310_WIN_RIGHT_Y_AXIS);
+    operatorRightJoyY = -operatorJoy->GetRawAxis(F310_WIN_RIGHT_Y_AXIS);
   } else {
     driverLeftJoyX = driverJoy->GetRawAxis(F310_LINUX_LEFT_X_AXIS);
     driverLeftJoyY = driverJoy->GetRawAxis(F310_LINUX_LEFT_Y_AXIS);
