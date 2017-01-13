@@ -33,7 +33,7 @@
 ######################
 # Eclipse
 ######################
-Debug/
+Debug/ 
 Debug/*
 *.pydevproject
 .metadata
