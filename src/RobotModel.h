@@ -31,13 +31,16 @@ public:
 
   Talon *leftDriveMotorA, *leftDriveMotorB, *rightDriveMotorA,
       *rightDriveMotorB;
+  
+  Talon *shooterMotor;
+
 private:
   PowerDistributionPanel* pdp;
 
   Timer *timer;
 
   double leftDriveACurrent, leftDriveBCurrent, rightDriveACurrent,
-      rightDriveBCurrent;
+      rightDriveBCurrent, shooterMotorCurrent;
 };
 
 #endif /* SRC_ROBOTMODEL_H_ */
