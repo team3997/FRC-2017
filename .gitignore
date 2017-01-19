@@ -27,7 +27,8 @@
 *.out
 *.app
 
-*.jar
+#Uncomment .jar to allow gradle build to pass
+#*.jar
 *.class
 ######################
 # Gradle build files
