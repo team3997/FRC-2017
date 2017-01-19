@@ -26,7 +26,8 @@ public:
   virtual bool GetArcadeDriveDesired();
 
 private:
-
+  
+  //booleans for desired states of robot
   bool reverseDriveDesired, arcadeDriveDesired;
 
   double driverLeftJoyX, driverLeftJoyY, driverRightJoyX, driverRightJoyY;
