@@ -29,6 +29,11 @@
 
 *.jar
 *.class
+######################
+# Gradle build files
+######################
+build/
+.gradle/
 
 ######################
 # Eclipse
