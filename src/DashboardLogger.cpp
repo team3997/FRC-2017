@@ -6,7 +6,7 @@
  */
 
 #include "WPILib.h"
-#include <DashboardLogger.h>
+#include "DashboardLogger.h"
 
 DashboardLogger::DashboardLogger(RobotModel *myRobot, RemoteControl *myHumanControl) {
   robot = myRobot;
