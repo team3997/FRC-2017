@@ -22,10 +22,10 @@ RobotModel::RobotModel() {
   rightDriveMotorA->SetSafetyEnabled(false);
   rightDriveMotorB->SetSafetyEnabled(false);
 
-  leftDriveMotorA->SetInverted(false);
-  leftDriveMotorB->SetInverted(false);
-  rightDriveMotorA->SetInverted(false);
-  rightDriveMotorB->SetInverted(false);
+  leftDriveMotorA->SetInverted(true);
+  leftDriveMotorB->SetInverted(true);
+  rightDriveMotorA->SetInverted(true);
+  rightDriveMotorB->SetInverted(true);
 
   leftDriveACurrent = 0;
   leftDriveBCurrent = 0;
