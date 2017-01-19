@@ -113,3 +113,12 @@ double RobotModel::GetTime() {
   return timer->Get();
 }
 
+// SUPERSTRUCTURE ACCESSORS AND MUTATORS IN ROBOTMODEL
+
+double RobotModel::GetShooterMotorSpeed() {
+  return shooterMotor->Get();
+}
+
+void RobotModel::SetShooterMotorSpeed(double speed){
+  shooterMotor->Set(speed);
+}

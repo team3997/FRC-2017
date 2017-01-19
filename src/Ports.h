@@ -14,7 +14,7 @@ static const int LEFT_DRIVE_MOTOR_A_PDP_CHAN           = 12;
 static const int LEFT_DRIVE_MOTOR_B_PDP_CHAN           = 13;
 static const int RIGHT_DRIVE_MOTOR_A_PDP_CHAN          = 14;
 static const int RIGHT_DRIVE_MOTOR_B_PDP_CHAN          = 15;
-static const int SHOOTER_MOTOR_PDP_CHAIN               = 11;
+static const int SHOOTER_MOTOR_PDP_CHAN                = 11;
 
 // ***************** DIGITAL I/O PORTS *****************
 
@@ -48,5 +48,6 @@ static const bool SQUARE_DRIVE_AXIS_INPUT              = true;
 static const bool USE_ARCADE_DRIVE                     = true;
 
 static const int DRIVE_DIRECTION_BUTTON_PORT           = 9;
+static const int SHOOTER_RUN_BUTTON_PORT               = 1;
 
 #endif

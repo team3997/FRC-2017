@@ -29,7 +29,11 @@ public:
   void ResetTimer(); //resets the timer
   double GetTime(); //returns the time
 
-  Talon *leftDriveMotorA, *leftDriveMotorB, *rightDriveMotorA,
+  //Superstructure systems
+	double GetShooterMotorSpeed(); //returns the speed of the shooter motor
+	void SetShooterMotorSpeed(double speed);//sets the speed of the shooter motor
+	
+	Talon *leftDriveMotorA, *leftDriveMotorB, *rightDriveMotorA,
       *rightDriveMotorB;
   
   Talon *shooterMotor;

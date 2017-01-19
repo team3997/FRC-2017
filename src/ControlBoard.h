@@ -22,20 +22,21 @@ public:
   //Drive joystick accessors
   double GetJoystickValue(Joysticks j, Axes a);
 
-  virtual bool GetReverseDriveDesired();
-  virtual bool GetArcadeDriveDesired();
+  bool GetReverseDriveDesired();
+  bool GetArcadeDriveDesired();
+	bool GetShooterRunDesired(); 
 
 private:
   
   //booleans for desired states of robot
-  bool reverseDriveDesired, arcadeDriveDesired;
+  bool reverseDriveDesired, arcadeDriveDesired, shooterRunDesired;
 
   double driverLeftJoyX, driverLeftJoyY, driverRightJoyX, driverRightJoyY;
   double operatorLeftJoyX, operatorLeftJoyY, operatorRightJoyX, operatorRightJoyY;
 
   Joystick *driverJoy, *operatorJoy;
 
-  ButtonReader *driveDirectionButton;
+  ButtonReader *driveDirectionButton, *shooterRunButton;
 
   void ReadAllButtons();
 };
