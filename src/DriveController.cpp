@@ -38,10 +38,10 @@ void DriveController::Update(double currTimeSec, double deltaTimeSec) {
         RemoteControl::kRY);
 
     if (humanControl->GetArcadeDriveDesired()) {
-          ArcadeDrive(driverLeftY, driverRightX);
-        } else {
-          TankDrive(driverLeftY, driverRightY);
-        }
+      ArcadeDrive(-driverLeftY, driverRightX);
+    } else {
+      TankDrive(driverLeftY, driverRightY);
+    }
 
     nextState = kTeleopDrive;
     break;
@@ -56,7 +56,7 @@ void DriveController::ArcadeDrive(double myY, double myX) {
     myY = -myY;
   }
 
-  driveTrain->ArcadeDrive(myY, -myX, SQUARE_DRIVE_AXIS_INPUT);
+  driveTrain->ArcadeDrive(myY, myX, SQUARE_DRIVE_AXIS_INPUT);
 }
 
 void DriveController::TankDrive(double myLeft, double myRight) {

@@ -14,6 +14,8 @@ ControlBoard::ControlBoard() {
   //Drivetrain buttons
   driveDirectionButton = new ButtonReader(driverJoy,
       DRIVE_DIRECTION_BUTTON_PORT);
+  
+  //Superstructure Buttons
 
   //Joystick positions that will set speed of robot movement
   driverLeftJoyX = 0;
@@ -56,6 +58,8 @@ void ControlBoard::ReadControls() {
 
   //DriveTrain Variables
   reverseDriveDesired = driveDirectionButton->IsDown();
+
+  //Superstructure Variables
 }
 
 
