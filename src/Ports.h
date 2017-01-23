@@ -3,8 +3,8 @@
 
 // ***************** PWM PORTS *****************
 static const int LEFT_DRIVE_MOTOR_A_PWM_PORT            = 0;
-static const int LEFT_DRIVE_MOTOR_B_PWM_PORT            = 1;
-static const int RIGHT_DRIVE_MOTOR_A_PWM_PORT           = 2;
+static const int LEFT_DRIVE_MOTOR_B_PWM_PORT            = 2;
+static const int RIGHT_DRIVE_MOTOR_A_PWM_PORT           = 1;
 static const int RIGHT_DRIVE_MOTOR_B_PWM_PORT           = 3;
 
 // ***************** PDP CHANNELS *****************
@@ -25,7 +25,7 @@ static const int RIGHT_DRIVE_MOTOR_B_PWM_PORT           = 3;
 // ***************** JOYSTICK USB PORTS *****************
 //MAKE SURE JOYSTICKS ARE SET TO "D" position on back
 
-static const bool USING_WIN_DRIVER_STATION              = false;
+static const bool USING_WIN_DRIVER_STATION              = true;
 static const int DRIVER_JOY_USB_PORT                    = 0;
 static const int OPERATOR_JOY_USB_PORT                  = 1;
 // ***************** BUTTONS *****************
