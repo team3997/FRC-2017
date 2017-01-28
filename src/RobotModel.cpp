@@ -17,20 +17,26 @@ RobotModel::RobotModel() {
   rightDriveMotorA = new Talon(RIGHT_DRIVE_MOTOR_A_PWM_PORT);
   rightDriveMotorB = new Talon(RIGHT_DRIVE_MOTOR_B_PWM_PORT);
 
+  //Init shooter motor
+  shooterMotor = new Talon(SHOOTER_MOTOR_PWM_PORT);
+
   leftDriveMotorA->SetSafetyEnabled(false);
   leftDriveMotorB->SetSafetyEnabled(false);
   rightDriveMotorA->SetSafetyEnabled(false);
   rightDriveMotorB->SetSafetyEnabled(false);
+  shooterMotor->SetSafetyEnabled(false);
 
-  leftDriveMotorA->SetInverted(true);
-  leftDriveMotorB->SetInverted(true);
-  rightDriveMotorA->SetInverted(true);
-  rightDriveMotorB->SetInverted(true);
+  leftDriveMotorA->SetInverted(false);
+  leftDriveMotorB->SetInverted(false);
+  rightDriveMotorA->SetInverted(false);
+  rightDriveMotorB->SetInverted(false);
+  shooterMotor->SetInverted(false);
 
   leftDriveACurrent = 0;
   leftDriveBCurrent = 0;
   rightDriveACurrent = 0;
   rightDriveBCurrent = 0;
+  shooterMotorCurrent = 0;
 
   timer = new Timer();
   timer->Start();
@@ -71,6 +77,7 @@ void RobotModel::UpdateCurrent() {
   leftDriveBCurrent = pdp->GetCurrent(LEFT_DRIVE_MOTOR_B_PDP_CHAN);
   rightDriveACurrent = pdp->GetCurrent(RIGHT_DRIVE_MOTOR_A_PDP_CHAN);
   rightDriveBCurrent = pdp->GetCurrent(RIGHT_DRIVE_MOTOR_B_PDP_CHAN);
+  shooterMotorCurrent = pdp->GetCurrent(SHOOTER_MOTOR_PDP_CHAN);
 }
 
 //returns the current of a given channel
@@ -88,6 +95,9 @@ double RobotModel::GetCurrent(int channel) {
   case LEFT_DRIVE_MOTOR_B_PDP_CHAN:
     return leftDriveBCurrent;
     break;
+  case SHOOTER_MOTOR_PDP_CHAN:
+    return shooterMotorCurrent;
+    break;
   default:
     return -1;
   }
@@ -103,3 +113,12 @@ double RobotModel::GetTime() {
   return timer->Get();
 }
 
+// SUPERSTRUCTURE ACCESSORS AND MUTATORS IN ROBOTMODEL
+
+double RobotModel::GetShooterMotorSpeed() {
+  return shooterMotor->Get();
+}
+
+void RobotModel::SetShooterMotorSpeed(double speed){
+  shooterMotor->Set(speed);
+}

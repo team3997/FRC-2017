@@ -21,6 +21,9 @@ private:
 
 	uint32_t m_stateVal;
 	uint32_t nextState;
+ 
+  //motor speeds
+	double shooterRunSpeed;
 };
 
 #endif
