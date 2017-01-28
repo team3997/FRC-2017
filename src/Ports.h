@@ -3,8 +3,8 @@
 
 // ***************** PWM PORTS *****************
 static const int LEFT_DRIVE_MOTOR_A_PWM_PORT            = 0;
-static const int LEFT_DRIVE_MOTOR_B_PWM_PORT            = 1;
-static const int RIGHT_DRIVE_MOTOR_A_PWM_PORT           = 2;
+static const int LEFT_DRIVE_MOTOR_B_PWM_PORT            = 2;
+static const int RIGHT_DRIVE_MOTOR_A_PWM_PORT           = 1;
 static const int RIGHT_DRIVE_MOTOR_B_PWM_PORT           = 3;
 static const int SHOOTER_MOTOR_PWM_PORT                 = 4;
 
@@ -31,16 +31,6 @@ static const bool USING_WIN_DRIVER_STATION             = true;
 static const int DRIVER_JOY_USB_PORT                   = 0;
 static const int OPERATOR_JOY_USB_PORT                 = 1;
 // ***************** BUTTONS *****************
-
-static const int F310_WIN_LEFT_X_AXIS                  = 0;
-static const int F310_WIN_LEFT_Y_AXIS                  = 1;
-static const int F310_WIN_RIGHT_X_AXIS                 = 2;
-static const int F310_WIN_RIGHT_Y_AXIS                 = 3;
-
-static const int F310_LINUX_LEFT_X_AXIS                = 0;
-static const int F310_LINUX_LEFT_Y_AXIS                = 1;
-static const int F310_LINUX_RIGHT_X_AXIS               = 2;
-static const int F310_LINUX_RIGHT_Y_AXIS               = 3;
 
 //Drive controller button ports and preferences
 
