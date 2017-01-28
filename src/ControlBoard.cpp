@@ -20,6 +20,7 @@ ControlBoard::ControlBoard() {
   	driveDirectionButton = new ButtonReader(driverJoy, XINPUT_LINUX_BACK_BUTTON);
   }
   //Superstructure Buttons
+  shooterRunButton = new ButtonReader(driverJoy, SHOOTER_RUN_BUTTON_PORT);
 
   //Joystick positions that will set speed of robot movement
   driverLeftJoyX = 0;
@@ -30,6 +31,9 @@ ControlBoard::ControlBoard() {
   //Drivetrain variables
   reverseDriveDesired = false;
   arcadeDriveDesired = USE_ARCADE_DRIVE;
+
+	//Superstructure variables
+  shooterRunDesired = false;
 
 }
 
@@ -64,6 +68,7 @@ void ControlBoard::ReadControls() {
   reverseDriveDesired = driveDirectionButton->IsDown();
 
   //Superstructure Variables
+  shooterRunDesired = shooterRunButton->IsDown();
 }
 
 

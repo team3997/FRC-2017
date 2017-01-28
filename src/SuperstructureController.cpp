@@ -7,6 +7,8 @@ SuperstructureController::SuperstructureController(RobotModel* myRobot, RemoteCo
 
 	m_stateVal = kInit;
 	nextState = kInit;
+
+  shooterRunSpeed = 0.0;
 }
 
 void SuperstructureController::Reset() {
@@ -23,7 +25,7 @@ void SuperstructureController::Update(double currTimeSec, double deltaTimeSec) {
 		nextState = kIdle;
 		break;
 	default:
-		break;
+	  break;
 	}
 	m_stateVal = nextState;
 }

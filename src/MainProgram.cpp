@@ -1,6 +1,7 @@
 #include "WPILib.h"
 #include "RobotModel.h"
 #include "DriveController.h"
+#include "SuperstructureController.h"
 #include "RemoteControl.h"
 #include "ControlBoard.h"
 #include "DashboardLogger.h"
@@ -13,8 +14,9 @@ class MainProgram: public frc::IterativeRobot {
   RobotModel *robot;
   //Creates a human control from RemoteControl, which includes ControlBoard
   RemoteControl *humanControl;
-  //Creates a controller for drivetrain
+  //Creates a controller for drivetrain and superstructure
   DriveController *driveController;
+  SuperstructureController *superstructureController;
   //Creates an object of Dashboardlogger
   DashboardLogger *dashboardLogger;
 
@@ -28,6 +30,7 @@ public:
     humanControl = new ControlBoard();
     driveController = new DriveController(robot, humanControl);
     dashboardLogger = new DashboardLogger(robot, humanControl);
+    superstructureController = new SuperstructureController(robot, humanControl);
 
     //Initializes timekeeper variables
     currTimeSec = 0.0;
@@ -44,6 +47,7 @@ private:
     robot->ResetTimer();
 
     driveController->Reset();
+    superstructureController->Reset();
 
     //Resets timer variables
     currTimeSec = 0.0;
@@ -67,6 +71,7 @@ private:
     robot->ResetTimer();
 
     driveController->Reset();
+    superstructureController->Reset();
 
     //Resets timer variables
     currTimeSec = 0.0;
@@ -88,11 +93,13 @@ private:
     //Reads controls and updates controllers accordingly
     humanControl->ReadControls();
     driveController->Update(currTimeSec, deltaTimeSec);
+    superstructureController->Update(currTimeSec, deltaTimeSec);
   }
 
   void DisabledInit() {
 
     driveController->Reset();
+    superstructureController->Reset();
 
   }
 
