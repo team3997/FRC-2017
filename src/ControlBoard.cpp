@@ -1,4 +1,5 @@
 #include "WPILib.h"
+#include "Params.h"
 #include "XInput.h"
 #include "ControlBoard.h"
 #include "Ports.h"
