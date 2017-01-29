@@ -19,6 +19,8 @@ private:
 	RobotModel* robot;
 	RemoteControl* humanControl;
 
+  bool usingShooterPID;
+
 	uint32_t m_stateVal;
 	uint32_t nextState;
  
