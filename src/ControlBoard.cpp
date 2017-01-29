@@ -109,6 +109,10 @@ bool ControlBoard::GetReverseDriveDesired() {
   return reverseDriveDesired;
 }
 
+//Returns true if running shooter is desired
+bool ControlBoard::GetShooterRunDesired() {
+  return shooterRunDesired;
+}
 //Returns true if arcade drive is desired
 bool ControlBoard::GetArcadeDriveDesired() {
   return arcadeDriveDesired;
