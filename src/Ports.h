@@ -6,7 +6,8 @@ static const int LEFT_DRIVE_MOTOR_A_PWM_PORT            = 0;
 static const int LEFT_DRIVE_MOTOR_B_PWM_PORT            = 2;
 static const int RIGHT_DRIVE_MOTOR_A_PWM_PORT           = 1;
 static const int RIGHT_DRIVE_MOTOR_B_PWM_PORT           = 3;
-static const int SHOOTER_MOTOR_PWM_PORT                 = 4;
+static const int SHOOTER_MOTOR_A_PWM_PORT               = 4;
+static const int SHOOTER_MOTOR_B_PWM_PORT               = 5;
 
 // ***************** PDP CHANNELS *****************
 
@@ -14,7 +15,8 @@ static const int LEFT_DRIVE_MOTOR_A_PDP_CHAN           = 12;
 static const int LEFT_DRIVE_MOTOR_B_PDP_CHAN           = 13;
 static const int RIGHT_DRIVE_MOTOR_A_PDP_CHAN          = 14;
 static const int RIGHT_DRIVE_MOTOR_B_PDP_CHAN          = 15;
-static const int SHOOTER_MOTOR_PDP_CHAN                = 11;
+static const int SHOOTER_MOTOR_A_PDP_CHAN              = 11;
+static const int SHOOTER_MOTOR_B_PDP_CHAN              = 10;
 
 // ***************** DIGITAL I/O PORTS *****************
 

@@ -36,8 +36,7 @@ public:
 	Talon *leftDriveMotorA, *leftDriveMotorB, *rightDriveMotorA,
       *rightDriveMotorB;
   
-  Talon *shooterMotor;
-
+  Talon *shooterMotorA, *shooterMotorB;
 private:
   PowerDistributionPanel* pdp;
 

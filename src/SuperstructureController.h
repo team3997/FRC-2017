@@ -19,9 +19,7 @@ private:
 	RobotModel* robot;
 	RemoteControl* humanControl;
 
-	PIDController(double p, double i, double d, PIDSource *myPidSource, PIDOutput *myPidOut);
-
-  uint32_t m_stateVal;
+        uint32_t m_stateVal;
 	uint32_t nextState;
 };
 

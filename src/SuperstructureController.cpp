@@ -24,23 +24,7 @@ void SuperstructureController::Update(double currTimeSec, double deltaTimeSec) {
 	case (kIdle):
 		nextState = kIdle;
     
-    //Shooter Behaviour
-    if(humanControl->GetShooterRunDesired()){
-      if(SHOOTER_USE_PID){
-        
-      }
-      else {
-        robot->SetShooterMotorSpeed(SHOOTER_HARDSET_MOTOR_SPEED);
-      }
-    }
-    else { 
-      if(SHOOTER_USE_PID){
-      
-      }
-      else {
-        robot->SetShooterMotorSpeed(0.0);   
-      }
-    }
+
 
 		break;
 
