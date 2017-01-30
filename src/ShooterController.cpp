@@ -7,7 +7,7 @@ ShooterController::ShooterController(RobotModel *myRobot, RemoteControl *myHuman
   robot = myRobot;
   humanControl = myHumanControl;
 
-
+  pidType = PIDSourceType.kRate;
 
   m_stateVal = kInitialize;
   nextState = kInitialize;

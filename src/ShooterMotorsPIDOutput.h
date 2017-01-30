@@ -1,7 +1,7 @@
 #ifndef SHOOTERMOTORSPIDOUTPUT_H_
 #define SHOOTERMOTORSPIDOUTPUT_H_
 
-#include "PIDOutput.h"
+#include "WPILib.h"
 #include "RobotModel.h"
 #include "RemoteControl.h"
 

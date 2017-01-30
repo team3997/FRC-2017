@@ -17,9 +17,9 @@ class ShooterController{
     RobotModel *robot;
     RemoteControl *humanControl;
 
-    PIDController shooterPID(double myP, double myI, double myD, PIDSource *myPidSource, PIDOutput *myPidOut);
+    PIDController *shooterPID;
 
-    PIDSource;
+    PIDSourceType pidType;
 
     PIDOutput;
 
