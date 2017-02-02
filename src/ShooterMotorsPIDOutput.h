@@ -5,15 +5,20 @@
 #include "RobotModel.h"
 #include "RemoteControl.h"
 
-class ShooterMotorsPIDOutput : PIDOutput{
+class ShooterMotorsPIDOutput : public PIDOutput{
 public:
-	ShooterMotorsPIDOutput(Spark kOutputMotor1, Spark kOutputMotor2);
-	~ShooterMotorsPIDOutput() {};
+	ShooterMotorsPIDOutput(Spark *kOutputMotor1, Spark *kOutputMotor2);
+  
+    //Override PIDWrite
+	void PIDWrite(double output);
 
-	void pidWrite(double output);
+	double GetPIDLoopOutput();
 
-	double getPIDLoopOutput();
 private:
+	double loopOutput;
+
+	Spark *shooterMotorA;
+	Spark *shooterMotorB;
 };
 
 #endif

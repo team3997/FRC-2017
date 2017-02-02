@@ -7,6 +7,7 @@
 
 #include "WPILib.h"
 #include "DashboardLogger.h"
+#include "Ports.h"
 
 DashboardLogger::DashboardLogger(RobotModel *myRobot, RemoteControl *myHumanControl) {
   robot = myRobot;
@@ -42,6 +43,12 @@ void DashboardLogger::PutDriveMotorCurrentData() {
   SmartDashboard::PutNumber("PDP_leftDriveMotorB", robot->GetCurrent(LEFT_DRIVE_MOTOR_B_PDP_CHAN));
   SmartDashboard::PutNumber("PDP_rightDriveMotorA", robot->GetCurrent(RIGHT_DRIVE_MOTOR_A_PDP_CHAN));
   SmartDashboard::PutNumber("PDP_rightDriveMotorB", robot->GetCurrent(RIGHT_DRIVE_MOTOR_B_PDP_CHAN));
+}
+
+void DashboardLogger::PutShooterEncoderData() {
+  SmartDashboard::PutNumber("SHOOTER_ENC_GetDistance()", robot->shooterEncoder->GetDistance());
+  SmartDashboard::PutNumber("SHOOTER_ENC_GetRate()", robot->shooterEncoder->GetRate());
+  SmartDashboard::PutNumber("SHOOTER_ENC_GetPeriod()", robot->shooterEncoder->GetPeriod());
 }
 
 void DashboardLogger::PutDriverJoystickAxesData() {

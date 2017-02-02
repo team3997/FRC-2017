@@ -7,6 +7,7 @@
 
 #include "WPILib.h"
 #include "RobotModel.h"
+#include "Ports.h"
 
 //RobotModel constructor: inits all variables and objects
 RobotModel::RobotModel() {
@@ -18,9 +19,15 @@ RobotModel::RobotModel() {
   rightDriveMotorB = new Talon(RIGHT_DRIVE_MOTOR_B_PWM_PORT);
 
   //Init shooter motor
-  shooterMotorA = new Talon(SHOOTER_MOTOR_A_PWM_PORT);
-  shooterMotorB = new Talon(SHOOTER_MOTOR_B_PWM_PORT);
+  shooterMotorA = new Spark(SHOOTER_MOTOR_A_PWM_PORT);
+  shooterMotorB = new Spark(SHOOTER_MOTOR_B_PWM_PORT);
 
+  shooterEncoder = new Encoder(SHOOTER_ENCODER_PORTS[0], SHOOTER_ENCODER_PORTS[1]);
+  
+  shooterEncoder->SetPIDSourceType(PIDSourceType::kRate);
+  shooterEncoder->SetDistancePerPulse((double)1/2048);
+
+  shooterEncoder->SetPIDSourceType(PIDSourceType::kRate);
   leftDriveMotorA->SetSafetyEnabled(false);
   leftDriveMotorB->SetSafetyEnabled(false);
   rightDriveMotorA->SetSafetyEnabled(false);
@@ -81,7 +88,7 @@ void RobotModel::UpdateCurrent() {
   leftDriveBCurrent = pdp->GetCurrent(LEFT_DRIVE_MOTOR_B_PDP_CHAN);
   rightDriveACurrent = pdp->GetCurrent(RIGHT_DRIVE_MOTOR_A_PDP_CHAN);
   rightDriveBCurrent = pdp->GetCurrent(RIGHT_DRIVE_MOTOR_B_PDP_CHAN);
-  shooterMotorACurrent = pdp->GetCurrent(SHOOTER_MOTOR_A_PDP_CHAN)
+  shooterMotorACurrent = pdp->GetCurrent(SHOOTER_MOTOR_A_PDP_CHAN);
   shooterMotorBCurrent = pdp->GetCurrent(SHOOTER_MOTOR_B_PDP_CHAN);
 }
 

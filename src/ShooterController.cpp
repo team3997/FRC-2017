@@ -3,11 +3,19 @@
 #include "ShooterController.h"
 #include "RobotModel.h"
 
-ShooterController::ShooterController(RobotModel *myRobot, RemoteControl *myHumanControl)
+ShooterController::ShooterController(RobotModel *myRobot, RemoteControl *myHumanControl) {
   robot = myRobot;
   humanControl = myHumanControl;
 
-  pidType = PIDSourceType.kRate;
+  shooterP = 0.1;
+  shooterI = 0.0;
+  shooterD = 0.0;
+
+  pidOutput = new ShooterMotorsPIDOutput(robot->shooterMotorA, robot->shooterMotorB);
+
+  shooterPID = new PIDController(shooterP, shooterI, shooterD, robot->shooterEncoder, pidOutput);
+
+  shooterPID->SetSetpoint(500);
 
   m_stateVal = kInitialize;
   nextState = kInitialize;
@@ -26,7 +34,7 @@ void ShooterController::Update(double currTimeSec, double deltaTimeSec) {
     case (kInitialize):
       nextState = kTeleop;
       break;
-    case (kTeleopDrive):
+    case (kTeleop):
       nextState = kTeleop;
       //Shooter Behaviour
       if(humanControl->GetShooterRunDesired()){
@@ -34,7 +42,7 @@ void ShooterController::Update(double currTimeSec, double deltaTimeSec) {
                
         }
         else {
-          robot->SetShooterMotorSpeed(SHOOTER_HARDSET_MOTOR_SPEED);
+          robot->SetShooterMotorsSpeed(SHOOTER_HARDSET_MOTOR_SPEED);
         }
       }
       else { 
@@ -42,7 +50,7 @@ void ShooterController::Update(double currTimeSec, double deltaTimeSec) {
 
         }
         else {
-          robot->SetShooterMotorSpeed(0.0);   
+          robot->SetShooterMotorsSpeed(0.0);
         }
       }
       break;

@@ -24,6 +24,7 @@ private:
 
   void PutDriveMotorCurrentData();
   void PutRobotCurrentData();
+  void PutShooterEncoderData();
   void PutDriverJoystickAxesData();
   void PutOperatorJoystickAxesData();
   void PutDriverMotorOutputs();

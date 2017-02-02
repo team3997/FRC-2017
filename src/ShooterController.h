@@ -4,11 +4,16 @@
 #include "WPILib.h"
 #include "RobotModel.h"
 #include "RemoteControl.h"
+#include "ShooterMotorsPIDOutput.h"
+
 
 class ShooterController{
   public:
     ShooterController(RobotModel*, RemoteControl*);
     virtual ~ShooterController();
+
+    void Reset();
+    void Update(double currTimeSec, double deltaTimeSec);
 
     enum ShooterState {
       kInitialize, kTeleop
@@ -19,11 +24,9 @@ class ShooterController{
 
     PIDController *shooterPID;
 
-    PIDSourceType pidType;
+    ShooterMotorsPIDOutput *pidOutput;
 
-    PIDOutput;
-
-    double p, i, d;
+    double shooterP, shooterI, shooterD;
 
     uint32_t m_stateVal;
     uint32_t nextState;
