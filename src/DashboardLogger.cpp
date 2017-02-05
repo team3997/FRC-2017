@@ -21,8 +21,9 @@ DashboardLogger::~DashboardLogger() {
 void DashboardLogger::UpdateData() {
   PutDriverJoystickAxesData();
   PutDriverMotorOutputs();
-  PutRobotCurrentData();
-  PutDriveMotorCurrentData();
+  PutShooterEncoderData();
+  PutShooterMotorOutputs();
+  PutGamePadButtonPress();
 }
 
 /*  double GetVoltage(); //returns the voltage
@@ -48,7 +49,15 @@ void DashboardLogger::PutDriveMotorCurrentData() {
 void DashboardLogger::PutShooterEncoderData() {
   SmartDashboard::PutNumber("SHOOTER_ENC_GetDistance()", robot->shooterEncoder->GetDistance());
   SmartDashboard::PutNumber("SHOOTER_ENC_GetRate()", robot->shooterEncoder->GetRate());
+  SmartDashboard::PutNumber("SHOOTER_ENC_GetRPM", robot->shooterEncoder->GetRate()*60.0);
+  SmartDashboard::PutNumber("SHOOTER_ENC_GetRPMGRAPH", robot->shooterEncoder->GetRate()*60.0);
   SmartDashboard::PutNumber("SHOOTER_ENC_GetPeriod()", robot->shooterEncoder->GetPeriod());
+  SmartDashboard::PutNumber("SHOOTER_ENC_GetRaw()", robot->shooterEncoder->GetRaw());
+}
+
+void DashboardLogger::PutShooterMotorOutputs() {
+  SmartDashboard::PutNumber("MOTOR_shooterMotorA", robot->shooterMotorA->Get());
+  SmartDashboard::PutNumber("MOTOR_shooterMotorB", robot->shooterMotorB->Get());
 }
 
 void DashboardLogger::PutDriverJoystickAxesData() {
@@ -64,6 +73,11 @@ void DashboardLogger::PutDriverJoystickAxesData() {
   SmartDashboard::PutNumber("JOY_driverRightY",
       humanControl->GetJoystickValue(RemoteControl::kDriverJoy,
           RemoteControl::kRY));
+}
+
+void DashboardLogger::PutGamePadButtonPress() {
+  SmartDashboard::PutBoolean("BUTTON_shooterRunDesired", humanControl->GetShooterRunDesired());
+  SmartDashboard::PutBoolean("BUTTON_reverseDriveDesired", humanControl->GetReverseDriveDesired());
 }
 
 void DashboardLogger::PutDriverMotorOutputs() {

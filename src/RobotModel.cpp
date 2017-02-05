@@ -19,21 +19,22 @@ RobotModel::RobotModel() {
   rightDriveMotorB = new Talon(RIGHT_DRIVE_MOTOR_B_PWM_PORT);
 
   //Init shooter motor
-  shooterMotorA = new Spark(SHOOTER_MOTOR_A_PWM_PORT);
-  shooterMotorB = new Spark(SHOOTER_MOTOR_B_PWM_PORT);
+  shooterMotorA = new Talon(SHOOTER_MOTOR_A_PWM_PORT);
+  shooterMotorB = new Talon(SHOOTER_MOTOR_B_PWM_PORT);
 
   shooterEncoder = new Encoder(SHOOTER_ENCODER_PORTS[0], SHOOTER_ENCODER_PORTS[1]);
   
   shooterEncoder->SetPIDSourceType(PIDSourceType::kRate);
-  shooterEncoder->SetDistancePerPulse((double)1/2048);
+  shooterEncoder->SetDistancePerPulse((1.0)/(250.0));
+  shooterEncoder->SetSamplesToAverage(90);
 
   shooterEncoder->SetPIDSourceType(PIDSourceType::kRate);
   leftDriveMotorA->SetSafetyEnabled(false);
   leftDriveMotorB->SetSafetyEnabled(false);
   rightDriveMotorA->SetSafetyEnabled(false);
   rightDriveMotorB->SetSafetyEnabled(false);
-  shooterMotorA->SetSafetyEnabled(false);
-  shooterMotorB->SetSafetyEnabled(false);
+  /*shooterMotorA->SetSafetyEnabled(false);
+  shooterMotorB->SetSafetyEnabled(false);*/
 
   leftDriveMotorA->SetInverted(false);
   leftDriveMotorB->SetInverted(false);
@@ -140,4 +141,5 @@ double RobotModel::GetShooterMotorBSpeed() {
 void RobotModel::SetShooterMotorsSpeed(double speed){
   shooterMotorA->Set(speed);
   shooterMotorB->Set(speed);
+  SmartDashboard::PutBoolean("RUNNING SHOOTER", true);
 }

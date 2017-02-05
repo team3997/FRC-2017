@@ -1,6 +1,6 @@
 #include "ShooterMotorsPIDOutput.h"
 
-ShooterMotorsPIDOutput::ShooterMotorsPIDOutput(Spark *kOutputMotor1, Spark *kOutputMotor2) {
+ShooterMotorsPIDOutput::ShooterMotorsPIDOutput(Talon *kOutputMotor1, Talon *kOutputMotor2) {
   shooterMotorA = kOutputMotor1;
   shooterMotorB = kOutputMotor2;
 }

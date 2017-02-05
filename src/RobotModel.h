@@ -36,7 +36,7 @@ public:
 	Talon *leftDriveMotorA, *leftDriveMotorB, *rightDriveMotorA,
       *rightDriveMotorB;
   
-  Spark *shooterMotorA, *shooterMotorB;
+  Talon *shooterMotorA, *shooterMotorB;
 
   Encoder *shooterEncoder;
 private:

@@ -19,7 +19,7 @@ void SuperstructureController::Update(double currTimeSec, double deltaTimeSec) {
 	switch(m_stateVal) {
 	case (kInit):
 		nextState = kIdle;
-        robot->SetShooterMotorsSpeed(0.0);
+
 		break;
 	case (kIdle):
 		nextState = kIdle;

@@ -19,7 +19,7 @@ static const int SHOOTER_MOTOR_A_PDP_CHAN              = 11;
 static const int SHOOTER_MOTOR_B_PDP_CHAN              = 10;
 
 // ***************** DIGITAL I/O PORTS *****************
-static const int SHOOTER_ENCODER_PORTS[]               = {0, 1};
+static const int SHOOTER_ENCODER_PORTS[]               = {8, 9};
 // ******************* ANALOG IN PORTS*******************
 
 // ***************** MISC *****************

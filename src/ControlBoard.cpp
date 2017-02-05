@@ -11,17 +11,19 @@
 ControlBoard::ControlBoard() {
   //Two Joysticks
   driverJoy = new Joystick(DRIVER_JOY_USB_PORT);
-  operatorJoy = new Joystick(OPERATOR_JOY_USB_PORT);
+  //operatorJoy = new Joystick(OPERATOR_JOY_USB_PORT);
 
   //Drivetrain buttons
   if(USING_WIN_DRIVER_STATION){
   	driveDirectionButton = new ButtonReader(driverJoy, XINPUT_WIN_BACK_BUTTON);
+  	shooterRunButton = new ButtonReader(driverJoy, XINPUT_WIN_GREEN_BUTTON);
   }	
   else {
-  	driveDirectionButton = new ButtonReader(driverJoy, XINPUT_LINUX_BACK_BUTTON);
+  	//driveDirectionButton = new ButtonReader(driverJoy, XINPUT_LINUX_BACK_BUTTON);
+  	//shooterRunButton = new ButtonReader(driverJoy, XINPUT_LINUX_GREEN_BUTTON);
   }
   //Superstructure Buttons
-  shooterRunButton = new ButtonReader(driverJoy, SHOOTER_RUN_BUTTON_PORT);
+
 
   //Joystick positions that will set speed of robot movement
   driverLeftJoyX = 0;
@@ -49,20 +51,20 @@ void ControlBoard::ReadControls() {
     driverRightJoyX = driverJoy->GetRawAxis(XINPUT_WIN_RIGHT_X_AXIS);
     driverRightJoyY = driverJoy->GetRawAxis(XINPUT_WIN_RIGHT_Y_AXIS);
 
-    operatorLeftJoyX = operatorJoy->GetRawAxis(XINPUT_WIN_LEFT_X_AXIS);
+    /*operatorLeftJoyX = operatorJoy->GetRawAxis(XINPUT_WIN_LEFT_X_AXIS);
     operatorLeftJoyY = -operatorJoy->GetRawAxis(XINPUT_WIN_LEFT_Y_AXIS);
     operatorRightJoyX = operatorJoy->GetRawAxis(XINPUT_WIN_RIGHT_X_AXIS);
-    operatorRightJoyY = -operatorJoy->GetRawAxis(XINPUT_WIN_RIGHT_Y_AXIS);
+    operatorRightJoyY = -operatorJoy->GetRawAxis(XINPUT_WIN_RIGHT_Y_AXIS);*/
   } else {
     driverLeftJoyX = driverJoy->GetRawAxis(XINPUT_LINUX_LEFT_X_AXIS);
     driverLeftJoyY = driverJoy->GetRawAxis(XINPUT_LINUX_LEFT_Y_AXIS);
     driverRightJoyX = driverJoy->GetRawAxis(XINPUT_LINUX_RIGHT_X_AXIS);
     driverRightJoyY = driverJoy->GetRawAxis(XINPUT_LINUX_RIGHT_Y_AXIS);
 
-    operatorLeftJoyX = operatorJoy->GetRawAxis(XINPUT_LINUX_LEFT_X_AXIS);
+    /*operatorLeftJoyX = operatorJoy->GetRawAxis(XINPUT_LINUX_LEFT_X_AXIS);
     operatorLeftJoyY = operatorJoy->GetRawAxis(XINPUT_LINUX_LEFT_Y_AXIS);
     operatorRightJoyX = operatorJoy->GetRawAxis(XINPUT_LINUX_RIGHT_X_AXIS);
-    operatorRightJoyY = operatorJoy->GetRawAxis(XINPUT_LINUX_RIGHT_Y_AXIS);
+    operatorRightJoyY = operatorJoy->GetRawAxis(XINPUT_LINUX_RIGHT_Y_AXIS);*/
   }
 
   //DriveTrain Variables
@@ -72,6 +74,11 @@ void ControlBoard::ReadControls() {
   shooterRunDesired = shooterRunButton->IsDown();
 }
 
+//Reads the values of all buttons defined by this class
+void ControlBoard::ReadAllButtons() {
+  driveDirectionButton->ReadValue();
+  shooterRunButton->ReadValue();
+}
 
 //Returns the joystick and axis being used
 double ControlBoard::GetJoystickValue(Joysticks j, Axes a) {
@@ -119,7 +126,4 @@ bool ControlBoard::GetArcadeDriveDesired() {
   return arcadeDriveDesired;
 }
 
-//Reads the values of all buttons defined by this class
-void ControlBoard::ReadAllButtons() {
-  driveDirectionButton->ReadValue();
-}
+
