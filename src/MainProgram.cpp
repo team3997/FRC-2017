@@ -49,6 +49,7 @@ private:
 
   void AutonomousInit() {
     robot->ResetTimer();
+    robot->ResetEncoders();
 
     driveController->Reset();
     superstructureController->Reset();
@@ -71,8 +72,8 @@ private:
   }
 
   void TeleopInit() {
-
     robot->ResetTimer();
+    robot->ResetEncoders();
 
     driveController->Reset();
     superstructureController->Reset();
@@ -103,7 +104,7 @@ private:
   }
 
   void DisabledInit() {
-
+	robot->ResetEncoders();
     driveController->Reset();
     superstructureController->Reset();
 
@@ -111,7 +112,6 @@ private:
 
   void DisabledPeriodic() {
     dashboardLogger->UpdateData();
-    SmartDashboard::PutBoolean("HUMANSHOOTLOOPDESIRED", false);
     //robot->UpdateCurrent();
 
     //Reads controls and updates controllers accordingly
