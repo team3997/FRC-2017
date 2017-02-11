@@ -2,6 +2,7 @@
 #include "Params.h"
 #include "DriveController.h"
 #include "RobotModel.h"
+#include "ControlBoard.h"
 
 DriveController::DriveController(RobotModel *myRobot,
     RemoteControl *myHumanControl) {
@@ -37,9 +38,9 @@ void DriveController::Update(double currTimeSec, double deltaTimeSec) {
         RemoteControl::kRY);
 
     if (humanControl->GetArcadeDriveDesired()) {
-      ArcadeDrive(driverLeftY, driverRightX);
+      ArcadeDrive(driverLeftX, driverRightY, true);
     } else {
-      TankDrive(driverLeftY, driverRightY);
+      TankDrive(driverLeftY, driverRightY, true);
     }
 
     nextState = kTeleopDrive;
@@ -49,22 +50,37 @@ void DriveController::Update(double currTimeSec, double deltaTimeSec) {
   m_stateVal = nextState;
 }
 
-void DriveController::ArcadeDrive(double myY, double myX) {
-  if (humanControl->GetReverseDriveDesired()) {
-    myX = -myX;
-    myY = -myY;
+void DriveController::ArcadeDrive(double myY, double myX, bool teleOp) {
+
+  if (teleOp) {
+    if (humanControl->GetReverseDriveDesired()) {
+      myX = -myX;
+      myY = -myY;
+    }
+
+    driveTrain->ArcadeDrive(myX, myY, SQUARE_DRIVE_AXIS_INPUT);
+
+  } else {
+    driveTrain->ArcadeDrive(myX, myY, false);
   }
 
-  driveTrain->ArcadeDrive(myY, myX, SQUARE_DRIVE_AXIS_INPUT);
+  driveTrain->ArcadeDrive(myX, myY, SQUARE_DRIVE_AXIS_INPUT);
 }
 
-void DriveController::TankDrive(double myLeft, double myRight) {
-  if (humanControl->GetReverseDriveDesired()) {
-    myLeft = -myLeft;
-    myRight = -myRight;
-  }
+void DriveController::TankDrive(double myLeft, double myRight, bool teleOp) {
+  if (teleOp) {
+      if (humanControl->GetReverseDriveDesired()) {
+        myLeft = -myLeft;
+        myRight = -myRight;
+      }
 
-  driveTrain->TankDrive(myLeft, myRight, SQUARE_DRIVE_AXIS_INPUT);
+      driveTrain->TankDrive(myLeft, myRight, SQUARE_DRIVE_AXIS_INPUT);
+
+    } else {
+      driveTrain->TankDrive(myLeft, myRight, false);
+    }
+
+    driveTrain->TankDrive(myLeft, myRight, false);
 }
 
 void DriveController::Reset() {

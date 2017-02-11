@@ -6,6 +6,7 @@
 #include "ControlBoard.h"
 #include "DashboardLogger.h"
 #include "ShooterController.h"
+#include "LifterController.h"
 #include <string.h>
 
 class MainProgram: public frc::IterativeRobot {
@@ -22,7 +23,7 @@ class MainProgram: public frc::IterativeRobot {
   //Creates an object of Dashboardlogger
   DashboardLogger *dashboardLogger;
 
-
+  LifterController *liftController;
   //Creates a time-keeper
   double currTimeSec;
   double lastTimeSec;
@@ -35,7 +36,7 @@ public:
     dashboardLogger = new DashboardLogger(robot, humanControl);
     superstructureController = new SuperstructureController(robot, humanControl);
     shooterController = new ShooterController(robot, humanControl);
-
+    liftController = new LifterController(robot, humanControl);
     //Initializes timekeeper variables
     currTimeSec = 0.0;
     lastTimeSec = 0.0;
@@ -77,7 +78,7 @@ private:
     driveController->Reset();
     superstructureController->Reset();
     shooterController->Reset();
-
+    liftController->Reset();
     //Resets timer variables
     currTimeSec = 0.0;
     lastTimeSec = 0.0;
@@ -100,6 +101,7 @@ private:
     driveController->Update(currTimeSec, deltaTimeSec);
     shooterController->Update(currTimeSec, deltaTimeSec);
     superstructureController->Update(currTimeSec, deltaTimeSec);
+    liftController->Update();
   }
 
   void DisabledInit() {

@@ -17,6 +17,7 @@ ControlBoard::ControlBoard() {
   if(USING_WIN_DRIVER_STATION){
   	driveDirectionButton = new ButtonReader(driverJoy, XINPUT_WIN_BACK_BUTTON);
   	shooterRunButton = new ButtonReader(driverJoy, XINPUT_WIN_GREEN_BUTTON);
+  	liftButton = new ButtonReader(driverJoy, XINPUT_WIN_BLUE_BUTTON);
   }	
   else {
   	//driveDirectionButton = new ButtonReader(driverJoy, XINPUT_LINUX_BACK_BUTTON);
@@ -72,12 +73,15 @@ void ControlBoard::ReadControls() {
 
   //Superstructure Variables
   shooterRunDesired = shooterRunButton->IsDown();
+
+  liftDesired = liftButton->IsDown();
 }
 
 //Reads the values of all buttons defined by this class
 void ControlBoard::ReadAllButtons() {
   driveDirectionButton->ReadValue();
   shooterRunButton->ReadValue();
+  liftButton->ReadValue();
 }
 
 //Returns the joystick and axis being used
@@ -126,4 +130,9 @@ bool ControlBoard::GetArcadeDriveDesired() {
   return arcadeDriveDesired;
 }
 
+bool ControlBoard::GetLiftDesired() {
+
+  return liftDesired;
+
+}
 

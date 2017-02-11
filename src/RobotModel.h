@@ -37,7 +37,7 @@ public:
       *rightDriveMotorB;
   
   Talon *shooterMotorA, *shooterMotorB;
-
+  Spark *liftMotor;
   Encoder *shooterEncoder;
 private:
   PowerDistributionPanel* pdp;
@@ -45,7 +45,7 @@ private:
   Timer *timer;
 
   double leftDriveACurrent, leftDriveBCurrent, rightDriveACurrent,
-      rightDriveBCurrent, shooterMotorACurrent, shooterMotorBCurrent;
+      rightDriveBCurrent, shooterMotorACurrent, shooterMotorBCurrent, liftMotorCurrent;
 };
 
 #endif /* SRC_ROBOTMODEL_H_ */

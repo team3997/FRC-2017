@@ -17,7 +17,8 @@ RobotModel::RobotModel() {
   leftDriveMotorB = new Talon(LEFT_DRIVE_MOTOR_B_PWM_PORT);
   rightDriveMotorA = new Talon(RIGHT_DRIVE_MOTOR_A_PWM_PORT);
   rightDriveMotorB = new Talon(RIGHT_DRIVE_MOTOR_B_PWM_PORT);
-
+  // Climber Motor
+  liftMotor = new Spark(LIFTER_MOTOR_PWM_PORT);
   //Init shooter motor
   shooterMotorA = new Talon(SHOOTER_MOTOR_A_PWM_PORT);
   shooterMotorB = new Talon(SHOOTER_MOTOR_B_PWM_PORT);
@@ -27,6 +28,7 @@ RobotModel::RobotModel() {
   shooterEncoder->SetPIDSourceType(PIDSourceType::kRate);
   shooterEncoder->SetDistancePerPulse((1.0)/(250.0));
   shooterEncoder->SetSamplesToAverage(90);
+  liftMotor->SetSafetyEnabled(false);
 
   shooterEncoder->SetPIDSourceType(PIDSourceType::kRate);
   leftDriveMotorA->SetSafetyEnabled(false);
@@ -35,6 +37,7 @@ RobotModel::RobotModel() {
   rightDriveMotorB->SetSafetyEnabled(false);
   /*shooterMotorA->SetSafetyEnabled(false);
   shooterMotorB->SetSafetyEnabled(false);*/
+  liftMotor->SetInverted(false);
 
   leftDriveMotorA->SetInverted(false);
   leftDriveMotorB->SetInverted(false);
@@ -91,6 +94,7 @@ void RobotModel::UpdateCurrent() {
   rightDriveBCurrent = pdp->GetCurrent(RIGHT_DRIVE_MOTOR_B_PDP_CHAN);
   shooterMotorACurrent = pdp->GetCurrent(SHOOTER_MOTOR_A_PDP_CHAN);
   shooterMotorBCurrent = pdp->GetCurrent(SHOOTER_MOTOR_B_PDP_CHAN);
+  liftMotorCurrent = pdp->GetCurrent(LIFTER_MOTOR_PDP_CHAN);
 }
 
 //returns the current of a given channel
@@ -113,6 +117,8 @@ double RobotModel::GetCurrent(int channel) {
     break;
   case SHOOTER_MOTOR_B_PDP_CHAN:
     return shooterMotorBCurrent;
+  case LIFTER_MOTOR_PDP_CHAN:
+    return liftMotorCurrent;
   default:
     return -1;
   }

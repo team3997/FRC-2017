@@ -25,18 +25,18 @@ public:
   bool GetReverseDriveDesired();
   bool GetArcadeDriveDesired();
   bool GetShooterRunDesired();
-
+  bool GetLiftDesired();
 private:
   
   //booleans for desired states of robot
-  bool reverseDriveDesired, arcadeDriveDesired, shooterRunDesired;
+  bool reverseDriveDesired, arcadeDriveDesired, shooterRunDesired, liftDesired;
 
   double driverLeftJoyX, driverLeftJoyY, driverRightJoyX, driverRightJoyY;
   double operatorLeftJoyX, operatorLeftJoyY, operatorRightJoyX, operatorRightJoyY;
 
   Joystick *driverJoy, *operatorJoy;
 
-  ButtonReader *driveDirectionButton, *shooterRunButton;
+  ButtonReader *driveDirectionButton, *shooterRunButton, *liftButton;
 
   void ReadAllButtons();
 };
