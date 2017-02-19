@@ -2,10 +2,10 @@
 #define PORTS_H
 
 // ***************** PWM PORTS *****************
-static const int LEFT_DRIVE_MOTOR_A_PWM_PORT            = 1; //back left
-static const int LEFT_DRIVE_MOTOR_B_PWM_PORT            = 0; //front left
-static const int RIGHT_DRIVE_MOTOR_A_PWM_PORT           = 3; //back right
-static const int RIGHT_DRIVE_MOTOR_B_PWM_PORT           = 2; //front riht
+static const int LEFT_DRIVE_MOTOR_A_PWM_PORT            = 0; //front left
+static const int LEFT_DRIVE_MOTOR_B_PWM_PORT            = 1; //back left
+static const int RIGHT_DRIVE_MOTOR_A_PWM_PORT           = 2; //front right
+static const int RIGHT_DRIVE_MOTOR_B_PWM_PORT           = 3; //back right
 static const int SHOOTER_MOTOR_A_PWM_PORT               = 4;
 static const int SHOOTER_MOTOR_B_PWM_PORT               = 5;
 

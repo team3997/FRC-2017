@@ -17,7 +17,7 @@ public:
 
   void Reset(); //resets variables and objects
 
-  void UpdateCurrent(); //initializes variables pertaining to current
+  void UpdateCurrent();  //initializes variables pertaining to current
 
   double GetVoltage(); //returns the voltage
   double GetTotalEnergy(); //returns the total energy of the PDP
