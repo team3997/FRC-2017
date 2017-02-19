@@ -37,7 +37,7 @@ void DriveController::Update(double currTimeSec, double deltaTimeSec) {
         RemoteControl::kRY);
 
     if (humanControl->GetArcadeDriveDesired()) {
-      ArcadeDrive(driverLeftY, driverRightX);
+      ArcadeDrive(driverLeftY, -driverRightX);
     } else {
       TankDrive(driverLeftY, driverRightY);
     }
