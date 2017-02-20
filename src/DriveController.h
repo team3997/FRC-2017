@@ -13,8 +13,8 @@ public:
 
   void Update(double currTimeSec, double deltaTimeSec);
   void Reset();
-  void ArcadeDrive(double myX, double myY, bool teleOp);
-  void TankDrive(double myLeft, double myRight, bool teleOp);
+  void ArcadeDrive(double myX, double myY);
+  void TankDrive(double myLeft, double myRight);
 
   enum DriveState {
     kInitialize, kTeleopDrive

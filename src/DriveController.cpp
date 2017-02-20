@@ -2,7 +2,6 @@
 #include "Params.h"
 #include "DriveController.h"
 #include "RobotModel.h"
-#include "ControlBoard.h"
 
 DriveController::DriveController(RobotModel *myRobot,
     RemoteControl *myHumanControl) {
@@ -38,9 +37,9 @@ void DriveController::Update(double currTimeSec, double deltaTimeSec) {
         RemoteControl::kRY);
 
     if (humanControl->GetArcadeDriveDesired()) {
-      ArcadeDrive(driverLeftX, driverRightY, true);
+      ArcadeDrive(driverLeftY, -driverRightX);
     } else {
-      TankDrive(driverLeftY, driverRightY, true);
+      TankDrive(driverLeftY, driverRightY);
     }
 
     nextState = kTeleopDrive;
@@ -50,37 +49,21 @@ void DriveController::Update(double currTimeSec, double deltaTimeSec) {
   m_stateVal = nextState;
 }
 
-void DriveController::ArcadeDrive(double myY, double myX, bool teleOp) {
-
-  if (teleOp) {
-    if (humanControl->GetReverseDriveDesired()) {
-      myX = -myX;
-      myY = -myY;
-    }
-
-    driveTrain->ArcadeDrive(myX, myY, SQUARE_DRIVE_AXIS_INPUT);
-
-  } else {
-    driveTrain->ArcadeDrive(myX, myY, false);
+void DriveController::ArcadeDrive(double myY, double myX) {
+  if (humanControl->GetReverseDriveDesired()) {
+    myX = -myX;
+    myY = -myY;
   }
-
   driveTrain->ArcadeDrive(myY, myX, SQUARE_DRIVE_AXIS_INPUT);
 }
 
-void DriveController::TankDrive(double myLeft, double myRight, bool teleOp) {
-  if (teleOp) {
-      if (humanControl->GetReverseDriveDesired()) {
-        myLeft = -myLeft;
-        myRight = -myRight;
-      }
+void DriveController::TankDrive(double myLeft, double myRight) {
+  if (humanControl->GetReverseDriveDesired()) {
+    myLeft = -myLeft;
+    myRight = -myRight;
+  }
 
-      driveTrain->TankDrive(myLeft, myRight, SQUARE_DRIVE_AXIS_INPUT);
-
-    } else {
-      driveTrain->TankDrive(myLeft, myRight, false);
-    }
-
-    driveTrain->TankDrive(myLeft, myRight, false);
+  driveTrain->TankDrive(myLeft, myRight, SQUARE_DRIVE_AXIS_INPUT);
 }
 
 void DriveController::Reset() {
