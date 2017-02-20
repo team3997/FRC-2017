@@ -54,7 +54,6 @@ void DriveController::ArcadeDrive(double myY, double myX) {
     myX = -myX;
     myY = -myY;
   }
-
   driveTrain->ArcadeDrive(myY, myX, SQUARE_DRIVE_AXIS_INPUT);
 }
 
