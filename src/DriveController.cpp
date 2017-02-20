@@ -1,4 +1,5 @@
 #include "WPILib.h"
+#include "Params.h"
 #include "DriveController.h"
 #include "RobotModel.h"
 
@@ -22,8 +23,6 @@ void DriveController::Update(double currTimeSec, double deltaTimeSec) {
     nextState = kTeleopDrive;
     break;
   case (kTeleopDrive):
-    printf("In case kTeleopDrive \n");
-
     double driverLeftX;
     driverLeftX = humanControl->GetJoystickValue(RemoteControl::kDriverJoy,
         RemoteControl::kLX);
@@ -38,7 +37,7 @@ void DriveController::Update(double currTimeSec, double deltaTimeSec) {
         RemoteControl::kRY);
 
     if (humanControl->GetArcadeDriveDesired()) {
-      ArcadeDrive(driverLeftY, driverRightX);
+      ArcadeDrive(driverLeftY, -driverRightX);
     } else {
       TankDrive(driverLeftY, driverRightY);
     }
@@ -55,7 +54,6 @@ void DriveController::ArcadeDrive(double myY, double myX) {
     myX = -myX;
     myY = -myY;
   }
-
   driveTrain->ArcadeDrive(myY, myX, SQUARE_DRIVE_AXIS_INPUT);
 }
 

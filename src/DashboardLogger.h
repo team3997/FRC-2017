@@ -24,9 +24,13 @@ private:
 
   void PutDriveMotorCurrentData();
   void PutRobotCurrentData();
+  void PutShooterEncoderData();
+  void PutDriveEncoderData();
+  void PutShooterMotorOutputs();
   void PutDriverJoystickAxesData();
   void PutOperatorJoystickAxesData();
   void PutDriverMotorOutputs();
+  void PutGamePadButtonPress();
 };
 
 #endif /* SRC_DASHBOARDLOGGER_H_ */
