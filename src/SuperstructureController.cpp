@@ -1,5 +1,5 @@
 #include "SuperstructureController.h"
-
+#include "Params.h"
 
 SuperstructureController::SuperstructureController(RobotModel* myRobot, RemoteControl* myHumanControl) {
 	robot = myRobot;
@@ -8,7 +8,6 @@ SuperstructureController::SuperstructureController(RobotModel* myRobot, RemoteCo
 	m_stateVal = kInit;
 	nextState = kInit;
 
-  shooterRunSpeed = 0.0;
 }
 
 void SuperstructureController::Reset() {
@@ -20,10 +19,13 @@ void SuperstructureController::Update(double currTimeSec, double deltaTimeSec) {
 	switch(m_stateVal) {
 	case (kInit):
 		nextState = kIdle;
+
 		break;
 	case (kIdle):
 		nextState = kIdle;
+
 		break;
+
 	default:
 	  break;
 	}

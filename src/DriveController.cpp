@@ -1,4 +1,5 @@
 #include "WPILib.h"
+#include "Params.h"
 #include "DriveController.h"
 #include "RobotModel.h"
 
@@ -22,8 +23,6 @@ void DriveController::Update(double currTimeSec, double deltaTimeSec) {
     nextState = kTeleopDrive;
     break;
   case (kTeleopDrive):
-    printf("In case kTeleopDrive \n");
-
     double driverLeftX;
     driverLeftX = humanControl->GetJoystickValue(RemoteControl::kDriverJoy,
         RemoteControl::kLX);

@@ -24,7 +24,7 @@ public:
 
   bool GetReverseDriveDesired();
   bool GetArcadeDriveDesired();
-	bool GetShooterRunDesired(); 
+  bool GetShooterRunDesired();
 
 private:
   
