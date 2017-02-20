@@ -8,27 +8,37 @@
 #include "WPILib.h"
 #include "RobotModel.h"
 #include "Ports.h"
+#include <math.h>
 
 //RobotModel constructor: inits all variables and objects
 RobotModel::RobotModel() {
   pdp = new PowerDistributionPanel();
 
-  leftDriveMotorA = new Talon(LEFT_DRIVE_MOTOR_A_PWM_PORT);
-  leftDriveMotorB = new Talon(LEFT_DRIVE_MOTOR_B_PWM_PORT);
-  rightDriveMotorA = new Talon(RIGHT_DRIVE_MOTOR_A_PWM_PORT);
-  rightDriveMotorB = new Talon(RIGHT_DRIVE_MOTOR_B_PWM_PORT);
+  leftDriveMotorA = new Spark(LEFT_DRIVE_MOTOR_A_PWM_PORT);
+  leftDriveMotorB = new Spark(LEFT_DRIVE_MOTOR_B_PWM_PORT);
+  rightDriveMotorA = new Spark(RIGHT_DRIVE_MOTOR_A_PWM_PORT);
+  rightDriveMotorB = new Spark(RIGHT_DRIVE_MOTOR_B_PWM_PORT);
 
   //Init shooter motor
   shooterMotorA = new Talon(SHOOTER_MOTOR_A_PWM_PORT);
   shooterMotorB = new Talon(SHOOTER_MOTOR_B_PWM_PORT);
 
+  //Init encoders
   shooterEncoder = new Encoder(SHOOTER_ENCODER_PORTS[0], SHOOTER_ENCODER_PORTS[1]);
+  leftDriveEncoder = new Encoder(LEFT_DRIVE_ENCODER_PORTS[0], LEFT_DRIVE_ENCODER_PORTS[1]);
+  rightDriveEncoder = new Encoder(RIGHT_DRIVE_ENCODER_PORTS[0], RIGHT_DRIVE_ENCODER_PORTS[1]);
   
   shooterEncoder->SetPIDSourceType(PIDSourceType::kRate);
   shooterEncoder->SetDistancePerPulse((1.0)/(250.0));
   shooterEncoder->SetSamplesToAverage(90);
 
-  shooterEncoder->SetPIDSourceType(PIDSourceType::kRate);
+  leftDriveEncoder->SetReverseDirection(true);
+  leftDriveEncoder->SetDistancePerPulse( ((1.0)/(250.0)) * ((4.0)*(M_PI)) );
+  leftDriveEncoder->SetSamplesToAverage(90);
+  rightDriveEncoder->SetReverseDirection(true);
+  rightDriveEncoder->SetDistancePerPulse( ((1.0)/(250.0)) * ((4.0)*(M_PI)) );
+  rightDriveEncoder->SetSamplesToAverage(90);
+
   leftDriveMotorA->SetSafetyEnabled(false);
   leftDriveMotorB->SetSafetyEnabled(false);
   rightDriveMotorA->SetSafetyEnabled(false);
@@ -61,7 +71,7 @@ RobotModel::~RobotModel() {
 
 //resets variables and objects
 void RobotModel::Reset() {
-
+  ResetEncoders();
 }
 
 //returns the voltage
@@ -121,6 +131,12 @@ double RobotModel::GetCurrent(int channel) {
 //resets the time
 void RobotModel::ResetTimer() {
   timer->Reset();
+}
+
+void RobotModel::ResetEncoders() {
+  shooterEncoder->Reset();
+  leftDriveEncoder->Reset();
+  rightDriveEncoder->Reset();
 }
 
 //returns the time

@@ -17,7 +17,7 @@ public:
 
   void Reset(); //resets variables and objects
 
-  void UpdateCurrent(); //initializes variables pertaining to current
+  void UpdateCurrent();  //initializes variables pertaining to current
 
   double GetVoltage(); //returns the voltage
   double GetTotalEnergy(); //returns the total energy of the PDP
@@ -32,13 +32,15 @@ public:
   double GetShooterMotorASpeed(); //returns the speed of the shooter motor A
   double GetShooterMotorBSpeed(); //returns the speed of the shooter motor B
   void SetShooterMotorsSpeed(double speed);//sets the speed of the shooter motor
-	
-	Talon *leftDriveMotorA, *leftDriveMotorB, *rightDriveMotorA,
+  void ResetEncoders();
+
+  Spark *leftDriveMotorA, *leftDriveMotorB, *rightDriveMotorA,
       *rightDriveMotorB;
   
   Talon *shooterMotorA, *shooterMotorB;
 
   Encoder *shooterEncoder;
+  Encoder *leftDriveEncoder, *rightDriveEncoder;
 private:
   PowerDistributionPanel* pdp;
 

@@ -22,6 +22,7 @@ void DashboardLogger::UpdateData() {
   PutDriverJoystickAxesData();
   PutDriverMotorOutputs();
   PutShooterEncoderData();
+  PutDriveEncoderData();
   PutShooterMotorOutputs();
   PutGamePadButtonPress();
 }
@@ -48,11 +49,27 @@ void DashboardLogger::PutDriveMotorCurrentData() {
 
 void DashboardLogger::PutShooterEncoderData() {
   SmartDashboard::PutNumber("SHOOTER_ENC_GetDistance()", robot->shooterEncoder->GetDistance());
-  SmartDashboard::PutNumber("SHOOTER_ENC_GetRate()", robot->shooterEncoder->GetRate());
+  //SmartDashboard::PutNumber("SHOOTER_ENC_GetRate()", robot->shooterEncoder->GetRate());
   SmartDashboard::PutNumber("SHOOTER_ENC_GetRPM", robot->shooterEncoder->GetRate()*60.0);
   SmartDashboard::PutNumber("SHOOTER_ENC_GetRPMGRAPH", robot->shooterEncoder->GetRate()*60.0);
-  SmartDashboard::PutNumber("SHOOTER_ENC_GetPeriod()", robot->shooterEncoder->GetPeriod());
-  SmartDashboard::PutNumber("SHOOTER_ENC_GetRaw()", robot->shooterEncoder->GetRaw());
+  //SmartDashboard::PutNumber("SHOOTER_ENC_GetPeriod()", robot->shooterEncoder->GetPeriod());
+  //SmartDashboard::PutNumber("SHOOTER_ENC_GetRaw()", robot->shooterEncoder->GetRaw());
+}
+
+void DashboardLogger::PutDriveEncoderData() {
+  SmartDashboard::PutNumber("LEFTDRIVE_ENC_GetDistance()", robot->leftDriveEncoder->GetDistance());
+  //SmartDashboard::PutNumber("LEFTDRIVE_ENC_GetRate()", robot->leftDriveEncoder->GetRate());
+  //SmartDashboard::PutNumber("LEFTDRIVE_ENC_GetRPM", robot->leftDriveEncoder->GetRate()*60.0);
+  //SmartDashboard::PutNumber("LEFTDRIVE_ENC_GetRPMGRAPH", robot->leftDriveEncoder->GetRate()*60.0);
+  //SmartDashboard::PutNumber("LEFTDRIVE_ENC_GetPeriod()", robot->leftDriveEncoder->GetPeriod());
+  //SmartDashboard::PutNumber("LEFTDRIVE_ENC_GetRaw()", robot->leftDriveEncoder->GetRaw());
+
+  SmartDashboard::PutNumber("RIGHTDRIVE_ENC_GetDistance()", robot->rightDriveEncoder->GetDistance());
+  //SmartDashboard::PutNumber("RIGHTDRIVE_ENC_GetRate()", robot->rightDriveEncoder->GetRate());
+  //SmartDashboard::PutNumber("RIGHTDRIVE_ENC_GetRPM", robot->rightDriveEncoder->GetRate()*60.0);
+  //SmartDashboard::PutNumber("RIGHTDRIVE_ENC_GetRPMGRAPH", robot->rightDriveEncoder->GetRate()*60.0);
+  //SmartDashboard::PutNumber("RIGHTDRIVE_ENC_GetPeriod()", robot->rightDriveEncoder->GetPeriod());
+  //SmartDashboard::PutNumber("RIGHTDRIVE_ENC_GetRaw()", robot->rightDriveEncoder->GetRaw());
 }
 
 void DashboardLogger::PutShooterMotorOutputs() {
