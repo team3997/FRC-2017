@@ -20,6 +20,7 @@ public:
   virtual bool GetReverseDriveDesired() = 0;
   virtual bool GetArcadeDriveDesired() = 0;
   virtual bool GetShooterRunDesired() = 0;
+  virtual bool GetClimbDesired() = 0;
 
   virtual void ReadControls() = 0;
 

@@ -19,18 +19,21 @@ RobotModel::RobotModel() {
   rightDriveMotorA = new Spark(RIGHT_DRIVE_MOTOR_A_PWM_PORT);
   rightDriveMotorB = new Spark(RIGHT_DRIVE_MOTOR_B_PWM_PORT);
 
+  climbMotor = new Talon(CLIMBER_MOTOR_PWM_PORT);
+
   //Init shooter motor
-  shooterMotorA = new Talon(SHOOTER_MOTOR_A_PWM_PORT);
-  shooterMotorB = new Talon(SHOOTER_MOTOR_B_PWM_PORT);
+  shooterMotorA = new Spark(SHOOTER_MOTOR_A_PWM_PORT);
+  shooterMotorB = new Spark(SHOOTER_MOTOR_B_PWM_PORT);
 
   //Init encoders
   shooterEncoder = new Encoder(SHOOTER_ENCODER_PORTS[0], SHOOTER_ENCODER_PORTS[1]);
   leftDriveEncoder = new Encoder(LEFT_DRIVE_ENCODER_PORTS[0], LEFT_DRIVE_ENCODER_PORTS[1]);
   rightDriveEncoder = new Encoder(RIGHT_DRIVE_ENCODER_PORTS[0], RIGHT_DRIVE_ENCODER_PORTS[1]);
-  
+
   shooterEncoder->SetPIDSourceType(PIDSourceType::kRate);
   shooterEncoder->SetDistancePerPulse((1.0)/(250.0));
   shooterEncoder->SetSamplesToAverage(90);
+  climbMotor->SetSafetyEnabled(false);
 
   leftDriveEncoder->SetReverseDirection(true);
   leftDriveEncoder->SetDistancePerPulse( ((1.0)/(250.0)) * ((4.0)*(M_PI)) );
@@ -45,6 +48,7 @@ RobotModel::RobotModel() {
   rightDriveMotorB->SetSafetyEnabled(false);
   /*shooterMotorA->SetSafetyEnabled(false);
   shooterMotorB->SetSafetyEnabled(false);*/
+  climbMotor->SetInverted(false);
 
   leftDriveMotorA->SetInverted(false);
   leftDriveMotorB->SetInverted(false);
@@ -101,6 +105,7 @@ void RobotModel::UpdateCurrent() {
   rightDriveBCurrent = pdp->GetCurrent(RIGHT_DRIVE_MOTOR_B_PDP_CHAN);
   shooterMotorACurrent = pdp->GetCurrent(SHOOTER_MOTOR_A_PDP_CHAN);
   shooterMotorBCurrent = pdp->GetCurrent(SHOOTER_MOTOR_B_PDP_CHAN);
+  climbMotorCurrent = pdp->GetCurrent(CLIMBER_MOTOR_PDP_CHAN);
 }
 
 //returns the current of a given channel
@@ -123,6 +128,8 @@ double RobotModel::GetCurrent(int channel) {
     break;
   case SHOOTER_MOTOR_B_PDP_CHAN:
     return shooterMotorBCurrent;
+  case CLIMBER_MOTOR_PDP_CHAN:
+    return climbMotorCurrent;
   default:
     return -1;
   }
@@ -147,7 +154,7 @@ double RobotModel::GetTime() {
 // SUPERSTRUCTURE ACCESSORS AND MUTATORS IN ROBOTMODEL
 
 double RobotModel::GetShooterMotorASpeed() {
-  return shooterMotorA->Get();
+    return shooterMotorA->Get();
 }
 
 double RobotModel::GetShooterMotorBSpeed() {
@@ -157,5 +164,8 @@ double RobotModel::GetShooterMotorBSpeed() {
 void RobotModel::SetShooterMotorsSpeed(double speed){
   shooterMotorA->Set(speed);
   shooterMotorB->Set(speed);
-  SmartDashboard::PutBoolean("RUNNING SHOOTER", true);
+}
+
+void RobotModel::SetClimberMotorSpeed(double speed) {
+  climbMotor->Set(speed);
 }

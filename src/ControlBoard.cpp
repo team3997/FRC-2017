@@ -17,13 +17,13 @@ ControlBoard::ControlBoard() {
   if(USING_WIN_DRIVER_STATION){
   	driveDirectionButton = new ButtonReader(driverJoy, XINPUT_WIN_BACK_BUTTON);
   	shooterRunButton = new ButtonReader(driverJoy, XINPUT_WIN_GREEN_BUTTON);
-  }	
+  	climberRunButton = new ButtonReader(driverJoy, XINPUT_WIN_BLUE_BUTTON);
+  }
   else {
   	//driveDirectionButton = new ButtonReader(driverJoy, XINPUT_LINUX_BACK_BUTTON);
   	//shooterRunButton = new ButtonReader(driverJoy, XINPUT_LINUX_GREEN_BUTTON);
   }
   //Superstructure Buttons
-
 
   //Joystick positions that will set speed of robot movement
   driverLeftJoyX = 0;
@@ -72,12 +72,15 @@ void ControlBoard::ReadControls() {
 
   //Superstructure Variables
   shooterRunDesired = shooterRunButton->IsDown();
+
+  climbDesired = climberRunButton->IsDown();
 }
 
 //Reads the values of all buttons defined by this class
 void ControlBoard::ReadAllButtons() {
   driveDirectionButton->ReadValue();
   shooterRunButton->ReadValue();
+  climberRunButton->ReadValue();
 }
 
 //Returns the joystick and axis being used
@@ -126,4 +129,9 @@ bool ControlBoard::GetArcadeDriveDesired() {
   return arcadeDriveDesired;
 }
 
+bool ControlBoard::GetClimbDesired() {
+
+  return climbDesired;
+
+}
 
