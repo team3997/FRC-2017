@@ -9,7 +9,6 @@
 #include "DashboardLogger.h"
 #include "Ports.h"
 
-
 DashboardLogger::DashboardLogger(RobotModel *myRobot, RemoteControl *myHumanControl) {
   robot = myRobot;
   humanControl = myHumanControl;
