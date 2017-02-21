@@ -10,7 +10,6 @@
 
 #include "WPILib.h"
 
-
 class RobotModel {
 public:
   RobotModel();
@@ -29,17 +28,15 @@ public:
   void ResetTimer(); //resets the timer
   double GetTime(); //returns the time
 
-
   //Superstructure systems
   double GetShooterMotorASpeed(); //returns the speed of the shooter motor A
   double GetShooterMotorBSpeed(); //returns the speed of the shooter motor B
   void SetShooterMotorsSpeed(double speed);//sets the speed of the shooter motor
-	
-  Spark *leftDriveMotorA, *leftDriveMotorB, *rightDriveMotorA, *rightDriveMotorB;
   void ResetEncoders();
 
+  Spark *leftDriveMotorA, *leftDriveMotorB, *rightDriveMotorA,
+      *rightDriveMotorB;
   
-
   Talon *shooterMotorA, *shooterMotorB;
 
   Encoder *shooterEncoder;
@@ -48,7 +45,6 @@ private:
   PowerDistributionPanel* pdp;
 
   Timer *timer;
-
 
   double leftDriveACurrent, leftDriveBCurrent, rightDriveACurrent,
       rightDriveBCurrent, shooterMotorACurrent, shooterMotorBCurrent;

@@ -27,7 +27,6 @@ void SuperstructureController::Update(double currTimeSec, double deltaTimeSec) {
 		break;
 
 	default:
-
 	  break;
 	}
 	m_stateVal = nextState;
