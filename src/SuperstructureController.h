@@ -19,6 +19,7 @@ private:
 	RobotModel* robot;
 	RemoteControl* humanControl;
 
+
         uint32_t m_stateVal;
 	uint32_t nextState;
 };

@@ -5,7 +5,6 @@
 
 static const bool SQUARE_DRIVE_AXIS_INPUT              = true;
 static const bool USE_ARCADE_DRIVE                     = true;
-
 static const double SHOOTER_HARDSET_MOTOR_SPEED        = 0.8;
 static const bool SHOOTER_USE_PID                      = true;
 #endif

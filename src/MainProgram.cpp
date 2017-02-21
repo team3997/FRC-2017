@@ -7,10 +7,11 @@
 #include "DashboardLogger.h"
 #include "ShooterController.h"
 #include <string.h>
+#include "Auto/Auto.h"
 
 class MainProgram: public frc::IterativeRobot {
   //LiveWindow helps in Test mode
-  LiveWindow *lw;
+  //LiveWindow *lw;
   //Creates a robot from class RobotModel
   RobotModel *robot;
   //Creates a human control from RemoteControl, which includes ControlBoard
@@ -22,6 +23,7 @@ class MainProgram: public frc::IterativeRobot {
   //Creates an object of Dashboardlogger
   DashboardLogger *dashboardLogger;
 
+  Auto* auton;
 
   //Creates a time-keeper
   double currTimeSec;
@@ -33,9 +35,9 @@ public:
     humanControl = new ControlBoard();
     driveController = new DriveController(robot, humanControl);
     dashboardLogger = new DashboardLogger(robot, humanControl);
-    superstructureController = new SuperstructureController(robot, humanControl);
+    auton = new Auto(driveController, robot);
     shooterController = new ShooterController(robot, humanControl);
-
+    superstructureController = new SuperstructureController(robot, humanControl);
     //Initializes timekeeper variables
     currTimeSec = 0.0;
     lastTimeSec = 0.0;
@@ -45,6 +47,8 @@ private:
   void RobotInit() {
     robot->ResetTimer();
     robot->Reset();
+    auton->ListOptions();
+
   }
 
   void AutonomousInit() {
@@ -52,12 +56,15 @@ private:
     robot->ResetEncoders();
 
     driveController->Reset();
+
     superstructureController->Reset();
 
     //Resets timer variables
     currTimeSec = 0.0;
     lastTimeSec = 0.0;
     deltaTimeSec = 0.0;
+    auton->Start();
+
   }
 
   void AutonomousPeriodic() {
@@ -72,10 +79,11 @@ private:
   }
 
   void TeleopInit() {
+    auton->Stop();
     robot->ResetTimer();
     robot->ResetEncoders();
-
     driveController->Reset();
+
     superstructureController->Reset();
     shooterController->Reset();
 
@@ -88,7 +96,6 @@ private:
 
   void TeleopPeriodic() {
     dashboardLogger->UpdateData();
-
     //Updates timer
     lastTimeSec = currTimeSec;
     currTimeSec = robot->GetTime();

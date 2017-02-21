@@ -1,4 +1,5 @@
 #include "ShooterMotorsPIDOutput.h"
+#include "WPILib.h"
 
 ShooterMotorsPIDOutput::ShooterMotorsPIDOutput(Talon *kOutputMotor1, Talon *kOutputMotor2) {
   shooterMotorA = kOutputMotor1;
