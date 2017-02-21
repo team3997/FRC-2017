@@ -22,9 +22,9 @@ static const int CLIMBER_MOTOR_PDP_CHAN                 = 16;
 
 
 // ***************** DIGITAL I/O PORTS *****************
-static const int LEFT_DRIVE_ENCODER_PORTS[]            = {2, 3};
-static const int RIGHT_DRIVE_ENCODER_PORTS[]           = {0, 1};
-static const int SHOOTER_ENCODER_PORTS[]               = {4, 5};
+static const int LEFT_DRIVE_ENCODER_PORTS[]            = {4, 5};
+static const int RIGHT_DRIVE_ENCODER_PORTS[]           = {2, 3};
+static const int SHOOTER_ENCODER_PORTS[]               = {0, 1};
 // ******************* ANALOG IN PORTS*******************
 
 // ***************** MISC *****************

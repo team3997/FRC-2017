@@ -40,7 +40,7 @@ void ShooterController::Update(double currTimeSec, double deltaTimeSec) {
       //Shooter Behaviour
       if(humanControl->GetShooterRunDesired()){
         if(SHOOTER_USE_PID){
-            shooterPID->Enable();
+          shooterPID->Enable();
         }
         else {
           robot->SetShooterMotorsSpeed(SHOOTER_HARDSET_MOTOR_SPEED);

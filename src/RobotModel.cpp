@@ -20,6 +20,7 @@ RobotModel::RobotModel() {
   rightDriveMotorB = new Spark(RIGHT_DRIVE_MOTOR_B_PWM_PORT);
 
   climbMotor = new Talon(CLIMBER_MOTOR_PWM_PORT);
+  feederMotor = new VictorSP(FEEDER_MOTOR_PWM_PORT);
 
   //Init shooter motor
   shooterMotorA = new Spark(SHOOTER_MOTOR_A_PWM_PORT);

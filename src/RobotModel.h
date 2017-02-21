@@ -39,6 +39,7 @@ public:
       *rightDriveMotorB;
   
   Spark *shooterMotorA, *shooterMotorB;
+  VictorSP *feederMotor;
   Talon *climbMotor;
   Encoder *shooterEncoder;
   Encoder *leftDriveEncoder, *rightDriveEncoder;

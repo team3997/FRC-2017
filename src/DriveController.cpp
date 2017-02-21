@@ -54,6 +54,7 @@ void DriveController::ArcadeDrive(double myY, double myX) {
     myX = -myX;
     myY = -myY;
   }
+  robot->feederMotor->Set(myY);
   driveTrain->ArcadeDrive(myY, myX, SQUARE_DRIVE_AXIS_INPUT);
 }
 
