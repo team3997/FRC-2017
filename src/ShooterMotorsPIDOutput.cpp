@@ -1,6 +1,6 @@
 #include "ShooterMotorsPIDOutput.h"
 
-ShooterMotorsPIDOutput::ShooterMotorsPIDOutput(Talon *kOutputMotor1, Talon *kOutputMotor2) {
+ShooterMotorsPIDOutput::ShooterMotorsPIDOutput(VictorSP *kOutputMotor1, VictorSP *kOutputMotor2) {
   shooterMotorA = kOutputMotor1;
   shooterMotorB = kOutputMotor2;
 }
@@ -12,6 +12,7 @@ void ShooterMotorsPIDOutput::PIDWrite(double output) {
   shooterMotorA->Set(output);
   shooterMotorB->Set(output);
 }
+
 
 double ShooterMotorsPIDOutput::GetPIDLoopOutput() {
   return loopOutput;

@@ -14,23 +14,29 @@
 RobotModel::RobotModel() {
   pdp = new PowerDistributionPanel();
 
+  //Init drive motors
   leftDriveMotorA = new Spark(LEFT_DRIVE_MOTOR_A_PWM_PORT);
   leftDriveMotorB = new Spark(LEFT_DRIVE_MOTOR_B_PWM_PORT);
   rightDriveMotorA = new Spark(RIGHT_DRIVE_MOTOR_A_PWM_PORT);
   rightDriveMotorB = new Spark(RIGHT_DRIVE_MOTOR_B_PWM_PORT);
 
-  //Init shooter motor
-  shooterMotorA = new Talon(SHOOTER_MOTOR_A_PWM_PORT);
-  shooterMotorB = new Talon(SHOOTER_MOTOR_B_PWM_PORT);
+  //Init superstructure motors
+  climberMotor = new Talon(CLIMBER_MOTOR_PWM_PORT);
+  feederMotor = new Talon(FEEDER_MOTOR_PWM_PORT);
+
+  //Init shooter motors
+  shooterMotorA = new VictorSP(SHOOTER_MOTOR_A_PWM_PORT);
+  shooterMotorB = new VictorSP(SHOOTER_MOTOR_B_PWM_PORT);
 
   //Init encoders
   shooterEncoder = new Encoder(SHOOTER_ENCODER_PORTS[0], SHOOTER_ENCODER_PORTS[1]);
   leftDriveEncoder = new Encoder(LEFT_DRIVE_ENCODER_PORTS[0], LEFT_DRIVE_ENCODER_PORTS[1]);
   rightDriveEncoder = new Encoder(RIGHT_DRIVE_ENCODER_PORTS[0], RIGHT_DRIVE_ENCODER_PORTS[1]);
-  
+
   shooterEncoder->SetPIDSourceType(PIDSourceType::kRate);
   shooterEncoder->SetDistancePerPulse((1.0)/(250.0));
   shooterEncoder->SetSamplesToAverage(90);
+  climberMotor->SetSafetyEnabled(false);
 
   leftDriveEncoder->SetReverseDirection(true);
   leftDriveEncoder->SetDistancePerPulse( ((1.0)/(250.0)) * ((4.0)*(M_PI)) );
@@ -45,6 +51,7 @@ RobotModel::RobotModel() {
   rightDriveMotorB->SetSafetyEnabled(false);
   /*shooterMotorA->SetSafetyEnabled(false);
   shooterMotorB->SetSafetyEnabled(false);*/
+  climberMotor->SetInverted(false);
 
   leftDriveMotorA->SetInverted(false);
   leftDriveMotorB->SetInverted(false);
@@ -101,6 +108,7 @@ void RobotModel::UpdateCurrent() {
   rightDriveBCurrent = pdp->GetCurrent(RIGHT_DRIVE_MOTOR_B_PDP_CHAN);
   shooterMotorACurrent = pdp->GetCurrent(SHOOTER_MOTOR_A_PDP_CHAN);
   shooterMotorBCurrent = pdp->GetCurrent(SHOOTER_MOTOR_B_PDP_CHAN);
+  climberMotorCurrent = pdp->GetCurrent(CLIMBER_MOTOR_PDP_CHAN);
 }
 
 //returns the current of a given channel
@@ -123,6 +131,8 @@ double RobotModel::GetCurrent(int channel) {
     break;
   case SHOOTER_MOTOR_B_PDP_CHAN:
     return shooterMotorBCurrent;
+  case CLIMBER_MOTOR_PDP_CHAN:
+    return climberMotorCurrent;
   default:
     return -1;
   }
@@ -146,16 +156,32 @@ double RobotModel::GetTime() {
 
 // SUPERSTRUCTURE ACCESSORS AND MUTATORS IN ROBOTMODEL
 
+void RobotModel::SetShooterMotorsSpeed(double speed){
+  shooterMotorA->Set(speed);
+  shooterMotorB->Set(speed);
+}
+
 double RobotModel::GetShooterMotorASpeed() {
-  return shooterMotorA->Get();
+    return shooterMotorA->Get();
 }
 
 double RobotModel::GetShooterMotorBSpeed() {
   return shooterMotorB->Get();
 }
 
-void RobotModel::SetShooterMotorsSpeed(double speed){
-  shooterMotorA->Set(speed);
-  shooterMotorB->Set(speed);
-  SmartDashboard::PutBoolean("RUNNING SHOOTER", true);
+void RobotModel::SetClimberMotorSpeed(double speed) {
+  climberMotor->Set(speed);
 }
+
+double RobotModel::GetClimberMotorSpeed() {
+    return climberMotor->Get();
+}
+
+void RobotModel::SetFeederMotorSpeed(double speed) {
+    feederMotor->Set(speed);
+}
+
+double RobotModel::GetFeederMotorSpeed() {
+    return feederMotor->Get();
+}
+
