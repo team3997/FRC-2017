@@ -129,9 +129,7 @@ bool ControlBoard::GetArcadeDriveDesired() {
   return arcadeDriveDesired;
 }
 
-bool ControlBoard::GetClimbDesired() {
-
+bool ControlBoard::GetClimberDesired() {
   return climbDesired;
-
 }
 

@@ -18,7 +18,6 @@ public:
   ClimberController(RobotModel* myRobot, RemoteControl* myHumanControl);
   void Reset();
   void Update();
-  void StartClimber();
   
   enum ClimberState {
     kInitialize, kTeleop	

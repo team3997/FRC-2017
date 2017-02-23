@@ -18,7 +18,7 @@ static const int LEFT_DRIVE_MOTOR_A_PDP_CHAN           = 12;
 static const int LEFT_DRIVE_MOTOR_B_PDP_CHAN           = 13;
 static const int RIGHT_DRIVE_MOTOR_A_PDP_CHAN          = 14;
 static const int RIGHT_DRIVE_MOTOR_B_PDP_CHAN          = 15;
-static const int CLIMBER_MOTOR_PDP_CHAN                 = 16;
+static const int CLIMBER_MOTOR_PDP_CHAN                = 16;
 
 
 // ***************** DIGITAL I/O PORTS *****************

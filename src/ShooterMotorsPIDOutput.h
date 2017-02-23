@@ -7,7 +7,7 @@
 
 class ShooterMotorsPIDOutput : public PIDOutput{
 public:
-	ShooterMotorsPIDOutput(Spark *kOutputMotor1, Spark *kOutputMotor2);
+	ShooterMotorsPIDOutput(VictorSP *kOutputMotor1, VictorSP *kOutputMotor2);
   
     //Override PIDWrite
 	void PIDWrite(double output);
@@ -17,8 +17,8 @@ public:
 private:
 	double loopOutput;
 
-	Spark *shooterMotorA;
-	Spark *shooterMotorB;
+	VictorSP *shooterMotorA;
+	VictorSP *shooterMotorB;
 };
 
 #endif

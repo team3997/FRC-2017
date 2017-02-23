@@ -27,20 +27,18 @@ void ClimberController::Update() {
     break;
   case (kTeleop):
     //Climber Behaviour
-    StartClimber();
+	if (humanControl->GetClimberDesired()) {
+      robot->SetClimberMotorSpeed(CLIMBER_HARDSET_MOTOR_SPEED);
+	}
+	else {
+	  robot->climberMotor->SetSpeed(0.0);
+	}
 
     nextState = kTeleop;
     break;
   }
 
   m_stateVal = nextState;
-}
-
-void ClimberController::StartClimber() {
-  if (humanControl->GetClimbDesired()) {
-    robot->SetClimberMotorSpeed(CLIMBER_HARDSET_MOTOR_SPEED);
-  }
-  robot->climbMotor->SetSpeed(0.0);
 }
 
 ClimberController::~ClimberController() {

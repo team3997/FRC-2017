@@ -29,18 +29,23 @@ public:
   double GetTime(); //returns the time
 
   //Superstructure systems
+  void SetShooterMotorsSpeed(double speed);//sets the speed of the shooter motors
   double GetShooterMotorASpeed(); //returns the speed of the shooter motor A
   double GetShooterMotorBSpeed(); //returns the speed of the shooter motor B
-  void SetShooterMotorsSpeed(double speed);//sets the speed of the shooter motors
+  
+  void SetFeederMotorSpeed(double speed); //sets the speed of the feeder motor 
+  double GetFeederMotorSpeed(); //gets the speed of the feeder motor
+
   void SetClimberMotorSpeed(double speed); //sets the speed of the climber motor
+  double GetClimberMotorSpeed(); //gets the speed of the climber motor
+  
   void ResetEncoders();
 
-  Spark *leftDriveMotorA, *leftDriveMotorB, *rightDriveMotorA,
-      *rightDriveMotorB;
-  
-  Spark *shooterMotorA, *shooterMotorB;
-  VictorSP *feederMotor;
-  Talon *climbMotor;
+  //Speed controllers
+  Spark *leftDriveMotorA, *leftDriveMotorB, *rightDriveMotorA, *rightDriveMotorB;
+  VictorSP *shooterMotorA, *shooterMotorB;
+  Talon *climberMotor, *feederMotor;
+
   Encoder *shooterEncoder;
   Encoder *leftDriveEncoder, *rightDriveEncoder;
 private:
@@ -49,7 +54,7 @@ private:
   Timer *timer;
 
   double leftDriveACurrent, leftDriveBCurrent, rightDriveACurrent,
-      rightDriveBCurrent, shooterMotorACurrent, shooterMotorBCurrent, climbMotorCurrent;
+      rightDriveBCurrent, shooterMotorACurrent, shooterMotorBCurrent, climberMotorCurrent;
 };
 
 #endif /* SRC_ROBOTMODEL_H_ */

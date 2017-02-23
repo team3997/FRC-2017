@@ -25,7 +25,7 @@ public:
   bool GetReverseDriveDesired();
   bool GetArcadeDriveDesired();
   bool GetShooterRunDesired();
-  bool GetClimbDesired();
+  bool GetClimberDesired();
 private:
   
   //booleans for desired states of robot
