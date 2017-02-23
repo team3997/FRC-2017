@@ -95,6 +95,7 @@ void DashboardLogger::PutDriverJoystickAxesData() {
 void DashboardLogger::PutGamePadButtonPress() {
   SmartDashboard::PutBoolean("BUTTON_shooterRunDesired", humanControl->GetShooterRunDesired());
   SmartDashboard::PutBoolean("BUTTON_reverseDriveDesired", humanControl->GetReverseDriveDesired());
+  SmartDashboard::PutBoolean("BUTTON_climberRunDesired", humanControl->GetClimberDesired());
 }
 
 void DashboardLogger::PutDriverMotorOutputs() {
