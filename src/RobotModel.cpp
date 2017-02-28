@@ -58,8 +58,9 @@ RobotModel::RobotModel() {
   leftDriveMotorB->SetInverted(false);
   rightDriveMotorA->SetInverted(false);
   rightDriveMotorB->SetInverted(false);
-  shooterMotorA->SetInverted(false);
-  shooterMotorB->SetInverted(false);
+  shooterMotorA->SetInverted(true);
+  shooterMotorB->SetInverted(true);
+  feederMotor->SetInverted(true);
 
   leftDriveACurrent = 0;
   leftDriveBCurrent = 0;
