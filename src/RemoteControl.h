@@ -21,6 +21,7 @@ public:
   virtual bool GetArcadeDriveDesired() = 0;
   virtual bool GetShooterRunDesired() = 0;
   virtual bool GetClimberDesired() = 0;
+  virtual bool GetFeederReverseDesired() = 0;
 
   virtual void ReadControls() = 0;
 
