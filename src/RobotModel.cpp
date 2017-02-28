@@ -38,6 +38,7 @@ RobotModel::RobotModel() {
   shooterEncoder->SetSamplesToAverage(90);
   climberMotor->SetSafetyEnabled(false);
 
+  shooterEncoder->SetPIDSourceType(PIDSourceType::kRate);
   leftDriveEncoder->SetReverseDirection(true);
   leftDriveEncoder->SetDistancePerPulse( ((1.0)/(250.0)) * ((4.0)*(M_PI)) );
   leftDriveEncoder->SetSamplesToAverage(90);
@@ -107,6 +108,7 @@ void RobotModel::UpdateCurrent() {
   leftDriveBCurrent = pdp->GetCurrent(LEFT_DRIVE_MOTOR_B_PDP_CHAN);
   rightDriveACurrent = pdp->GetCurrent(RIGHT_DRIVE_MOTOR_A_PDP_CHAN);
   rightDriveBCurrent = pdp->GetCurrent(RIGHT_DRIVE_MOTOR_B_PDP_CHAN);
+
   shooterMotorACurrent = pdp->GetCurrent(SHOOTER_MOTOR_A_PDP_CHAN);
   shooterMotorBCurrent = pdp->GetCurrent(SHOOTER_MOTOR_B_PDP_CHAN);
   climberMotorCurrent = pdp->GetCurrent(CLIMBER_MOTOR_PDP_CHAN);

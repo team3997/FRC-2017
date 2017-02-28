@@ -1,8 +1,9 @@
 #include "WPILib.h"
-#include "Params.h"
 #include "XInput.h"
 #include "ControlBoard.h"
 #include "Ports.h"
+#include "Params.h"
+
 
 //This file defines all the joysticks, buttons, other variables, and functions necessary
 //to control the robot during teleop by getting human input from the driver station.
@@ -14,6 +15,7 @@ ControlBoard::ControlBoard() {
   //operatorJoy = new Joystick(OPERATOR_JOY_USB_PORT);
 
   //Drivetrain buttons
+  //Superstructure Buttons
   if(USING_WIN_DRIVER_STATION){
   	driveDirectionButton = new ButtonReader(driverJoy, XINPUT_WIN_BACK_BUTTON);
   	shooterRunButton = new ButtonReader(driverJoy, XINPUT_WIN_GREEN_BUTTON);
@@ -38,7 +40,6 @@ ControlBoard::ControlBoard() {
 
 	//Superstructure variables
   shooterRunDesired = false;
-
 }
 
 //ReadControls reads the states of all the buttons and joysticks, and sets variables
