@@ -36,7 +36,6 @@ void Auto::Start() {
 }
 
 void Auto::Stop() {
-  SmartDashboard::PutBoolean("AutoStop", true);
   autoRoutineRunner->Stop();
   autoRoutine->m_active = false;
 

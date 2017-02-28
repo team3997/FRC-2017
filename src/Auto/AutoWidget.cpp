@@ -24,7 +24,6 @@ namespace frc {
  * @param object the option
  */
 void AutoWidget::AddObject(llvm::StringRef name, int routine) {
-  SmartDashboard::PutNumber("Made it to list options", (double) routine);
 
   m_choices[name] = routine;
 }
@@ -41,7 +40,6 @@ void AutoWidget::AddObject(llvm::StringRef name, int routine) {
  */
 
 void AutoWidget::AddDefault(llvm::StringRef name, int defaultRoutine) {
-  SmartDashboard::PutNumber("Made it to list options", (double) defaultRoutine);
 
   m_defaultChoice = name;
   AddObject(name, defaultRoutine);

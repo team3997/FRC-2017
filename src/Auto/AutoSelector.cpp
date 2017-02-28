@@ -17,7 +17,7 @@ AutoSelector::AutoSelector(RobotModel* kShooter, DriveController* kDrive) {
 
 void AutoSelector::ListOptions() {
   autoChooser->AddDefault("Do nothing (Default)", 0);
-  autoChooser->AddObject("Drive", 1);
+  autoChooser->AddObject("Drive (1s)", 1);
   autoChooser->AddObject("Shoot", 2);
   SmartDashboard::PutData("Autonomous: ", autoChooser);
 }

@@ -48,19 +48,15 @@ public:
   }
 private:
 	void RobotInit() {
-		SmartDashboard::PutString("RobotInit", "Hit RobotInit");
-		SmartDashboard::PutBoolean("AutoStop", false);
 		robot->ResetTimer();
 		robot->Reset();
 		auton->ListOptions();
 	}
 
 	void AutonomousInit() {
-		SmartDashboard::PutString("AutonomousInit", "Hit AutonomousInit");
 		robot->ResetTimer();
 		robot->ResetEncoders();
 		driveController->Reset();
-		superstructureController->Reset();
 		//Resets timer variables
 		currTimeSec = 0.0;
 		lastTimeSec = 0.0;
@@ -69,9 +65,6 @@ private:
 	}
 
 	void AutonomousPeriodic() {
-		SmartDashboard::PutString("AutonomousPeriodic",
-				"Hit AutonomousPeriodic");
-
 		dashboardLogger->UpdateData();
 
 //    //Timer is updated
@@ -116,7 +109,6 @@ private:
 	void DisabledInit() {
 		robot->ResetEncoders();
 		driveController->Reset();
-		superstructureController->Reset();
 		auton->Stop();
 	}
 
