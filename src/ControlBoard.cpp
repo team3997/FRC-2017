@@ -18,6 +18,7 @@ ControlBoard::ControlBoard() {
   	driveDirectionButton = new ButtonReader(driverJoy, XINPUT_WIN_BACK_BUTTON);
   	shooterRunButton = new ButtonReader(driverJoy, XINPUT_WIN_GREEN_BUTTON);
   	climberRunButton = new ButtonReader(driverJoy, XINPUT_WIN_BLUE_BUTTON);
+  	feederReverseButton = new ButtonReader(driverJoy, XINPUT_WIN_START_BUTTON);
   }
   else {
   	//driveDirectionButton = new ButtonReader(driverJoy, XINPUT_LINUX_BACK_BUTTON);
@@ -72,7 +73,7 @@ void ControlBoard::ReadControls() {
 
   //Superstructure Variables
   shooterRunDesired = shooterRunButton->IsDown();
-
+  feederReverseDesired = feederReverseButton->IsDown();
   climbDesired = climberRunButton->IsDown();
 }
 
@@ -80,6 +81,7 @@ void ControlBoard::ReadControls() {
 void ControlBoard::ReadAllButtons() {
   driveDirectionButton->ReadValue();
   shooterRunButton->ReadValue();
+  feederReverseButton->ReadValue();
   climberRunButton->ReadValue();
 }
 
@@ -131,5 +133,9 @@ bool ControlBoard::GetArcadeDriveDesired() {
 
 bool ControlBoard::GetClimberDesired() {
   return climbDesired;
+}
+
+bool ControlBoard::GetFeederReverseDesired() {
+	return feederReverseDesired;
 }
 
