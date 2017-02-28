@@ -1,7 +1,7 @@
-
+#include "WPILib.h"
 #include "Params.h"
 #include "DriveController.h"
-#include "WPILib.h"
+#include "RobotModel.h"
 
 DriveController::DriveController(RobotModel *myRobot,
     RemoteControl *myHumanControl) {
@@ -37,7 +37,7 @@ void DriveController::Update(double currTimeSec, double deltaTimeSec) {
         RemoteControl::kRY);
 
     if (humanControl->GetArcadeDriveDesired()) {
-      ArcadeDrive(driverLeftY, -driverRightX, true);
+      ArcadeDrive(driverLeftY, -driverRightX);
     } else {
       TankDrive(driverLeftY, driverRightY);
     }
@@ -49,19 +49,13 @@ void DriveController::Update(double currTimeSec, double deltaTimeSec) {
   m_stateVal = nextState;
 }
 
-void DriveController::ArcadeDrive(double myY, double myX, bool teleOp) {
-
-  if (teleOp) {
-    if (humanControl->GetReverseDriveDesired()) {
-      myX = -myX;
-      myY = -myY;
-    }
-
-    driveTrain->ArcadeDrive(myY, myX, SQUARE_DRIVE_AXIS_INPUT);
-
-  } else {
-    driveTrain->ArcadeDrive(myY, myX, false);
+void DriveController::ArcadeDrive(double myY, double myX) {
+  if (humanControl->GetReverseDriveDesired()) {
+    myX = -myX;
+    myY = -myY;
   }
+
+  driveTrain->ArcadeDrive(myY, myX, SQUARE_DRIVE_AXIS_INPUT);
 }
 
 void DriveController::TankDrive(double myLeft, double myRight) {
@@ -75,8 +69,4 @@ void DriveController::TankDrive(double myLeft, double myRight) {
 
 void DriveController::Reset() {
   m_stateVal = kInitialize;
-}
-
-void DriveController::Stop() {
-  driveTrain->ArcadeDrive(0.00, 0.00, false);
 }
