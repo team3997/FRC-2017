@@ -1,24 +1,19 @@
 #ifndef DRIVECONTROLLER_H_
 #define DRIVECONTROLLER_H_
 
-#include "WPILib.h"
 #include "RobotModel.h"
 #include "RemoteControl.h"
-#include "DashboardLogger.h"
-
 
 class PivotCommand;
 
 class DriveController {
 public:
-  DriveController(RobotModel *myRobot,
-      RemoteControl *myHumanControl);
+  DriveController(RobotModel*, RemoteControl*);
   virtual ~DriveController();
 
-  void Stop();
   void Update(double currTimeSec, double deltaTimeSec);
   void Reset();
-  void ArcadeDrive(double myX, double myY, bool teleOp);
+  void ArcadeDrive(double myX, double myY);
   void TankDrive(double myLeft, double myRight);
 
   enum DriveState {
