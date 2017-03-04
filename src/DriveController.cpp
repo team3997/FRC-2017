@@ -55,7 +55,17 @@ void DriveController::ArcadeDrive(double myY, double myX) {
     myY = -myY;
   }
 
-  driveTrain->ArcadeDrive(myY, myX, SQUARE_DRIVE_AXIS_INPUT);
+  if (humanControl->GetClimberDesired()){
+	  GLOBAL_DRIVE_SPEED_MULTIPLIER = 0.5;
+	  SQUARE_DRIVE_AXIS_INPUT = false;
+  }
+  else {
+	  GLOBAL_DRIVE_SPEED_MULTIPLIER = 1.0;
+	  SQUARE_DRIVE_AXIS_INPUT = true;
+  }
+
+  driveTrain->ArcadeDrive(myY * GLOBAL_DRIVE_SPEED_MULTIPLIER,
+		  myX * GLOBAL_DRIVE_SPEED_MULTIPLIER, SQUARE_DRIVE_AXIS_INPUT);
 }
 
 void DriveController::TankDrive(double myLeft, double myRight) {
@@ -64,7 +74,8 @@ void DriveController::TankDrive(double myLeft, double myRight) {
     myRight = -myRight;
   }
 
-  driveTrain->TankDrive(myLeft, myRight, SQUARE_DRIVE_AXIS_INPUT);
+  driveTrain->TankDrive(myLeft * GLOBAL_DRIVE_SPEED_MULTIPLIER,
+		  myRight * GLOBAL_DRIVE_SPEED_MULTIPLIER, SQUARE_DRIVE_AXIS_INPUT);
 }
 
 void DriveController::Reset() {

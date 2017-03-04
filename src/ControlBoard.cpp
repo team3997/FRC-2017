@@ -17,7 +17,8 @@ ControlBoard::ControlBoard() {
   if(USING_WIN_DRIVER_STATION){
   	driveDirectionButton = new ButtonReader(driverJoy, XINPUT_WIN_BACK_BUTTON);
   	shooterRunButton = new ButtonReader(driverJoy, XINPUT_WIN_GREEN_BUTTON);
-  	climberRunButton = new ButtonReader(driverJoy, XINPUT_WIN_BLUE_BUTTON);
+  	climberRunButton = new TriggerReader(driverJoy, XINPUT_WIN_RIGHT_TRIGGER_AXIS);
+  	climberReverseButton = new ButtonReader(driverJoy, XINPUT_WIN_RED_BUTTON);
   	feederReverseButton = new ButtonReader(driverJoy, XINPUT_WIN_START_BUTTON);
   }
   else {
@@ -74,7 +75,8 @@ void ControlBoard::ReadControls() {
   //Superstructure Variables
   shooterRunDesired = shooterRunButton->IsDown();
   feederReverseDesired = feederReverseButton->IsDown();
-  climbDesired = climberRunButton->IsDown();
+  climberDesired = climberRunButton->IsDown();
+  climberReverseDesired = climberReverseButton->IsDown();
 }
 
 //Reads the values of all buttons defined by this class
@@ -83,6 +85,7 @@ void ControlBoard::ReadAllButtons() {
   shooterRunButton->ReadValue();
   feederReverseButton->ReadValue();
   climberRunButton->ReadValue();
+  climberReverseButton->ReadValue();
 }
 
 //Returns the joystick and axis being used
@@ -132,10 +135,13 @@ bool ControlBoard::GetArcadeDriveDesired() {
 }
 
 bool ControlBoard::GetClimberDesired() {
-  return climbDesired;
+  return climberDesired;
 }
 
 bool ControlBoard::GetFeederReverseDesired() {
 	return feederReverseDesired;
 }
 
+bool ControlBoard::GetClimberReverseDesired() {
+	return climberReverseDesired;
+}

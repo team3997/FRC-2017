@@ -22,6 +22,7 @@ public:
   virtual bool GetShooterRunDesired() = 0;
   virtual bool GetClimberDesired() = 0;
   virtual bool GetFeederReverseDesired() = 0;
+  virtual bool GetClimberReverseDesired() = 0;
 
   virtual void ReadControls() = 0;
 

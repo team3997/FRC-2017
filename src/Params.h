@@ -3,14 +3,16 @@
 #include "WPILib.h"
 //Params.h: Preferences for the robot
 
-static const bool SQUARE_DRIVE_AXIS_INPUT              = true;
+static bool SQUARE_DRIVE_AXIS_INPUT                    = true;
 static const bool USE_ARCADE_DRIVE                     = true;
 
 static const double SHOOTER_HARDSET_MOTOR_SPEED        = 1.0;
 static const bool SHOOTER_USE_PID                      = false;
 static double FEEDER_HARDSET_MOTOR_SPEED               = 1.0;
 
-static const double CLIMBER_HARDSET_MOTOR_SPEED        = 0.5;
+static double GLOBAL_DRIVE_SPEED_MULTIPLIER            = 1.0;
+
+static const double CLIMBER_HARDSET_MOTOR_SPEED        = 1.0;
 
 //PID PAARAMS
 static const double SHOOTER_PID_SETPOINT               = 3300.0;
