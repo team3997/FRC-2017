@@ -12,6 +12,7 @@ AutoSelector::AutoSelector(RobotModel* kShooter, DriveController* kDrive) {
   RegisterAutonomous(new DoNothingRoutine());
   RegisterAutonomous(new DriveForwardRoutine(kDrive));
   RegisterAutonomous(new JustShootRoutine(kShooter));
+  RegisterAutonomous(new CenterGear(kDrive));
   autoChooser = new AutoWidget();
 }
 
@@ -19,6 +20,7 @@ void AutoSelector::ListOptions() {
   autoChooser->AddDefault("Do nothing (Default)", 0);
   autoChooser->AddObject("Drive (1s)", 1);
   autoChooser->AddObject("Shoot", 2);
+  autoChooser->AddObject("CenterField Gear", 3);
   SmartDashboard::PutData("Autonomous: ", autoChooser);
 }
 

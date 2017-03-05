@@ -12,6 +12,7 @@
 #include "Routines/DoNothingRoutine.h"
 #include "Routines/DriveForwardRoutine.h"
 #include "Routines/JustShootRoutine.h"
+#include "Routines/CenterGear.h"
 #include "../DriveController.h"
 #include "../RobotModel.h"
 #include "AutoWidget.h"
