@@ -45,3 +45,7 @@ void AutoRoutine::Shoot(RobotModel* kShooter, double seconds, double speed) {
   RunAction(new ShootAction(kShooter, seconds, speed));
 }
 
+void AutoRoutine::DriveDistance(DriveController* kDrive) {
+  RunAction(new DriveSetPoint(kDrive));
+
+}

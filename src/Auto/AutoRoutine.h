@@ -13,6 +13,7 @@
 #include "Action/Action.h"
 #include "Action/DriveIntervalAction.h"
 #include "Action/ShootAction.h"
+#include "Action/DriveSetPoint.h"
 
 class AutoRoutine {
 
@@ -26,7 +27,7 @@ public:
   void RunAction(Action* action);
   void DriveInterval(DriveController* kDrive, double seconds, double y, double x);
   void Shoot(RobotModel* kShooter, double seconds, double speed);
-
+  void DriveDistance(DriveController* kDrive);
 protected:
   virtual void Routine(void) = 0;
 private:
