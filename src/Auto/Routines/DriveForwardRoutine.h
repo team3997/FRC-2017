@@ -12,14 +12,14 @@
 
 class DriveForwardRoutine: public AutoRoutine {
 public:
-  DriveForwardRoutine(DriveController* kDrive);
-  void Prestart();
+	DriveForwardRoutine(DriveController* kDrive);
+	void Prestart();
 
 protected:
-  void Routine();
+	void Routine();
 
 private:
-  DriveController* kDrive;
+	DriveController* kDrive;
 };
 
 #endif /* SRC_AUTO_ROUTINES_DRIVEFORWARDROUTINE_H_ */

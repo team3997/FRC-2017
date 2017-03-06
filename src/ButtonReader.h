@@ -7,36 +7,32 @@
 //ButtonReader reads the states of push buttons
 class ButtonReader {
 public:
-    ButtonReader(Joystick *joy, int buttonNum);
-    virtual ~ButtonReader();
-    void ReadValue();
-    bool IsDown();
-    bool WasJustPressed();
-    bool WasJustReleased();
-    bool StateJustChanged();
+	ButtonReader(Joystick *joy, int buttonNum);
+	virtual ~ButtonReader();
+	void ReadValue();
+	bool IsDown();
+	bool WasJustPressed();
+	bool WasJustReleased();
+	bool StateJustChanged();
 
 private:
-    Joystick *joystick;
-    int buttonNum;
-    bool lastState;
-    bool currState;
+	Joystick *joystick;
+	int buttonNum;bool lastState;bool currState;
 };
 
 //ToggleButtonReader reads the states of toggles
-class ToggleButtonReader : public ButtonReader {
+class ToggleButtonReader: public ButtonReader {
 public:
-    ToggleButtonReader(Joystick *joy, int buttonNum);
-    virtual ~ToggleButtonReader();
-    virtual bool GetState();
+	ToggleButtonReader(Joystick *joy, int buttonNum);
+	virtual ~ToggleButtonReader();
+	virtual bool GetState();
 
 private:
-    bool currToggleState;
+	bool currToggleState;
 };
 
 enum SwitchState {
-    kUp = 1,
-    kNeutral = 0,
-    kDown = -1,
+	kUp = 1, kNeutral = 0, kDown = -1,
 };
 
 #endif

@@ -1,8 +1,8 @@
 #ifndef PARAMS_H
 #define PARAMS_H
 #include "WPILib.h"
-//Params.h: Preferences for the robot
 
+//Params.h: Preferences for the robot
 static bool SQUARE_DRIVE_AXIS_INPUT                    = true;
 static const bool USE_ARCADE_DRIVE                     = true;
 
@@ -16,12 +16,13 @@ static const double CLIMBER_HARDSET_MOTOR_SPEED        = 1.0;
 
 static const double FEEDER_PULSE_TIME 				   = 0.2;
 
-//PID PAARAMS
+//PID PARAMS
 static const double SHOOTER_PID_SETPOINT               = 3600.0;
 static const double SHOOTER_THRESHOLD_FOR_FEEDER       = 2800.0;
 
-static const double SHOOTER_PID_SCALE_VALUES[] 		   = {(1.0/500.0), 1.0, 1.0}; //P, I, D
 static const double SHOOTER_PID_VALUES[]               = {0.8, 0.0, 0.0}; // P, I, D
+static const double SHOOTER_PID_SCALE_VALUES[] 		   = {(1.0/500.0), 1.0, 1.0}; //P, I, D
+
 
 
 #endif

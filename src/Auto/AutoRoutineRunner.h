@@ -13,17 +13,17 @@
 class AutoRoutineRunner {
 public:
 
-  //void function NOT constructor
-  void SetAutoRoutine(AutoRoutine* new_auto_routine);
-  void Start();
-  void Stop();
-  void Run();
-  static Timer* GetTimer();
-  virtual ~AutoRoutineRunner();
+	//void function NOT constructor
+	void SetAutoRoutine(AutoRoutine* new_auto_routine);
+	void Start();
+	void Stop();
+	void Run();
+	static Timer* GetTimer();
+	virtual ~AutoRoutineRunner();
 
 private:
-  AutoRoutine* m_auto_routine;
-  bool autoStarted;
+	AutoRoutine* m_auto_routine;
+	bool autoStarted;
 };
 
 #endif /* SRC_AUTO_AUTOROUTINERUNNER_H_ */

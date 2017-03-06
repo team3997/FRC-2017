@@ -13,39 +13,44 @@
 #include "TriggerReader.h"
 #include "RemoteControl.h"
 
-class ControlBoard : public RemoteControl {
+class ControlBoard: public RemoteControl {
 public:
-  ControlBoard();
-  ~ControlBoard() {};
+	ControlBoard();
+	~ControlBoard() {
+	};
 
-  virtual void ReadControls();
+	virtual void ReadControls();
 
-  //Drive joystick accessors
-  double GetJoystickValue(Joysticks j, Axes a);
+	//Drive joystick accessors
+	double GetJoystickValue(Joysticks j, Axes a);
 
-
-  bool GetReverseDriveDesired();
-  bool GetArcadeDriveDesired();
-  bool GetShooterRunDesired();
-  bool GetClimberDesired();
-  bool GetFeederRunDesired();
-  bool GetFeederReverseDesired();
-  bool GetClimberReverseDesired();
+	bool GetReverseDriveDesired();
+	bool GetArcadeDriveDesired();
+	bool GetShooterRunDesired();
+	bool GetClimberDesired();
+	bool GetFeederRunDesired();
+	bool GetFeederReverseDesired();
+	bool GetClimberReverseDesired();
 
 private:
-  
-  //booleans for desired states of robot
-  bool climberReverseDesired, feederReverseDesired, feederRunDesired, reverseDriveDesired, arcadeDriveDesired, shooterRunDesired, climberDesired;
 
-  double driverLeftJoyX, driverLeftJoyY, driverRightJoyX, driverRightJoyY;
-  double operatorLeftJoyX, operatorLeftJoyY, operatorRightJoyX, operatorRightJoyY;
+	//booleans for desired states of robot
+	bool climberReverseDesired, feederReverseDesired, feederRunDesired,
+			reverseDriveDesired, arcadeDriveDesired, shooterRunDesired,
+			climberDesired;
 
-  Joystick *driverJoy, *operatorJoy;
+	double driverLeftJoyX, driverLeftJoyY, driverRightJoyX, driverRightJoyY;
+	double operatorLeftJoyX, operatorLeftJoyY, operatorRightJoyX,
+			operatorRightJoyY;
 
-  ButtonReader *climberReverseButton, *driveDirectionButton, *feederReverseButton, *shooterRunButton;
-  TriggerReader *climberRunButton, *feederRunButton;
+	Joystick *driverJoy, *operatorJoy;
 
-  void ReadAllButtons();
+	ButtonReader *climberReverseButton, *driveDirectionButton,
+			*feederReverseButton, *shooterRunButton;
+
+	TriggerReader *climberRunButton, *feederRunButton;
+
+	void ReadAllButtons();
 };
 
 #endif /* SRC_CONTROLBOARD_H_ */

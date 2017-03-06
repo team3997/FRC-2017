@@ -52,7 +52,6 @@ private:
 		robot->ResetTimer();
 		robot->Reset();
 		auton->ListOptions();
-
 	}
 
 	void AutonomousInit() {
@@ -66,7 +65,6 @@ private:
 		currTimeSec = 0.0;
 		lastTimeSec = 0.0;
 		deltaTimeSec = 0.0;
-
 
 		auton->Start();
 

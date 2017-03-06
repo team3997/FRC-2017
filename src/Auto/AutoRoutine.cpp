@@ -11,33 +11,35 @@
 #include <DriverStation.h>
 
 void AutoRoutine::Run() {
-  m_active = true;
-  Routine();
+	m_active = true;
+	Routine();
 
 }
 
 void AutoRoutine::Stop() {
-  m_active = false;
+	m_active = false;
 }
 
 bool AutoRoutine::IsActive() {
-  return m_active;
+	return m_active;
 }
 
 void AutoRoutine::RunAction(Action* action) {
-  action->Start();
-  while ((IsActive()) && (!action->IsFinished()) && (AutoRoutineRunner::GetTimer()->Get() <= 15) && RobotState::IsAutonomous() && !RobotState::IsDisabled()) {
-    action->Update();
-  }
-  action->Done();
+	action->Start();
+	while ((IsActive()) && (!action->IsFinished())
+			&& (AutoRoutineRunner::GetTimer()->Get() <= 15)
+			&& RobotState::IsAutonomous() && !RobotState::IsDisabled()) {
+		action->Update();
+	}
+	action->Done();
 }
 
-
-void AutoRoutine::DriveInterval(DriveController* kDrive, double seconds, double y, double x) {
-  RunAction(new DriveIntervalAction(kDrive, seconds, y, x));
+void AutoRoutine::DriveInterval(DriveController* kDrive, double seconds,
+		double y, double x) {
+	RunAction(new DriveIntervalAction(kDrive, seconds, y, x));
 }
 
 void AutoRoutine::Shoot(RobotModel* kShooter, double seconds, double speed) {
-  RunAction(new ShootAction(kShooter, seconds, speed));
+	RunAction(new ShootAction(kShooter, seconds, speed));
 }
 

@@ -5,11 +5,11 @@
 #include "RobotModel.h"
 #include "RemoteControl.h"
 
-class ShooterMotorsPIDOutput : public PIDOutput{
+class ShooterMotorsPIDOutput: public PIDOutput {
 public:
 	ShooterMotorsPIDOutput(VictorSP *kOutputMotor1, VictorSP *kOutputMotor2);
-  
-    //Override PIDWrite
+
+	//Override PIDWrite
 	void PIDWrite(double output);
 
 	double GetPIDLoopOutput();

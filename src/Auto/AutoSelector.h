@@ -20,21 +20,21 @@ using namespace frc;
 
 class AutoSelector {
 public:
-  AutoSelector(RobotModel* kShooter, DriveController* kDrive);
+	AutoSelector(RobotModel* kShooter, DriveController* kDrive);
 
-  void ListOptions();
-  AutoRoutine* Pick();
-  void RegisterAutonomous(AutoRoutine* autonomous);
-  AutoRoutine* GetAutoRoutine();
-  AutoRoutine* GetDefaultRoutine();
+	void ListOptions();
+	AutoRoutine* Pick();
+	void RegisterAutonomous(AutoRoutine* autonomous);
+	AutoRoutine* GetAutoRoutine();
+	AutoRoutine* GetDefaultRoutine();
 
-  virtual ~AutoSelector();
+	virtual ~AutoSelector();
 private:
-  AutoWidget *autoChooser;
+	AutoWidget *autoChooser;
 
-  vector<AutoRoutine*>* autoRoutines;
-  void SetAutoRoutineByIndex(int input);
-  int selectedIndex = 0;
+	vector<AutoRoutine*>* autoRoutines;
+	void SetAutoRoutineByIndex(int input);
+	int selectedIndex = 0;
 };
 
 #endif /* SRC_AUTO_AUTOSELECTOR_H_ */

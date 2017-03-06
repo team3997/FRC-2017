@@ -13,17 +13,17 @@
 #include "../../DriveController.h"
 class DriveIntervalAction: public Action {
 public:
+	DriveIntervalAction(DriveController* kDrive, double seconds, double y,double x);
 
-  DriveIntervalAction(DriveController* kDrive, double seconds, double y,
-          double x);bool IsFinished();
-  void Update();
-  void Done();
-  void Start();
+	bool IsFinished();
+	void Update();
+	void Done();
+	void Start();
 
-  virtual ~DriveIntervalAction();
+	virtual ~DriveIntervalAction();
 
 private:
-  DriveController* kDrive;
+	DriveController* kDrive;
 };
 
 #endif /* SRC_AUTO_ACTION_DRIVEINTERVALACTION_H_ */

@@ -25,7 +25,7 @@ namespace frc {
  */
 void AutoWidget::AddObject(llvm::StringRef name, int routine) {
 
-  m_choices[name] = routine;
+	m_choices[name] = routine;
 }
 
 /**
@@ -41,8 +41,8 @@ void AutoWidget::AddObject(llvm::StringRef name, int routine) {
 
 void AutoWidget::AddDefault(llvm::StringRef name, int defaultRoutine) {
 
-  m_defaultChoice = name;
-  AddObject(name, defaultRoutine);
+	m_defaultChoice = name;
+	AddObject(name, defaultRoutine);
 }
 
 /**
@@ -54,28 +54,29 @@ void AutoWidget::AddDefault(llvm::StringRef name, int defaultRoutine) {
  * @return the option selected
  */
 int AutoWidget::GetSelected() {
-  std::string selected = m_table->GetString(kSelected, m_defaultChoice);
-  if (selected == "") {
-    return 0;
-  } else {
-    return m_choices[selected];
-  }
+	std::string selected = m_table->GetString(kSelected, m_defaultChoice);
+	if (selected == "") {
+		return 0;
+	} else {
+		return m_choices[selected];
+	}
 }
 
 void AutoWidget::InitTable(std::shared_ptr<ITable> subtable) {
-  std::vector<std::string> keys;
-  m_table = subtable;
-  if (m_table != nullptr) {
-    for (const auto& choice : m_choices) {
-      keys.push_back(choice.first());
-    }
+	std::vector<std::string> keys;
+	m_table = subtable;
+	if (m_table != nullptr) {
+		for (const auto& choice : m_choices) {
+			keys.push_back(choice.first());
+		}
 
-    // Unlike std::map, llvm::StringMap elements are not sorted
-    std::sort(keys.begin(), keys.end());
+		// Unlike std::map, llvm::StringMap elements are not sorted
+		std::sort(keys.begin(), keys.end());
 
-    m_table->PutValue(kOptions, nt::Value::MakeStringArray(std::move(keys)));
-    m_table->PutString(kDefault, m_defaultChoice);
-  }
+		m_table->PutValue(kOptions,
+				nt::Value::MakeStringArray(std::move(keys)));
+		m_table->PutString(kDefault, m_defaultChoice);
+	}
 }
 
 }  // namespace frc

@@ -33,16 +33,16 @@ namespace frc {
  */
 class AutoWidget: public SendableChooserBase {
 public:
-  virtual ~AutoWidget() = default;
+	virtual ~AutoWidget() = default;
 
-  void AddObject(llvm::StringRef name, int routine);
-  void AddDefault(llvm::StringRef name, int defaultRoutine);
-  int GetSelected();
+	void AddObject(llvm::StringRef name, int routine);
+	void AddDefault(llvm::StringRef name, int defaultRoutine);
+	int GetSelected();
 
-  void InitTable(std::shared_ptr<ITable> subtable) override;
+	void InitTable(std::shared_ptr<ITable> subtable) override;
 
 private:
-  llvm::StringMap<int> m_choices;
+	llvm::StringMap<int> m_choices;
 };
 }  // namespace frc
 

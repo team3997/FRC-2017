@@ -8,38 +8,38 @@
 #include "AutoSelector.h"
 
 AutoSelector::AutoSelector(RobotModel* kShooter, DriveController* kDrive) {
-  autoRoutines = new vector<AutoRoutine*>();
-  RegisterAutonomous(new DoNothingRoutine());
-  RegisterAutonomous(new DriveForwardRoutine(kDrive));
-  RegisterAutonomous(new JustShootRoutine(kShooter));
-  autoChooser = new AutoWidget();
+	autoRoutines = new vector<AutoRoutine*>();
+	RegisterAutonomous(new DoNothingRoutine());
+	RegisterAutonomous(new DriveForwardRoutine(kDrive));
+	RegisterAutonomous(new JustShootRoutine(kShooter));
+	autoChooser = new AutoWidget();
 }
 
 void AutoSelector::ListOptions() {
-  autoChooser->AddDefault("Do nothing (Default)", 0);
-  autoChooser->AddObject("Drive (1s)", 1);
-  autoChooser->AddObject("Shoot", 2);
-  SmartDashboard::PutData("Autonomous: ", autoChooser);
+	autoChooser->AddDefault("Do nothing (Default)", 0);
+	autoChooser->AddObject("Drive (1s)", 1);
+	autoChooser->AddObject("Shoot", 2);
+	SmartDashboard::PutData("Autonomous: ", autoChooser);
 }
 
 AutoRoutine* AutoSelector::Pick() {
-  SetAutoRoutineByIndex(autoChooser->GetSelected());
-  return GetAutoRoutine();
+	SetAutoRoutineByIndex(autoChooser->GetSelected());
+	return GetAutoRoutine();
 }
 
 void AutoSelector::RegisterAutonomous(AutoRoutine* autonomous) {
-  autoRoutines->push_back(autonomous);
+	autoRoutines->push_back(autonomous);
 }
 
 AutoRoutine* AutoSelector::GetAutoRoutine() {
-  return autoRoutines->at(selectedIndex);
+	return autoRoutines->at(selectedIndex);
 }
 
 void AutoSelector::SetAutoRoutineByIndex(int input) {
-  if (input < 0 || input >= autoRoutines->size()) {
-    input = 0;
-  }
-  selectedIndex = input;
+	if (input < 0 || input >= autoRoutines->size()) {
+		input = 0;
+	}
+	selectedIndex = input;
 }
 
 AutoRoutine* AutoSelector::GetDefaultRoutine() {

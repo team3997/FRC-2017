@@ -12,17 +12,17 @@ class Action {
 //Base class for all autonomous actions to implement functions
 public:
 
-  virtual bool IsFinished() = 0;
-  virtual void Update() = 0;
-  virtual void Done() = 0;
-  virtual void Start() = 0;
+	virtual bool IsFinished() = 0;
+	virtual void Update() = 0;
+	virtual void Done() = 0;
+	virtual void Start() = 0;
 
 protected:
 
-  double goal_time;
-  double start_time;
-  double x_drive;
-  double y_drive;
+	double goal_time;
+	double start_time;
+	double x_drive;
+	double y_drive;
 };
 
 #endif /* SRC_AUTO_ACTION_ACTION_H_ */
