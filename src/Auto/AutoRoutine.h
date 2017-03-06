@@ -13,18 +13,22 @@
 #include "Action/Action.h"
 #include "Action/DriveIntervalAction.h"
 #include "Action/ShootAction.h"
+#include "Action/DriveSetPoint.h"
 
 class AutoRoutine {
 
 public:
-	bool m_active = false;bool *teleop;
-	virtual void Prestart() = 0;bool IsActive();
-	void Run();
-	void Stop();
-	void RunAction(Action* action);
-	void DriveInterval(DriveController* kDrive, double seconds, double y,
-			double x);
-	void Shoot(RobotModel* kShooter, double seconds, double speed);
+
+  bool m_active = false;
+  bool *teleop;
+  virtual void Prestart() = 0;
+  bool IsActive();
+  void Run();
+  void Stop();
+  void RunAction(Action* action);
+  void DriveInterval(DriveController* kDrive, double seconds, double y, double x);
+  void Shoot(RobotModel* kShooter, double seconds, double speed);
+  void DriveDistance(DriveController* kDrive);
 
 protected:
 	virtual void Routine(void) = 0;
