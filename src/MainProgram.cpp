@@ -6,10 +6,13 @@
 #include "ShooterController.h"
 #include "ClimberController.h"
 #include "DriveController.h"
+#include <string.h>
+#include "Auto/Auto.h"
 
 class MainProgram: public frc::IterativeRobot {
-	//Creates a robot from class RobotModel
-	RobotModel *robot;
+
+  //Creates a robot from class RobotModel
+  RobotModel *robot;
 
 	//Creates a human control from RemoteControl, which includes ControlBoard
 	RemoteControl *humanControl;
@@ -22,96 +25,107 @@ class MainProgram: public frc::IterativeRobot {
 	DashboardLogger *dashboardLogger;
 
 	ClimberController *climberController;
+  
+  Auto* auton;
 
 	//Creates a time-keeper	`
 	double currTimeSec;
 	double lastTimeSec;
 	double deltaTimeSec;
-
+  
 public:
-	MainProgram(void) {
-		robot = new RobotModel();
-		humanControl = new ControlBoard();
-		driveController = new DriveController(robot, humanControl);
-		dashboardLogger = new DashboardLogger(robot, humanControl);
-		shooterController = new ShooterController(robot, humanControl);
-		climberController = new ClimberController(robot, humanControl);
-
-		//Initializes timekeeper variables
-		currTimeSec = 0.0;
-		lastTimeSec = 0.0;
-		deltaTimeSec = 0.0;
-	}
+  MainProgram(void) {
+    robot = new RobotModel();
+    humanControl = new ControlBoard();
+    driveController = new DriveController(robot, humanControl);
+    dashboardLogger = new DashboardLogger(robot, humanControl);
+    shooterController = new ShooterController(robot, humanControl);
+    climberController = new ClimberController(robot, humanControl);
+    auton = new Auto(driveController, robot);
+    //Initializes timekeeper variables
+    currTimeSec = 0.0;
+    lastTimeSec = 0.0;
+    deltaTimeSec = 0.0;
+  }
 private:
 	void RobotInit() {
 		robot->ResetTimer();
 		robot->Reset();
+		auton->ListOptions();
+
 	}
 
 	void AutonomousInit() {
 		robot->ResetTimer();
 		robot->ResetEncoders();
-
+    
 		driveController->Reset();
 
 		//Resets timer variables
 		currTimeSec = 0.0;
 		lastTimeSec = 0.0;
 		deltaTimeSec = 0.0;
+    
+		auton->Start();
+
 	}
 
 	void AutonomousPeriodic() {
 		dashboardLogger->UpdateData();
-
 		//Timer is updated
 		lastTimeSec = currTimeSec;
 		currTimeSec = robot->GetTime();
 		deltaTimeSec = currTimeSec - lastTimeSec;
 
+
 		//robot->UpdateCurrent();
 	}
 
 	void TeleopInit() {
-		robot->ResetTimer();
-		robot->ResetEncoders();
+	    auton->Stop();
+	    robot->ResetTimer();
+	    robot->ResetEncoders();
 
-		driveController->Reset();
-		shooterController->Reset();
-		climberController->Reset();
+	    driveController->Reset();
+	    shooterController->Reset();
+	    climberController->Reset();
 
-		//Resets timer variables
-		currTimeSec = 0.0;
-		lastTimeSec = 0.0;
-		deltaTimeSec = 0.0;
+	    //Resets timer variables
+	    currTimeSec = 0.0;
+	    lastTimeSec = 0.0;
+	    deltaTimeSec = 0.0;
 
-	}
+	  }
 
-	void TeleopPeriodic() {
-		dashboardLogger->UpdateData();
+	  void TeleopPeriodic() {
+	    dashboardLogger->UpdateData();
 
-		//Updates timer
-		lastTimeSec = currTimeSec;
-		currTimeSec = robot->GetTime();
-		deltaTimeSec = currTimeSec - lastTimeSec;
+	    //Updates timer
+	    lastTimeSec = currTimeSec;
+	    currTimeSec = robot->GetTime();
+	    deltaTimeSec = currTimeSec - lastTimeSec;
 
-		//Reads controls and updates controllers accordingly
-		humanControl->ReadControls();
-		driveController->Update(currTimeSec, deltaTimeSec);
-		shooterController->Update(currTimeSec, deltaTimeSec);
-		climberController->Update();
-	}
+	    //Reads controls and updates controllers accordingly
+	    humanControl->ReadControls();
+	    driveController->Update(currTimeSec, deltaTimeSec);
+	    shooterController->Update(currTimeSec, deltaTimeSec);
+	    climberController->Update();
+	  }
 
 	void DisabledInit() {
 		robot->ResetEncoders();
 		driveController->Reset();
 		shooterController->Reset();
-		climberController->Reset();
+		climberController->Reset();		
+auton->Stop();
 	}
 
 	void DisabledPeriodic() {
 		dashboardLogger->UpdateData();
+		//robot->UpdateCurrent();
+		auton->Stop();
+		//Reads controls and updates controllers accordingly
 		humanControl->ReadControls();
-
 	}
 };
 
