@@ -14,24 +14,25 @@ class MainProgram: public frc::IterativeRobot {
   //Creates a robot from class RobotModel
   RobotModel *robot;
 
-  //Creates a human control from RemoteControl, which includes ControlBoard
-  RemoteControl *humanControl;
+	//Creates a human control from RemoteControl, which includes ControlBoard
+	RemoteControl *humanControl;
 
-  //Creates a controller for drivetrain and superstructure
-  DriveController *driveController;
-  ShooterController *shooterController;
+	//Creates a controller for drivetrain and superstructure
+	DriveController *driveController;
+	ShooterController *shooterController;
 
-  //Creates an object of Dashboardlogger
-  DashboardLogger *dashboardLogger;
+	//Creates an object of Dashboardlogger
+	DashboardLogger *dashboardLogger;
 
-  ClimberController *climberController;
-
+	ClimberController *climberController;
+  
   Auto* auton;
-  //Creates a time-keeper
 
-  double currTimeSec;
-  double lastTimeSec;
-  double deltaTimeSec;
+	//Creates a time-keeper	`
+	double currTimeSec;
+	double lastTimeSec;
+	double deltaTimeSec;
+  
 public:
   MainProgram(void) {
     robot = new RobotModel();
@@ -51,26 +52,31 @@ private:
 		robot->ResetTimer();
 		robot->Reset();
 		auton->ListOptions();
+
 	}
 
 	void AutonomousInit() {
 		robot->ResetTimer();
 		robot->ResetEncoders();
+    
 		driveController->Reset();
+
 		//Resets timer variables
 		currTimeSec = 0.0;
 		lastTimeSec = 0.0;
 		deltaTimeSec = 0.0;
+    
 		auton->Start();
+
 	}
 
 	void AutonomousPeriodic() {
 		dashboardLogger->UpdateData();
+		//Timer is updated
+		lastTimeSec = currTimeSec;
+		currTimeSec = robot->GetTime();
+		deltaTimeSec = currTimeSec - lastTimeSec;
 
-//    //Timer is updated
-//    lastTimeSec = currTimeSec;
-//    currTimeSec = robot->GetTime();
-//    deltaTimeSec = currTimeSec - lastTimeSec;
 
 		//robot->UpdateCurrent();
 	}
@@ -109,7 +115,9 @@ private:
 	void DisabledInit() {
 		robot->ResetEncoders();
 		driveController->Reset();
-		auton->Stop();
+		shooterController->Reset();
+		climberController->Reset();		
+auton->Stop();
 	}
 
 	void DisabledPeriodic() {
@@ -119,8 +127,6 @@ private:
 		//Reads controls and updates controllers accordingly
 		humanControl->ReadControls();
 	}
-
-
 };
 
 START_ROBOT_CLASS(MainProgram);

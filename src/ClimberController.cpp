@@ -27,7 +27,10 @@ void ClimberController::Update() {
     break;
   case (kTeleop):
     //Climber Behaviour
-	if (humanControl->GetClimberDesired()) {
+    if (humanControl->GetClimberReverseDesired()){
+    	robot->SetClimberMotorSpeed(-CLIMBER_HARDSET_MOTOR_SPEED);
+    }
+    else if (humanControl->GetClimberDesired()) {
       robot->SetClimberMotorSpeed(CLIMBER_HARDSET_MOTOR_SPEED);
 	}
 	else {

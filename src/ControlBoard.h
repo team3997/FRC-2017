@@ -10,6 +10,7 @@
 
 #include "WPILib.h"
 #include "ButtonReader.h"
+#include "TriggerReader.h"
 #include "RemoteControl.h"
 
 class ControlBoard : public RemoteControl {
@@ -27,18 +28,22 @@ public:
   bool GetArcadeDriveDesired();
   bool GetShooterRunDesired();
   bool GetClimberDesired();
+  bool GetFeederRunDesired();
   bool GetFeederReverseDesired();
+  bool GetClimberReverseDesired();
+
 private:
   
   //booleans for desired states of robot
-  bool feederReverseDesired, reverseDriveDesired, arcadeDriveDesired, shooterRunDesired, climbDesired;
+  bool climberReverseDesired, feederReverseDesired, feederRunDesired, reverseDriveDesired, arcadeDriveDesired, shooterRunDesired, climberDesired;
 
   double driverLeftJoyX, driverLeftJoyY, driverRightJoyX, driverRightJoyY;
   double operatorLeftJoyX, operatorLeftJoyY, operatorRightJoyX, operatorRightJoyY;
 
   Joystick *driverJoy, *operatorJoy;
 
-  ButtonReader *driveDirectionButton, *feederReverseButton, *shooterRunButton, *climberRunButton;
+  ButtonReader *climberReverseButton, *driveDirectionButton, *feederReverseButton, *shooterRunButton;
+  TriggerReader *climberRunButton, *feederRunButton;
 
   void ReadAllButtons();
 };

@@ -18,6 +18,8 @@ static const int XINPUT_WIN_BACK_BUTTON               	  = 7;
 static const int XINPUT_WIN_START_BUTTON                  = 8;
 static const int XINPUT_WIN_LEFT_STICK_CLICK              = 9;
 static const int XINPUT_WIN_RIGHT_STICK_CLICK             = 10;
+static const int XINPUT_WIN_LEFT_TRIGGER                  = 11;
+static const int XINPUT_WIN_RIGHT_TRIGGER                 = 12;
 
 
 static const int XINPUT_LINUX_LEFT_X_AXIS                 = 0;

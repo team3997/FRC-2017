@@ -12,15 +12,18 @@
 ControlBoard::ControlBoard() {
   //Two Joysticks
   driverJoy = new Joystick(DRIVER_JOY_USB_PORT);
-  //operatorJoy = new Joystick(OPERATOR_JOY_USB_PORT);
+  operatorJoy = new Joystick(OPERATOR_JOY_USB_PORT);
 
   //Drivetrain buttons
   //Superstructure Buttons
   if(USING_WIN_DRIVER_STATION){
   	driveDirectionButton = new ButtonReader(driverJoy, XINPUT_WIN_BACK_BUTTON);
-  	shooterRunButton = new ButtonReader(driverJoy, XINPUT_WIN_GREEN_BUTTON);
-  	climberRunButton = new ButtonReader(driverJoy, XINPUT_WIN_BLUE_BUTTON);
-  	feederReverseButton = new ButtonReader(driverJoy, XINPUT_WIN_START_BUTTON);
+  	climberRunButton = new TriggerReader(driverJoy, XINPUT_WIN_RIGHT_TRIGGER_AXIS);
+  	climberReverseButton = new ButtonReader(driverJoy, XINPUT_WIN_RED_BUTTON);
+
+  	shooterRunButton = new ButtonReader(operatorJoy, XINPUT_WIN_GREEN_BUTTON);
+  	feederRunButton = new TriggerReader(operatorJoy, XINPUT_WIN_RIGHT_TRIGGER_AXIS);
+  	feederReverseButton = new ButtonReader(operatorJoy, XINPUT_WIN_START_BUTTON);
   }
   else {
   	//driveDirectionButton = new ButtonReader(driverJoy, XINPUT_LINUX_BACK_BUTTON);
@@ -75,7 +78,9 @@ void ControlBoard::ReadControls() {
   //Superstructure Variables
   shooterRunDesired = shooterRunButton->IsDown();
   feederReverseDesired = feederReverseButton->IsDown();
-  climbDesired = climberRunButton->IsDown();
+  climberDesired = climberRunButton->IsDown();
+  climberReverseDesired = climberReverseButton->IsDown();
+  feederRunDesired = feederRunButton->IsDown();
 }
 
 //Reads the values of all buttons defined by this class
@@ -84,6 +89,8 @@ void ControlBoard::ReadAllButtons() {
   shooterRunButton->ReadValue();
   feederReverseButton->ReadValue();
   climberRunButton->ReadValue();
+  climberReverseButton->ReadValue();
+  feederRunButton->ReadValue();
 }
 
 //Returns the joystick and axis being used
@@ -133,10 +140,17 @@ bool ControlBoard::GetArcadeDriveDesired() {
 }
 
 bool ControlBoard::GetClimberDesired() {
-  return climbDesired;
+  return climberDesired;
 }
 
 bool ControlBoard::GetFeederReverseDesired() {
 	return feederReverseDesired;
 }
 
+bool ControlBoard::GetClimberReverseDesired() {
+	return climberReverseDesired;
+}
+
+bool ControlBoard::GetFeederRunDesired() {
+	return feederRunDesired;
+}
