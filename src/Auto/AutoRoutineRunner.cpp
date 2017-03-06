@@ -35,6 +35,7 @@ void AutoRoutineRunner::Stop() {
   }
   autoTimer->Stop();
   autoTimer->Reset();
+  autoTimer->Stop();
 }
 
 Timer* AutoRoutineRunner::GetTimer() {
