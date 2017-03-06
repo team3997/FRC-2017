@@ -15,6 +15,7 @@ class ShooterController{
     void Reset();
     void Update(double currTimeSec, double deltaTimeSec);
 
+    Timer *feederPulseTimer;
     enum ShooterState {
       kInitialize, kTeleop
     };
@@ -22,9 +23,13 @@ class ShooterController{
     RobotModel *robot;
     RemoteControl *humanControl;
 
+    bool feederPulseBool;
+    double currentPulse, prevPulse;
+
     PIDController *shooterPID;
 
     ShooterMotorsPIDOutput *pidOutput;
+
 
     double shooterP, shooterI, shooterD;
 

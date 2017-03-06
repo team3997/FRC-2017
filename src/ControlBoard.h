@@ -27,13 +27,14 @@ public:
   bool GetArcadeDriveDesired();
   bool GetShooterRunDesired();
   bool GetClimberDesired();
+  bool GetFeederRunDesired();
   bool GetFeederReverseDesired();
   bool GetClimberReverseDesired();
 
 private:
   
   //booleans for desired states of robot
-  bool climberReverseDesired, feederReverseDesired, reverseDriveDesired, arcadeDriveDesired, shooterRunDesired, climberDesired;
+  bool climberReverseDesired, feederReverseDesired, feederRunDesired, reverseDriveDesired, arcadeDriveDesired, shooterRunDesired, climberDesired;
 
   double driverLeftJoyX, driverLeftJoyY, driverRightJoyX, driverRightJoyY;
   double operatorLeftJoyX, operatorLeftJoyY, operatorRightJoyX, operatorRightJoyY;
@@ -41,7 +42,7 @@ private:
   Joystick *driverJoy, *operatorJoy;
 
   ButtonReader *climberReverseButton, *driveDirectionButton, *feederReverseButton, *shooterRunButton;
-  TriggerReader *climberRunButton;
+  TriggerReader *climberRunButton, *feederRunButton;
 
   void ReadAllButtons();
 };

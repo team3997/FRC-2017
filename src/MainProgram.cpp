@@ -7,7 +7,6 @@
 #include "ClimberController.h"
 #include "DriveController.h"
 
-
 class MainProgram: public frc::IterativeRobot {
 	//Creates a robot from class RobotModel
 	RobotModel *robot;
@@ -105,6 +104,8 @@ private:
 	void DisabledInit() {
 		robot->ResetEncoders();
 		driveController->Reset();
+		shooterController->Reset();
+		climberController->Reset();
 	}
 
 	void DisabledPeriodic() {
