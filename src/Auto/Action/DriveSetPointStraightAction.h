@@ -14,14 +14,14 @@
 #include "Action.h"
 class DriveSetPointStraightAction: public Action {
 public:
-	DriveSetPointStraightAction(RobotModel *robot, DriveController *driveTrain, double distance, double maxSpeed, double timeout);
+	DriveSetPointStraightAction(RobotModel *robot, DriveController *driveController, double distance, double maxSpeed, double timeout);
 	bool IsFinished();
 	void Update();
 	void Done();
 	void Start();
 
 private:
-	DriveController *driveTrain;
+	DriveController *driveController;
 	RobotModel *robot;
 	bool reachedSetpoint;
 
