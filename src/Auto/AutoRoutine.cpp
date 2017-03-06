@@ -9,9 +9,6 @@
 #include "AutoRoutine.h"
 #include "WPILib.h"
 #include <DriverStation.h>
-/*void AutoRoutine::WaitTime(double seconds) {
- AutoRoutine::runAction(new TimeoutAction(seconds));
- }*/
 
 void AutoRoutine::Run() {
   m_active = true;
@@ -29,9 +26,8 @@ bool AutoRoutine::IsActive() {
 
 void AutoRoutine::RunAction(Action* action) {
   action->Start();
-  while ((IsActive()) && (!action->IsFinished()) && (AutoRoutineRunner::GetTimer()->Get() <= 15) && RobotState::IsAutonomous()) {
+  while ((IsActive()) && (!action->IsFinished()) && (AutoRoutineRunner::GetTimer()->Get() <= 15) && RobotState::IsAutonomous() && !RobotState::IsDisabled()) {
     action->Update();
-
   }
   action->Done();
 }
