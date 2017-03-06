@@ -9,7 +9,7 @@
 #include <string.h>
 #include "Auto/Auto.h"
 
-class MainProgram: public frc::IterativeRobot {
+class MainProgram : public frc::IterativeRobot {
 
 	//Creates a robot from class RobotModel
 	RobotModel *robot;
@@ -49,6 +49,7 @@ public:
 	}
 private:
 	void RobotInit() {
+		RefreshAllIni();
 		robot->ResetTimer();
 		robot->Reset();
 		auton->ListOptions();
@@ -56,6 +57,7 @@ private:
 
 	void AutonomousInit() {
 		auton->Stop();
+		RefreshAllIni();
 		robot->ResetTimer();
 		robot->ResetEncoders();
 
@@ -76,6 +78,7 @@ private:
 
 	void TeleopInit() {
 		auton->Stop();
+		RefreshAllIni();
 		robot->ResetTimer();
 		robot->ResetEncoders();
 
@@ -106,11 +109,15 @@ private:
 	}
 
 	void DisabledInit() {
+		auton->Stop();
+
+		RefreshAllIni();
+
 		robot->ResetEncoders();
 		driveController->Reset();
 		shooterController->Reset();
 		climberController->Reset();
-		auton->Stop();
+
 	}
 
 	void DisabledPeriodic() {
@@ -118,7 +125,12 @@ private:
 		//robot->UpdateCurrent();
 		//auton->Stop();
 		//Reads controls and updates controllers accordingly
-		humanControl->ReadControls();
+	    humanControl->ReadControls();
+	    RefreshAllIni();
+	}
+	void RefreshAllIni() {
+	    robot->RefreshIni();
+	    driveController->RefreshIni();
 	}
 };
 

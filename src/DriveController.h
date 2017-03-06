@@ -7,6 +7,8 @@
 #include "DriveYMotorsPIDOutput.h"
 #include "DriveEncodersPIDSource.h"
 #include "DashboardLogger.h"
+#include "ini.h"
+#include <iostream>
 
 class PivotCommand;
 
@@ -20,6 +22,7 @@ public:
 	void Reset();
 	void ArcadeDrive(double myX, double myY, bool teleOp);
 	void TankDrive(double myLeft, double myRight);
+	  void RefreshIni();
 
 	enum DriveState {
 		kInitialize, kTeleopDrive
@@ -30,13 +33,14 @@ public:
 	DriveEncodersPIDSource *driveEncodersPIDSource;
 
 private:
-	RobotModel *robot;
-	RemoteControl *humanControl;
 
-	RobotDrive *driveTrain;
-
-	uint32_t m_stateVal;
-	uint32_t nextState;
+  RobotModel *robot;
+  RemoteControl *humanControl;
+  double testVariable;
+  double test2Variable;
+  RobotDrive *driveTrain;
+  uint32_t m_stateVal;
+  uint32_t nextState;
 };
 
 #endif

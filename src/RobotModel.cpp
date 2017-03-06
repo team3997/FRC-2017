@@ -75,7 +75,7 @@ RobotModel::RobotModel() {
 
 	timer = new Timer();
 	timer->Start();
-
+    pini = new Ini("/home/lvuser/robot.ini");
 }
 
 RobotModel::~RobotModel() {
@@ -191,4 +191,7 @@ void RobotModel::SetFeederMotorSpeed(double speed) {
 double RobotModel::GetFeederMotorSpeed() {
 	return feederMotor->Get();
 }
-
+void RobotModel::RefreshIni() {
+    delete pini;
+    pini = new Ini("/home/lvuser/robot.ini");
+}

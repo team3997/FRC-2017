@@ -97,3 +97,9 @@ void DriveController::Reset() {
 void DriveController::Stop() {
   driveTrain->ArcadeDrive(0.00, 0.00, false);
 }
+void DriveController::RefreshIni() {
+    testVariable = robot->pini->getf("DEBUGGING", "testVariable", 0.0);
+    test2Variable = robot->pini->getf("DEBUGGING", "test2Variable", 100.0);
+    SmartDashboard::PutNumber("testVariable", testVariable);
+    SmartDashboard::PutNumber("test2Variable", test2Variable);
+}
