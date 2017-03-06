@@ -9,6 +9,7 @@
 #include "DashboardLogger.h"
 #include "Ports.h"
 
+
 DashboardLogger::DashboardLogger(RobotModel *myRobot, RemoteControl *myHumanControl) {
   robot = myRobot;
   humanControl = myHumanControl;
@@ -96,6 +97,9 @@ void DashboardLogger::PutGamePadButtonPress() {
   SmartDashboard::PutBoolean("BUTTON_shooterRunDesired", humanControl->GetShooterRunDesired());
   SmartDashboard::PutBoolean("BUTTON_reverseDriveDesired", humanControl->GetReverseDriveDesired());
   SmartDashboard::PutBoolean("BUTTON_climberRunDesired", humanControl->GetClimberDesired());
+  SmartDashboard::PutBoolean("BUTTON_climberRunReversedDesired", humanControl->GetClimberReverseDesired());
+  SmartDashboard::PutBoolean("BUTTON_feederRunReverseDesired", humanControl->GetFeederReverseDesired());
+  SmartDashboard::PutBoolean("BUTTON_feederRunDesired", humanControl->GetFeederRunDesired());
 }
 
 void DashboardLogger::PutDriverMotorOutputs() {

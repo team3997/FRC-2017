@@ -7,108 +7,121 @@
 #include "ClimberController.h"
 #include "DriveController.h"
 #include <string.h>
+#include "Auto/Auto.h"
 
 class MainProgram: public frc::IterativeRobot {
-  //Creates a robot from class RobotModel
-  RobotModel *robot;
 
-  //Creates a human control from RemoteControl, which includes ControlBoard
-  RemoteControl *humanControl;
+	//Creates a robot from class RobotModel
+	RobotModel *robot;
 
-  //Creates a controller for drivetrain and superstructure
-  DriveController *driveController;
-  ShooterController *shooterController;
+	//Creates a human control from RemoteControl, which includes ControlBoard
+	RemoteControl *humanControl;
 
-  //Creates an object of Dashboardlogger
-  DashboardLogger *dashboardLogger;
+	//Creates a controller for drivetrain and superstructure
+	DriveController *driveController;
+	ShooterController *shooterController;
 
-  ClimberController *climberController;
-  //Creates a time-keeper
-  double currTimeSec;
-  double lastTimeSec;
-  double deltaTimeSec;
+	//Creates an object of Dashboardlogger
+	DashboardLogger *dashboardLogger;
+
+	ClimberController *climberController;
+
+	Auto* auton;
+
+	//Creates a time-keeper	`
+	double currTimeSec;
+	double lastTimeSec;
+	double deltaTimeSec;
+
 public:
-  MainProgram(void) {
-    robot = new RobotModel();
-    humanControl = new ControlBoard();
-    driveController = new DriveController(robot, humanControl);
-    dashboardLogger = new DashboardLogger(robot, humanControl);
-    shooterController = new ShooterController(robot, humanControl);
-    climberController = new ClimberController(robot, humanControl);
-
-    //Initializes timekeeper variables
-    currTimeSec = 0.0;
-    lastTimeSec = 0.0;
-    deltaTimeSec = 0.0;
-  }
+	MainProgram(void) {
+		robot = new RobotModel();
+		humanControl = new ControlBoard();
+		driveController = new DriveController(robot, humanControl);
+		dashboardLogger = new DashboardLogger(robot, humanControl);
+		shooterController = new ShooterController(robot, humanControl);
+		climberController = new ClimberController(robot, humanControl);
+		auton = new Auto(driveController, robot);
+		//Initializes timekeeper variables
+		currTimeSec = 0.0;
+		lastTimeSec = 0.0;
+		deltaTimeSec = 0.0;
+	}
 private:
-  void RobotInit() {
-    robot->ResetTimer();
-    robot->Reset();
-  }
+	void RobotInit() {
+		robot->ResetTimer();
+		robot->Reset();
+		auton->ListOptions();
 
-  void AutonomousInit() {
-    robot->ResetTimer();
-    robot->ResetEncoders();
+	}
 
-    driveController->Reset();
+	void AutonomousInit() {
+		auton->Stop();
+		robot->ResetTimer();
+		robot->ResetEncoders();
 
-    //Resets timer variables
-    currTimeSec = 0.0;
-    lastTimeSec = 0.0;
-    deltaTimeSec = 0.0;
-  }
+		driveController->Reset();
 
-  void AutonomousPeriodic() {
-    dashboardLogger->UpdateData();
+		//Resets timer variables
+		currTimeSec = 0.0;
+		lastTimeSec = 0.0;
+		deltaTimeSec = 0.0;
 
-    //Timer is updated
-    lastTimeSec = currTimeSec;
-    currTimeSec = robot->GetTime();
-    deltaTimeSec = currTimeSec - lastTimeSec;
 
-    //robot->UpdateCurrent();
-  }
+		auton->Start();
 
-  void TeleopInit() {
-    robot->ResetTimer();
-    robot->ResetEncoders();
+	}
 
-    driveController->Reset();
-    shooterController->Reset();
-    climberController->Reset();
+	void AutonomousPeriodic() {
 
-    //Resets timer variables
-    currTimeSec = 0.0;
-    lastTimeSec = 0.0;
-    deltaTimeSec = 0.0;
+	}
 
-  }
+	void TeleopInit() {
+		auton->Stop();
+		robot->ResetTimer();
+		robot->ResetEncoders();
 
-  void TeleopPeriodic() {
-    dashboardLogger->UpdateData();
+		driveController->Reset();
+		shooterController->Reset();
+		climberController->Reset();
 
-    //Updates timer
-    lastTimeSec = currTimeSec;
-    currTimeSec = robot->GetTime();
-    deltaTimeSec = currTimeSec - lastTimeSec;
+		//Resets timer variables
+		currTimeSec = 0.0;
+		lastTimeSec = 0.0;
+		deltaTimeSec = 0.0;
 
-    //Reads controls and updates controllers accordingly
-    humanControl->ReadControls();
-    driveController->Update(currTimeSec, deltaTimeSec);
-    shooterController->Update(currTimeSec, deltaTimeSec);
-    climberController->Update();
-  }
+	}
 
-  void DisabledInit() {
-	robot->ResetEncoders();
-    driveController->Reset();
-  }
+	void TeleopPeriodic() {
+		dashboardLogger->UpdateData();
 
-  void DisabledPeriodic() {
-    dashboardLogger->UpdateData();
-    humanControl->ReadControls();
-  }
+		//Updates timer
+		lastTimeSec = currTimeSec;
+		currTimeSec = robot->GetTime();
+		deltaTimeSec = currTimeSec - lastTimeSec;
+
+		//Reads controls and updates controllers accordingly
+		humanControl->ReadControls();
+		driveController->Update(currTimeSec, deltaTimeSec);
+		shooterController->Update(currTimeSec, deltaTimeSec);
+		climberController->Update();
+	}
+
+	void DisabledInit() {
+		robot->ResetEncoders();
+		driveController->Reset();
+		shooterController->Reset();
+		climberController->Reset();
+		auton->Stop();
+	}
+
+	void DisabledPeriodic() {
+		dashboardLogger->UpdateData();
+		//robot->UpdateCurrent();
+		//auton->Stop();
+		//Reads controls and updates controllers accordingly
+		humanControl->ReadControls();
+	}
 };
 
 START_ROBOT_CLASS(MainProgram);
