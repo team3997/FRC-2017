@@ -16,13 +16,20 @@ static const double CLIMBER_HARDSET_MOTOR_SPEED        = 1.0;
 
 static const double FEEDER_PULSE_TIME 				   = 0.2;
 
-//PID PARAMS
+//SHOOTER PID PARAMS
 static const double SHOOTER_PID_SETPOINT               = 3600.0;
 static const double SHOOTER_THRESHOLD_FOR_FEEDER       = 2800.0;
 
 static const double SHOOTER_PID_VALUES[]               = {0.8, 0.0, 0.0}; // P, I, D
 static const double SHOOTER_PID_SCALE_VALUES[] 		   = {(1.0/500.0), 1.0, 1.0}; //P, I, D
 
+//DRIVE PID PARAMS
+
+static const double DRIVE_Y_PID_VALUES[]               = {0.0, 0.0, 0.0}; // P, I, D
+static const double DRIVE_Y_PID_SCALE_VALUES[] 		   = {1.0, 1.0, 1.0}; //P, I, D
+
+static const int DRIVE_Y_PID_TOLERANCE                 = 10;
+static const int DRIVE_Y_PID_SAMPLES_AVERAGE           = 10;
 
 
 #endif

@@ -4,6 +4,8 @@
 #include "WPILib.h"
 #include "RobotModel.h"
 #include "RemoteControl.h"
+#include "DriveYMotorsPIDOutput.h"
+#include "DriveEncodersPIDSource.h"
 #include "DashboardLogger.h"
 
 class PivotCommand;
@@ -22,6 +24,10 @@ public:
 	enum DriveState {
 		kInitialize, kTeleopDrive
 	};
+
+	PIDOutput *driveYPIDOutput;
+	PIDController *driveYPID;
+	DriveEncodersPIDSource *driveEncodersPIDSource;
 
 private:
 	RobotModel *robot;

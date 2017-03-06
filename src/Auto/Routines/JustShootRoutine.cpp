@@ -10,5 +10,5 @@ void JustShootRoutine::Prestart() {
 }
 
 void JustShootRoutine::Routine() {
-	Shoot(kShooter, 5.0, .8);
+	ShootAction(kShooter, 5.0, .8);
 }

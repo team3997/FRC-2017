@@ -7,8 +7,22 @@ DriveController::DriveController(RobotModel *myRobot,
     RemoteControl *myHumanControl) {
   robot = myRobot;
   humanControl = myHumanControl;
-  driveTrain = new RobotDrive(robot->leftDriveMotorA, robot->leftDriveMotorB,
-      robot->rightDriveMotorA, robot->rightDriveMotorB);
+  driveTrain = new RobotDrive(robot->leftDriveMotorA, robot->leftDriveMotorB, robot->rightDriveMotorA, robot->rightDriveMotorB);
+
+  robot->leftDriveEncoder->SetPIDSourceType(PIDSourceType::kDisplacement);
+  robot->leftDriveEncoder->SetSamplesToAverage(DRIVE_Y_PID_SAMPLES_AVERAGE);
+
+  robot->rightDriveEncoder->SetPIDSourceType(PIDSourceType::kDisplacement);
+  robot->rightDriveEncoder->SetSamplesToAverage(DRIVE_Y_PID_SAMPLES_AVERAGE);
+
+  driveEncodersPIDSource = new DriveEncodersPIDSource(robot->leftDriveEncoder, robot->rightDriveEncoder);
+  driveYPIDOutput = new DriveYMotorsPIDOutput(driveTrain);
+  driveYPID = new PIDController(DRIVE_Y_PID_VALUES[0], DRIVE_Y_PID_VALUES[1], DRIVE_Y_PID_VALUES[2], driveEncodersPIDSource, driveYPIDOutput);
+
+  driveYPID->SetOutputRange(-1.0, 1.0);
+  driveYPID->SetPercentTolerance(DRIVE_Y_PID_TOLERANCE);
+
+  driveYPID->Disable();
 
   m_stateVal = kInitialize;
   nextState = kInitialize;

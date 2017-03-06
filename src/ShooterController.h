@@ -18,14 +18,15 @@ public:
 	enum ShooterState {
 		kInitialize, kTeleop
 	};
+
+	PIDController *shooterPID;
+
 private:
 	RobotModel *robot;
 	RemoteControl *humanControl;
 
 	bool feederPulseBool;
 	double currentPulse, prevPulse;
-
-	PIDController *shooterPID;
 
 	ShooterMotorsPIDOutput *pidOutput;
 
