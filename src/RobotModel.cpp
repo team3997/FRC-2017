@@ -46,7 +46,8 @@ RobotModel::RobotModel() {
 	leftDriveEncoder->SetDistancePerPulse(((1.0) / (250.0)) * ((4.0) * (M_PI)));
 	leftDriveEncoder->SetSamplesToAverage(90);
 	rightDriveEncoder->SetReverseDirection(false);
-	rightDriveEncoder->SetDistancePerPulse(((1.0) / (250.0)) * ((4.0) * (M_PI)));
+	rightDriveEncoder->SetDistancePerPulse(
+			((1.0) / (250.0)) * ((4.0) * (M_PI)));
 	rightDriveEncoder->SetSamplesToAverage(90);
 
 	leftDriveMotorA->SetSafetyEnabled(false);
@@ -54,8 +55,8 @@ RobotModel::RobotModel() {
 	rightDriveMotorA->SetSafetyEnabled(false);
 	rightDriveMotorB->SetSafetyEnabled(false);
 	shooterMotorA->SetSafetyEnabled(false);
-	 shooterMotorB->SetSafetyEnabled(false);
-	 feederMotor->SetSafetyEnabled(false);
+	shooterMotorB->SetSafetyEnabled(false);
+	feederMotor->SetSafetyEnabled(false);
 	climberMotor->SetInverted(true);
 
 	leftDriveMotorA->SetInverted(false);
@@ -75,7 +76,7 @@ RobotModel::RobotModel() {
 
 	timer = new Timer();
 	timer->Start();
-    pini = new Ini("/home/lvuser/robot.ini");
+	pini = new Ini("/home/lvuser/robot.ini");
 }
 
 RobotModel::~RobotModel() {
@@ -145,6 +146,41 @@ double RobotModel::GetCurrent(int channel) {
 	}
 }
 
+//sets the speed for a given wheel(s)
+void RobotModel::SetWheelSpeed(Wheels w, double speed) {
+	switch (w) {
+	case (LeftWheels):
+		leftDriveMotorA->Set(speed);
+		leftDriveMotorB->Set(speed);
+		break;
+	case (RightWheels):
+		rightDriveMotorA->Set(-speed); //negative value since wheels are inverted on robot
+		rightDriveMotorB->Set(-speed); //negative value since wheels are inverted on robot
+		break;
+	case (AllWheels):
+		leftDriveMotorA->Set(speed);
+		leftDriveMotorB->Set(speed);
+		rightDriveMotorA->Set(-speed); //negative value since wheels are inverted on robot
+		rightDriveMotorB->Set(-speed); //negative value since wheels are inverted on robot
+		break;
+	}
+}
+
+//returns the speed of a given wheel
+float RobotModel::GetWheelSpeed(Wheels w) {
+	switch (w) {
+	case (LeftWheels):
+		return leftDriveMotorA->Get();
+		break;
+	case (RightWheels):
+		return -rightDriveMotorA->Get();
+		break;
+	default:
+		return 0.0;
+		break;
+	}
+}
+
 //resets the time
 void RobotModel::ResetTimer() {
 	timer->Reset();
@@ -192,6 +228,7 @@ double RobotModel::GetFeederMotorSpeed() {
 	return feederMotor->Get();
 }
 void RobotModel::RefreshIni() {
-    delete pini;
-    pini = new Ini("/home/lvuser/robot.ini");
+	delete pini;
+	pini = new Ini("/home/lvuser/robot.ini");
 }
+

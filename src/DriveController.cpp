@@ -16,28 +16,34 @@ DriveController::DriveController(RobotModel *myRobot,
   robot->rightDriveEncoder->SetPIDSourceType(PIDSourceType::kDisplacement);
   robot->rightDriveEncoder->SetSamplesToAverage(DRIVE_Y_PID_SAMPLES_AVERAGE);
 
-  driveEncodersPIDSource = new DriveEncodersPIDSource(robot->leftDriveEncoder, robot->rightDriveEncoder);
+  /*driveEncodersPIDSource = new DriveEncodersPIDSource(robot->leftDriveEncoder, robot->rightDriveEncoder);
   driveYPIDOutput = new DriveYMotorsPIDOutput(driveTrain);
   driveYPID = new PIDController(
 		  DRIVE_Y_PID_VALUES[0] * DRIVE_Y_PID_SCALE_VALUES[0],
 		  DRIVE_Y_PID_VALUES[1] * DRIVE_Y_PID_SCALE_VALUES[1],
 		  DRIVE_Y_PID_VALUES[2] * DRIVE_Y_PID_SCALE_VALUES[2],
-		  driveEncodersPIDSource, driveYPIDOutput);
+		  driveEncodersPIDSource, driveYPIDOutput);/*
 
   //driveXPIDOutput = new DriveRotateMotorsPIDOutput(driveTrain);
   //driveXPID = new PIDController(DRIVE_X_PID_VALUES[0], DRIVE_X_PID_VALUES[1], DRIVE_X_PID_VALUES[2], driveEncodersPIDSource, driveXPIDOutput);
 
 
-  driveYPID->SetOutputRange(-1.0, 1.0);
+  /*driveYPID->SetOutputRange(-1.0, 1.0);
   driveYPID->SetPercentTolerance(DRIVE_Y_PID_TOLERANCE);
 
-  driveYPID->Disable();
+  driveYPID->Disable(); */
 
 
   //driveXPID->SetOutputRange(-1.0, 1.0);
   //driveXPID->SetPercentTolerance(DRIVE_X_PID_TOLERANCE);
 
   //driveXPID->Disable();
+
+  leftPIDOutput = new WheelsPIDOutput(robot, robot->LeftWheels);
+  leftPID = new PIDController(0.0, 0.0, 0.0, robot->leftDriveEncoder, leftPIDOutput);
+  leftPID->SetOutputRange(-1.0, 1.0);
+  leftPID->SetAbsoluteTolerance(1);
+  leftPID->Disable();
 
   m_stateVal = kInitialize;
   nextState = kInitialize;

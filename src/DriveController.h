@@ -9,6 +9,7 @@
 #include "DriveEncodersPIDSource.h"
 #include "DashboardLogger.h"
 #include "ini.h"
+#include "WheelsPIDOutput.h"
 #include <iostream>
 
 class PivotCommand;
@@ -31,10 +32,16 @@ public:
 
 	PIDOutput *driveXPIDOutput;
 	PIDController *driveXPID;
-
 	PIDOutput *driveYPIDOutput;
 	PIDController *driveYPID;
-	DriveEncodersPIDSource *driveEncodersPIDSource;
+
+	PIDOutput *leftPIDOutput;
+	PIDController *leftPID;
+
+	PIDOutput *rightPIDOutput;
+	PIDController *rightPID;
+
+	DriveEncodersPIDSource *driveEncodersPIDSource; //average of two drive encoders
 
 private:
 

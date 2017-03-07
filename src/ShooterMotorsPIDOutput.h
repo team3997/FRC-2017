@@ -13,10 +13,8 @@ public:
 	void PIDWrite(double output);
 
 	double GetPIDLoopOutput();
-
-private:
 	double loopOutput;
-
+private:
 	VictorSP *shooterMotorA;
 	VictorSP *shooterMotorB;
 };

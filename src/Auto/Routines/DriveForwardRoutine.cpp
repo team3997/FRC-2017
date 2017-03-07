@@ -14,7 +14,6 @@ DriveForwardRoutine::DriveForwardRoutine(DriveController* kDrive) {
 
 void DriveForwardRoutine::Routine() {
 	// TODO Auto-generated constructor stub
-	SmartDashboard::PutBoolean("reacheddriveroutine", true);
 	DriveInterval(kDrive, 1.0, 0.2, 0);
 }
 

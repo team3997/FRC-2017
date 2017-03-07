@@ -26,11 +26,13 @@ bool DriveSetPointStraightAction::IsFinished() {
 }
 
 void DriveSetPointStraightAction::Update() {
-	reachedSetpoint = driveController->driveYPID->OnTarget();
+	reachedSetpoint = driveController->leftPID->OnTarget();
+	SmartDashboard::PutBoolean("ACTION_DriveSetpointStraight", true);
 }
 
 void DriveSetPointStraightAction::Done() {
-	driveController->driveYPID->Disable();
+	driveController->leftPID->Disable();
+	SmartDashboard::PutBoolean("ACTION_DriveSetpointStraight", false);
 	driveController->Stop();
 }
 
@@ -43,9 +45,9 @@ void DriveSetPointStraightAction::Start() {
 	leftEncoderStartDistance = robot->leftDriveEncoder->GetDistance();
 	rightEncoderStartDistance = robot->rightDriveEncoder->GetDistance();
 
-	driveController->driveYPID->SetOutputRange(-maxSpeed, maxSpeed);
-	//driveController->driveYPID->SetPID(p, i ,d);
-	driveController->driveYPID->SetSetpoint(distance + ((leftEncoderStartDistance + rightEncoderStartDistance) / 2.0 ));
+	driveController->leftPID->SetOutputRange(-maxSpeed, maxSpeed);
+	driveController->leftPID->SetPID(0.0, 0.0, 0.0);
+	driveController->leftPID->SetSetpoint(distance + leftEncoderStartDistance);
 
-	driveController->driveYPID->Enable();
+	driveController->leftPID->Enable();
 }

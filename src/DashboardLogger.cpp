@@ -66,10 +66,10 @@ void DashboardLogger::PutShooterMotorOutputs() {
 }
 
 void DashboardLogger::PutDriverJoystickAxesData() {
-	SmartDashboard::PutNumber("JOY_driverLeftX", humanControl->GetJoystickValue(RemoteControl::kDriverJoy, RemoteControl::kLX));
-	SmartDashboard::PutNumber("JOY_driverLeftY", humanControl->GetJoystickValue(RemoteControl::kDriverJoy, RemoteControl::kLY));
-	SmartDashboard::PutNumber("JOY_driverRightX", humanControl->GetJoystickValue(RemoteControl::kDriverJoy, RemoteControl::kRX));
-	SmartDashboard::PutNumber("JOY_driverRightY", humanControl->GetJoystickValue(RemoteControl::kDriverJoy, RemoteControl::kRY));
+	SmartDashboard::PutNumber("DRIVERJOY_driverLeftX", humanControl->GetJoystickValue(RemoteControl::kDriverJoy, RemoteControl::kLX));
+	SmartDashboard::PutNumber("DRIVERJOY_driverLeftY", humanControl->GetJoystickValue(RemoteControl::kDriverJoy, RemoteControl::kLY));
+	SmartDashboard::PutNumber("DRIVERJOY_driverRightX", humanControl->GetJoystickValue(RemoteControl::kDriverJoy, RemoteControl::kRX));
+	SmartDashboard::PutNumber("DRIVERJOY_driverRightY", humanControl->GetJoystickValue(RemoteControl::kDriverJoy, RemoteControl::kRY));
 }
 
 void DashboardLogger::PutGamePadButtonPress() {
