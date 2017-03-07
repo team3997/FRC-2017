@@ -15,7 +15,7 @@ DashboardLogger::DashboardLogger(RobotModel *myRobot,
 	humanControl = myHumanControl;
 }
 
-DashboardLogger::~DashboardLogger() {
+DashboardLogger::~DashboardLogger(){
 	// TODO Auto-generated destructor stub
 }
 
@@ -26,6 +26,7 @@ void DashboardLogger::UpdateData() {
 	PutDriveEncoderData();
 	PutShooterMotorOutputs();
 	PutGamePadButtonPress();
+	SmartDashboard::PutNumber("DEBUG_FPGATimestamp", robot->timer->GetFPGATimestamp());
 }
 
 /*  double GetVoltage(); //returns the voltage

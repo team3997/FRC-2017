@@ -8,6 +8,7 @@ DriveController::DriveController(RobotModel *myRobot,
   robot = myRobot;
   humanControl = myHumanControl;
   driveTrain = new RobotDrive(robot->leftDriveMotorA, robot->leftDriveMotorB, robot->rightDriveMotorA, robot->rightDriveMotorB);
+  driveTrain->SetSafetyEnabled(false);
 
   robot->leftDriveEncoder->SetPIDSourceType(PIDSourceType::kDisplacement);
   robot->leftDriveEncoder->SetSamplesToAverage(DRIVE_Y_PID_SAMPLES_AVERAGE);

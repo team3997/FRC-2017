@@ -49,9 +49,11 @@ class RobotModel {
 
         Encoder *shooterEncoder;
         Encoder *leftDriveEncoder, *rightDriveEncoder;
+
+        Timer *timer;
     private:
         PowerDistributionPanel* pdp;
-        Timer *timer;
+
 
         double leftDriveACurrent, leftDriveBCurrent, rightDriveACurrent,
                rightDriveBCurrent, shooterMotorACurrent, shooterMotorBCurrent,

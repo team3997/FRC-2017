@@ -9,6 +9,7 @@
 #define SRC_AUTO_AUTOROUTINERUNNER_H_
 
 #include "AutoRoutine.h"
+#include "Threads.h"
 
 class AutoRoutineRunner {
 public:
@@ -18,12 +19,14 @@ public:
 	void Start();
 	void Stop();
 	void Run();
+	void ThreadFunction();
 	static Timer* GetTimer();
 	virtual ~AutoRoutineRunner();
 
 private:
 	AutoRoutine* m_auto_routine;
 	bool autoStarted;
+	std::thread *routine_thread;
 };
 
 #endif /* SRC_AUTO_AUTOROUTINERUNNER_H_ */

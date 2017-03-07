@@ -73,7 +73,8 @@ private:
 	}
 
 	void AutonomousPeriodic() {
-
+		//Autonoumous is running in a thread called by "auton->Start();"
+		dashboardLogger->UpdateData(); //JOystick data does NOT update during autonomous
 	}
 
 	void TeleopInit() {
