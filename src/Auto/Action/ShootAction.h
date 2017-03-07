@@ -21,7 +21,7 @@ protected:
 
 private:
 	double kSpeed;
-	RobotModel* kShooter;
+	RobotModel* robot;
 };
 
 #endif /* SRC_AUTO_ACTION_SHOOTACTION_H_ */

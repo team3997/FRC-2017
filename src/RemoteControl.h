@@ -24,6 +24,7 @@ public:
 	virtual bool GetFeederReverseDesired() = 0;
 	virtual bool GetFeederRunDesired() = 0;
 	virtual bool GetClimberReverseDesired() = 0;
+	virtual bool GetResetEncodersDesired() = 0;
 
 	virtual void ReadControls() = 0;
 

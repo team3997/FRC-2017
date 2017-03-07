@@ -23,6 +23,7 @@ ControlBoard::ControlBoard() {
 		shooterRunButton = new ButtonReader(operatorJoy, XINPUT_WIN_GREEN_BUTTON);
 		feederRunButton = new TriggerReader(operatorJoy, XINPUT_WIN_RIGHT_TRIGGER_AXIS);
 		feederReverseButton = new ButtonReader(operatorJoy, XINPUT_WIN_START_BUTTON);
+		resetEncodersButton = new ButtonReader(operatorJoy, XINPUT_WIN_YELLOW_BUTTON);
 	} else {
 		//driveDirectionButton = new ButtonReader(driverJoy, XINPUT_LINUX_BACK_BUTTON);
 		//shooterRunButton = new ButtonReader(driverJoy, XINPUT_LINUX_GREEN_BUTTON);
@@ -41,6 +42,7 @@ ControlBoard::ControlBoard() {
 
 	//Superstructure variables
 	shooterRunDesired = false;
+	//resetEncodersButton = false;
 }
 
 //ReadControls reads the states of all the buttons and joysticks, and sets variables
@@ -74,11 +76,12 @@ void ControlBoard::ReadControls() {
 	reverseDriveDesired = driveDirectionButton->IsDown();
 
 	//Superstructure Variables
-	shooterRunDesired = shooterRunButton->IsDown();
-	feederReverseDesired = feederReverseButton->IsDown();
-	climberDesired = climberRunButton->IsDown();
+	shooterRunDesired     = shooterRunButton->IsDown();
+	feederReverseDesired  = feederReverseButton->IsDown();
+	climberDesired        = climberRunButton->IsDown();
 	climberReverseDesired = climberReverseButton->IsDown();
-	feederRunDesired = feederRunButton->IsDown();
+	feederRunDesired      = feederRunButton->IsDown();
+	resetEncodersDesired  = resetEncodersButton->IsDown();
 }
 
 //Reads the values of all buttons defined by this class
@@ -89,6 +92,7 @@ void ControlBoard::ReadAllButtons() {
 	climberRunButton->ReadValue();
 	climberReverseButton->ReadValue();
 	feederRunButton->ReadValue();
+	resetEncodersButton->ReadValue();
 }
 
 //Returns the joystick and axis being used
@@ -151,4 +155,8 @@ bool ControlBoard::GetClimberReverseDesired() {
 
 bool ControlBoard::GetFeederRunDesired() {
 	return feederRunDesired;
+}
+
+bool ControlBoard::GetResetEncodersDesired() {
+	return resetEncodersDesired;
 }

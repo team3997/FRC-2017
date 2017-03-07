@@ -14,6 +14,7 @@
 #include "Action/Action.h"
 #include "Action/DriveIntervalAction.h"
 #include "Action/ShootAction.h"
+#include "Action/DriveSetPointRotateAction.h"
 
 class AutoRoutine {
 
@@ -31,6 +32,7 @@ public:
   void DriveInterval(DriveController* kDrive, double seconds, double y, double x);
   void Shoot(RobotModel *robot, double seconds, double speed);
   void DriveDistanceStraight(RobotModel *robot, DriveController* kDrive, double desired_distance, double maxSpeed, double timeout);
+  void DriveDistanceRotate(RobotModel *robot, DriveController* kDrive, double desired_distance, double maxSpeed, double timeout);
 
 protected:
 	virtual void Routine(void) = 0;

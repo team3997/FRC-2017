@@ -1,7 +1,7 @@
 #include "JustShootRoutine.h"
 
-JustShootRoutine::JustShootRoutine(RobotModel* shooter) {
-	kShooter = shooter;
+JustShootRoutine::JustShootRoutine(RobotModel* robot) {
+	this->robot = robot;
 }
 
 void JustShootRoutine::Prestart() {
@@ -10,5 +10,5 @@ void JustShootRoutine::Prestart() {
 }
 
 void JustShootRoutine::Routine() {
-	ShootAction(kShooter, 5.0, .8);
+	ShootAction(robot, 5.0, .8);
 }

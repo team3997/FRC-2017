@@ -101,6 +101,12 @@ private:
 		currTimeSec = robot->GetTime();
 		deltaTimeSec = currTimeSec - lastTimeSec;
 
+		/*if (humanControl->GetResetEncodersDesired()){
+		    robot->leftDriveEncoder->Reset();
+		    robot->rightDriveEncoder->Reset();
+		    robot->shooterEncoder->Reset();
+	    }*/
+
 		//Reads controls and updates controllers accordingly
 		humanControl->ReadControls();
 		driveController->Update(currTimeSec, deltaTimeSec);
@@ -125,6 +131,13 @@ private:
 		//robot->UpdateCurrent();
 		//auton->Stop();
 		//Reads controls and updates controllers accordingly
+
+		if (humanControl->GetResetEncodersDesired()){
+			robot->leftDriveEncoder->Reset();
+			robot->rightDriveEncoder->Reset();
+			robot->shooterEncoder->Reset();
+		}
+
 	    humanControl->ReadControls();
 	    RefreshAllIni();
 	}

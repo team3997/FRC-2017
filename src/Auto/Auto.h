@@ -15,7 +15,7 @@
 
 class Auto {
 public:
-	Auto(DriveController* kDrive, RobotModel* kShooter);bool ReturnBool();
+	Auto(DriveController* kDrive, RobotModel* robot);bool ReturnBool();
 	AutoRoutine* autoRoutine;
 	void Reset();
 	void ListOptions();
@@ -26,7 +26,7 @@ public:
 	virtual ~Auto();
 private:
 	DriveController* kDrive;
-	RobotModel* kShooter;
+	RobotModel* robot;
 };
 
 #endif /* SRC_AUTO_AUTO_H_ */

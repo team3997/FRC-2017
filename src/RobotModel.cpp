@@ -42,20 +42,20 @@ RobotModel::RobotModel() {
 	climberMotor->SetSafetyEnabled(false);
 
 	shooterEncoder->SetPIDSourceType(PIDSourceType::kRate);
-	leftDriveEncoder->SetReverseDirection(true);
+	leftDriveEncoder->SetReverseDirection(false);
 	leftDriveEncoder->SetDistancePerPulse(((1.0) / (250.0)) * ((4.0) * (M_PI)));
 	leftDriveEncoder->SetSamplesToAverage(90);
-	rightDriveEncoder->SetReverseDirection(true);
-	rightDriveEncoder->SetDistancePerPulse(
-			((1.0) / (250.0)) * ((4.0) * (M_PI)));
+	rightDriveEncoder->SetReverseDirection(false);
+	rightDriveEncoder->SetDistancePerPulse(((1.0) / (250.0)) * ((4.0) * (M_PI)));
 	rightDriveEncoder->SetSamplesToAverage(90);
 
 	leftDriveMotorA->SetSafetyEnabled(false);
 	leftDriveMotorB->SetSafetyEnabled(false);
 	rightDriveMotorA->SetSafetyEnabled(false);
 	rightDriveMotorB->SetSafetyEnabled(false);
-	/*shooterMotorA->SetSafetyEnabled(false);
-	 shooterMotorB->SetSafetyEnabled(false);*/
+	shooterMotorA->SetSafetyEnabled(false);
+	 shooterMotorB->SetSafetyEnabled(false);
+	 feederMotor->SetSafetyEnabled(false);
 	climberMotor->SetInverted(true);
 
 	leftDriveMotorA->SetInverted(false);

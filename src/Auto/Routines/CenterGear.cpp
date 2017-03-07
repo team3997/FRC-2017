@@ -7,13 +7,13 @@
 
 #include "CenterGear.h"
 
-CenterGear::CenterGear(DriveController* driveTrain) {
-
+CenterGear::CenterGear(RobotModel *robot, DriveController* driveTrain) {
+  this->robot = robot;
   this->driveTrain = driveTrain;
 }
 
 void CenterGear::Routine() {
-
+	DriveDistanceStraight(robot, driveTrain, 20.0, 0.5, 6.0);
 }
 
 void CenterGear::Prestart() {}

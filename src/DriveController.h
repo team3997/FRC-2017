@@ -5,6 +5,7 @@
 #include "RobotModel.h"
 #include "RemoteControl.h"
 #include "DriveYMotorsPIDOutput.h"
+#include "DriveRotateMotorsPIDOutput.h"
 #include "DriveEncodersPIDSource.h"
 #include "DashboardLogger.h"
 #include "ini.h"
@@ -27,6 +28,9 @@ public:
 	enum DriveState {
 		kInitialize, kTeleopDrive
 	};
+
+	PIDOutput *driveXPIDOutput;
+	PIDController *driveXPID;
 
 	PIDOutput *driveYPIDOutput;
 	PIDController *driveYPID;

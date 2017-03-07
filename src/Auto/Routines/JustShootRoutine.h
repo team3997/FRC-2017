@@ -20,7 +20,7 @@ protected:
 	void Routine();
 
 private:
-	RobotModel* kShooter;
+	RobotModel* robot;
 };
 
 #endif /* SRC_AUTO_ROUTINES_JUSTSHOOTROUTINE_H_ */

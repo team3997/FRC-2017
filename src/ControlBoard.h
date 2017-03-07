@@ -31,13 +31,14 @@ public:
 	bool GetFeederRunDesired();
 	bool GetFeederReverseDesired();
 	bool GetClimberReverseDesired();
+	bool GetResetEncodersDesired();
 
 private:
 
 	//booleans for desired states of robot
 	bool climberReverseDesired, feederReverseDesired, feederRunDesired,
 			reverseDriveDesired, arcadeDriveDesired, shooterRunDesired,
-			climberDesired;
+			climberDesired, resetEncodersDesired;
 
 	double driverLeftJoyX, driverLeftJoyY, driverRightJoyX, driverRightJoyY;
 	double operatorLeftJoyX, operatorLeftJoyY, operatorRightJoyX,
@@ -46,7 +47,7 @@ private:
 	Joystick *driverJoy, *operatorJoy;
 
 	ButtonReader *climberReverseButton, *driveDirectionButton,
-			*feederReverseButton, *shooterRunButton;
+			*feederReverseButton, *shooterRunButton, *resetEncodersButton;
 
 	TriggerReader *climberRunButton, *feederRunButton;
 

@@ -25,11 +25,16 @@ static const double SHOOTER_PID_SCALE_VALUES[] 		   = {(1.0/500.0), 1.0, 1.0}; /
 
 //DRIVE PID PARAMS
 
-static const double DRIVE_Y_PID_VALUES[]               = {0.0, 0.0, 0.0}; // P, I, D
+static const double DRIVE_Y_PID_VALUES[]               = {0.125, 0.0, 0.0}; // P, I, D
 static const double DRIVE_Y_PID_SCALE_VALUES[] 		   = {1.0, 1.0, 1.0}; //P, I, D
 
 static const int DRIVE_Y_PID_TOLERANCE                 = 10;
 static const int DRIVE_Y_PID_SAMPLES_AVERAGE           = 10;
 
+static const double DRIVE_X_PID_VALUES[]               = {0.0, 0.0, 0.0}; // P, I, D
+static const double DRIVE_X_PID_SCALE_VALUES[] 		   = {1.0, 1.0, 1.0}; //P, I, D
+
+static const int DRIVE_X_PID_TOLERANCE                 = 10;
+static const int DRIVE_X_PID_SAMPLES_AVERAGE           = 10;
 
 #endif

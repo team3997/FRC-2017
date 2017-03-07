@@ -21,7 +21,7 @@ using namespace frc;
 
 class AutoSelector {
 public:
-	AutoSelector(RobotModel* kShooter, DriveController* kDrive);
+	AutoSelector(RobotModel* robot, DriveController* kDrive);
 
 	void ListOptions();
 	AutoRoutine* Pick();
