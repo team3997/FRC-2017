@@ -19,10 +19,20 @@ DriveController::DriveController(RobotModel *myRobot,
   driveYPIDOutput = new DriveYMotorsPIDOutput(driveTrain);
   driveYPID = new PIDController(DRIVE_Y_PID_VALUES[0], DRIVE_Y_PID_VALUES[1], DRIVE_Y_PID_VALUES[2], driveEncodersPIDSource, driveYPIDOutput);
 
+  //driveXPIDOutput = new DriveRotateMotorsPIDOutput(driveTrain);
+  //driveXPID = new PIDController(DRIVE_X_PID_VALUES[0], DRIVE_X_PID_VALUES[1], DRIVE_X_PID_VALUES[2], driveEncodersPIDSource, driveXPIDOutput);
+
+
   driveYPID->SetOutputRange(-1.0, 1.0);
   driveYPID->SetPercentTolerance(DRIVE_Y_PID_TOLERANCE);
 
   driveYPID->Disable();
+
+
+  //driveXPID->SetOutputRange(-1.0, 1.0);
+  //driveXPID->SetPercentTolerance(DRIVE_X_PID_TOLERANCE);
+
+  //driveXPID->Disable();
 
   m_stateVal = kInitialize;
   nextState = kInitialize;

@@ -26,17 +26,14 @@ bool AutoRoutine::IsActive() {
 
 void AutoRoutine::RunAction(Action* action) {
 	action->Start();
-	while ((IsActive()) && (!action->IsFinished())
-			&& (AutoRoutineRunner::GetTimer()->Get() <= 15)
-			&& RobotState::IsAutonomous() && !RobotState::IsDisabled()) {
+	while ((IsActive()) && (!action->IsFinished()) && (AutoRoutineRunner::GetTimer()->Get() <= 15) && RobotState::IsAutonomous() && !RobotState::IsDisabled()) {
 		action->Update();
 	}
 	action->Done();
 }
 
 //ACTIONS:
-void AutoRoutine::DriveInterval(DriveController* kDrive, double seconds,
-		double y, double x) {
+void AutoRoutine::DriveInterval(DriveController* kDrive, double seconds, double y, double x) {
 	RunAction(new DriveIntervalAction(kDrive, seconds, y, x));
 }
 
@@ -46,5 +43,9 @@ void AutoRoutine::Shoot(RobotModel* robot, double seconds, double speed) {
 
 void AutoRoutine::DriveDistanceStraight(RobotModel* robot, DriveController* kDrive, double desired_distance, double maxSpeed, double timeout) {
   RunAction(new DriveSetPointStraightAction(robot, kDrive, desired_distance, maxSpeed, timeout));
-
 }
+
+void AutoRoutine::DriveDistanceRotate(RobotModel* robot, DriveController* kDrive, double desired_distance, double maxSpeed, double timeout) {
+  RunAction(new DriveSetPointRotateAction(robot, kDrive, desired_distance, maxSpeed, timeout));
+}
+

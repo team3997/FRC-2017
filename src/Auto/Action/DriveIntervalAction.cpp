@@ -7,8 +7,7 @@
 #include "Timer.h"
 #include "DriveIntervalAction.h"
 
-DriveIntervalAction::DriveIntervalAction(DriveController* kDrive,
-		double seconds, double y, double x) {
+DriveIntervalAction::DriveIntervalAction(DriveController* kDrive, double seconds, double y, double x) {
 	goal_time = seconds;
 	x_drive = x;
 	y_drive = y;
@@ -20,6 +19,7 @@ bool DriveIntervalAction::IsFinished() {
 }
 
 void DriveIntervalAction::Update() {
+	SmartDashboard::PutNumber("reachedUPDATE", Timer::GetFPGATimestamp());
 	kDrive->ArcadeDrive(y_drive, x_drive, false);
 }
 
@@ -28,6 +28,7 @@ void DriveIntervalAction::Done() {
 }
 
 void DriveIntervalAction::Start() {
+	SmartDashboard::PutNumber("reachedSTART", Timer::GetFPGATimestamp());
 	start_time = Timer::GetFPGATimestamp();
 }
 DriveIntervalAction::~DriveIntervalAction() {

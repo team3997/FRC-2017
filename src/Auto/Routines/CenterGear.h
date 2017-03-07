@@ -12,12 +12,12 @@
 
 class CenterGear : public AutoRoutine {
  public:
-  CenterGear(DriveController* driveTrain);
+  CenterGear(RobotModel *robot, DriveController* driveTrain);
   virtual ~CenterGear();
   void Prestart();
  private:
   DriveController *driveTrain;
-
+  RobotModel *robot;
  protected:
   void Routine();
 };
