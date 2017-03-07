@@ -44,11 +44,10 @@ RobotModel::RobotModel() {
 	shooterEncoder->SetPIDSourceType(PIDSourceType::kRate);
 	leftDriveEncoder->SetReverseDirection(false);
 	leftDriveEncoder->SetDistancePerPulse(((1.0) / (250.0)) * ((4.0) * (M_PI)));
-	leftDriveEncoder->SetSamplesToAverage(90);
+	leftDriveEncoder->SetSamplesToAverage(1);
 	rightDriveEncoder->SetReverseDirection(false);
-	rightDriveEncoder->SetDistancePerPulse(
-			((1.0) / (250.0)) * ((4.0) * (M_PI)));
-	rightDriveEncoder->SetSamplesToAverage(90);
+	rightDriveEncoder->SetDistancePerPulse(((1.0) / (250.0)) * ((4.0) * (M_PI)));
+	rightDriveEncoder->SetSamplesToAverage(1);
 
 	leftDriveMotorA->SetSafetyEnabled(false);
 	leftDriveMotorB->SetSafetyEnabled(false);

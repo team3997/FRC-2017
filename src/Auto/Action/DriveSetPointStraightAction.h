@@ -27,6 +27,7 @@ private:
 
 	double distance, maxSpeed, timeout;
 
+	int target_pass;
 	double leftEncoderStartDistance, rightEncoderStartDistance;
 };
 
