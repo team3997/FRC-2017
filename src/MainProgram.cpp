@@ -142,8 +142,8 @@ private:
 	    RefreshAllIni();
 	}
 	void RefreshAllIni() {
-	    //robot->RefreshIni();
-	    //driveController->RefreshIni();
+	    robot->RefreshIni();
+	    driveController->RefreshIni();
 	}
 };
 

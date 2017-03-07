@@ -46,8 +46,7 @@ RobotModel::RobotModel() {
 	leftDriveEncoder->SetDistancePerPulse(((1.0) / (250.0)) * ((4.0) * (M_PI)));
 	leftDriveEncoder->SetSamplesToAverage(90);
 	rightDriveEncoder->SetReverseDirection(false);
-	rightDriveEncoder->SetDistancePerPulse(
-			((1.0) / (250.0)) * ((4.0) * (M_PI)));
+	rightDriveEncoder->SetDistancePerPulse(((1.0) / (250.0)) * ((4.0) * (M_PI)));
 	rightDriveEncoder->SetSamplesToAverage(90);
 
 	leftDriveMotorA->SetSafetyEnabled(false);
