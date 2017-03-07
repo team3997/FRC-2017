@@ -31,8 +31,8 @@ public:
   //ACTIONS:
   void DriveInterval(DriveController* kDrive, double seconds, double y, double x);
   void Shoot(RobotModel *robot, double seconds, double speed);
-  void DriveDistanceStraight(RobotModel *robot, DriveController* kDrive, double desired_distance, double maxSpeed, double timeout);
-  void DriveDistanceRotate(RobotModel *robot, DriveController* kDrive, double desired_distance, double maxSpeed, double timeout);
+  void DriveDistanceStraight(RobotModel *robot, DriveController* kDrive, double desired_distance, double maxSpeed, double timeout, double minTime);
+  void DriveDistanceRotate(RobotModel *robot, DriveController* kDrive, double desired_distance, double maxSpeed, double timeout, double minTime);
 
 protected:
 	virtual void Routine(void) = 0;

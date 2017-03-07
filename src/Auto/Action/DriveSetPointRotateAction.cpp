@@ -6,17 +6,18 @@
  */
 
 #include "DriveSetPointRotateAction.h"
-
+#include "WPILib.h"
 //distance: distance in inches for the bot to rotate
 //maxSpeed: max speed robot can drive to hit setpoint
 //timeout: amount of allowed time this action can run before ending
-DriveSetPointRotateAction::DriveSetPointRotateAction(RobotModel *robot, DriveController *driveController, double distance, double maxSpeed, double timeout) {
+DriveSetPointRotateAction::DriveSetPointRotateAction(RobotModel *robot, DriveController *driveController, double distance, double maxSpeed, double timeout, double minTime, bool wantMinTime) {
 	this->driveController = driveController;
 	this->distance = distance;
 	this->timeout = timeout;
 	this->robot = robot;
 	this->maxSpeed = maxSpeed;
-
+    this->minTime = minTime;
+    this->wantMinTime = wantMinTime;
 	reachedSetpoint = false;
 	leftEncoderStartDistance, rightEncoderStartDistance = 0.0;
 }

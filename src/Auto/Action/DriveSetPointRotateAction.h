@@ -14,7 +14,7 @@
 #include "Action.h"
 class DriveSetPointRotateAction: public Action {
 public:
-	DriveSetPointRotateAction(RobotModel *robot, DriveController *driveController, double distance, double maxSpeed, double timeout);
+	DriveSetPointRotateAction(RobotModel *robot, DriveController *driveController, double distance, double maxSpeed, double timeout, double minTime, bool wantMinTime);
 	bool IsFinished();
 	void Update();
 	void Done();
@@ -23,9 +23,9 @@ public:
 private:
 	DriveController *driveController;
 	RobotModel *robot;
-	bool reachedSetpoint;
+	bool reachedSetpoint, wantMinTime;
 
-	double distance, maxSpeed, timeout;
+	double distance, maxSpeed, timeout, minTime;
 
 	double leftEncoderStartDistance, rightEncoderStartDistance;
 };
