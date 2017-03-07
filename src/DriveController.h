@@ -5,7 +5,8 @@
 #include "RobotModel.h"
 #include "RemoteControl.h"
 #include "DashboardLogger.h"
-
+#include "ini.h"
+#include <iostream>
 
 class PivotCommand;
 
@@ -20,6 +21,7 @@ public:
   void Reset();
   void ArcadeDrive(double myX, double myY, bool teleOp);
   void TankDrive(double myLeft, double myRight);
+  void RefreshIni();
 
   enum DriveState {
     kInitialize, kTeleopDrive
@@ -28,9 +30,9 @@ public:
 private:
   RobotModel *robot;
   RemoteControl *humanControl;
-
+  double testVariable;
+  double test2Variable;
   RobotDrive *driveTrain;
-
   uint32_t m_stateVal;
   uint32_t nextState;
 };

@@ -9,119 +9,133 @@
 #include <string.h>
 #include "Auto/Auto.h"
 
-class MainProgram: public frc::IterativeRobot {
+class MainProgram : public frc::IterativeRobot {
 
-	//Creates a robot from class RobotModel
-	RobotModel *robot;
+    //Creates a robot from class RobotModel
+    RobotModel *robot;
 
-	//Creates a human control from RemoteControl, which includes ControlBoard
-	RemoteControl *humanControl;
+    //Creates a human control from RemoteControl, which includes ControlBoard
+    RemoteControl *humanControl;
 
-	//Creates a controller for drivetrain and superstructure
-	DriveController *driveController;
-	ShooterController *shooterController;
+    //Creates a controller for drivetrain and superstructure
+    DriveController *driveController;
+    ShooterController *shooterController;
 
-	//Creates an object of Dashboardlogger
-	DashboardLogger *dashboardLogger;
+    //Creates an object of Dashboardlogger
+    DashboardLogger *dashboardLogger;
 
-	ClimberController *climberController;
+    ClimberController *climberController;
 
-	Auto* auton;
+    Auto* auton;
 
-	//Creates a time-keeper	`
-	double currTimeSec;
-	double lastTimeSec;
-	double deltaTimeSec;
+    //Creates a time-keeper	`
+    double currTimeSec;
+    double lastTimeSec;
+    double deltaTimeSec;
 
-public:
-	MainProgram(void) {
-		robot = new RobotModel();
-		humanControl = new ControlBoard();
-		driveController = new DriveController(robot, humanControl);
-		dashboardLogger = new DashboardLogger(robot, humanControl);
-		shooterController = new ShooterController(robot, humanControl);
-		climberController = new ClimberController(robot, humanControl);
-		auton = new Auto(driveController, robot);
-		//Initializes timekeeper variables
-		currTimeSec = 0.0;
-		lastTimeSec = 0.0;
-		deltaTimeSec = 0.0;
-	}
-private:
-	void RobotInit() {
-		robot->ResetTimer();
-		robot->Reset();
-		auton->ListOptions();
-
-	}
-
-	void AutonomousInit() {
-		auton->Stop();
-		robot->ResetTimer();
-		robot->ResetEncoders();
-
-		driveController->Reset();
-
-		//Resets timer variables
-		currTimeSec = 0.0;
-		lastTimeSec = 0.0;
-		deltaTimeSec = 0.0;
+ public:
+    MainProgram(void) {
+        robot = new RobotModel();
+        humanControl = new ControlBoard();
+        driveController = new DriveController(robot, humanControl);
+        dashboardLogger = new DashboardLogger(robot, humanControl);
+        shooterController = new ShooterController(robot, humanControl);
+        climberController = new ClimberController(robot, humanControl);
+        auton = new Auto(driveController, robot);
+        //Initializes timekeeper variables
+        currTimeSec = 0.0;
+        lastTimeSec = 0.0;
+        deltaTimeSec = 0.0;
+    }
+ private:
+    void RobotInit() {
+        robot->ResetTimer();
+        robot->Reset();
+        auton->ListOptions();
+        RefreshAllIni();
 
 
-		auton->Start();
+    }
 
-	}
+    void AutonomousInit() {
+        RefreshAllIni();
 
-	void AutonomousPeriodic() {
+        auton->Stop();
+        robot->ResetTimer();
+        robot->ResetEncoders();
 
-	}
+        driveController->Reset();
 
-	void TeleopInit() {
-		auton->Stop();
-		robot->ResetTimer();
-		robot->ResetEncoders();
+        //Resets timer variables
+        currTimeSec = 0.0;
+        lastTimeSec = 0.0;
+        deltaTimeSec = 0.0;
 
-		driveController->Reset();
-		shooterController->Reset();
-		climberController->Reset();
+        auton->Start();
 
-		//Resets timer variables
-		currTimeSec = 0.0;
-		lastTimeSec = 0.0;
-		deltaTimeSec = 0.0;
+    }
 
-	}
+    void AutonomousPeriodic() {
 
-	void TeleopPeriodic() {
-		dashboardLogger->UpdateData();
+    }
 
-		//Updates timer
-		lastTimeSec = currTimeSec;
-		currTimeSec = robot->GetTime();
-		deltaTimeSec = currTimeSec - lastTimeSec;
+    void TeleopInit() {
+        RefreshAllIni();
 
-		//Reads controls and updates controllers accordingly
-		humanControl->ReadControls();
-		driveController->Update(currTimeSec, deltaTimeSec);
-		shooterController->Update(currTimeSec, deltaTimeSec);
-		climberController->Update();
-	}
+        auton->Stop();
+        robot->ResetTimer();
+        robot->ResetEncoders();
 
-	void DisabledInit() {
-		robot->ResetEncoders();
-		driveController->Reset();
-		shooterController->Reset();
-		climberController->Reset();
-		auton->Stop();
-	}
+        driveController->Reset();
+        shooterController->Reset();
+        climberController->Reset();
 
-	void DisabledPeriodic() {
-		dashboardLogger->UpdateData();
-		//robot->UpdateCurrent();
-		//auton->Stop();
-		//Reads controls and updates controllers accordingly
-		humanControl->ReadControls();
-	}
+        //Resets timer variables
+        currTimeSec = 0.0;
+        lastTimeSec = 0.0;
+        deltaTimeSec = 0.0;
+
+    }
+
+    void TeleopPeriodic() {
+        RefreshAllIni();
+
+        dashboardLogger->UpdateData();
+
+        //Updates timer
+        lastTimeSec = currTimeSec;
+        currTimeSec = robot->GetTime();
+        deltaTimeSec = currTimeSec - lastTimeSec;
+
+        //Reads controls and updates controllers accordingly
+        humanControl->ReadControls();
+        driveController->Update(currTimeSec, deltaTimeSec);
+        shooterController->Update(currTimeSec, deltaTimeSec);
+        climberController->Update();
+    }
+
+    void DisabledInit() {
+        RefreshAllIni();
+
+        robot->ResetEncoders();
+        driveController->Reset();
+        shooterController->Reset();
+        climberController->Reset();
+        auton->Stop();
+    }
+
+    void DisabledPeriodic() {
+        RefreshAllIni();
+        dashboardLogger->UpdateData();
+        //robot->UpdateCurrent();
+        //auton->Stop();
+        //Reads controls and updates controllers accordingly
+        humanControl->ReadControls();
+    }
+    void RefreshAllIni() {
+        robot->RefreshIni();
+        driveController->RefreshIni();
+    }
 };
 
 START_ROBOT_CLASS(MainProgram);

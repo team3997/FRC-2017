@@ -9,7 +9,7 @@
 #define SRC_ROBOTMODEL_H_
 
 #include "WPILib.h"
-
+#include "ini.h"
 
 class RobotModel {
 public:
@@ -39,19 +39,19 @@ public:
 
   void SetClimberMotorSpeed(double speed); //sets the speed of the climber motor
   double GetClimberMotorSpeed(); //gets the speed of the climber motor
-  
+  void RefreshIni();
   void ResetEncoders();
 
   //Speed controllers
   Spark *leftDriveMotorA, *leftDriveMotorB, *rightDriveMotorA, *rightDriveMotorB;
   VictorSP *shooterMotorA, *shooterMotorB;
   Talon *climberMotor, *feederMotor;
+  Ini *pini;
 
   Encoder *shooterEncoder;
   Encoder *leftDriveEncoder, *rightDriveEncoder;
 private:
   PowerDistributionPanel* pdp;
-
   Timer *timer;
 
 
