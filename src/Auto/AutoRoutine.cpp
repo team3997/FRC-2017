@@ -47,5 +47,7 @@ void AutoRoutine::DriveDistanceStraight(RobotModel* robot, DriveController* kDri
 
 void AutoRoutine::DriveDistanceRotate(RobotModel* robot, DriveController* kDrive, double desired_distance, double maxSpeed, double timeout, double minTime) {
   RunAction(new DriveSetPointRotateAction(robot, kDrive, desired_distance, maxSpeed, timeout, minTime, false));
-}
 
+void AutoRoutine::WaitTime(double timeout) {
+    RunAction(new WaitTimeAction(timeout));
+}
