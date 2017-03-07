@@ -18,7 +18,11 @@ DriveController::DriveController(RobotModel *myRobot,
 
   driveEncodersPIDSource = new DriveEncodersPIDSource(robot->leftDriveEncoder, robot->rightDriveEncoder);
   driveYPIDOutput = new DriveYMotorsPIDOutput(driveTrain);
-  driveYPID = new PIDController(DRIVE_Y_PID_VALUES[0], DRIVE_Y_PID_VALUES[1], DRIVE_Y_PID_VALUES[2], driveEncodersPIDSource, driveYPIDOutput);
+  driveYPID = new PIDController(
+		  DRIVE_Y_PID_VALUES[0] * DRIVE_Y_PID_SCALE_VALUES[0],
+		  DRIVE_Y_PID_VALUES[1] * DRIVE_Y_PID_SCALE_VALUES[1],
+		  DRIVE_Y_PID_VALUES[2] * DRIVE_Y_PID_SCALE_VALUES[2],
+		  driveEncodersPIDSource, driveYPIDOutput);
 
   //driveXPIDOutput = new DriveRotateMotorsPIDOutput(driveTrain);
   //driveXPID = new PIDController(DRIVE_X_PID_VALUES[0], DRIVE_X_PID_VALUES[1], DRIVE_X_PID_VALUES[2], driveEncodersPIDSource, driveXPIDOutput);
