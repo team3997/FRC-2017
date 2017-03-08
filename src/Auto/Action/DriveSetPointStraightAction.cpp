@@ -56,7 +56,7 @@ void DriveSetPointStraightAction::Start() {
 	rightEncoderStartDistance = robot->rightDriveEncoder->GetDistance();
 
 	driveController->leftPID->SetOutputRange(-maxSpeed, maxSpeed);
-	driveController->leftPID->SetPID(0.125, 0.0, 0.0);
+	driveController->leftPID->SetPID(0.3, 0.0, 0.0);
 	driveController->leftPID->SetSetpoint(distance + leftEncoderStartDistance);
 
 	driveController->rightPID->SetOutputRange(-maxSpeed, maxSpeed);
