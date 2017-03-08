@@ -7,10 +7,12 @@
 
 #include "DriveSetPointRotateAction.h"
 
-//distance: distance in inches for the bot to rotate
+//distance: distance in inches for the bot to rotate. positive for clockwise, negative for counter clockwise
 //maxSpeed: max speed robot can drive to hit setpoint
 //timeout: amount of allowed time this action can run before ending
-DriveSetPointRotateAction::DriveSetPointRotateAction(RobotModel *robot, DriveController *driveController, double distance, double maxSpeed, double timeout) {
+DriveSetPointRotateAction::DriveSetPointRotateAction(RobotModel *robot,
+		DriveController *driveController, double distance, double maxSpeed,
+		double timeout) {
 	this->driveController = driveController;
 	this->distance = distance;
 	this->timeout = timeout;
@@ -26,11 +28,17 @@ bool DriveSetPointRotateAction::IsFinished() {
 }
 
 void DriveSetPointRotateAction::Update() {
-	reachedSetpoint = driveController->driveXPID->OnTarget();
+	if(driveController->leftPID->OnTarget() && driveController->rightPID->OnTarget() && (Timer::GetFPGATimestamp() >= start_time + 6.0)){
+		reachedSetpoint = true;
+	}
+	else{
+		reachedSetpoint = false;
+	}
 }
 
 void DriveSetPointRotateAction::Done() {
-	driveController->driveXPID->Disable();
+	driveController->leftPID->Disable();
+	driveController->rightPID->Disable();
 	driveController->Stop();
 }
 
@@ -43,9 +51,14 @@ void DriveSetPointRotateAction::Start() {
 	leftEncoderStartDistance = robot->leftDriveEncoder->GetDistance();
 	rightEncoderStartDistance = robot->rightDriveEncoder->GetDistance();
 
-	driveController->driveXPID->SetOutputRange(-maxSpeed, maxSpeed);
-	//driveController->driveYPID->SetPID(p, i ,d);
-	driveController->driveXPID->SetSetpoint(distance + ((leftEncoderStartDistance + rightEncoderStartDistance) / 2.0 ));
+	driveController->leftPID->SetOutputRange(-maxSpeed, maxSpeed);
+	driveController->leftPID->SetPID(0.125, 0.0, 0.0);
+	driveController->leftPID->SetSetpoint(distance + leftEncoderStartDistance);
 
-	driveController->driveXPID->Enable();
+	driveController->rightPID->SetOutputRange(-maxSpeed, maxSpeed);
+	driveController->rightPID->SetPID(0.125, 0.0, 0.0);
+	driveController->rightPID->SetSetpoint(-1.0 * (distance + rightEncoderStartDistance));
+
+	driveController->leftPID->Enable();
+	driveController->rightPID->Enable();
 }

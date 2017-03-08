@@ -35,8 +35,6 @@ void DriveSetPointStraightAction::Update() {
 	else{
 		reachedSetpoint = false;
 	}
-	SmartDashboard::PutNumber("LEFTPIDSETPOINT", driveController->leftPID->GetSetpoint());
-	SmartDashboard::PutNumber("RIGHTPIDSETPOINT", driveController->rightPID->GetSetpoint());
 	SmartDashboard::PutBoolean("ACTION_DriveSetpointStraight", true);
 }
 
