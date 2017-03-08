@@ -3,8 +3,9 @@
 #include "WPILib.h"
 
 DriveController::DriveController(RobotModel *myRobot,
-		RemoteControl *myHumanControl) {
+		RemoteControl *myHumanControl, VisionController *myVision) {
 	robot = myRobot;
+	vision = myVision;
 	humanControl = myHumanControl;
 	driveTrain = new RobotDrive(robot->leftDriveMotorA, robot->leftDriveMotorB,
 			robot->rightDriveMotorA, robot->rightDriveMotorB);
@@ -16,26 +17,6 @@ DriveController::DriveController(RobotModel *myRobot,
 	robot->rightDriveEncoder->SetPIDSourceType(PIDSourceType::kDisplacement);
 	robot->rightDriveEncoder->SetSamplesToAverage(DRIVE_Y_PID_SAMPLES_AVERAGE);
 
-	/*driveEncodersPIDSource = new DriveEncodersPIDSource(robot->leftDriveEncoder, robot->rightDriveEncoder);
-	 driveYPIDOutput = new DriveYMotorsPIDOutput(driveTrain);
-	 driveYPID = new PIDController(
-	 DRIVE_Y_PID_VALUES[0] * DRIVE_Y_PID_SCALE_VALUES[0],
-	 DRIVE_Y_PID_VALUES[1] * DRIVE_Y_PID_SCALE_VALUES[1],
-	 DRIVE_Y_PID_VALUES[2] * DRIVE_Y_PID_SCALE_VALUES[2],
-	 driveEncodersPIDSource, driveYPIDOutput);/*
-
-	 //driveXPIDOutput = new DriveRotateMotorsPIDOutput(driveTrain);
-	 //driveXPID = new PIDController(DRIVE_X_PID_VALUES[0], DRIVE_X_PID_VALUES[1], DRIVE_X_PID_VALUES[2], driveEncodersPIDSource, driveXPIDOutput);
-
-
-	 /*driveYPID->SetOutputRange(-1.0, 1.0);
-	 driveYPID->SetPercentTolerance(DRIVE_Y_PID_TOLERANCE);
-
-	 driveYPID->Disable(); */
-
-	//driveXPID->SetOutputRange(-1.0, 1.0);
-	//driveXPID->SetPercentTolerance(DRIVE_X_PID_TOLERANCE);
-	//driveXPID->Disable();
 	leftPIDOutput = new WheelsPIDOutput(robot, robot->LeftWheels);
 	leftPID = new PIDController(0.0, 0.0, 0.0, robot->leftDriveEncoder,
 			leftPIDOutput);
@@ -48,6 +29,13 @@ DriveController::DriveController(RobotModel *myRobot,
 	rightPID->SetOutputRange(-1.0, 1.0);
 	rightPID->SetAbsoluteTolerance(0.25);
 	rightPID->Disable();
+
+	visionPIDSource = new VisionPIDSource(vision);
+	driveXPIDOutput = new DriveRotateMotorsPIDOutput(driveTrain);
+	visionPID = new PIDController(0.0, 0.0, 0.0, visionPIDSource, driveXPIDOutput);
+	visionPID->SetOutputRange(-1.0, 1.0);
+	visionPID->SetAbsoluteTolerance(1);
+	visionPID->Disable();
 
 	m_stateVal = kInitialize;
 	nextState = kInitialize;
