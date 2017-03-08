@@ -15,6 +15,7 @@ class CenterGear : public AutoRoutine {
   CenterGear(RobotModel *robot, DriveController* driveTrain);
   virtual ~CenterGear();
   void Prestart();
+
  private:
   DriveController *driveTrain;
   RobotModel *robot;

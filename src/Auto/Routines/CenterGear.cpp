@@ -13,7 +13,9 @@ CenterGear::CenterGear(RobotModel *robot, DriveController* driveTrain) {
 }
 
 void CenterGear::Routine() {
-	DriveDistanceStraight(robot, driveTrain, 100.0, 0.4, 8.0, 6.0);
+	DriveDistanceStraight(robot, driveTrain, 30.0, 0.5, 4.0, 4.0, false);
+	DriveDistanceRotate  (robot, driveTrain, -180.0, 0.7, 7.0, 7.0, false);
+	DriveDistanceStraight(robot, driveTrain, 30.0, 0.5, 4.0, 4.0, false);
 }
 
 void CenterGear::Prestart() {}

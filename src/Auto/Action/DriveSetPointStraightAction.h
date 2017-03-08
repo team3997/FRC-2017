@@ -14,7 +14,7 @@
 #include "Action.h"
 class DriveSetPointStraightAction: public Action {
 public:
-	DriveSetPointStraightAction(RobotModel *robot, DriveController *driveController, double distance, double maxSpeed, double timeout, double minTime, bool wantMinTime);
+	DriveSetPointStraightAction(RobotModel *robot, DriveController *driveController, double distance, double maxSpeed, double minTime, double timeout, bool wantMinTime);
 	bool IsFinished();
 	void Update();
 	void Done();
@@ -27,6 +27,7 @@ private:
 
 	double distance, maxSpeed, timeout, minTime;
 
+	double P, I, D;
 	int target_pass;
 	double leftEncoderStartDistance, rightEncoderStartDistance;
 };

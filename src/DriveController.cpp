@@ -40,13 +40,13 @@ DriveController::DriveController(RobotModel *myRobot,
 	leftPID = new PIDController(0.0, 0.0, 0.0, robot->leftDriveEncoder,
 			leftPIDOutput);
 	leftPID->SetOutputRange(-1.0, 1.0);
-	leftPID->SetAbsoluteTolerance(1);
+	leftPID->SetAbsoluteTolerance(0.25);
 	leftPID->Disable();
 
 	rightPIDOutput = new WheelsPIDOutput(robot, robot->RightWheels);
 	rightPID = new PIDController(0.0, 0.0, 0.0, robot->rightDriveEncoder, rightPIDOutput);
 	rightPID->SetOutputRange(-1.0, 1.0);
-	rightPID->SetAbsoluteTolerance(1);
+	rightPID->SetAbsoluteTolerance(0.25);
 	rightPID->Disable();
 
 	m_stateVal = kInitialize;
@@ -124,8 +124,4 @@ void DriveController::Stop() {
 	driveTrain->ArcadeDrive(0.00, 0.00, false);
 }
 void DriveController::RefreshIni() {
-	testVariable = robot->pini->getf("DEBUGGING", "testVariable", 0.0);
-	test2Variable = robot->pini->getf("DEBUGGING", "test2Variable", 100.0);
-	SmartDashboard::PutNumber("testVariable", testVariable);
-	SmartDashboard::PutNumber("test2Variable", test2Variable);
 }

@@ -41,12 +41,12 @@ void AutoRoutine::Shoot(RobotModel* robot, double seconds, double speed) {
 	RunAction(new ShootAction(robot, seconds, speed));
 }
 
-void AutoRoutine::DriveDistanceStraight(RobotModel* robot, DriveController* kDrive, double desired_distance, double maxSpeed, double timeout, double minTime) {
-  RunAction(new DriveSetPointStraightAction(robot, kDrive, desired_distance, maxSpeed, timeout, minTime, false));
+void AutoRoutine::DriveDistanceStraight(RobotModel* robot, DriveController* kDrive, double desired_distance, double maxSpeed, double minTime, double timeout, bool wantMinTime) {
+  RunAction(new DriveSetPointStraightAction(robot, kDrive, desired_distance, maxSpeed, minTime, timeout, false));
 }
 
-void AutoRoutine::DriveDistanceRotate(RobotModel* robot, DriveController* kDrive, double desired_distance, double maxSpeed, double timeout, double minTime) {
-  RunAction(new DriveSetPointRotateAction(robot, kDrive, desired_distance, maxSpeed, timeout, minTime, false));
+void AutoRoutine::DriveDistanceRotate(RobotModel* robot, DriveController* kDrive, double desired_distance, double maxSpeed, double minTime, double timeout, bool wantMinTime) {
+  RunAction(new DriveSetPointRotateAction(robot, kDrive, desired_distance, maxSpeed, minTime, timeout, false));
 }
 void AutoRoutine::WaitTime(double timeout) {
     RunAction(new WaitTimeAction(timeout));
