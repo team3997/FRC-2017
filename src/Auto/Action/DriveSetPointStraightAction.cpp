@@ -12,13 +12,14 @@
 //timeout: amount of allowed time this action can run before ending
 DriveSetPointStraightAction::DriveSetPointStraightAction(RobotModel *robot,
 		DriveController *driveController, double distance, double maxSpeed,
-		double timeout) {
+		double timeout, double minTime, bool wantMinTime) {
 	this->driveController = driveController;
 	this->distance = distance;
 	this->timeout = timeout;
 	this->robot = robot;
 	this->maxSpeed = maxSpeed;
-
+	this->minTime = minTime;
+	this->wantMinTime = wantMinTime;
 	reachedSetpoint = false;
 	target_pass = 0;
 	leftEncoderStartDistance, rightEncoderStartDistance = 0.0;
@@ -29,7 +30,7 @@ bool DriveSetPointStraightAction::IsFinished() {
 }
 
 void DriveSetPointStraightAction::Update() {
-	if(driveController->leftPID->OnTarget() && driveController->rightPID->OnTarget() && (Timer::GetFPGATimestamp() >= start_time + 6.0)){
+	if(driveController->leftPID->OnTarget() && driveController->rightPID->OnTarget() && (Timer::GetFPGATimestamp() >= start_time + minTime)){
 		reachedSetpoint = true;
 	}
 	else{
