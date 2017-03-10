@@ -8,11 +8,14 @@
 #ifndef SRC_AUTO_AUTOSELECTOR_H_
 #define SRC_AUTO_AUTOSELECTOR_H_
 
-#include <Auto/AutoSelector.h>
+
 #include "Routines/DoNothingRoutine.h"
 #include "Routines/DriveForwardRoutine.h"
 #include "Routines/JustShootRoutine.h"
 #include "Routines/CenterGear.h"
+#include "Routines/LeftGear.h"
+#include "Routines/RightGear.h"
+#include "Routines/ShootHighGoal.h"
 #include "../DriveController.h"
 #include "../RobotModel.h"
 #include "AutoWidget.h"
