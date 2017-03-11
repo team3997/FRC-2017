@@ -17,6 +17,8 @@ AutoSelector::AutoSelector(RobotModel* robot, DriveController* kDrive) {
   RegisterAutonomous(new LeftGear(robot, kDrive));
   RegisterAutonomous(new RightGear(robot, kDrive));
   RegisterAutonomous(new ShootHighGoal(robot, kDrive));
+  RegisterAutonomous(new PassAutoLine(robot, kDrive));
+  RegisterAutonomous(new LeftHopper(robot, kDrive));
 
   autoChooser = new AutoWidget();
 }
@@ -26,6 +28,13 @@ void AutoSelector::ListOptions() {
   autoChooser->AddObject("Drive (1s)", 1);
   autoChooser->AddObject("Shoot", 2);
   autoChooser->AddObject("CenterField Gear", 3);
+  autoChooser->AddObject("LeftField Gear", 4);
+  autoChooser->AddObject("RightField Gear", 5);
+  autoChooser->AddObject("Shoot High Goal", 6);
+  autoChooser->AddObject("Pass AutoLine", 7);
+  autoChooser->AddObject("Left Hopper", 8);
+
+
   SmartDashboard::PutData("Autonomous: ", autoChooser);
 
 }

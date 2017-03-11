@@ -16,6 +16,8 @@
 #include "Routines/LeftGear.h"
 #include "Routines/RightGear.h"
 #include "Routines/ShootHighGoal.h"
+#include "Routines/PassAutoLine.h"
+#include "Routines/LeftHopper.h"
 #include "../DriveController.h"
 #include "../RobotModel.h"
 #include "AutoWidget.h"
