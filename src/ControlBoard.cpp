@@ -24,6 +24,8 @@ ControlBoard::ControlBoard() {
 		feederRunButton = new TriggerReader(operatorJoy, XINPUT_WIN_RIGHT_TRIGGER_AXIS);
 		feederReverseButton = new ButtonReader(operatorJoy, XINPUT_WIN_START_BUTTON);
 		resetEncodersButton = new ButtonReader(operatorJoy, XINPUT_WIN_YELLOW_BUTTON);
+		gearSuckDesiredButton = new ButtonReader(operatorJoy, XINPUT_WIN_BACK_BUTTON);
+		gearSuckDesiredButton = new ButtonReader(operatorJoy, XINPUT_WIN_LEFT_BUMPER);
 	} else {
 		//driveDirectionButton = new ButtonReader(driverJoy, XINPUT_LINUX_BACK_BUTTON);
 		//shooterRunButton = new ButtonReader(driverJoy, XINPUT_LINUX_GREEN_BUTTON);
@@ -82,6 +84,8 @@ void ControlBoard::ReadControls() {
 	climberReverseDesired = climberReverseButton->IsDown();
 	feederRunDesired      = feederRunButton->IsDown();
 	resetEncodersDesired  = resetEncodersButton->IsDown();
+	gearSuckDesired       = gearSuckDesiredButton->IsDown();
+	gearSuckReverseDesired= gearSuckReverseDesiredButton->IsDown();
 }
 
 //Reads the values of all buttons defined by this class
@@ -93,6 +97,8 @@ void ControlBoard::ReadAllButtons() {
 	climberReverseButton->ReadValue();
 	feederRunButton->ReadValue();
 	resetEncodersButton->ReadValue();
+	gearSuckDesiredButton->ReadValue();
+	gearSuckReverseDesiredButton->ReadValue();
 }
 
 //Returns the joystick and axis being used
@@ -159,4 +165,13 @@ bool ControlBoard::GetFeederRunDesired() {
 
 bool ControlBoard::GetResetEncodersDesired() {
 	return resetEncodersDesired;
+}
+
+bool ControlBoard::GetGearSuckReverseDesired() {
+    return gearSuckReverseDesired;
+
+}
+
+bool ControlBoard::GetGearSuckDesired() {
+    return gearSuckDesired;
 }
