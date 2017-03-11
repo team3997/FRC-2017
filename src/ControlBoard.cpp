@@ -16,9 +16,10 @@ ControlBoard::ControlBoard() {
 	//Drivetrain buttons
 	//Superstructure Buttons
 	if (USING_WIN_DRIVER_STATION) {
-		driveDirectionButton = new ButtonReader(driverJoy, XINPUT_WIN_BACK_BUTTON);
+		driveDirectionButton = new ButtonReader(driverJoy, XINPUT_WIN_START_BUTTON);
 		slowDriveTier1Button = new TriggerReader(driverJoy, XINPUT_WIN_RIGHT_TRIGGER_AXIS);
 		slowDriveTier2Button = new TriggerReader(driverJoy, XINPUT_WIN_LEFT_TRIGGER_AXIS);
+		driveBackButton = new ButtonReader(driverJoy, XINPUT_WIN_BACK_BUTTON);
 
 		climberRunButton = new ButtonReader(operatorJoy, XINPUT_WIN_BLUE_BUTTON);
 		climberReverseButton = new ButtonReader(operatorJoy, XINPUT_WIN_RED_BUTTON);
@@ -86,6 +87,7 @@ void ControlBoard::ReadControls() {
 	resetEncodersDesired  = resetEncodersButton->IsDown();
 	slowDriveTier1Desired = slowDriveTier1Button->IsDown();
 	slowDriveTier2Desired = slowDriveTier2Button->IsDown();
+	driveBackDesired      = driveBackButton->IsDown();
 }
 
 //Reads the values of all buttons defined by this class
@@ -99,6 +101,7 @@ void ControlBoard::ReadAllButtons() {
 	climberReverseButton->ReadValue();
 	feederRunButton->ReadValue();
 	resetEncodersButton->ReadValue();
+	driveBackButton->ReadValue();
 }
 
 //Returns the joystick and axis being used
@@ -172,4 +175,7 @@ bool ControlBoard::GetSlowDriveTier1Desired() {
 }
 bool ControlBoard::GetSlowDriveTier2Desired() {
 	return slowDriveTier2Desired;
+}
+bool ControlBoard::GetDriveBackDesired() {
+	return driveBackDesired;
 }

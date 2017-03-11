@@ -117,6 +117,7 @@ private:
 	    }*/
 
 		//Reads controls and updates controllers accordingly
+		RefreshAllIni();
 		humanControl->ReadControls();
 		driveController->Update(currTimeSec, deltaTimeSec);
 		shooterController->Update(currTimeSec, deltaTimeSec);

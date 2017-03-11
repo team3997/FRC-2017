@@ -16,6 +16,7 @@
 #include "Action/ShootAction.h"
 #include "Action/DriveSetPointRotateAction.h"
 #include "Action/WaitTimeAction.h"
+#include "Action/VisionSetpointXAction.h"
 class AutoRoutine {
 
 public:
