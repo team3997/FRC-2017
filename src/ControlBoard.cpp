@@ -27,6 +27,8 @@ ControlBoard::ControlBoard() {
 		feederRunButton = new TriggerReader(operatorJoy, XINPUT_WIN_RIGHT_TRIGGER_AXIS);
 		feederReverseButton = new ButtonReader(operatorJoy, XINPUT_WIN_START_BUTTON);
 		resetEncodersButton = new ButtonReader(operatorJoy, XINPUT_WIN_YELLOW_BUTTON);
+		gearSuckButton = new ButtonReader(operatorJoy, XINPUT_WIN_RIGHT_BUMPER);
+		gearSuckReverseButton = new ButtonReader(operatorJoy, XINPUT_WIN_LEFT_BUMPER);
 	} else {
 		//driveDirectionButton = new ButtonReader(driverJoy, XINPUT_LINUX_BACK_BUTTON);
 		//shooterRunButton = new ButtonReader(driverJoy, XINPUT_LINUX_GREEN_BUTTON);
@@ -79,15 +81,17 @@ void ControlBoard::ReadControls() {
 	reverseDriveDesired = driveDirectionButton->IsDown();
 
 	//Superstructure Variables
-	shooterRunDesired     = shooterRunButton->IsDown();
-	feederReverseDesired  = feederReverseButton->IsDown();
-	climberDesired        = climberRunButton->IsDown();
-	climberReverseDesired = climberReverseButton->IsDown();
-	feederRunDesired      = feederRunButton->IsDown();
-	resetEncodersDesired  = resetEncodersButton->IsDown();
-	slowDriveTier1Desired = slowDriveTier1Button->IsDown();
-	slowDriveTier2Desired = slowDriveTier2Button->IsDown();
-	driveBackDesired      = driveBackButton->IsDown();
+	shooterRunDesired      = shooterRunButton->IsDown();
+	feederReverseDesired   = feederReverseButton->IsDown();
+	climberDesired         = climberRunButton->IsDown();
+	climberReverseDesired  = climberReverseButton->IsDown();
+	feederRunDesired       = feederRunButton->IsDown();
+	resetEncodersDesired   = resetEncodersButton->IsDown();
+	slowDriveTier1Desired  = slowDriveTier1Button->IsDown();
+	slowDriveTier2Desired  = slowDriveTier2Button->IsDown();
+	driveBackDesired       = driveBackButton->IsDown();
+	gearSuckDesired        = gearSuckButton->IsDown();
+	gearSuckReverseDesired = gearSuckReverseButton->IsDown();
 }
 
 //Reads the values of all buttons defined by this class
@@ -102,6 +106,8 @@ void ControlBoard::ReadAllButtons() {
 	feederRunButton->ReadValue();
 	resetEncodersButton->ReadValue();
 	driveBackButton->ReadValue();
+	gearSuckButton->ReadValue();
+	gearSuckReverseButton->ReadValue();
 }
 
 //Returns the joystick and axis being used
@@ -178,4 +184,10 @@ bool ControlBoard::GetSlowDriveTier2Desired() {
 }
 bool ControlBoard::GetDriveBackDesired() {
 	return driveBackDesired;
+}
+bool ControlBoard::GetGearSuckReverseDesired() {
+    return gearSuckReverseDesired;
+}
+bool ControlBoard::GetGearSuckDesired() {
+    return gearSuckDesired;
 }

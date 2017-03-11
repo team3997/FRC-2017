@@ -7,6 +7,7 @@
 #include "ClimberController.h"
 #include "DriveController.h"
 #include "VisionController.h"
+#include "GearSuck.h"
 #include <string.h>
 #include "Auto/Auto.h"
 
@@ -27,7 +28,7 @@ class MainProgram : public frc::IterativeRobot {
 	DashboardLogger *dashboardLogger;
 
 	ClimberController *climberController;
-
+	GearSuck *gearController;
 	Auto* auton;
 
 	//Creates a time-keeper	`
@@ -44,8 +45,8 @@ public:
 		dashboardLogger   = new DashboardLogger(robot, humanControl);
 		shooterController = new ShooterController(robot, humanControl);
 		climberController = new ClimberController(robot, humanControl);
+		gearController    = new GearSuck(robot, humanControl);
 		auton             = new Auto(driveController, robot);
-
 		//Initializes timekeeper variables
 		currTimeSec = 0.0;
 		lastTimeSec = 0.0;
@@ -123,6 +124,7 @@ private:
 		shooterController->Update(currTimeSec, deltaTimeSec);
 		climberController->Update();
 		visionController->Update();
+		gearController->Update();
 	}
 
 	void DisabledInit() {
