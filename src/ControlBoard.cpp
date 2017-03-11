@@ -17,9 +17,11 @@ ControlBoard::ControlBoard() {
 	//Superstructure Buttons
 	if (USING_WIN_DRIVER_STATION) {
 		driveDirectionButton = new ButtonReader(driverJoy, XINPUT_WIN_BACK_BUTTON);
-		climberRunButton = new TriggerReader(driverJoy, XINPUT_WIN_RIGHT_TRIGGER_AXIS);
-		climberReverseButton = new ButtonReader(driverJoy, XINPUT_WIN_RED_BUTTON);
+		slowDriveTier1Button = new TriggerReader(driverJoy, XINPUT_WIN_RIGHT_TRIGGER_AXIS);
+		slowDriveTier2Button = new TriggerReader(driverJoy, XINPUT_WIN_LEFT_TRIGGER_AXIS);
 
+		climberRunButton = new ButtonReader(operatorJoy, XINPUT_WIN_BLUE_BUTTON);
+		climberReverseButton = new ButtonReader(operatorJoy, XINPUT_WIN_RED_BUTTON);
 		shooterRunButton = new ButtonReader(operatorJoy, XINPUT_WIN_GREEN_BUTTON);
 		feederRunButton = new TriggerReader(operatorJoy, XINPUT_WIN_RIGHT_TRIGGER_AXIS);
 		feederReverseButton = new ButtonReader(operatorJoy, XINPUT_WIN_START_BUTTON);
@@ -82,11 +84,15 @@ void ControlBoard::ReadControls() {
 	climberReverseDesired = climberReverseButton->IsDown();
 	feederRunDesired      = feederRunButton->IsDown();
 	resetEncodersDesired  = resetEncodersButton->IsDown();
+	slowDriveTier1Desired = slowDriveTier1Button->IsDown();
+	slowDriveTier2Desired = slowDriveTier2Button->IsDown();
 }
 
 //Reads the values of all buttons defined by this class
 void ControlBoard::ReadAllButtons() {
 	driveDirectionButton->ReadValue();
+	slowDriveTier1Button->ReadValue();
+	slowDriveTier2Button->ReadValue();
 	shooterRunButton->ReadValue();
 	feederReverseButton->ReadValue();
 	climberRunButton->ReadValue();
@@ -159,4 +165,11 @@ bool ControlBoard::GetFeederRunDesired() {
 
 bool ControlBoard::GetResetEncodersDesired() {
 	return resetEncodersDesired;
+}
+
+bool ControlBoard::GetSlowDriveTier1Desired() {
+	return slowDriveTier1Desired;
+}
+bool ControlBoard::GetSlowDriveTier2Desired() {
+	return slowDriveTier2Desired;
 }

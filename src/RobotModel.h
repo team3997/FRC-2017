@@ -13,7 +13,6 @@
 
 class RobotModel {
 public:
-
 	enum Wheels {
 		LeftWheels, RightWheels, AllWheels
 	};

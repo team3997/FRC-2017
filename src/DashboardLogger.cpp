@@ -80,6 +80,8 @@ void DashboardLogger::PutGamePadButtonPress() {
 	SmartDashboard::PutBoolean("BUTTON_feederRunReverseDesired", humanControl->GetFeederReverseDesired());
 	SmartDashboard::PutBoolean("BUTTON_feederRunDesired", humanControl->GetFeederRunDesired());
 	SmartDashboard::PutBoolean("BUTTON_resetEncodersDesired", humanControl->GetResetEncodersDesired());
+	SmartDashboard::PutBoolean("BUTTON_slowDriveTier1Desired", humanControl->GetSlowDriveTier1Desired());
+	SmartDashboard::PutBoolean("BUTTON_slowDriveTier2Desired", humanControl->GetSlowDriveTier2Desired());
 }
 
 void DashboardLogger::PutDriverMotorOutputs() {

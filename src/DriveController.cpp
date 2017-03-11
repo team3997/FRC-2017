@@ -81,7 +81,18 @@ void DriveController::ArcadeDrive(double myY, double myX, bool teleOp) {
 		if (humanControl->GetReverseDriveDesired()) {
 			myX = -myX;
 			myY = -myY;
-		} else {
+		}
+
+		if((humanControl->GetSlowDriveTier1Desired() && !humanControl->GetSlowDriveTier2Desired())
+				|| (!humanControl->GetSlowDriveTier1Desired() && humanControl->GetSlowDriveTier2Desired())) {
+			GLOBAL_DRIVE_SPEED_MULTIPLIER = 0.5;
+			SQUARE_DRIVE_AXIS_INPUT = false;
+		}
+		else if(humanControl->GetSlowDriveTier1Desired() && humanControl->GetSlowDriveTier2Desired()) {
+			GLOBAL_DRIVE_SPEED_MULTIPLIER = 0.35;
+			SQUARE_DRIVE_AXIS_INPUT = false;
+		}
+		else {
 			GLOBAL_DRIVE_SPEED_MULTIPLIER = 1.0;
 			SQUARE_DRIVE_AXIS_INPUT = true;
 		}
