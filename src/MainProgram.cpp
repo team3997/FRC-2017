@@ -145,6 +145,13 @@ private:
 	void RefreshAllIni() {
 	    robot->RefreshIni();
 	    driveController->RefreshIni();
+	    SmartDashboard::PutNumber("H_LOW", robot->pini->getf("CAMERA", "h_low", 0));
+        SmartDashboard::PutNumber("H_HIGH", robot->pini->getf("CAMERA", "h_high", 0));
+        SmartDashboard::PutNumber("S_LOW", robot->pini->getf("CAMERA", "s_low", 0));
+        SmartDashboard::PutNumber("S_HIGH", robot->pini->getf("CAMERA", "s_high", 0));
+        SmartDashboard::PutNumber("V_LOW", robot->pini->getf("CAMERA", "v_low", 0));
+        SmartDashboard::PutNumber("V_HIGH", robot->pini->getf("CAMERA", "v_HIGH", 0));
+
 	}
 };
 
