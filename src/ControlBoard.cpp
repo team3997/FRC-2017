@@ -30,7 +30,7 @@ ControlBoard::ControlBoard() {
 		gearSuckButton = new ButtonReader(operatorJoy, XINPUT_WIN_RIGHT_BUMPER);
 		gearSuckReverseButton = new ButtonReader(operatorJoy, XINPUT_WIN_LEFT_BUMPER);
 	} else {
-		//driveDirectionButton = new ButtonReader(driverJoy, XINPUT_LINUX_BACK_BUTTON);
+		//driveDirectiosrc	nButton = new ButtonReader(driverJoy, XINPUT_LINUX_BACK_BUTTON);
 		//shooterRunButton = new ButtonReader(driverJoy, XINPUT_LINUX_GREEN_BUTTON);
 	}
 	//Superstructure Buttons

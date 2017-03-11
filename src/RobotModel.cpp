@@ -19,7 +19,7 @@ RobotModel::RobotModel() {
 	leftDriveMotorB = new Spark(LEFT_DRIVE_MOTOR_B_PWM_PORT);
 	rightDriveMotorA = new Spark(RIGHT_DRIVE_MOTOR_A_PWM_PORT);
 	rightDriveMotorB = new Spark(RIGHT_DRIVE_MOTOR_B_PWM_PORT);
-	gearSucker = new Spark(GEAR_MOTOR);
+	gearSuckerMotor = new Spark(GEAR_SUCKER_MOTOR_PWM_PORT);
 
 	//Init superstructure motors
 	climberMotor = new Talon(CLIMBER_MOTOR_PWM_PORT);
@@ -57,6 +57,7 @@ RobotModel::RobotModel() {
 	shooterMotorA->SetSafetyEnabled(false);
 	shooterMotorB->SetSafetyEnabled(false);
 	feederMotor->SetSafetyEnabled(false);
+    gearSuckerMotor->SetSafetyEnabled(false); 
 	climberMotor->SetInverted(true);
 
 	leftDriveMotorA->SetInverted(false);
@@ -106,8 +107,6 @@ double RobotModel::GetTotalEnergy() {
 double RobotModel::GetTotalPower() {
 	return pdp->GetTotalPower();
 }
-
-
 
 //initializes variables pertaining to current
 void RobotModel::UpdateCurrent() {
@@ -233,12 +232,12 @@ double RobotModel::GetFeederMotorSpeed() {
 	return feederMotor->Get();
 }
 
-void RobotModel::SetGearMotorSpeed(double speed) {
-    gearSucker->Set(speed);
+void RobotModel::SetGearSuckerMotorSpeed(double speed) {
+    gearSuckerMotor->Set(speed);
 }
 
-double RobotModel::GetGearMotorSpeed() {
-    return gearSucker->GetSpeed();
+double RobotModel::GetGearSuckerMotorSpeed() {
+    return gearSuckerMotor->Get();
 }
 void RobotModel::RefreshIni() {
 	delete pini;

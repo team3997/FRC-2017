@@ -51,7 +51,7 @@ private:
 	Joystick *driverJoy, *operatorJoy;
 
 	ButtonReader *climberReverseButton, *driveDirectionButton,
-			*feederReverseButton, *climberRunButton, *shooterRunButton, *resetEncodersButton, *driveBackButton, gearSuckReverseButton, gearSuckButton;
+			*feederReverseButton, *climberRunButton, *shooterRunButton, *resetEncodersButton, *driveBackButton, *gearSuckReverseButton, *gearSuckButton;
 
 	TriggerReader *slowDriveTier1Button, *slowDriveTier2Button, *feederRunButton;
 

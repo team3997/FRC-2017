@@ -72,11 +72,11 @@ void DriveController::Update(double currTimeSec, double deltaTimeSec) {
 
                 leftPID->SetOutputRange(-0.8, 0.8);
                 leftPID->SetPID(0.125, 0.0, 0.0);
-                leftPID->SetSetpoint(-5.0);
+                leftPID->SetSetpoint(-4.0);
 
                 rightPID->SetOutputRange(-0.8, 0.8);
                 rightPID->SetPID(0.125, 0.0, 0.0);
-                rightPID->SetSetpoint(-5.0);
+                rightPID->SetSetpoint(-4.0);
 
                 leftPID->Enable();
                 rightPID->Enable();

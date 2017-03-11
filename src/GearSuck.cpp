@@ -5,7 +5,7 @@
  *      Author: peter
  */
 
-#include <GearSuck.h>
+#include "GearSuck.h"
 
 GearSuck::GearSuck(RobotModel* robot, RemoteControl* humanControl) {
    this->robot = robot;
@@ -23,12 +23,12 @@ void GearSuck::Update() {
        break;
    case (kTeleop):
        //Climber Behaviour
-       if (humanControl->GetClimberReverseDesired()) {
-           robot->SetClimberMotorSpeed(-GEAR_HARDSET_MOTOR_SPEED);
-       } else if (humanControl->GetClimberDesired()) {
-           robot->SetClimberMotorSpeed(GEAR_HARDSET_MOTOR_SPEED);
+       if (humanControl->GetGearSuckDesired()) {
+           robot->SetGearSuckerMotorSpeed(-GEAR_HARDSET_MOTOR_SPEED);
+       } else if (humanControl->GetGearSuckReverseDesired()) {
+           robot->SetGearSuckerMotorSpeed(GEAR_HARDSET_MOTOR_SPEED);
        } else {
-           robot->SetGearMotorSpeed(0.0);
+           robot->SetGearSuckerMotorSpeed(0.0);
        }
 
        nextState = kTeleop;
