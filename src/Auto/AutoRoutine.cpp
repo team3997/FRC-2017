@@ -51,3 +51,6 @@ void AutoRoutine::DriveDistanceRotate(RobotModel* robot, DriveController* kDrive
 void AutoRoutine::WaitTime(double timeout) {
     RunAction(new WaitTimeAction(timeout));
 }
+void AutoRoutine::VisionSetpointX(VisionController *vision, DriveController *drive, double setpoint, double maxSpeed, double timeout){
+	RunAction(new VisionSetpointXAction(vision, drive, setpoint, maxSpeed, timeout));
+}

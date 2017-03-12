@@ -19,6 +19,7 @@ RobotModel::RobotModel() {
 	leftDriveMotorB = new Spark(LEFT_DRIVE_MOTOR_B_PWM_PORT);
 	rightDriveMotorA = new Spark(RIGHT_DRIVE_MOTOR_A_PWM_PORT);
 	rightDriveMotorB = new Spark(RIGHT_DRIVE_MOTOR_B_PWM_PORT);
+	gearSuckerMotor = new Spark(GEAR_SUCKER_MOTOR_PWM_PORT);
 
 	//Init superstructure motors
 	climberMotor = new Talon(CLIMBER_MOTOR_PWM_PORT);
@@ -56,6 +57,7 @@ RobotModel::RobotModel() {
 	shooterMotorA->SetSafetyEnabled(false);
 	shooterMotorB->SetSafetyEnabled(false);
 	feederMotor->SetSafetyEnabled(false);
+    gearSuckerMotor->SetSafetyEnabled(false); 
 	climberMotor->SetInverted(true);
 
 	leftDriveMotorA->SetInverted(false);
@@ -116,6 +118,7 @@ void RobotModel::UpdateCurrent() {
 	shooterMotorACurrent = pdp->GetCurrent(SHOOTER_MOTOR_A_PDP_CHAN);
 	shooterMotorBCurrent = pdp->GetCurrent(SHOOTER_MOTOR_B_PDP_CHAN);
 	climberMotorCurrent = pdp->GetCurrent(CLIMBER_MOTOR_PDP_CHAN);
+	gearSuckerCurrent = pdp->GetCurrent(GEAR_MOTOR_PDP_CHAN);
 }
 
 //returns the current of a given channel
@@ -140,6 +143,8 @@ double RobotModel::GetCurrent(int channel) {
 		return shooterMotorBCurrent;
 	case CLIMBER_MOTOR_PDP_CHAN:
 		return climberMotorCurrent;
+	case GEAR_MOTOR_PDP_CHAN:
+	    return gearSuckerCurrent;
 	default:
 		return -1;
 	}
@@ -225,6 +230,14 @@ void RobotModel::SetFeederMotorSpeed(double speed) {
 
 double RobotModel::GetFeederMotorSpeed() {
 	return feederMotor->Get();
+}
+
+void RobotModel::SetGearSuckerMotorSpeed(double speed) {
+    gearSuckerMotor->Set(speed);
+}
+
+double RobotModel::GetGearSuckerMotorSpeed() {
+    return gearSuckerMotor->Get();
 }
 void RobotModel::RefreshIni() {
 	delete pini;

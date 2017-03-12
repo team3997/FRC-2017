@@ -33,8 +33,6 @@ void AutoSelector::ListOptions() {
   autoChooser->AddObject("Shoot High Goal", 6);
   autoChooser->AddObject("Pass AutoLine", 7);
   autoChooser->AddObject("Left Hopper", 8);
-
-
   SmartDashboard::PutData("Autonomous: ", autoChooser);
 
 }

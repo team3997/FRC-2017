@@ -25,6 +25,11 @@ public:
 	virtual bool GetFeederRunDesired() = 0;
 	virtual bool GetClimberReverseDesired() = 0;
 	virtual bool GetResetEncodersDesired() = 0;
+	virtual bool GetSlowDriveTier1Desired() = 0;
+	virtual bool GetSlowDriveTier2Desired() = 0;
+	virtual bool GetDriveBackDesired() = 0;
+	virtual bool GetGearSuckReverseDesired() = 0;
+    virtual bool GetGearSuckDesired() = 0;
 
 	virtual void ReadControls() = 0;
 

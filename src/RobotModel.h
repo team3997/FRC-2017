@@ -13,7 +13,6 @@
 
 class RobotModel {
 public:
-
 	enum Wheels {
 		LeftWheels, RightWheels, AllWheels
 	};
@@ -43,7 +42,8 @@ public:
 	double GetShooterMotorBSpeed(); //returns the speed of the shooter motor B
 	void SetFeederMotorSpeed(double speed); //sets the speed of the feeder motor
 	double GetFeederMotorSpeed(); //gets the speed of the feeder motor
-
+    void SetGearSuckerMotorSpeed(double speed); //sets the speed of the climber motor
+    double GetGearSuckerMotorSpeed(); //gets the speed of the climber motor
 	void SetClimberMotorSpeed(double speed); //sets the speed of the climber motor
 	double GetClimberMotorSpeed(); //gets the speed of the climber motor
 	void RefreshIni();
@@ -51,7 +51,7 @@ public:
 
 	//Speed controllers
 	Spark *leftDriveMotorA, *leftDriveMotorB, *rightDriveMotorA,
-			*rightDriveMotorB;
+			*rightDriveMotorB, *gearSuckerMotor;
 	VictorSP *shooterMotorA, *shooterMotorB;
 	Talon *climberMotor, *feederMotor;
 	Ini *pini;
@@ -65,7 +65,7 @@ private:
 
 	double leftDriveACurrent, leftDriveBCurrent, rightDriveACurrent,
 			rightDriveBCurrent, shooterMotorACurrent, shooterMotorBCurrent,
-			climberMotorCurrent;
+			climberMotorCurrent, gearSuckerCurrent;
 };
 
 #endif /* SRC_ROBOTMODEL_H_ */

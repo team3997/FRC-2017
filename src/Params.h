@@ -13,7 +13,7 @@ static double FEEDER_HARDSET_MOTOR_SPEED               = 0.8;
 static double GLOBAL_DRIVE_SPEED_MULTIPLIER            = 1.0;
 
 static const double CLIMBER_HARDSET_MOTOR_SPEED        = 1.0;
-
+static const double GEAR_HARDSET_MOTOR_SPEED           = 1.0;
 static const double FEEDER_PULSE_TIME 				   = 0.2;
 
 //SHOOTER PID PARAMS

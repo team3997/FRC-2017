@@ -6,6 +6,8 @@
 #include "ShooterController.h"
 #include "ClimberController.h"
 #include "DriveController.h"
+#include "VisionController.h"
+#include "GearSuck.h"
 #include <string.h>
 #include "Auto/Auto.h"
 
@@ -16,6 +18,7 @@ class MainProgram : public frc::IterativeRobot {
 
 	//Creates a human control from RemoteControl, which includes ControlBoard
 	RemoteControl *humanControl;
+	VisionController *visionController;
 
 	//Creates a controller for drivetrain and superstructure
 	DriveController *driveController;
@@ -25,7 +28,7 @@ class MainProgram : public frc::IterativeRobot {
 	DashboardLogger *dashboardLogger;
 
 	ClimberController *climberController;
-
+	GearSuck *gearController;
 	Auto* auton;
 
 	//Creates a time-keeper	`
@@ -35,13 +38,15 @@ class MainProgram : public frc::IterativeRobot {
 
 public:
 	MainProgram(void) {
-		robot = new RobotModel();
-		humanControl = new ControlBoard();
-		driveController = new DriveController(robot, humanControl);
-		dashboardLogger = new DashboardLogger(robot, humanControl);
+		robot             = new RobotModel();
+		humanControl      = new ControlBoard();
+		visionController  = new VisionController();
+		driveController   = new DriveController(robot, humanControl, visionController);
+		dashboardLogger   = new DashboardLogger(robot, humanControl);
 		shooterController = new ShooterController(robot, humanControl);
 		climberController = new ClimberController(robot, humanControl);
-		auton = new Auto(driveController, robot);
+		gearController    = new GearSuck(robot, humanControl);
+		auton             = new Auto(driveController, robot);
 		//Initializes timekeeper variables
 		currTimeSec = 0.0;
 		lastTimeSec = 0.0;
@@ -53,6 +58,7 @@ private:
 		robot->ResetTimer();
 		robot->Reset();
 		auton->ListOptions();
+		visionController->Disable();
 	}
 
 	void AutonomousInit() {
@@ -68,6 +74,7 @@ private:
 		lastTimeSec = 0.0;
 		deltaTimeSec = 0.0;
 
+		visionController->Enable();
 		auton->Start();
 
 	}
@@ -75,6 +82,7 @@ private:
 	void AutonomousPeriodic() {
 		//Autonoumous is running in a thread called by "auton->Start();"
 		dashboardLogger->UpdateData(); //JOystick data does NOT update during autonomous
+		visionController->Update();
 	}
 
 	void TeleopInit() {
@@ -92,6 +100,7 @@ private:
 		lastTimeSec = 0.0;
 		deltaTimeSec = 0.0;
 
+		visionController->Enable();
 	}
 
 	void TeleopPeriodic() {
@@ -109,10 +118,13 @@ private:
 	    }*/
 
 		//Reads controls and updates controllers accordingly
+		RefreshAllIni();
 		humanControl->ReadControls();
 		driveController->Update(currTimeSec, deltaTimeSec);
 		shooterController->Update(currTimeSec, deltaTimeSec);
 		climberController->Update();
+		visionController->Update();
+		gearController->Update();
 	}
 
 	void DisabledInit() {
@@ -124,6 +136,7 @@ private:
 		driveController->Reset();
 		shooterController->Reset();
 		climberController->Reset();
+		visionController->Disable();
 
 	}
 
@@ -139,6 +152,7 @@ private:
 			robot->shooterEncoder->Reset();
 		}
 
+		visionController->Update();
 	    humanControl->ReadControls();
 	    RefreshAllIni();
 	}

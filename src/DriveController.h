@@ -8,6 +8,8 @@
 #include "DriveRotateMotorsPIDOutput.h"
 #include "DriveEncodersPIDSource.h"
 #include "DashboardLogger.h"
+#include "VisionController.h"
+#include "VisionPIDSource.h"
 #include "ini.h"
 #include "WheelsPIDOutput.h"
 #include <iostream>
@@ -16,7 +18,7 @@ class PivotCommand;
 
 class DriveController {
 public:
-	DriveController(RobotModel *myRobot, RemoteControl *myHumanControl);
+	DriveController(RobotModel *myRobot, RemoteControl *myHumanControl, VisionController *myVision);
 	virtual ~DriveController();
 
 	void Stop();
@@ -30,10 +32,6 @@ public:
 		kInitialize, kTeleopDrive
 	};
 
-	PIDOutput *driveXPIDOutput;
-	PIDController *driveXPID;
-	PIDOutput *driveYPIDOutput;
-	PIDController *driveYPID;
 
 	PIDOutput *leftPIDOutput;
 	PIDController *leftPID;
@@ -41,14 +39,19 @@ public:
 	PIDOutput *rightPIDOutput;
 	PIDController *rightPID;
 
+	PIDOutput *driveXPIDOutput;
+	PIDController *visionPID;
+	PIDSource *visionPIDSource;
+
 	DriveEncodersPIDSource *driveEncodersPIDSource; //average of two drive encoders
 
 private:
-
+  VisionController *vision;
   RobotModel *robot;
   RemoteControl *humanControl;
   double testVariable;
   double test2Variable;
+  bool prevBackState, currBackState;
   RobotDrive *driveTrain;
   uint32_t m_stateVal;
   uint32_t nextState;
