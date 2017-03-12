@@ -15,19 +15,18 @@
 
 class Auto {
 public:
-  Auto(DriveController* kDrive, RobotModel* kShooter);
-  bool ReturnBool();
-  AutoRoutine* autoRoutine;
-  void Reset();
-  void ListOptions();
-  void Start();
-  void Stop();
-  AutoSelector* selector;
-  AutoRoutineRunner* autoRoutineRunner;
-  virtual ~Auto();
+	Auto(DriveController* kDrive, RobotModel* robot);bool ReturnBool();
+	AutoRoutine* autoRoutine;
+	void Reset();
+	void ListOptions();
+	void Start();
+	void Stop();
+	AutoSelector* selector;
+	AutoRoutineRunner* autoRoutineRunner;
+	virtual ~Auto();
 private:
-  DriveController* kDrive;
-  RobotModel* kShooter;
+	DriveController* kDrive;
+	RobotModel* robot;
 };
 
 #endif /* SRC_AUTO_AUTO_H_ */

@@ -9,42 +9,39 @@
 #include "Timer.h"
 #include "Params.h"
 
-ClimberController::ClimberController(RobotModel* myRobot,
-    RemoteControl* myHumanControl) {
-  robot = myRobot;
-  humanControl = myHumanControl;
+ClimberController::ClimberController(RobotModel* myRobot, RemoteControl* myHumanControl) {
+	robot = myRobot;
+	humanControl = myHumanControl;
 
-  m_stateVal = kInitialize;
-  nextState = kInitialize;
+	m_stateVal = kInitialize;
+	nextState = kInitialize;
 }
 void ClimberController::Reset() {
-  m_stateVal = kInitialize;
+	m_stateVal = kInitialize;
 }
 void ClimberController::Update() {
-  switch (m_stateVal) {
-  case (kInitialize):
-    nextState = kTeleop;
-    break;
-  case (kTeleop):
-    //Climber Behaviour
-    if (humanControl->GetClimberReverseDesired()){
-    	robot->SetClimberMotorSpeed(-CLIMBER_HARDSET_MOTOR_SPEED);
-    }
-    else if (humanControl->GetClimberDesired()) {
-      robot->SetClimberMotorSpeed(CLIMBER_HARDSET_MOTOR_SPEED);
-	}
-	else {
-	  robot->climberMotor->SetSpeed(0.0);
+	switch (m_stateVal) {
+	case (kInitialize):
+		nextState = kTeleop;
+		break;
+	case (kTeleop):
+		//Climber Behaviour
+		if (humanControl->GetClimberReverseDesired()) {
+			robot->SetClimberMotorSpeed(-CLIMBER_HARDSET_MOTOR_SPEED);
+		} else if (humanControl->GetClimberDesired()) {
+			robot->SetClimberMotorSpeed(CLIMBER_HARDSET_MOTOR_SPEED);
+		} else {
+			robot->climberMotor->SetSpeed(0.0);
+		}
+
+		nextState = kTeleop;
+		break;
 	}
 
-    nextState = kTeleop;
-    break;
-  }
-
-  m_stateVal = nextState;
+	m_stateVal = nextState;
 }
 
 ClimberController::~ClimberController() {
-  // TODO Auto-generated destructor stub
+	// TODO Auto-generated destructor stub
 }
 

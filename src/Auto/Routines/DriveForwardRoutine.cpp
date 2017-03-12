@@ -9,12 +9,12 @@
 
 DriveForwardRoutine::DriveForwardRoutine(DriveController* kDrive) {
 
-  this->kDrive = kDrive;
+	this->kDrive = kDrive;
 }
 
 void DriveForwardRoutine::Routine() {
-  // TODO Auto-generated constructor stub
-  DriveInterval(kDrive, 1.0, 0.5, 0);
+	// TODO Auto-generated constructor stub
+	DriveInterval(kDrive, 1.0, 0.2, 0);
 }
 
 void DriveForwardRoutine::Prestart() {

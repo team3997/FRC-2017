@@ -12,10 +12,10 @@
 
 class DoNothingRoutine: public AutoRoutine {
 public:
-  void Routine();
+	void Routine();
 
 protected:
-  void Prestart();
+	void Prestart();
 
 };
 

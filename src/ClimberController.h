@@ -15,20 +15,20 @@
 
 class ClimberController {
 public:
-  ClimberController(RobotModel* myRobot, RemoteControl* myHumanControl);
-  void Reset();
-  void Update();
-  
-  enum ClimberState {
-    kInitialize, kTeleop	
-  };
+	ClimberController(RobotModel* myRobot, RemoteControl* myHumanControl);
+	void Reset();
+	void Update();
 
-  virtual ~ClimberController();
+	enum ClimberState {
+		kInitialize, kTeleop
+	};
+
+	virtual ~ClimberController();
 private:
-  RobotModel* robot;
-  RemoteControl* humanControl;
-  uint32_t m_stateVal;
-  uint32_t nextState;
+	RobotModel* robot;
+	RemoteControl* humanControl;
+	uint32_t m_stateVal;
+	uint32_t nextState;
 
 };
 
