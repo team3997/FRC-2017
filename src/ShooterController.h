@@ -6,35 +6,34 @@
 #include "RemoteControl.h"
 #include "ShooterMotorsPIDOutput.h"
 
+class ShooterController {
+public:
+	ShooterController(RobotModel*, RemoteControl*);
+	virtual ~ShooterController();
 
-class ShooterController{
-  public:
-    ShooterController(RobotModel*, RemoteControl*);
-    virtual ~ShooterController();
+	void Reset();
+	void Update(double currTimeSec, double deltaTimeSec);
 
-    void Reset();
-    void Update(double currTimeSec, double deltaTimeSec);
+	Timer *feederPulseTimer;
+	enum ShooterState {
+		kInitialize, kTeleop
+	};
 
-    Timer *feederPulseTimer;
-    enum ShooterState {
-      kInitialize, kTeleop
-    };
-  private:
-    RobotModel *robot;
-    RemoteControl *humanControl;
+	PIDController *shooterPID;
 
-    bool feederPulseBool;
-    double currentPulse, prevPulse;
+private:
+	RobotModel *robot;
+	RemoteControl *humanControl;
 
-    PIDController *shooterPID;
+	bool feederPulseBool;
+	double currentPulse, prevPulse;
 
-    ShooterMotorsPIDOutput *pidOutput;
+	ShooterMotorsPIDOutput *pidOutput;
 
+	double shooterP, shooterI, shooterD;
 
-    double shooterP, shooterI, shooterD;
-
-    uint32_t m_stateVal;
-    uint32_t nextState;
+	uint32_t m_stateVal;
+	uint32_t nextState;
 };
 
 #endif

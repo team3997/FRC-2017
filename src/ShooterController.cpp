@@ -3,8 +3,7 @@
 #include "ShooterController.h"
 #include "RobotModel.h"
 
-ShooterController::ShooterController(RobotModel *myRobot,
-		RemoteControl *myHumanControl) {
+ShooterController::ShooterController(RobotModel *myRobot, RemoteControl *myHumanControl) {
 	robot = myRobot;
 	humanControl = myHumanControl;
 
@@ -81,6 +80,7 @@ void ShooterController::Update(double currTimeSec, double deltaTimeSec) {
 		} else {
 			robot->SetFeederMotorSpeed(0.0);
 		}
+
 		//shooter Behaviour
 		if (humanControl->GetShooterRunDesired()) {
 			if (SHOOTER_USE_PID) {
@@ -89,12 +89,6 @@ void ShooterController::Update(double currTimeSec, double deltaTimeSec) {
 				robot->SetShooterMotorsSpeed(SHOOTER_HARDSET_MOTOR_SPEED);
 			}
 
-			//wait for shooter speed threshold
-			/*if ((robot->shooterEncoder->GetRate() * 60.0) >= SHOOTER_THRESHOLD_FOR_FEEDER) {
-			 robot->SetFeederMotorSpeed(FEEDER_HARDSET_MOTOR_SPEED);
-			 } else {
-			 robot->SetFeederMotorSpeed(0.0);
-			 }*/
 		} else if (humanControl->GetFeederReverseDesired()) {
 			robot->SetShooterMotorsSpeed(-0.5);
 		} else {

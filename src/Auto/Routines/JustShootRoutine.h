@@ -13,14 +13,14 @@
 
 class JustShootRoutine: public AutoRoutine {
 public:
-  JustShootRoutine(RobotModel* shooter);
-  void Prestart();
+	JustShootRoutine(RobotModel* shooter);
+	void Prestart();
 
 protected:
-  void Routine();
+	void Routine();
 
 private:
-  RobotModel* kShooter;
+	RobotModel* robot;
 };
 
 #endif /* SRC_AUTO_ROUTINES_JUSTSHOOTROUTINE_H_ */

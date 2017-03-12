@@ -1,15 +1,14 @@
-
 #include "JustShootRoutine.h"
 
-JustShootRoutine::JustShootRoutine(RobotModel* shooter) {
-  kShooter = shooter;
+JustShootRoutine::JustShootRoutine(RobotModel* robot) {
+	this->robot = robot;
 }
 
 void JustShootRoutine::Prestart() {
-  // TODO Auto-generated constructor stub
+	// TODO Auto-generated constructor stub
 
 }
 
 void JustShootRoutine::Routine() {
-  Shoot(kShooter, 5.0, .8);
+	ShootAction(robot, 5.0, .8);
 }

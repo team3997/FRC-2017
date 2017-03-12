@@ -11,33 +11,46 @@
 #include <DriverStation.h>
 
 void AutoRoutine::Run() {
-  m_active = true;
-  Routine();
+	m_active = true;
+	Routine();
 
 }
 
 void AutoRoutine::Stop() {
-  m_active = false;
+	m_active = false;
 }
 
 bool AutoRoutine::IsActive() {
-  return m_active;
+	return m_active;
 }
 
 void AutoRoutine::RunAction(Action* action) {
-  action->Start();
-  while ((IsActive()) && (!action->IsFinished()) && (AutoRoutineRunner::GetTimer()->Get() <= 15) && RobotState::IsAutonomous() && !RobotState::IsDisabled()) {
-    action->Update();
-  }
-  action->Done();
+	action->Start();
+	while ((IsActive()) && (!action->IsFinished()) && (AutoRoutineRunner::GetTimer()->Get() <= 15) && RobotState::IsAutonomous() && !RobotState::IsDisabled()) {
+		action->Update();
+	}
+	action->Done();
 }
 
-
+//ACTIONS:
 void AutoRoutine::DriveInterval(DriveController* kDrive, double seconds, double y, double x) {
-  RunAction(new DriveIntervalAction(kDrive, seconds, y, x));
+	RunAction(new DriveIntervalAction(kDrive, seconds, y, x));
 }
 
-void AutoRoutine::Shoot(RobotModel* kShooter, double seconds, double speed) {
-  RunAction(new ShootAction(kShooter, seconds, speed));
+void AutoRoutine::Shoot(RobotModel* robot, double seconds, double speed) {
+	RunAction(new ShootAction(robot, seconds, speed));
 }
 
+void AutoRoutine::DriveDistanceStraight(RobotModel* robot, DriveController* kDrive, double desired_distance, double maxSpeed, double minTime, double timeout, bool wantMinTime) {
+  RunAction(new DriveSetPointStraightAction(robot, kDrive, desired_distance, maxSpeed, minTime, timeout, false));
+}
+
+void AutoRoutine::DriveDistanceRotate(RobotModel* robot, DriveController* kDrive, double desired_distance, double maxSpeed, double minTime, double timeout, bool wantMinTime) {
+  RunAction(new DriveSetPointRotateAction(robot, kDrive, desired_distance, maxSpeed, minTime, timeout, false));
+}
+void AutoRoutine::WaitTime(double timeout) {
+    RunAction(new WaitTimeAction(timeout));
+}
+void AutoRoutine::VisionSetpointX(VisionController *vision, DriveController *drive, double setpoint, double maxSpeed, double timeout){
+	RunAction(new VisionSetpointXAction(vision, drive, setpoint, maxSpeed, timeout));
+}

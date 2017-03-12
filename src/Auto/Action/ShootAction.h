@@ -12,16 +12,16 @@
 #include "../../RobotModel.h"
 class ShootAction: public Action {
 public:
-  ShootAction(RobotModel* shooter, double seconds, double speed);bool IsFinished();
-  void Update();
-  void Done();
-  void Start();
-  virtual ~ShootAction();
+	ShootAction(RobotModel* shooter, double seconds, double speed);bool IsFinished();
+	void Update();
+	void Done();
+	void Start();
+	virtual ~ShootAction();
 protected:
 
 private:
-  double kSpeed;
-  RobotModel* kShooter;
+	double kSpeed;
+	RobotModel* robot;
 };
 
 #endif /* SRC_AUTO_ACTION_SHOOTACTION_H_ */
