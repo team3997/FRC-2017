@@ -82,8 +82,7 @@ void DriveController::Update(double currTimeSec, double deltaTimeSec) {
                 rightPID->Enable();
                 prevBackState = true;
 			}
-		}
-		else if (humanControl->GetArcadeDriveDesired()) {
+		} else if (humanControl->GetArcadeDriveDesired()) {
 			leftPID->Disable();
 			rightPID->Disable();
 			prevBackState = false;
@@ -111,7 +110,7 @@ void DriveController::ArcadeDrive(double myY, double myX, bool teleOp) {
 
 		if((humanControl->GetSlowDriveTier1Desired() && !humanControl->GetSlowDriveTier2Desired())
 				|| (!humanControl->GetSlowDriveTier1Desired() && humanControl->GetSlowDriveTier2Desired())) {
-			GLOBAL_DRIVE_SPEED_MULTIPLIER = 0.5;
+			GLOBAL_DRIVE_SPEED_MULTIPLIER = 0.65;
 			SQUARE_DRIVE_AXIS_INPUT = false;
 		}
 		else if(humanControl->GetSlowDriveTier1Desired() && humanControl->GetSlowDriveTier2Desired()) {
