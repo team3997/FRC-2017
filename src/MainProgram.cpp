@@ -59,6 +59,8 @@ private:
 		robot->Reset();
 		auton->ListOptions();
 		visionController->Disable();
+        CameraServer::GetInstance()->StartAutomaticCapture();
+
 	}
 
 	void AutonomousInit() {
