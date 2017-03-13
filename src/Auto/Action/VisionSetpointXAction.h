@@ -15,7 +15,7 @@
 
 class VisionSetpointXAction: public Action {
 public:
-	VisionSetpointXAction(VisionController *vision, DriveController *drive, int setpoint, double maxSpeed, double timeout);
+	VisionSetpointXAction(VisionController *vision, DriveController *drive, RobotModel *robot, int setpoint, double maxSpeed, double timeout);
 
 	bool IsFinished();
 	void Update();
@@ -25,10 +25,15 @@ public:
 	virtual ~VisionSetpointXAction();
 
 private:
+
+	double P, I, D;
+
 	int setpoint;
 	double maxSpeed, timeout;
+	double leftEncoderStartDistance, rightEncoderStartDistance;
 	VisionController *vision;
-	DriveController *drive;
+	DriveController *driveController;
+	RobotModel *robot;
 };
 
 #endif /* SRC_AUTO_ACTION_VISIONSETPOINTXACTION_H_ */

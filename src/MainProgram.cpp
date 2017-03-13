@@ -30,6 +30,7 @@ class MainProgram : public frc::IterativeRobot {
 	ClimberController *climberController;
 	GearSuck *gearController;
 	Auto* auton;
+	CameraServer *camera;
 
 	//Creates a time-keeper	`
 	double currTimeSec;
@@ -59,8 +60,8 @@ private:
 		robot->Reset();
 		auton->ListOptions();
 		visionController->Disable();
-        CameraServer::GetInstance()->StartAutomaticCapture();
-
+        camera = CameraServer::GetInstance();
+        camera->StartAutomaticCapture();
 	}
 
 	void AutonomousInit() {

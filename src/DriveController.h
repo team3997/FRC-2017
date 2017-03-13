@@ -41,12 +41,12 @@ public:
 
 	PIDOutput *driveXPIDOutput;
 	PIDController *visionPID;
-	PIDSource *visionPIDSource;
+	VisionPIDSource *visionPIDSource;
 
 	DriveEncodersPIDSource *driveEncodersPIDSource; //average of two drive encoders
+    VisionController *vision;
 
 private:
-  VisionController *vision;
   RobotModel *robot;
   RemoteControl *humanControl;
   double testVariable;

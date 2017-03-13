@@ -18,8 +18,7 @@ DriveController::DriveController(RobotModel *myRobot,
 	robot->rightDriveEncoder->SetSamplesToAverage(DRIVE_Y_PID_SAMPLES_AVERAGE);
 
 	leftPIDOutput = new WheelsPIDOutput(robot, robot->LeftWheels);
-	leftPID = new PIDController(0.0, 0.0, 0.0, robot->leftDriveEncoder,
-			leftPIDOutput);
+	leftPID = new PIDController(0.0, 0.0, 0.0, robot->leftDriveEncoder, leftPIDOutput);
 	leftPID->SetOutputRange(-1.0, 1.0);
 	leftPID->SetAbsoluteTolerance(0.25);
 	leftPID->Disable();
@@ -48,6 +47,9 @@ void DriveController::Update(double currTimeSec, double deltaTimeSec) {
 	switch (m_stateVal) {
 	case (kInitialize):
 		prevBackState = false;
+		visionPID->Disable();
+		leftPID->Disable();
+		rightPID->Disable();
 		nextState = kTeleopDrive;
 		break;
 	case (kTeleopDrive):

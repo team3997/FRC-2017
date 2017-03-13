@@ -12,5 +12,5 @@ VisionPIDSource::VisionPIDSource(VisionController *vision) {
 }
 
 double VisionPIDSource::PIDGet() {
-
+	return vision->GetRightContour();
 }

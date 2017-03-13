@@ -30,8 +30,7 @@ DriveSetPointStraightAction::DriveSetPointStraightAction(RobotModel *robot,
 }
 
 bool DriveSetPointStraightAction::IsFinished() {
-	return (Timer::GetFPGATimestamp() >= start_time + timeout)
-			|| (reachedSetpoint);
+	return (Timer::GetFPGATimestamp() >= start_time + timeout) || (reachedSetpoint);
 }
 
 void DriveSetPointStraightAction::Update() {
