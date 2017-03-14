@@ -66,7 +66,7 @@ void DriveController::Update(double currTimeSec, double deltaTimeSec) {
 		driverRightY = humanControl->GetJoystickValue(RemoteControl::kDriverJoy,
 				RemoteControl::kRY);
 
-		if(humanControl->GetDriveBackDesired()){
+		if(humanControl->GetDriveBackDesired() || humanControl->GetDriveBackOtherDesired()){
 			currBackState = true;
 			if(prevBackState == false && currBackState == true){
                 robot->leftDriveEncoder->Reset();

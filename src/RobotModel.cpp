@@ -37,6 +37,10 @@ RobotModel::RobotModel() {
 	rightDriveEncoder = new Encoder(RIGHT_DRIVE_ENCODER_PORTS[0],
 			RIGHT_DRIVE_ENCODER_PORTS[1]);
 
+	climberLockerServo = new Servo(CLIMBER_LOCKER_SERVO_PWM_PORT);
+
+	climberLockerServo->SetSafetyEnabled(false);
+
 	shooterEncoder->SetPIDSourceType(PIDSourceType::kRate);
 	shooterEncoder->SetDistancePerPulse((1.0) / (250.0));
 	shooterEncoder->SetSamplesToAverage(90);
@@ -234,6 +238,9 @@ double RobotModel::GetFeederMotorSpeed() {
 
 void RobotModel::SetGearSuckerMotorSpeed(double speed) {
     gearSuckerMotor->Set(speed);
+}
+void RobotModel::SetClimberLockServoSpeed(double speed){
+	climberLockerServo->Set(speed);
 }
 
 double RobotModel::GetGearSuckerMotorSpeed() {

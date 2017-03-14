@@ -34,6 +34,13 @@ void ClimberController::Update() {
 			robot->climberMotor->SetSpeed(0.0);
 		}
 
+		if(humanControl->GetClimberLockDesired()) {
+			robot->SetClimberLockServoSpeed(0.8);
+		}
+		else {
+			robot->climberLockerServo->SetDisabled();
+		}
+
 		nextState = kTeleop;
 		break;
 	}

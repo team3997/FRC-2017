@@ -11,6 +11,7 @@ static const int FEEDER_MOTOR_PWM_PORT                  = 5;
 static const int SHOOTER_MOTOR_A_PWM_PORT               = 6;
 static const int SHOOTER_MOTOR_B_PWM_PORT               = 7;
 static const int GEAR_SUCKER_MOTOR_PWM_PORT             = 8;
+static const int CLIMBER_LOCKER_SERVO_PWM_PORT          = 9;
 
 // ***************** PDP CHANNELS *****************
 static const int SHOOTER_MOTOR_B_PDP_CHAN              = 10;

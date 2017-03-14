@@ -46,6 +46,7 @@ public:
     double GetGearSuckerMotorSpeed(); //gets the speed of the climber motor
 	void SetClimberMotorSpeed(double speed); //sets the speed of the climber motor
 	double GetClimberMotorSpeed(); //gets the speed of the climber motor
+	void SetClimberLockServoSpeed(double speed);
 	void RefreshIni();
 	void ResetEncoders();
 
@@ -58,6 +59,8 @@ public:
 
 	Encoder *shooterEncoder;
 	Encoder *leftDriveEncoder, *rightDriveEncoder;
+
+	Servo *climberLockerServo;
 
 	Timer *timer;
 private:

@@ -149,11 +149,6 @@ private:
 		//auton->Stop();
 		//Reads controls and updates controllers accordingly
 
-		if (humanControl->GetResetEncodersDesired()){
-			robot->leftDriveEncoder->Reset();
-			robot->rightDriveEncoder->Reset();
-			robot->shooterEncoder->Reset();
-		}
 
 		visionController->Update();
 	    humanControl->ReadControls();
