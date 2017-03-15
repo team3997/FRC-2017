@@ -20,13 +20,14 @@
 #include "Routines/LeftHopper.h"
 #include "../DriveController.h"
 #include "../RobotModel.h"
+#include "../VisionController.h"
 #include "AutoWidget.h"
 using namespace std;
 using namespace frc;
 
 class AutoSelector {
 public:
-	AutoSelector(RobotModel* robot, DriveController* kDrive);
+	AutoSelector(VisionController *vision, RobotModel* robot, DriveController* kDrive);
 
 	void ListOptions();
 	AutoRoutine* Pick();

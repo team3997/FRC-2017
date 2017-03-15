@@ -12,10 +12,11 @@
 #include "AutoRoutine.h"
 #include "../DriveController.h"
 #include "../RobotModel.h"
+#include "../VisionController.h"
 
 class Auto {
 public:
-	Auto(DriveController* kDrive, RobotModel* robot);bool ReturnBool();
+	Auto(VisionController *vision, DriveController* kDrive, RobotModel* robot);bool ReturnBool();
 	AutoRoutine* autoRoutine;
 	void Reset();
 	void ListOptions();

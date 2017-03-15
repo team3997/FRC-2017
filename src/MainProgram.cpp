@@ -47,7 +47,7 @@ public:
 		shooterController = new ShooterController(robot, humanControl);
 		climberController = new ClimberController(robot, humanControl);
 		gearController    = new GearSuck(robot, humanControl);
-		auton             = new Auto(driveController, robot);
+		auton             = new Auto(visionController, driveController, robot);
 		//Initializes timekeeper variables
 		currTimeSec = 0.0;
 		lastTimeSec = 0.0;
@@ -86,6 +86,8 @@ private:
 		//Autonoumous is running in a thread called by "auton->Start();"
 		dashboardLogger->UpdateData(); //JOystick data does NOT update during autonomous
 		visionController->Update();
+		SmartDashboard::PutNumber("LEFT", visionController->GetLeftContour());
+		SmartDashboard::PutNumber("RIGHT", visionController->GetRightContour());
 	}
 
 	void TeleopInit() {
@@ -164,6 +166,9 @@ private:
         SmartDashboard::PutNumber("V_LOW", robot->pini->getf("CAMERA", "v_low", 0));
         SmartDashboard::PutNumber("V_HIGH", robot->pini->getf("CAMERA", "v_HIGH", 0));
 
+        robot->pini->getf("PINI", "PINI_P", 0.0);
+		robot->pini->getf("PINI", "PINI_I", 0.0);
+		robot->pini->getf("PINI", "PINI_D", 0.0);
 	}
 };
 

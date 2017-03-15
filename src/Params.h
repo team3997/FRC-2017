@@ -37,4 +37,10 @@ static const double DRIVE_X_PID_SCALE_VALUES[] 		   = {1.0, 1.0, 1.0}; //P, I, D
 static const int DRIVE_X_PID_TOLERANCE                 = 10;
 static const int DRIVE_X_PID_SAMPLES_AVERAGE           = 10;
 
+
+//PINI UPDATES
+static double PINI_P;
+static double PINI_D;
+static double PINI_I;
+
 #endif

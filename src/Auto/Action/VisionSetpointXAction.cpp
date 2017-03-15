@@ -19,9 +19,13 @@ VisionSetpointXAction::VisionSetpointXAction(VisionController *vision,
 
 	leftEncoderStartDistance, rightEncoderStartDistance = 0.0;
 
-	P = 0;
-	I = 0;
-	D = 0;
+	//P = 1.0 / 250.0;
+	//I = 0.0;
+	//D = 1.0 / 150.0;
+
+	P = 1.0 / robot->pini->getf("PINI", "PINI_P", 0.0);
+	I = 1.0 / robot->pini->getf("PINI", "PINI_I", 0.0);
+	D = 1.0 / robot->pini->getf("PINI", "PINI_D", 0.0);
 }
 
 bool VisionSetpointXAction::IsFinished() {
@@ -29,17 +33,21 @@ bool VisionSetpointXAction::IsFinished() {
 }
 
 void VisionSetpointXAction::Update() {
+
 	if(driveController->vision->GetRightContour() == 0.0){
 		driveController->visionPID->Disable();
+		SmartDashboard::PutString("Running_VISION", "STOPPED");
 	}
 	else {
 		driveController->visionPID->Enable();
+		SmartDashboard::PutString("Running_VISION", "RUNNING");
 	}
 }
 
 void VisionSetpointXAction::Done() {
 	driveController->visionPID->Disable();
 	driveController->Stop();
+	SmartDashboard::PutString("Running_VISION", "DONE");
 }
 
 void VisionSetpointXAction::Start() {
@@ -52,6 +60,9 @@ void VisionSetpointXAction::Start() {
 	rightEncoderStartDistance = robot->rightDriveEncoder->GetDistance();
 
 	driveController->visionPID->SetOutputRange(-maxSpeed, maxSpeed);
+	SmartDashboard::PutNumber("Vision_P", P);
+	SmartDashboard::PutNumber("Vision_I", I);
+	SmartDashboard::PutNumber("Vision_D", D);
 	driveController->visionPID->SetPID(P, I, D);
 	driveController->visionPID->SetSetpoint(setpoint + leftEncoderStartDistance);
 
