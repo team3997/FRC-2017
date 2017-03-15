@@ -7,8 +7,7 @@
 
 #include "Auto/Action/VisionSetpointXAction.h"
 
-VisionSetpointXAction::VisionSetpointXAction(VisionController *vision,
-		DriveController *driveController, RobotModel *robot, int setpoint, double maxSpeed, double timeout) {
+VisionSetpointXAction::VisionSetpointXAction(VisionController *vision, DriveController *driveController, RobotModel *robot, int setpoint, double maxSpeed, double timeout, bool waitForTimeout) {
 	// TODO Auto-generated constructor stub
 	this->vision = vision;
 	this->driveController = driveController;
@@ -16,6 +15,7 @@ VisionSetpointXAction::VisionSetpointXAction(VisionController *vision,
 	this->maxSpeed = maxSpeed;
 	this->robot = robot;
 	this->timeout = timeout;
+	this->waitForTimeout = waitForTimeout;
 
 	leftEncoderStartDistance, rightEncoderStartDistance = 0.0;
 
@@ -29,7 +29,10 @@ VisionSetpointXAction::VisionSetpointXAction(VisionController *vision,
 }
 
 bool VisionSetpointXAction::IsFinished() {
-	return (Timer::GetFPGATimestamp() >= start_time + timeout);
+	if(waitForTimeout)
+        return (Timer::GetFPGATimestamp() >= start_time + timeout);
+	else
+		return (Timer::GetFPGATimestamp() >= start_time + timeout) || (driveController->visionPID->OnTarget());
 }
 
 void VisionSetpointXAction::Update() {

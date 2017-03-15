@@ -14,8 +14,8 @@ AutoSelector::AutoSelector(VisionController *vision, RobotModel* robot, DriveCon
   RegisterAutonomous(new DriveForwardRoutine(kDrive));
   RegisterAutonomous(new JustShootRoutine(robot));
   RegisterAutonomous(new CenterGear(vision, robot, kDrive));
-  RegisterAutonomous(new LeftGear(robot, kDrive));
-  RegisterAutonomous(new RightGear(robot, kDrive));
+  RegisterAutonomous(new LeftGear(vision, robot, kDrive));
+  RegisterAutonomous(new RightGear(vision, robot, kDrive));
   RegisterAutonomous(new ShootHighGoal(robot, kDrive));
   RegisterAutonomous(new PassAutoLine(robot, kDrive));
   RegisterAutonomous(new LeftHopper(robot, kDrive));

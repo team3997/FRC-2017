@@ -13,7 +13,7 @@ PassAutoLine::PassAutoLine(RobotModel *robot, DriveController* driveTrain) {
 }
 
 void PassAutoLine::Routine() {
-    DriveDistanceStraight(robot, driveTrain, 94.0, .8, 10, 10, false);
+    DriveDistanceStraight(robot, driveTrain, 94.0, .8, 10, false);
 
 }
 

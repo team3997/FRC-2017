@@ -10,12 +10,13 @@
 #include "../AutoRoutine.h"
 class LeftGear : public AutoRoutine {
  public:
-    LeftGear(RobotModel *robot, DriveController* driveTrain);
+    LeftGear(VisionController *vision, RobotModel *robot, DriveController* driveTrain);
     void Prestart();
 
  private:
     DriveController *driveTrain;
     RobotModel *robot;
+    VisionController *vision;
  protected:
     void Routine();
 };

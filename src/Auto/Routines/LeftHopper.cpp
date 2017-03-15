@@ -13,8 +13,8 @@ LeftHopper::LeftHopper(RobotModel *robot, DriveController* driveTrain) {
 }
 
 void LeftHopper::Routine() {
-    DriveDistanceStraight(robot, driveTrain, 173.0, .8, 10, 10, false);
-    DriveDistanceRotate(robot, driveTrain, -90, .8, 10.0, 10.0, false);
+    DriveDistanceStraight(robot, driveTrain, 173.0, .8, 10, false);
+    DriveDistanceRotate(robot, driveTrain, -90, .8, 10.0, false);
 
 }
 
