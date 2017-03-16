@@ -31,6 +31,7 @@ public:
 	virtual bool GetDriveBackOtherDesired() = 0;
 	virtual bool GetGearSuckReverseDesired() = 0;
     virtual bool GetGearSuckDesired() = 0;
+    virtual bool GetLightsActiveDesired() = 0;
 
 	virtual void ReadControls() = 0;
 

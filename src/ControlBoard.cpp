@@ -30,6 +30,7 @@ ControlBoard::ControlBoard() {
 		climberLockButton = new ButtonReader(operatorJoy, XINPUT_WIN_YELLOW_BUTTON);
 		gearSuckButton = new ButtonReader(operatorJoy, XINPUT_WIN_RIGHT_BUMPER);
 		gearSuckReverseButton = new ButtonReader(operatorJoy, XINPUT_WIN_LEFT_BUMPER);
+		lightsActiveButton = new TriggerReader(operatorJoy, XINPUT_WIN_LEFT_TRIGGER);
 	} else {
 		//driveDirectiosrc	nButton = new ButtonReader(driverJoy, XINPUT_LINUX_BACK_BUTTON);
 		//shooterRunButton = new ButtonReader(driverJoy, XINPUT_LINUX_GREEN_BUTTON);
@@ -94,6 +95,7 @@ void ControlBoard::ReadControls() {
 	gearSuckDesired        = gearSuckButton->IsDown();
 	gearSuckReverseDesired = gearSuckReverseButton->IsDown();
 	driveBackOtherDesired  = driveBackOtherButton->IsDown();
+	lightsActiveDesired    = lightsActiveButton->IsDown();
 }
 
 //Reads the values of all buttons defined by this class
@@ -111,6 +113,7 @@ void ControlBoard::ReadAllButtons() {
 	gearSuckButton->ReadValue();
 	gearSuckReverseButton->ReadValue();
 	driveBackOtherButton->ReadValue();
+	lightsActiveButton->ReadValue();
 }
 
 //Returns the joystick and axis being used
@@ -196,4 +199,7 @@ bool ControlBoard::GetGearSuckDesired() {
 }
 bool ControlBoard::GetDriveBackOtherDesired() {
 	return driveBackOtherDesired;
+}
+bool ControlBoard::GetLightsActiveDesired(){
+	return lightsActiveDesired;
 }
