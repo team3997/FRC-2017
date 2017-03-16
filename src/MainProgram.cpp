@@ -66,6 +66,8 @@ private:
 		visionController->Disable();
         camera = CameraServer::GetInstance();
         camera->StartAutomaticCapture();
+        SmartDashboard::PutNumber("VISION_leftContour", 0.0);
+        SmartDashboard::GetNumber("VISION_rightContour", 0.0);
 	}
 
 	void AutonomousInit() {
@@ -135,7 +137,7 @@ private:
 		climberController->Update();
 		visionController->Update();
 		gearController->Update();
-		lights->Update(true);
+		//lights->Update(true);
 	}
 
 	void DisabledInit() {
