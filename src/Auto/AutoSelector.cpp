@@ -11,7 +11,7 @@ AutoSelector::AutoSelector(VisionController *vision, RobotModel* robot, DriveCon
 
   autoRoutines = new vector<AutoRoutine*>();
   RegisterAutonomous(new DoNothingRoutine());
-  RegisterAutonomous(new DriveForwardRoutine(kDrive));
+  RegisterAutonomous(new DriveForwardRoutine(robot, kDrive));
   RegisterAutonomous(new JustShootRoutine(robot));
   RegisterAutonomous(new CenterGear(vision, robot, kDrive));
   RegisterAutonomous(new LeftGear(vision, robot, kDrive));

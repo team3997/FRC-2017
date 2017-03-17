@@ -8,10 +8,12 @@
 #include "LightsController.h"
 
 LightsController::LightsController(RemoteControl *myHumanControl) {
-	myHumanControl = humanControl;
+    humanControl = myHumanControl;
 
 	pin1 = new DigitalOutput(LIGHTS_DIO_PORTS[0]);
 	pin2 = new DigitalOutput(LIGHTS_DIO_PORTS[1]);
+
+	m_stateVal = kInitialize;
 }
 
 LightsController::~LightsController() {
@@ -26,19 +28,21 @@ void LightsController::Update(bool enabled) {
 	switch (m_stateVal) {
 	case (kInitialize):
 		nextState = kTeleop;
+		SmartDashboard::PutString("LIGHTS_debug", "init reached");
 		break;
 	case (kTeleop):
+
 		//Climber Behaviour
-		if(enabled){
-            if (humanControl->GetLightsActiveDesired()) {
-            	SetShoutRoutine();
-            }
-            else {
-            	SetEnabledRoutine();
-            }
-		}
-		else {
+		if (enabled) {
+			if (humanControl->GetLightsActiveDesired()) {
+				SetShoutRoutine();
+			} else {
+				SetEnabledRoutine();
+				SmartDashboard::PutString("LIGHTS_debug_2", "enabled reached");
+			}
+		} else {
 			SetDisabledRoutine();
+			SmartDashboard::PutString("LIGHTS_debug_3", "disabled reached");
 		}
 
 		nextState = kTeleop;
@@ -48,17 +52,17 @@ void LightsController::Update(bool enabled) {
 	m_stateVal = nextState;
 }
 
-void LightsController::SetDisabledRoutine(){
+void LightsController::SetDisabledRoutine() {
 	pin1->Set(LOW);
 	pin2->Set(LOW);
 }
 
-void LightsController::SetEnabledRoutine(){
+void LightsController::SetEnabledRoutine() {
 	pin1->Set(HIGH);
 	pin2->Set(LOW);
 }
 
-void LightsController::SetShoutRoutine(){
+void LightsController::SetShoutRoutine() {
 	pin1->Set(HIGH);
 	pin2->Set(HIGH);
 }

@@ -12,7 +12,7 @@
 
 class DriveForwardRoutine: public AutoRoutine {
 public:
-	DriveForwardRoutine(DriveController* kDrive);
+	DriveForwardRoutine(RobotModel *robot, DriveController* kDrive);
 	void Prestart();
 
 protected:
@@ -20,6 +20,7 @@ protected:
 
 private:
 	DriveController* kDrive;
+	RobotModel *robot;
 };
 
 #endif /* SRC_AUTO_ROUTINES_DRIVEFORWARDROUTINE_H_ */

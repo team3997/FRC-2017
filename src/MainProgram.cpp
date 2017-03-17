@@ -33,7 +33,7 @@ class MainProgram : public frc::IterativeRobot {
 	Auto* auton;
 	CameraServer *camera;
 
-	LightsController *lights;
+	//LightsController *lights;
 
 	//Creates a time-keeper	`
 	double currTimeSec;
@@ -51,7 +51,7 @@ public:
 		climberController = new ClimberController(robot, humanControl);
 		gearController    = new GearSuck(robot, humanControl);
 		auton             = new Auto(visionController, driveController, robot);
-		lights            = new LightsController(humanControl);
+		//lights            = new LightsController(humanControl);
 		//Initializes timekeeper variables
 		currTimeSec = 0.0;
 		lastTimeSec = 0.0;
@@ -92,7 +92,7 @@ private:
 		//Autonoumous is running in a thread called by "auton->Start();"
 		dashboardLogger->UpdateData(); //JOystick data does NOT update during autonomous
 		visionController->Update();
-		lights->Update(true);
+		//lights->Update(true);
 		SmartDashboard::PutNumber("LEFT", visionController->GetLeftContour());
 		SmartDashboard::PutNumber("RIGHT", visionController->GetRightContour());
 	}
@@ -159,7 +159,7 @@ private:
 		//auton->Stop();
 		//Reads controls and updates controllers accordingly
 
-		lights->Update(false);
+		//lights->Update(false);
 		visionController->Update();
 	    humanControl->ReadControls();
 	    RefreshAllIni();

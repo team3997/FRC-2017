@@ -24,15 +24,18 @@ public:
 	void SetEnabledRoutine();
 	void SetShoutRoutine();
 
-	enum ShooterState {
+	enum LightsState {
 		kInitialize, kTeleop
 	};
+
+
 private:
+	DigitalOutput *pin1;
+	DigitalOutput *pin2;
 	RemoteControl *humanControl;
 	uint32_t m_stateVal;
 	uint32_t nextState;
-	DigitalOutput *pin1;
-	DigitalOutput *pin2;
+
 	bool HIGH = true;
 	bool LOW = false;
 };
