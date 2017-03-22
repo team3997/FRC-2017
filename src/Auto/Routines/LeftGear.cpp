@@ -18,8 +18,9 @@ void LeftGear::Prestart() {
 }
 
 void LeftGear::Routine() {
-   DriveDistanceStraight(robot, driveTrain, 129, .8, 7, false);
-   DriveDistanceRotate(robot, driveTrain, 90, .8, 3, false);
-   DriveDistanceStraight(robot, driveTrain, 15, .8, 5, false);
+   DriveDistanceStraight(robot, driveTrain, 93.96, 0.5, 3.3, true);
+   DriveDistanceRotate(robot, driveTrain, 73, 0.6, 1.5, true);
+  // DriveDistanceStraight(robot, driveTrain, 2, 1.0, 1, false);
+   DriveDistanceStraight(robot, driveTrain, 30, 0.4, 5, false);
 }
 // 15in 129v

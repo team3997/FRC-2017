@@ -19,6 +19,7 @@ AutoSelector::AutoSelector(VisionController *vision, RobotModel* robot, DriveCon
   RegisterAutonomous(new ShootHighGoal(robot, kDrive));
   RegisterAutonomous(new PassAutoLine(robot, kDrive));
   RegisterAutonomous(new LeftHopper(robot, kDrive));
+  RegisterAutonomous(new BoilerFirstHopper(robot, kDrive));
 
   autoChooser = new AutoWidget();
 }
@@ -33,6 +34,8 @@ void AutoSelector::ListOptions() {
   autoChooser->AddObject("Shoot High Goal", 6);
   autoChooser->AddObject("Pass AutoLine", 7);
   autoChooser->AddObject("Left Hopper", 8);
+  autoChooser->AddObject("BoilerStraightHoppers", 9);
+
   SmartDashboard::PutData("Autonomous: ", autoChooser);
 
 }

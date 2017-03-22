@@ -12,6 +12,7 @@
 #include "Routines/DoNothingRoutine.h"
 #include "Routines/DriveForwardRoutine.h"
 #include "Routines/JustShootRoutine.h"
+#include "Routines/BoilerFirstHopper.h"
 #include "Routines/CenterGear.h"
 #include "Routines/LeftGear.h"
 #include "Routines/RightGear.h"

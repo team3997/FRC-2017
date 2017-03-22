@@ -18,9 +18,9 @@ void RightGear::Prestart() {
 }
 
 void RightGear::Routine() {
-    DriveDistanceStraight(robot, driveTrain, 76.0, .8, 3.5, false);
-    DriveDistanceRotate(robot, driveTrain, -50.0, .8, 1.5, false);
-    VisionSetpointX(vision, driveTrain, robot, 207, 0.4, 1.5, false);
-    DriveDistanceStraight(robot, driveTrain, 15, .8, 5, false);
+	   DriveDistanceStraight(robot, driveTrain, 98, 0.5, 3.3, true);
+	   DriveDistanceRotate(robot, driveTrain, -73, 0.6, 1.5, true);
+	   DriveDistanceStraight(robot, driveTrain, 10, 1.0, 1, false);
+	   DriveDistanceStraight(robot, driveTrain, 15, 0.4, 5, false);
 
 }

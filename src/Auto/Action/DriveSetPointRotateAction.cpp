@@ -20,7 +20,7 @@ DriveSetPointRotateAction::DriveSetPointRotateAction(RobotModel *robot, DriveCon
 	reachedSetpoint = false;
 	leftEncoderStartDistance, rightEncoderStartDistance = 0.0;
 
-	P = robot->pini->getf("DRIVE_PID", "drive_p", 0.0);
+	P = 0.3;
 	I = robot->pini->getf("DRIVE_PID", "drive_i", 0.0);
 	D = robot->pini->getf("DRIVE_PID", "drive_d", 0.0);
 	SmartDashboard::PutNumber("DRIVE_PID_P", P);
