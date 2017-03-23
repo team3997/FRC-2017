@@ -28,7 +28,7 @@ static const int LEFT_DRIVE_ENCODER_PORTS[]            = {4, 5};
 static const int RIGHT_DRIVE_ENCODER_PORTS[]           = {2, 3};
 static const int SHOOTER_ENCODER_PORTS[]               = {0, 1};
 
-static const int LIGHTS_DIO_PORTS[]                    = {6, 7};
+static const int LIGHTS_DIO_PORTS[]                    = {6, 7, 8, 9};
 // ******************* ANALOG IN PORTS*******************
 
 // ***************** MISC *****************

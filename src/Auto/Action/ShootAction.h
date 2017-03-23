@@ -12,7 +12,8 @@
 #include "../../RobotModel.h"
 class ShootAction: public Action {
 public:
-	ShootAction(RobotModel* shooter, double seconds, double speed);bool IsFinished();
+	ShootAction(RobotModel* shooter, double seconds, double speed);
+	bool IsFinished();
 	void Update();
 	void Done();
 	void Start();

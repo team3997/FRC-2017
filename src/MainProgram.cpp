@@ -29,6 +29,8 @@ class MainProgram : public frc::IterativeRobot {
 	DashboardLogger *dashboardLogger;
 
 	ClimberController *climberController;
+
+	LightsController* lights;
 	GearSuck *gearController;
 	Auto* auton;
 	CameraServer *camera;
@@ -44,13 +46,14 @@ public:
 	MainProgram(void) {
 		robot             = new RobotModel();
 		humanControl      = new ControlBoard();
+		lights            = new LightsController(humanControl);
 		visionController  = new VisionController();
 		driveController   = new DriveController(robot, humanControl, visionController);
 		dashboardLogger   = new DashboardLogger(robot, humanControl);
 		shooterController = new ShooterController(robot, humanControl);
 		climberController = new ClimberController(robot, humanControl);
 		gearController    = new GearSuck(robot, humanControl);
-		auton             = new Auto(visionController, driveController, robot);
+		auton             = new Auto(visionController, driveController, robot, lights);
 		//lights            = new LightsController(humanControl);
 		//Initializes timekeeper variables
 		currTimeSec = 0.0;
@@ -98,6 +101,7 @@ private:
 	}
 
 	void TeleopInit() {
+
 		auton->Stop();
 		RefreshAllIni();
 		robot->ResetTimer();
@@ -137,7 +141,10 @@ private:
 		climberController->Update();
 		visionController->Update();
 		gearController->Update();
-		//lights->Update(true);
+
+		if(humanControl->GetClimberDesired()) {
+		    lights->Climbing();
+		}
 	}
 
 	void DisabledInit() {

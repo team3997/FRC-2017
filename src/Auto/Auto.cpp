@@ -11,10 +11,11 @@
 #include <stdio.h>
 using namespace std;
 
-Auto::Auto(VisionController *vision, DriveController* kDrive, RobotModel* robot) {
+Auto::Auto(VisionController *vision, DriveController* kDrive, RobotModel* robot, LightsController* lights) {
 	this->kDrive = kDrive;
 	this->robot = robot;
-	selector = new AutoSelector(vision, robot, kDrive);
+	this->lights = lights;
+	selector = new AutoSelector(vision, robot, kDrive, lights);
 	autoRoutineRunner = new AutoRoutineRunner();
 	autoRoutine = selector->GetDefaultRoutine();
 }

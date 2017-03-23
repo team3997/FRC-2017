@@ -10,13 +10,14 @@
 //distance: distance in inches for the bot to rotate
 //maxSpeed: max speed robot can drive to hit setpoint
 //timeout: amount of allowed time this action can run before ending
-DriveSetPointRotateAction::DriveSetPointRotateAction(RobotModel *robot, DriveController *driveController, double angle, double maxSpeed, double timeout, bool waitForTimeout) {
+DriveSetPointRotateAction::DriveSetPointRotateAction(RobotModel *robot, DriveController *driveController, double angle, double maxSpeed, double timeout, bool waitForTimeout, LightsController* lights) {
 	this->driveController = driveController;
 	this->distance = (angle * 40.0) / (180.0);
 	this->timeout = timeout;
 	this->robot = robot;
 	this->maxSpeed = maxSpeed;
     this->waitForTimeout = waitForTimeout;
+    this->lights = lights;
 	reachedSetpoint = false;
 	leftEncoderStartDistance, rightEncoderStartDistance = 0.0;
 
@@ -29,7 +30,10 @@ DriveSetPointRotateAction::DriveSetPointRotateAction(RobotModel *robot, DriveCon
 }
 
 bool DriveSetPointRotateAction::IsFinished() {
-	if(waitForTimeout)
+    if((Timer::GetFPGATimestamp() >= start_time + timeout) && !(reachedSetpoint)) {
+        lights->PIDFail();
+    }
+    if(waitForTimeout)
         return (Timer::GetFPGATimestamp() >= start_time + timeout);
 	else
         return (Timer::GetFPGATimestamp() >= start_time + timeout) || reachedSetpoint;
@@ -39,9 +43,11 @@ bool DriveSetPointRotateAction::IsFinished() {
 void DriveSetPointRotateAction::Update() {
 	if(driveController->leftPID->OnTarget() && driveController->rightPID->OnTarget()) {
 		reachedSetpoint = true;
+		lights->PIDLockedOn();
 	}
 	else {
 		reachedSetpoint = false;
+		lights->PIDWorking();
 	}
 }
 

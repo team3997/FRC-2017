@@ -11,14 +11,11 @@
 
 #include "Routines/DoNothingRoutine.h"
 #include "Routines/DriveForwardRoutine.h"
-#include "Routines/JustShootRoutine.h"
 #include "Routines/BoilerFirstHopper.h"
 #include "Routines/CenterGear.h"
 #include "Routines/LeftGear.h"
 #include "Routines/RightGear.h"
-#include "Routines/ShootHighGoal.h"
 #include "Routines/PassAutoLine.h"
-#include "Routines/LeftHopper.h"
 #include "../DriveController.h"
 #include "../RobotModel.h"
 #include "../VisionController.h"
@@ -28,7 +25,7 @@ using namespace frc;
 
 class AutoSelector {
 public:
-	AutoSelector(VisionController *vision, RobotModel* robot, DriveController* kDrive);
+	AutoSelector(VisionController *vision, RobotModel* robot, DriveController* kDrive, LightsController* lights);
 
 	void ListOptions();
 	AutoRoutine* Pick();
@@ -43,6 +40,7 @@ private:
 	vector<AutoRoutine*>* autoRoutines;
 	void SetAutoRoutineByIndex(int input);
 	int selectedIndex = 0;
+	LightsController* lights;
 };
 
 #endif /* SRC_AUTO_AUTOSELECTOR_H_ */

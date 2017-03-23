@@ -41,16 +41,16 @@ void AutoRoutine::Shoot(RobotModel* robot, double seconds, double speed) {
 	RunAction(new ShootAction(robot, seconds, speed));
 }
 
-void AutoRoutine::DriveDistanceStraight(RobotModel* robot, DriveController* kDrive, double desired_distance, double maxSpeed, double timeout, bool waitForTimeout) {
-  RunAction(new DriveSetPointStraightAction(robot, kDrive, desired_distance, maxSpeed, timeout, waitForTimeout));
+void AutoRoutine::DriveDistanceStraight(RobotModel* robot, DriveController* kDrive, double desired_distance, double maxSpeed, double timeout, bool waitForTimeout, LightsController* lights) {
+  RunAction(new DriveSetPointStraightAction(robot, kDrive, desired_distance, maxSpeed, timeout, waitForTimeout, lights));
 }
 
-void AutoRoutine::DriveDistanceRotate(RobotModel* robot, DriveController* kDrive, double desired_distance, double maxSpeed, double timeout, bool waitForTimeout) {
-  RunAction(new DriveSetPointRotateAction(robot, kDrive, desired_distance, maxSpeed, timeout, waitForTimeout));
+void AutoRoutine::DriveDistanceRotate(RobotModel* robot, DriveController* kDrive, double desired_distance, double maxSpeed, double timeout, bool waitForTimeout, LightsController* lights) {
+  RunAction(new DriveSetPointRotateAction(robot, kDrive, desired_distance, maxSpeed, timeout, waitForTimeout, lights));
 }
 void AutoRoutine::WaitTime(double timeout) {
     RunAction(new WaitTimeAction(timeout));
 }
-void AutoRoutine::VisionSetpointX(VisionController *vision, DriveController *drive, RobotModel *robot, double setpoint, double maxSpeed, double timeout, bool waitForTimeout){
-	RunAction(new VisionSetpointXAction(vision, drive, robot, setpoint, maxSpeed, timeout, waitForTimeout));
+void AutoRoutine::VisionSetpointX(VisionController *vision, DriveController *drive, RobotModel *robot, double setpoint, double maxSpeed, double timeout, bool waitForTimeout, LightsController* lights){
+	RunAction(new VisionSetpointXAction(vision, drive, robot, setpoint, maxSpeed, timeout, waitForTimeout, lights));
 }

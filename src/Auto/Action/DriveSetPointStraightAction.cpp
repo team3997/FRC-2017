@@ -11,13 +11,14 @@
 //maxSpeed: max speed robot can drive to hit setpoint
 //timeout: amount of allowed time this action can run before ending
 DriveSetPointStraightAction::DriveSetPointStraightAction(RobotModel *robot,
-		DriveController *driveController, double distance, double maxSpeed, double timeout, bool waitForTimeout) {
+		DriveController *driveController, double distance, double maxSpeed, double timeout, bool waitForTimeout, LightsController* lights) {
 	this->driveController = driveController;
 	this->distance = distance;
 	this->timeout = timeout;
 	this->robot = robot;
 	this->maxSpeed = maxSpeed;
 	this->waitForTimeout = waitForTimeout;
+	this->lights = lights;
 	reachedSetpoint = false;
 	target_pass = 0;
 	leftEncoderStartDistance, rightEncoderStartDistance = 0.0;
@@ -28,7 +29,10 @@ DriveSetPointStraightAction::DriveSetPointStraightAction(RobotModel *robot,
 }
 
 bool DriveSetPointStraightAction::IsFinished() {
-	if(waitForTimeout)
+	if((Timer::GetFPGATimestamp() >= start_time + timeout) && !(reachedSetpoint)) {
+	    lights->PIDFail();
+	}
+    if(waitForTimeout)
         return (Timer::GetFPGATimestamp() >= start_time + timeout);
 	else
         return (Timer::GetFPGATimestamp() >= start_time + timeout) || reachedSetpoint;
@@ -38,8 +42,10 @@ bool DriveSetPointStraightAction::IsFinished() {
 void DriveSetPointStraightAction::Update() {
 	if (driveController->leftPID->OnTarget() && driveController->rightPID->OnTarget()) {
 		reachedSetpoint = true;
+		lights->PIDLockedOn();
 	} else {
 		reachedSetpoint = false;
+		lights->PIDWorking();
 	}
 	SmartDashboard::PutBoolean("ACTION_DriveSetpointStraight", true);
 }

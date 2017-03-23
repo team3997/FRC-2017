@@ -23,6 +23,11 @@ public:
 	void SetDisabledRoutine();
 	void SetEnabledRoutine();
 	void SetShoutRoutine();
+	void PIDFail();
+	void PIDWorking();
+	void PIDLockedOn();
+	void GearIntake();
+	void Climbing();
 
 	enum LightsState {
 		kInitialize, kTeleop
@@ -32,6 +37,9 @@ public:
 private:
 	DigitalOutput *pin1;
 	DigitalOutput *pin2;
+	DigitalOutput *pin3;
+	DigitalOutput *pin4;
+
 	RemoteControl *humanControl;
 	uint32_t m_stateVal;
 	uint32_t nextState;
