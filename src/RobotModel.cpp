@@ -13,14 +13,15 @@
 //RobotModel constructor: inits all variables and objects
 RobotModel::RobotModel() {
 	pdp = new PowerDistributionPanel();
-
+	gearPot = new AnalogPotentiometer(GEAR_POT, 3600, GEAR_POT_OFFSET);
 	//Init drive motors
 	leftDriveMotorA = new Spark(LEFT_DRIVE_MOTOR_A_PWM_PORT);
 	leftDriveMotorB = new Spark(LEFT_DRIVE_MOTOR_B_PWM_PORT);
 	rightDriveMotorA = new Spark(RIGHT_DRIVE_MOTOR_A_PWM_PORT);
 	rightDriveMotorB = new Spark(RIGHT_DRIVE_MOTOR_B_PWM_PORT);
 	gearSuckerMotor = new Spark(GEAR_SUCKER_MOTOR_PWM_PORT);
-
+	gearRotateMotor = new Spark(GEAR_ROTATE_MOTOR_PWM_PORT);
+	gearIntakeMotor = new Talon(GEAR_INTAKE_MOTOR_PWM_PORT);
 	//Init superstructure motors
 	climberMotor = new Talon(CLIMBER_MOTOR_PWM_PORT);
 	feederMotor = new Talon(FEEDER_MOTOR_PWM_PORT);
@@ -61,7 +62,10 @@ RobotModel::RobotModel() {
 	shooterMotorA->SetSafetyEnabled(false);
 	shooterMotorB->SetSafetyEnabled(false);
 	feederMotor->SetSafetyEnabled(false);
-    gearSuckerMotor->SetSafetyEnabled(false); 
+    gearSuckerMotor->SetSafetyEnabled(false);
+    gearIntakeMotor->SetSafetyEnabled(false);
+    gearRotateMotor->SetSafetyEnabled(false);
+
 	climberMotor->SetInverted(true);
 
 	leftDriveMotorA->SetInverted(false);
@@ -245,6 +249,21 @@ void RobotModel::SetClimberLockServoSpeed(double speed){
 
 double RobotModel::GetGearSuckerMotorSpeed() {
     return gearSuckerMotor->Get();
+}
+
+void RobotModel::SetGearIntakeSpeed(double speed) {
+    gearIntakeMotor->Set(speed);
+}
+
+double RobotModel::GetGearIntakeSpeed() {
+    return gearIntakeMotor->Get();
+}
+void RobotModel::SetRotateGearHolder(double speed) {
+    gearRotateMotor->Set(speed);
+}
+
+double RobotModel::GetGearRotateSpeed() {
+    return gearRotateMotor->Get();
 }
 void RobotModel::RefreshIni() {
 	delete pini;

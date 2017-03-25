@@ -12,63 +12,71 @@
 #include "ini.h"
 
 class RobotModel {
-public:
-	enum Wheels {
-		LeftWheels, RightWheels, AllWheels
-	};
+ public:
+    enum Wheels {
+        LeftWheels,
+        RightWheels,
+        AllWheels
+    };
 
-	void SetWheelSpeed(Wheels w, double speed); //sets the speed for a given wheel(s)
-	float GetWheelSpeed(Wheels w); //returns the speed of a given wheel
+    void SetWheelSpeed(Wheels w, double speed);  //sets the speed for a given wheel(s)
+    float GetWheelSpeed(Wheels w);  //returns the speed of a given wheel
 
-	RobotModel();
-	virtual ~RobotModel();
+    RobotModel();
+    virtual ~RobotModel();
 
-	void Reset(); //resets variables and objects
+    void Reset();  //resets variables and objects
 
-	void UpdateCurrent();  //initializes variables pertaining to current
+    void UpdateCurrent();  //initializes variables pertaining to current
 
-	double GetVoltage(); //returns the voltage
-	double GetTotalEnergy(); //returns the total energy of the PDP
-	double GetTotalCurrent(); //returns the total current of the PDP
-	double GetTotalPower(); //returns the total power of the PDP
-	double GetCurrent(int channel); //returns the current of a given channel
+    double GetVoltage();  //returns the voltage
+    double GetTotalEnergy();  //returns the total energy of the PDP
+    double GetTotalCurrent();  //returns the total current of the PDP
+    double GetTotalPower();  //returns the total power of the PDP
+    double GetCurrent(int channel);  //returns the current of a given channel
 
-	void ResetTimer(); //resets the timer
-	double GetTime(); //returns the time
+    void ResetTimer();  //resets the timer
+    double GetTime();  //returns the time
 
-	//Superstructure systems
-	void SetShooterMotorsSpeed(double speed); //sets the speed of the shooter motors
-	double GetShooterMotorASpeed(); //returns the speed of the shooter motor A
-	double GetShooterMotorBSpeed(); //returns the speed of the shooter motor B
-	void SetFeederMotorSpeed(double speed); //sets the speed of the feeder motor
-	double GetFeederMotorSpeed(); //gets the speed of the feeder motor
-    void SetGearSuckerMotorSpeed(double speed); //sets the speed of the climber motor
-    double GetGearSuckerMotorSpeed(); //gets the speed of the climber motor
-	void SetClimberMotorSpeed(double speed); //sets the speed of the climber motor
-	double GetClimberMotorSpeed(); //gets the speed of the climber motor
-	void SetClimberLockServoSpeed(double speed);
-	void RefreshIni();
-	void ResetEncoders();
+    //Superstructure systems
+    void SetShooterMotorsSpeed(double speed);  //sets the speed of the shooter motors
+    double GetShooterMotorASpeed();  //returns the speed of the shooter motor A
+    double GetShooterMotorBSpeed();  //returns the speed of the shooter motor B
+    void SetFeederMotorSpeed(double speed);  //sets the speed of the feeder motor
+    double GetFeederMotorSpeed();  //gets the speed of the feeder motor
+    void SetGearSuckerMotorSpeed(double speed);  //sets the speed of the climber motor
+    double GetGearSuckerMotorSpeed();  //gets the speed of the climber motor
+    void SetClimberMotorSpeed(double speed);  //sets the speed of the climber motor
+    double GetClimberMotorSpeed();  //gets the speed of the climber motor
+    void SetClimberLockServoSpeed(double speed);
+    void SetGearIntakeSpeed(double speed);
+    void SetRotateGearHolder(double speed);
+    double GetGearIntakeSpeed();
+    double GetGearRotateSpeed();
 
-	//Speed controllers
-	Spark *leftDriveMotorA, *leftDriveMotorB, *rightDriveMotorA,
-			*rightDriveMotorB, *gearSuckerMotor;
-	VictorSP *shooterMotorA, *shooterMotorB;
-	Talon *climberMotor, *feederMotor;
-	Ini *pini;
+    void GetRotateGearHolder();
+    void RefreshIni();
+    void ResetEncoders();
 
-	Encoder *shooterEncoder;
-	Encoder *leftDriveEncoder, *rightDriveEncoder;
+    //Speed controllers
+    Spark *leftDriveMotorA, *leftDriveMotorB, *rightDriveMotorA,
+            *rightDriveMotorB, *gearSuckerMotor, *gearRotateMotor;
+    VictorSP *shooterMotorA, *shooterMotorB;
+    Talon *climberMotor, *feederMotor, *gearIntakeMotor;
+    Ini *pini;
 
-	Servo *climberLockerServo;
+    Encoder *shooterEncoder;
+    Encoder *leftDriveEncoder, *rightDriveEncoder;
+    Potentiometer *gearPot;
+    Servo *climberLockerServo;
 
-	Timer *timer;
-private:
-	PowerDistributionPanel* pdp;
+    Timer *timer;
+ private:
+    PowerDistributionPanel* pdp;
 
-	double leftDriveACurrent, leftDriveBCurrent, rightDriveACurrent,
-			rightDriveBCurrent, shooterMotorACurrent, shooterMotorBCurrent,
-			climberMotorCurrent, gearSuckerCurrent;
+    double leftDriveACurrent, leftDriveBCurrent, rightDriveACurrent,
+            rightDriveBCurrent, shooterMotorACurrent, shooterMotorBCurrent,
+            climberMotorCurrent, gearSuckerCurrent;
 };
 
 #endif /* SRC_ROBOTMODEL_H_ */
