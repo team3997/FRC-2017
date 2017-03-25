@@ -23,15 +23,8 @@ RobotModel::RobotModel() {
 
 	//Init superstructure motors
 	climberMotor = new Talon(CLIMBER_MOTOR_PWM_PORT);
-	feederMotor = new Talon(FEEDER_MOTOR_PWM_PORT);
-
-	//Init shooter motors
-	shooterMotorA = new VictorSP(SHOOTER_MOTOR_A_PWM_PORT);
-	shooterMotorB = new VictorSP(SHOOTER_MOTOR_B_PWM_PORT);
 
 	//Init encoders
-	shooterEncoder = new Encoder(SHOOTER_ENCODER_PORTS[0],
-			SHOOTER_ENCODER_PORTS[1]);
 	leftDriveEncoder = new Encoder(LEFT_DRIVE_ENCODER_PORTS[0],
 			LEFT_DRIVE_ENCODER_PORTS[1]);
 	rightDriveEncoder = new Encoder(RIGHT_DRIVE_ENCODER_PORTS[0],
@@ -58,9 +51,6 @@ RobotModel::RobotModel() {
 	leftDriveMotorB->SetSafetyEnabled(false);
 	rightDriveMotorA->SetSafetyEnabled(false);
 	rightDriveMotorB->SetSafetyEnabled(false);
-	shooterMotorA->SetSafetyEnabled(false);
-	shooterMotorB->SetSafetyEnabled(false);
-	feederMotor->SetSafetyEnabled(false);
     gearSuckerMotor->SetSafetyEnabled(false); 
 	climberMotor->SetInverted(true);
 
@@ -68,16 +58,11 @@ RobotModel::RobotModel() {
 	leftDriveMotorB->SetInverted(false);
 	rightDriveMotorA->SetInverted(false);
 	rightDriveMotorB->SetInverted(false);
-	shooterMotorA->SetInverted(true);
-	shooterMotorB->SetInverted(true);
-	feederMotor->SetInverted(true);
 
 	leftDriveACurrent = 0;
 	leftDriveBCurrent = 0;
 	rightDriveACurrent = 0;
 	rightDriveBCurrent = 0;
-	shooterMotorACurrent = 0;
-	shooterMotorBCurrent = 0;
 
 	timer = new Timer();
 	timer->Start();
@@ -119,8 +104,6 @@ void RobotModel::UpdateCurrent() {
 	rightDriveACurrent = pdp->GetCurrent(RIGHT_DRIVE_MOTOR_A_PDP_CHAN);
 	rightDriveBCurrent = pdp->GetCurrent(RIGHT_DRIVE_MOTOR_B_PDP_CHAN);
 
-	shooterMotorACurrent = pdp->GetCurrent(SHOOTER_MOTOR_A_PDP_CHAN);
-	shooterMotorBCurrent = pdp->GetCurrent(SHOOTER_MOTOR_B_PDP_CHAN);
 	climberMotorCurrent = pdp->GetCurrent(CLIMBER_MOTOR_PDP_CHAN);
 	gearSuckerCurrent = pdp->GetCurrent(GEAR_MOTOR_PDP_CHAN);
 }
@@ -140,11 +123,6 @@ double RobotModel::GetCurrent(int channel) {
 	case LEFT_DRIVE_MOTOR_B_PDP_CHAN:
 		return leftDriveBCurrent;
 		break;
-	case SHOOTER_MOTOR_A_PDP_CHAN:
-		return shooterMotorACurrent;
-		break;
-	case SHOOTER_MOTOR_B_PDP_CHAN:
-		return shooterMotorBCurrent;
 	case CLIMBER_MOTOR_PDP_CHAN:
 		return climberMotorCurrent;
 	case GEAR_MOTOR_PDP_CHAN:
@@ -207,18 +185,6 @@ double RobotModel::GetTime() {
 
 // SUPERSTRUCTURE ACCESSORS AND MUTATORS IN ROBOTMODEL
 
-void RobotModel::SetShooterMotorsSpeed(double speed) {
-	shooterMotorA->Set(speed);
-	shooterMotorB->Set(speed);
-}
-
-double RobotModel::GetShooterMotorASpeed() {
-	return shooterMotorA->Get();
-}
-
-double RobotModel::GetShooterMotorBSpeed() {
-	return shooterMotorB->Get();
-}
 
 void RobotModel::SetClimberMotorSpeed(double speed) {
 	climberMotor->Set(speed);
@@ -228,13 +194,6 @@ double RobotModel::GetClimberMotorSpeed() {
 	return climberMotor->Get();
 }
 
-void RobotModel::SetFeederMotorSpeed(double speed) {
-	feederMotor->Set(speed);
-}
-
-double RobotModel::GetFeederMotorSpeed() {
-	return feederMotor->Get();
-}
 
 void RobotModel::SetGearSuckerMotorSpeed(double speed) {
     gearSuckerMotor->Set(speed);

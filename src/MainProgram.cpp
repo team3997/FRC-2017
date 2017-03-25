@@ -4,7 +4,6 @@
 #include "ControlBoard.h"
 #include "DashboardLogger.h"
 #include "LightsController.h"
-#include "ShooterController.h"
 #include "ClimberController.h"
 #include "DriveController.h"
 #include "VisionController.h"
@@ -23,7 +22,6 @@ class MainProgram : public frc::IterativeRobot {
 
 	//Creates a controller for drivetrain and superstructure
 	DriveController *driveController;
-	ShooterController *shooterController;
 
 	//Creates an object of Dashboardlogger
 	DashboardLogger *dashboardLogger;
@@ -47,7 +45,6 @@ public:
 		visionController  = new VisionController();
 		driveController   = new DriveController(robot, humanControl, visionController);
 		dashboardLogger   = new DashboardLogger(robot, humanControl);
-		shooterController = new ShooterController(robot, humanControl);
 		climberController = new ClimberController(robot, humanControl);
 		gearController    = new GearSuck(robot, humanControl);
 		auton             = new Auto(visionController, driveController, robot);
@@ -104,7 +101,6 @@ private:
 		robot->ResetEncoders();
 
 		driveController->Reset();
-		shooterController->Reset();
 		climberController->Reset();
 
 		//Resets timer variables
@@ -133,7 +129,6 @@ private:
 		RefreshAllIni();
 		humanControl->ReadControls();
 		driveController->Update(currTimeSec, deltaTimeSec);
-		shooterController->Update(currTimeSec, deltaTimeSec);
 		climberController->Update();
 		visionController->Update();
 		gearController->Update();
@@ -147,7 +142,6 @@ private:
 
 		robot->ResetEncoders();
 		driveController->Reset();
-		shooterController->Reset();
 		climberController->Reset();
 		visionController->Disable();
 

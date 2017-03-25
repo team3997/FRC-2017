@@ -12,11 +12,9 @@ AutoSelector::AutoSelector(VisionController *vision, RobotModel* robot, DriveCon
   autoRoutines = new vector<AutoRoutine*>();
   RegisterAutonomous(new DoNothingRoutine());
   RegisterAutonomous(new DriveForwardRoutine(robot, kDrive));
-  RegisterAutonomous(new JustShootRoutine(robot));
   RegisterAutonomous(new CenterGear(vision, robot, kDrive));
   RegisterAutonomous(new LeftGear(vision, robot, kDrive));
   RegisterAutonomous(new RightGear(vision, robot, kDrive));
-  RegisterAutonomous(new ShootHighGoal(robot, kDrive));
   RegisterAutonomous(new PassAutoLine(robot, kDrive));
   RegisterAutonomous(new LeftHopper(robot, kDrive));
   RegisterAutonomous(new BoilerFirstHopper(robot, kDrive));
@@ -27,14 +25,12 @@ AutoSelector::AutoSelector(VisionController *vision, RobotModel* robot, DriveCon
 void AutoSelector::ListOptions() {
   autoChooser->AddDefault("Do nothing (Default)", 0);
   autoChooser->AddObject("Drive (1s)", 1);
-  autoChooser->AddObject("Shoot", 2);
-  autoChooser->AddObject("CenterField Gear", 3);
-  autoChooser->AddObject("LeftField Gear", 4);
-  autoChooser->AddObject("RightField Gear", 5);
-  autoChooser->AddObject("Shoot High Goal", 6);
-  autoChooser->AddObject("Pass AutoLine", 7);
-  autoChooser->AddObject("Left Hopper", 8);
-  autoChooser->AddObject("BoilerStraightHoppers", 9);
+  autoChooser->AddObject("CenterField Gear", 2);
+  autoChooser->AddObject("LeftField Gear", 3);
+  autoChooser->AddObject("RightField Gear", 4);
+  autoChooser->AddObject("Pass AutoLine", 5);
+  autoChooser->AddObject("Left Hopper", 6);
+  autoChooser->AddObject("BoilerStraightHoppers", 7);
 
   SmartDashboard::PutData("Autonomous: ", autoChooser);
 

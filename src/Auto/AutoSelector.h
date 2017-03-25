@@ -11,12 +11,10 @@
 
 #include "Routines/DoNothingRoutine.h"
 #include "Routines/DriveForwardRoutine.h"
-#include "Routines/JustShootRoutine.h"
 #include "Routines/BoilerFirstHopper.h"
 #include "Routines/CenterGear.h"
 #include "Routines/LeftGear.h"
 #include "Routines/RightGear.h"
-#include "Routines/ShootHighGoal.h"
 #include "Routines/PassAutoLine.h"
 #include "Routines/LeftHopper.h"
 #include "../DriveController.h"

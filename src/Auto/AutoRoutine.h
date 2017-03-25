@@ -13,7 +13,6 @@
 #include <iostream>
 #include "Action/Action.h"
 #include "Action/DriveIntervalAction.h"
-#include "Action/ShootAction.h"
 #include "Action/DriveSetPointRotateAction.h"
 #include "Action/WaitTimeAction.h"
 #include "Action/VisionSetpointXAction.h"
@@ -31,7 +30,6 @@ public:
 
   //ACTIONS:
   void DriveInterval(DriveController* kDrive, double seconds, double y, double x);
-  void Shoot(RobotModel *robot, double seconds, double speed);
   void DriveDistanceStraight(RobotModel *robot, DriveController* kDrive, double desired_distance, double maxSpeed, double timeout, bool waitForTimeout);
   void DriveDistanceRotate(RobotModel *robot, DriveController* kDrive, double desired_distance, double maxSpeed, double timeout, bool waitForTimeout);
   void VisionSetpointX(VisionController *vision, DriveController *drive, RobotModel *robot, double setpoint, double maxSpeed, double timeout, bool waitForTimeout);
