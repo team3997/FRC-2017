@@ -7,7 +7,7 @@
 
 #ifndef SRC_AUTO_AUTOROUTINE_H_
 #define SRC_AUTO_AUTOROUTINE_H_
-
+#include "../GearController.h"
 #include <Auto/Action/DriveSetPointStraightAction.h>
 #include "WPILib.h"
 #include <iostream>

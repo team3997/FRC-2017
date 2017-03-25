@@ -6,6 +6,8 @@
  */
 
 #include "LightsController.h"
+#include "SmartDashboard/SmartDashboard.h"
+#include "DigitalOutput.h"
 
 LightsController::LightsController(RemoteControl *myHumanControl) {
     humanControl = myHumanControl;

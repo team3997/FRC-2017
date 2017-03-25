@@ -22,13 +22,14 @@
 #include "../DriveController.h"
 #include "../RobotModel.h"
 #include "../VisionController.h"
+#include "../GearController.h"
 #include "AutoWidget.h"
 using namespace std;
 using namespace frc;
 
 class AutoSelector {
 public:
-	AutoSelector(VisionController *vision, RobotModel* robot, DriveController* kDrive);
+	AutoSelector(VisionController *vision, RobotModel* robot, DriveController* kDrive, GearController* gearController);
 
 	void ListOptions();
 	AutoRoutine* Pick();
@@ -39,7 +40,6 @@ public:
 	virtual ~AutoSelector();
 private:
 	AutoWidget *autoChooser;
-
 	vector<AutoRoutine*>* autoRoutines;
 	void SetAutoRoutineByIndex(int input);
 	int selectedIndex = 0;
