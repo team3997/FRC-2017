@@ -11,7 +11,5 @@ AnalogPIDOutput::AnalogPIDOutput(RobotModel* robot) {
     this->robot = robot;
 }
 void AnalogPIDOutput::PIDWrite(double output) {
-    robot->SetRotateGearHolder(output);
+    robot->SetGearTilterSpeed(output);
 }
-
-

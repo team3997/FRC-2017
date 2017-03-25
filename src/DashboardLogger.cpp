@@ -22,9 +22,7 @@ DashboardLogger::~DashboardLogger(){
 void DashboardLogger::UpdateData() {
 	PutDriverJoystickAxesData();
 	PutDriverMotorOutputs();
-	PutShooterEncoderData();
 	PutDriveEncoderData();
-	PutShooterMotorOutputs();
 	PutGamePadButtonPress();
 	SmartDashboard::PutNumber("DEBUG_FPGATimestamp", robot->timer->GetFPGATimestamp());
 }
@@ -49,20 +47,9 @@ void DashboardLogger::PutDriveMotorCurrentData() {
 	SmartDashboard::PutNumber("PDP_rightDriveMotorB", robot->GetCurrent(RIGHT_DRIVE_MOTOR_B_PDP_CHAN));
 }
 
-void DashboardLogger::PutShooterEncoderData() {
-	SmartDashboard::PutNumber("SHOOTER_ENC_GetDistance()", robot->shooterEncoder->GetDistance());
-	SmartDashboard::PutNumber("SHOOTER_ENC_GetRPM", robot->shooterEncoder->GetRate() * 60.0);
-	SmartDashboard::PutNumber("SHOOTER_ENC_GetRPMGRAPH", robot->shooterEncoder->GetRate() * 60.0);
-}
-
 void DashboardLogger::PutDriveEncoderData() {
 	SmartDashboard::PutNumber("LEFTDRIVE_ENC_GetDistance()", robot->leftDriveEncoder->GetDistance());
 	SmartDashboard::PutNumber("RIGHTDRIVE_ENC_GetDistance()", robot->rightDriveEncoder->GetDistance());
-}
-
-void DashboardLogger::PutShooterMotorOutputs() {
-	SmartDashboard::PutNumber("MOTOR_shooterMotorA", robot->shooterMotorA->Get());
-	SmartDashboard::PutNumber("MOTOR_shooterMotorB", robot->shooterMotorB->Get());
 }
 
 void DashboardLogger::PutDriverJoystickAxesData() {
@@ -73,12 +60,9 @@ void DashboardLogger::PutDriverJoystickAxesData() {
 }
 
 void DashboardLogger::PutGamePadButtonPress() {
-	SmartDashboard::PutBoolean("BUTTON_shooterRunDesired", humanControl->GetShooterRunDesired());
 	SmartDashboard::PutBoolean("BUTTON_reverseDriveDesired", humanControl->GetReverseDriveDesired());
 	SmartDashboard::PutBoolean("BUTTON_climberRunDesired", humanControl->GetClimberDesired());
 	SmartDashboard::PutBoolean("BUTTON_climberRunReversedDesired", humanControl->GetClimberReverseDesired());
-	SmartDashboard::PutBoolean("BUTTON_feederRunReverseDesired", humanControl->GetFeederReverseDesired());
-	SmartDashboard::PutBoolean("BUTTON_feederRunDesired", humanControl->GetFeederRunDesired());
 	SmartDashboard::PutBoolean("BUTTON_slowDriveTier1Desired", humanControl->GetSlowDriveTier1Desired());
 	SmartDashboard::PutBoolean("BUTTON_slowDriveTier2Desired", humanControl->GetSlowDriveTier2Desired());
 	SmartDashboard::PutBoolean("BUTTON_gearSuckDesired", humanControl->GetGearSuckDesired());

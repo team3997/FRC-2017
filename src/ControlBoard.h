@@ -47,8 +47,7 @@ private:
 			climberDesired, climberLockDesired, slowDriveTier1Desired, slowDriveTier2Desired, lightsActiveDesired, driveBackDesired, gearSuckDesired, gearSuckReverseDesired, driveBackOtherDesired;
 
 	double driverLeftJoyX, driverLeftJoyY, driverRightJoyX, driverRightJoyY;
-	double operatorLeftJoyX, operatorLeftJoyY, operatorRightJoyX,
-			operatorRightJoyY;
+	double operatorLeftJoyX, operatorLeftJoyY, operatorRightJoyX, operatorRightJoyY;
 
 	Joystick *driverJoy, *operatorJoy;
 
