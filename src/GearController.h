@@ -15,22 +15,21 @@
 class GearController {
  public:
     GearController(RobotModel* robot, RemoteControl* humanControl);
-    PIDOutput* gearOutput;
-    PIDController* gearPID;
+    PIDOutput* gearTilterPIDOutput;
+    PIDController* gearTilterPID;
 
-    AnalogPIDSource* gearPIDSource;
+    AnalogPIDSource* gearTilterPIDSource;
 
+    void Reset();
     void Update();
     enum GearState {
-        kInitialize,
-        kTeleopDrive
+        kInitialize, kTeleop
     };
     virtual ~GearController();
 
  private:
     RobotModel* robot;
     RemoteControl* humanControl;
-    bool prevBackState, currBackState;
     uint32_t m_stateVal;
     uint32_t nextState;
 };

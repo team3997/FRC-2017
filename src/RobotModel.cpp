@@ -208,6 +208,11 @@ void RobotModel::SetGearTilterSpeed(double speed) {
 double RobotModel::GetGearTilterSpeed() {
     return gearTilterMotor->Get();
 }
+
+double RobotModel::GetGearPotReading() {
+	gearPot->Get();
+}
+
 void RobotModel::RefreshIni() {
 	delete pini;
 	pini = new Ini("/home/lvuser/robot.ini");

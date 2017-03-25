@@ -44,6 +44,7 @@ public:
 	void SetGearTilterSpeed(double speed);
 	double GetGearIntakeSpeed();
 	double GetGearTilterSpeed();
+	double GetGearPotReading();
 	void RefreshIni();
 	void ResetEncoders();
 

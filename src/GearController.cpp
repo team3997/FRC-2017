@@ -11,34 +11,31 @@ GearController::GearController(RobotModel* robot, RemoteControl* humanControl) {
     this->robot = robot;
     this->humanControl = humanControl;
     robot->gearPot->SetPIDSourceType(PIDSourceType::kDisplacement);
-    gearOutput = new AnalogPIDOutput(robot);
-    gearPID = new PIDController(0.0, 0.0, 0.0, robot->gearPot, gearOutput);
-    gearPID->SetOutputRange(-1.0, 1.0);
-    gearPID->SetAbsoluteTolerance(0.25);
-    gearPID->Disable();
+    gearTilterPIDOutput = new AnalogPIDOutput(robot);
+    gearTilterPID = new PIDController(0.0, 0.0, 0.0, robot->gearPot, gearTilterPIDOutput);
+    gearTilterPID->SetOutputRange(-0.7, 0.7);
+    gearTilterPID->SetAbsoluteTolerance(1);
+	gearTilterPID->SetPID(0.0, 0.0, 0.0);
+	gearTilterPID->SetSetpoint(0);
+	gearTilterPID->Disable();
 
     m_stateVal = kInitialize;
     nextState = kInitialize;
-
 }
+
+void GearController::Reset() {
+	m_stateVal = kInitialize;
+}
+
 void GearController::Update() {
     switch (m_stateVal) {
         case (kInitialize):
-            prevBackState = false;
-            gearPID->Disable();
-            nextState = kTeleopDrive;
+        	gearTilterPID->Disable();
+            nextState = kTeleop;
             break;
-        case (kTeleopDrive):
-            currBackState = true;
-                if (prevBackState == false && currBackState == true) {
-                    gearPID->SetOutputRange(-0.8, 0.8);
-                    gearPID->SetPID(0.125, 0.0, 0.0);
-                    gearPID->SetSetpoint(0);
+        case (kTeleop):
 
-                    gearPID->Enable();
-            }
-
-            nextState = kTeleopDrive;
+            nextState = kTeleop;
             break;
     }  // end of switch
 
