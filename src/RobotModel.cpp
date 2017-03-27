@@ -13,7 +13,7 @@
 //RobotModel constructor: inits all variables and objects
 RobotModel::RobotModel() {
 	pdp = new PowerDistributionPanel();
-	gearPot = new AnalogPotentiometer(GEAR_POT, 3600, GEAR_POT_OFFSET);
+	gearPot = new AnalogPotentiometer(0);
 	//Init drive motors
 	leftDriveMotorA = new Spark(LEFT_DRIVE_MOTOR_A_PWM_PORT);
 	leftDriveMotorB = new Spark(LEFT_DRIVE_MOTOR_B_PWM_PORT);

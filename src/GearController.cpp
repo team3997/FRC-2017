@@ -6,6 +6,7 @@
  */
 
 #include "GearController.h"
+#include "Params.h"
 
 GearController::GearController(RobotModel* robot, RemoteControl* humanControl) {
     this->robot = robot;
@@ -34,6 +35,22 @@ void GearController::Update() {
             nextState = kTeleop;
             break;
         case (kTeleop):
+			if(humanControl->GetGearTitlerIntakeDesired()){
+				robot->SetGearIntakeSpeed(GEAR_WHEELS_MOTOR_SPEED);
+			}
+			else if(humanControl->GetGearTitlerOuttakeDesired()){
+				robot->SetGearIntakeSpeed(-GEAR_WHEELS_MOTOR_SPEED);
+			}
+			else {
+				robot->SetGearIntakeSpeed(0.0);
+			}
+
+        	if(humanControl->GetGearTitlerDownDesired()){
+        		gearTilterPID->Enable();
+        	}
+        	else {
+        		gearTilterPID->Disable();
+        	}
 
             nextState = kTeleop;
             break;

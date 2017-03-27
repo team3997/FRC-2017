@@ -25,6 +25,7 @@ void DashboardLogger::UpdateData() {
 	PutDriveEncoderData();
 	PutGamePadButtonPress();
 	SmartDashboard::PutNumber("DEBUG_FPGATimestamp", robot->timer->GetFPGATimestamp());
+	SmartDashboard::PutNumber("POT_GearTilterPot", robot->gearPot->Get());
 }
 
 /*  double GetVoltage(); //returns the voltage
@@ -65,8 +66,6 @@ void DashboardLogger::PutGamePadButtonPress() {
 	SmartDashboard::PutBoolean("BUTTON_climberRunReversedDesired", humanControl->GetClimberReverseDesired());
 	SmartDashboard::PutBoolean("BUTTON_slowDriveTier1Desired", humanControl->GetSlowDriveTier1Desired());
 	SmartDashboard::PutBoolean("BUTTON_slowDriveTier2Desired", humanControl->GetSlowDriveTier2Desired());
-	SmartDashboard::PutBoolean("BUTTON_gearSuckDesired", humanControl->GetGearSuckDesired());
-	SmartDashboard::PutBoolean("BUTTON_gearSuckReverseDesired", humanControl->GetGearSuckReverseDesired());
 }
 
 void DashboardLogger::PutDriverMotorOutputs() {

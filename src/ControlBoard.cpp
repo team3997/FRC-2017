@@ -13,8 +13,6 @@ ControlBoard::ControlBoard() {
 	driverJoy = new Joystick(DRIVER_JOY_USB_PORT);
 	operatorJoy = new Joystick(OPERATOR_JOY_USB_PORT);
 
-	//Drivetrain buttons
-	//Superstructure Buttons
 	if (USING_WIN_DRIVER_STATION) {
 		driveDirectionButton = new ButtonReader(driverJoy, XINPUT_WIN_START_BUTTON);
 		slowDriveTier1Button = new TriggerReader(driverJoy, XINPUT_WIN_RIGHT_TRIGGER_AXIS);
@@ -22,20 +20,12 @@ ControlBoard::ControlBoard() {
 		driveBackButton = new ButtonReader(driverJoy, XINPUT_WIN_BACK_BUTTON);
 		driveBackOtherButton = new ButtonReader(driverJoy, XINPUT_WIN_LEFT_BUMPER);
 
+		gearTilterDownButton = new TriggerReader(operatorJoy, XINPUT_WIN_RIGHT_TRIGGER_AXIS);
 		climberRunButton = new ButtonReader(operatorJoy, XINPUT_WIN_BLUE_BUTTON);
 		climberReverseButton = new ButtonReader(operatorJoy, XINPUT_WIN_RED_BUTTON);
-		shooterRunButton = new ButtonReader(operatorJoy, XINPUT_WIN_GREEN_BUTTON);
-		feederRunButton = new TriggerReader(operatorJoy, XINPUT_WIN_RIGHT_TRIGGER_AXIS);
-		feederReverseButton = new ButtonReader(operatorJoy, XINPUT_WIN_START_BUTTON);
 		climberLockButton = new ButtonReader(operatorJoy, XINPUT_WIN_YELLOW_BUTTON);
-		gearSuckButton = new ButtonReader(operatorJoy, XINPUT_WIN_RIGHT_BUMPER);
-		gearSuckReverseButton = new ButtonReader(operatorJoy, XINPUT_WIN_LEFT_BUMPER);
-		lightsActiveButton = new TriggerReader(operatorJoy, XINPUT_WIN_LEFT_TRIGGER);
-	} else {
-		//driveDirectiosrc	nButton = new ButtonReader(driverJoy, XINPUT_LINUX_BACK_BUTTON);
-		//shooterRunButton = new ButtonReader(driverJoy, XINPUT_LINUX_GREEN_BUTTON);
+		lightsActiveButton = new TriggerReader(operatorJoy, XINPUT_WIN_LEFT_TRIGGER_AXIS);
 	}
-	//Superstructure Buttons
 
 	//Joystick positions that will set speed of robot movement
 	driverLeftJoyX = 0;
@@ -48,8 +38,6 @@ ControlBoard::ControlBoard() {
 	arcadeDriveDesired = USE_ARCADE_DRIVE;
 
 	//Superstructure variables
-	shooterRunDesired = false;
-	//resetEncodersButton = false;
 }
 
 //ReadControls reads the states of all the buttons and joysticks, and sets variables
@@ -83,19 +71,17 @@ void ControlBoard::ReadControls() {
 	reverseDriveDesired = driveDirectionButton->IsDown();
 
 	//Superstructure Variables
-	shooterRunDesired      = shooterRunButton->IsDown();
-	feederReverseDesired   = feederReverseButton->IsDown();
-	climberDesired         = climberRunButton->IsDown();
-	climberReverseDesired  = climberReverseButton->IsDown();
-	feederRunDesired       = feederRunButton->IsDown();
-	climberLockDesired     = climberLockButton->IsDown();
-	slowDriveTier1Desired  = slowDriveTier1Button->IsDown();
-	slowDriveTier2Desired  = slowDriveTier2Button->IsDown();
-	driveBackDesired       = driveBackButton->IsDown();
-	gearSuckDesired        = gearSuckButton->IsDown();
-	gearSuckReverseDesired = gearSuckReverseButton->IsDown();
-	driveBackOtherDesired  = driveBackOtherButton->IsDown();
-	lightsActiveDesired    = lightsActiveButton->IsDown();
+	climberDesired           = climberRunButton->IsDown();
+	climberReverseDesired    = climberReverseButton->IsDown();
+	climberLockDesired       = climberLockButton->IsDown();
+	slowDriveTier1Desired    = slowDriveTier1Button->IsDown();
+	slowDriveTier2Desired    = slowDriveTier2Button->IsDown();
+	driveBackDesired         = driveBackButton->IsDown();
+	driveBackOtherDesired    = driveBackOtherButton->IsDown();
+	lightsActiveDesired      = lightsActiveButton->IsDown();
+	gearTilterDownDesired    = gearTilterDownButton->IsDown();
+	gearTilterOuttakeDesired = gearTilterOuttakeButton->IsDown();
+	gearTilterIntakeDesired  = gearTilterIntakeButton->IsDown();
 }
 
 //Reads the values of all buttons defined by this class
@@ -103,17 +89,15 @@ void ControlBoard::ReadAllButtons() {
 	driveDirectionButton->ReadValue();
 	slowDriveTier1Button->ReadValue();
 	slowDriveTier2Button->ReadValue();
-	shooterRunButton->ReadValue();
-	feederReverseButton->ReadValue();
 	climberRunButton->ReadValue();
 	climberReverseButton->ReadValue();
-	feederRunButton->ReadValue();
 	climberLockButton->ReadValue();
 	driveBackButton->ReadValue();
-	gearSuckButton->ReadValue();
-	gearSuckReverseButton->ReadValue();
 	driveBackOtherButton->ReadValue();
 	lightsActiveButton->ReadValue();
+	gearTilterDownButton->ReadValue();
+	gearTilterOuttakeButton->ReadValue();
+	gearTilterIntakeButton->ReadValue();
 }
 
 //Returns the joystick and axis being used
@@ -153,10 +137,6 @@ bool ControlBoard::GetReverseDriveDesired() {
 	return reverseDriveDesired;
 }
 
-//Returns true if running shooter is desired
-bool ControlBoard::GetShooterRunDesired() {
-	return shooterRunDesired;
-}
 //Returns true if arcade drive is desired
 bool ControlBoard::GetArcadeDriveDesired() {
 	return arcadeDriveDesired;
@@ -166,16 +146,8 @@ bool ControlBoard::GetClimberDesired() {
 	return climberDesired;
 }
 
-bool ControlBoard::GetFeederReverseDesired() {
-	return feederReverseDesired;
-}
-
 bool ControlBoard::GetClimberReverseDesired() {
 	return climberReverseDesired;
-}
-
-bool ControlBoard::GetFeederRunDesired() {
-	return feederRunDesired;
 }
 
 bool ControlBoard::GetClimberLockDesired() {
@@ -185,21 +157,31 @@ bool ControlBoard::GetClimberLockDesired() {
 bool ControlBoard::GetSlowDriveTier1Desired() {
 	return slowDriveTier1Desired;
 }
+
 bool ControlBoard::GetSlowDriveTier2Desired() {
 	return slowDriveTier2Desired;
 }
+
 bool ControlBoard::GetDriveBackDesired() {
 	return driveBackDesired;
 }
-bool ControlBoard::GetGearSuckReverseDesired() {
-    return gearSuckReverseDesired;
-}
-bool ControlBoard::GetGearSuckDesired() {
-    return gearSuckDesired;
-}
+
 bool ControlBoard::GetDriveBackOtherDesired() {
 	return driveBackOtherDesired;
 }
+
 bool ControlBoard::GetLightsActiveDesired(){
 	return lightsActiveDesired;
+}
+
+bool ControlBoard::GetGearTitlerDownDesired(){
+	return gearTilterDownDesired;
+}
+
+bool ControlBoard::GetGearTitlerIntakeDesired(){
+	return gearTilterIntakeDesired;
+}
+
+bool ControlBoard::GetGearTitlerOuttakeDesired(){
+	return gearTilterOuttakeDesired;
 }
