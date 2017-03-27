@@ -21,6 +21,7 @@ ControlBoard::ControlBoard() {
 		slowDriveTier2Button = new TriggerReader(driverJoy, XINPUT_WIN_LEFT_TRIGGER_AXIS);
 		driveBackButton = new ButtonReader(driverJoy, XINPUT_WIN_BACK_BUTTON);
 		driveBackOtherButton = new ButtonReader(driverJoy, XINPUT_WIN_LEFT_BUMPER);
+		shoutRoutineButton = new ButtonReader(driverJoy, XINPUT_WIN_YELLOW_BUTTON);
 
 		climberRunButton = new ButtonReader(operatorJoy, XINPUT_WIN_BLUE_BUTTON);
 		climberReverseButton = new ButtonReader(operatorJoy, XINPUT_WIN_RED_BUTTON);
@@ -96,6 +97,7 @@ void ControlBoard::ReadControls() {
 	gearSuckReverseDesired = gearSuckReverseButton->IsDown();
 	driveBackOtherDesired  = driveBackOtherButton->IsDown();
 	lightsActiveDesired    = lightsActiveButton->IsDown();
+	shoutRoutineDesired = shoutRoutineButton->IsDown();
 }
 
 //Reads the values of all buttons defined by this class
@@ -114,6 +116,7 @@ void ControlBoard::ReadAllButtons() {
 	gearSuckReverseButton->ReadValue();
 	driveBackOtherButton->ReadValue();
 	lightsActiveButton->ReadValue();
+	shoutRoutineButton->ReadValue();
 }
 
 //Returns the joystick and axis being used
@@ -202,4 +205,7 @@ bool ControlBoard::GetDriveBackOtherDesired() {
 }
 bool ControlBoard::GetLightsActiveDesired(){
 	return lightsActiveDesired;
+}
+bool ControlBoard::GetShoutRoutineDesired() {
+    return shoutRoutineDesired;
 }

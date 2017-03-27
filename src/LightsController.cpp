@@ -33,7 +33,7 @@ void LightsController::Update(bool enabled) {
 		SmartDashboard::PutString("LIGHTS_debug", "init reached");
 		break;
 	case (kTeleop):
-
+        /*
 		//Climber Behaviour
 		if (enabled) {
 			if (humanControl->GetLightsActiveDesired()) {
@@ -45,7 +45,7 @@ void LightsController::Update(bool enabled) {
 		} else {
 			SetDisabledRoutine();
 			SmartDashboard::PutString("LIGHTS_debug_3", "disabled reached");
-		}
+		}*/
 
 		nextState = kTeleop;
 		break;
@@ -71,7 +71,7 @@ void LightsController::SetEnabledRoutine() {
 void LightsController::SetShoutRoutine() {
 	pin1->Set(HIGH);
 	pin2->Set(HIGH);
-    pin3->Set(HIGH);
+    pin3->Set(LOW);
     pin4->Set(HIGH);
 }
 

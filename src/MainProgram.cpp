@@ -101,7 +101,7 @@ private:
 	}
 
 	void TeleopInit() {
-
+	    lights->SetEnabledRoutine();
 		auton->Stop();
 		RefreshAllIni();
 		robot->ResetTimer();
@@ -141,9 +141,12 @@ private:
 		climberController->Update();
 		visionController->Update();
 		gearController->Update();
-
 		if(humanControl->GetClimberDesired()) {
 		    lights->Climbing();
+		} else if(humanControl->GetShoutRoutineDesired()) {
+		    lights->SetShoutRoutine();
+		} else {
+		    lights->SetEnabledRoutine();
 		}
 	}
 
@@ -157,10 +160,11 @@ private:
 		shooterController->Reset();
 		climberController->Reset();
 		visionController->Disable();
-
+		lights->SetDisabledRoutine();
 	}
 
 	void DisabledPeriodic() {
+
 		dashboardLogger->UpdateData();
 		//robot->UpdateCurrent();
 		//auton->Stop();

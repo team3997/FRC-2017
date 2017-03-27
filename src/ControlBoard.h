@@ -39,12 +39,13 @@ public:
 	bool GetGearSuckReverseDesired();
 	bool GetGearSuckDesired();
 	bool GetLightsActiveDesired();
+	bool GetShoutRoutineDesired();
 private:
 
 	//booleans for desired states of robot
 	bool climberReverseDesired, feederReverseDesired, feederRunDesired,
 			reverseDriveDesired, arcadeDriveDesired, shooterRunDesired,
-			climberDesired, climberLockDesired, slowDriveTier1Desired, slowDriveTier2Desired, lightsActiveDesired, driveBackDesired, gearSuckDesired, gearSuckReverseDesired, driveBackOtherDesired;
+			climberDesired, climberLockDesired, slowDriveTier1Desired, slowDriveTier2Desired, lightsActiveDesired, driveBackDesired, gearSuckDesired, gearSuckReverseDesired, driveBackOtherDesired, shoutRoutineDesired;
 
 	double driverLeftJoyX, driverLeftJoyY, driverRightJoyX, driverRightJoyY;
 	double operatorLeftJoyX, operatorLeftJoyY, operatorRightJoyX,
@@ -53,7 +54,7 @@ private:
 	Joystick *driverJoy, *operatorJoy;
 
 	ButtonReader *climberReverseButton, *driveDirectionButton,
-			*feederReverseButton, *climberRunButton, *shooterRunButton, *climberLockButton, *driveBackButton, *gearSuckReverseButton, *gearSuckButton, *driveBackOtherButton;
+			*feederReverseButton, *climberRunButton, *shooterRunButton, *climberLockButton, *driveBackButton, *gearSuckReverseButton, *gearSuckButton, *driveBackOtherButton, *shoutRoutineButton;
 
 	TriggerReader *slowDriveTier1Button, *slowDriveTier2Button, *feederRunButton, *lightsActiveButton;
 
