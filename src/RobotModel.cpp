@@ -210,7 +210,7 @@ double RobotModel::GetGearTilterSpeed() {
 }
 
 double RobotModel::GetGearPotReading() {
-	gearPot->Get();
+	return gearPot->Get();
 }
 
 void RobotModel::RefreshIni() {

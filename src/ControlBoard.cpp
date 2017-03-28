@@ -20,6 +20,9 @@ ControlBoard::ControlBoard() {
 		driveBackButton = new ButtonReader(driverJoy, XINPUT_WIN_BACK_BUTTON);
 		driveBackOtherButton = new ButtonReader(driverJoy, XINPUT_WIN_LEFT_BUMPER);
 
+		gearTilterIntakeButton = new ButtonReader(operatorJoy, XINPUT_WIN_GREEN_BUTTON);
+        gearTilterOuttakeButton = new ButtonReader(operatorJoy, XINPUT_WIN_RED_BUTTON);
+
 		gearTilterDownButton = new TriggerReader(operatorJoy, XINPUT_WIN_RIGHT_TRIGGER_AXIS);
 		climberRunButton = new ButtonReader(operatorJoy, XINPUT_WIN_BLUE_BUTTON);
 		climberReverseButton = new ButtonReader(operatorJoy, XINPUT_WIN_RED_BUTTON);
