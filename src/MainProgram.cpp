@@ -48,6 +48,7 @@ public:
 		climberController = new ClimberController(robot, humanControl);
 		gearController    = new GearController(robot, humanControl);
 		auton             = new Auto(visionController, driveController, robot, gearController);
+
 		//lights            = new LightsController(humanControl);
 		//Initializes timekeeper variables
 		currTimeSec = 0.0;
@@ -156,6 +157,7 @@ private:
 		//lights->Update(false);
 		visionController->Update();
 	    humanControl->ReadControls();
+	    gearController->Update();
 	    RefreshAllIni();
 	}
 	void RefreshAllIni() {

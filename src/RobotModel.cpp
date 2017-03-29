@@ -48,7 +48,7 @@ RobotModel::RobotModel() {
 	leftDriveMotorB->SetSafetyEnabled(false);
 	rightDriveMotorA->SetSafetyEnabled(false);
 	rightDriveMotorB->SetSafetyEnabled(false);
-	climberMotor->SetInverted(true);
+	climberMotor->SetInverted(false);
 
 	leftDriveMotorA->SetInverted(false);
 	leftDriveMotorB->SetInverted(false);

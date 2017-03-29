@@ -6,23 +6,16 @@
 static bool SQUARE_DRIVE_AXIS_INPUT                    = true;
 static const bool USE_ARCADE_DRIVE                     = true;
 
-static const double SHOOTER_HARDSET_MOTOR_SPEED        = 1.0;
-static const bool SHOOTER_USE_PID                      = true;
-static double FEEDER_HARDSET_MOTOR_SPEED               = 0.8;
-
 static double GLOBAL_DRIVE_SPEED_MULTIPLIER            = 1.0;
-static const double GEAR_WHEELS_MOTOR_SPEED            = 0.8;
 
 static const double CLIMBER_HARDSET_MOTOR_SPEED        = 1.0;
-static const double GEAR_HARDSET_MOTOR_SPEED           = 1.0;
-static const double FEEDER_PULSE_TIME 				   = 0.2;
 
-//SHOOTER PID PARAMS
-static const double SHOOTER_PID_SETPOINT               = 3600.0;
-static const double SHOOTER_THRESHOLD_FOR_FEEDER       = 2800.0;
-
-static const double SHOOTER_PID_VALUES[]               = {0.8, 0.0, 0.0}; // P, I, D
-static const double SHOOTER_PID_SCALE_VALUES[] 		   = {(1.0/500.0), 1.0, 1.0}; //P, I, D
+//GEAR HOLDER PARAMS
+static const double GEAR_WHEELS_RESTING_MOTOR_SPEED    = 0.0;
+static const double GEAR_WHEELS_ACTIVE_MOTOR_SPEED     = 0.7;
+static const double GEAR_TILTER_MAX_MOTOR_SPEED        = 0.4;
+static const double GEAR_POT_UP_POSITION               = 0.236;
+static const double GEAR_POT_DOWN_POSITION             = 0.3264;
 
 //DRIVE PID PARAMS
 

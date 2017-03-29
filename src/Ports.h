@@ -25,6 +25,7 @@ static const int RIGHT_DRIVE_ENCODER_PORTS[]           = {7, 6};
 static const int LIGHTS_DIO_PORTS[]                    = {5, 4};
 // ******************* ANALOG IN PORTS*******************
 static const int GEAR_POT                              = 0;
+
 // ***************** MISC *****************
 
 // ***************** SOLENOID PORTS *****************

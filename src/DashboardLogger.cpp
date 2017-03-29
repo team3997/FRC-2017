@@ -66,6 +66,10 @@ void DashboardLogger::PutGamePadButtonPress() {
 	SmartDashboard::PutBoolean("BUTTON_climberRunReversedDesired", humanControl->GetClimberReverseDesired());
 	SmartDashboard::PutBoolean("BUTTON_slowDriveTier1Desired", humanControl->GetSlowDriveTier1Desired());
 	SmartDashboard::PutBoolean("BUTTON_slowDriveTier2Desired", humanControl->GetSlowDriveTier2Desired());
+	SmartDashboard::PutBoolean("BUTTON_gearTilterDownDesired", humanControl->GetGearTitlerDownDesired());
+	SmartDashboard::PutBoolean("BUTTON_gearIntakeDesired", humanControl->GetGearTitlerIntakeDesired());
+	SmartDashboard::PutBoolean("BUTTON_gearOuttakeDesired", humanControl->GetGearTitlerOuttakeDesired());
+
 }
 
 void DashboardLogger::PutDriverMotorOutputs() {
