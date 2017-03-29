@@ -34,12 +34,9 @@ RobotModel::RobotModel() {
 
 	climberLockerServo->SetSafetyEnabled(false);
 
-	shooterEncoder->SetPIDSourceType(PIDSourceType::kRate);
-	shooterEncoder->SetDistancePerPulse((1.0) / (250.0));
-	shooterEncoder->SetSamplesToAverage(90);
+
 	climberMotor->SetSafetyEnabled(false);
 
-	shooterEncoder->SetPIDSourceType(PIDSourceType::kRate);
 	leftDriveEncoder->SetReverseDirection(false);
 	leftDriveEncoder->SetDistancePerPulse(((1.0) / (250.0)) * ((4.0) * (M_PI)));
 	leftDriveEncoder->SetSamplesToAverage(1);
@@ -169,7 +166,6 @@ void RobotModel::ResetTimer() {
 }
 
 void RobotModel::ResetEncoders() {
-	shooterEncoder->Reset();
 	leftDriveEncoder->Reset();
 	rightDriveEncoder->Reset();
 }

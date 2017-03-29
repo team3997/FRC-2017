@@ -59,7 +59,6 @@ public:
 
 	AnalogPotentiometer *gearPot;
 
-	Encoder *shooterEncoder;
 	Encoder *leftDriveEncoder, *rightDriveEncoder;
 
 	Servo *climberLockerServo;
@@ -69,7 +68,7 @@ private:
 	PowerDistributionPanel* pdp;
 
 	double leftDriveACurrent, leftDriveBCurrent, rightDriveACurrent,
-			rightDriveBCurrent, climberMotorCurrent, gearSuckerCurrent;
+			rightDriveBCurrent, climberMotorCurrent;
 };
 
 #endif /* SRC_ROBOTMODEL_H_ */
