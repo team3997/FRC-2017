@@ -1,4 +1,5 @@
 #include "TriggerReader.h"
+#include "WPILib.h"
 
 //Class TriggerReader
 //Constructs a joystick and sets the port of the Trigger on the joystick, and reads the state of the Trigger

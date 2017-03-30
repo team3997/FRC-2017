@@ -4,11 +4,10 @@
 #include "ControlBoard.h"
 #include "DashboardLogger.h"
 #include "LightsController.h"
-#include "ShooterController.h"
 #include "ClimberController.h"
 #include "DriveController.h"
 #include "VisionController.h"
-#include "GearSuck.h"
+#include "GearController.h"
 #include <string.h>
 #include "Auto/Auto.h"
 
@@ -23,15 +22,14 @@ class MainProgram : public frc::IterativeRobot {
 
 	//Creates a controller for drivetrain and superstructure
 	DriveController *driveController;
-	ShooterController *shooterController;
 
 	//Creates an object of Dashboardlogger
 	DashboardLogger *dashboardLogger;
 
 	ClimberController *climberController;
-
 	LightsController* lights;
-	GearSuck *gearController;
+
+	GearController *gearController;
 	Auto* auton;
 	CameraServer *camera;
 
@@ -50,10 +48,9 @@ public:
 		visionController  = new VisionController();
 		driveController   = new DriveController(robot, humanControl, visionController);
 		dashboardLogger   = new DashboardLogger(robot, humanControl);
-		shooterController = new ShooterController(robot, humanControl);
 		climberController = new ClimberController(robot, humanControl);
-		gearController    = new GearSuck(robot, humanControl);
-		auton             = new Auto(visionController, driveController, robot, lights);
+		gearController    = new GearController(robot, humanControl);
+		auton             = new Auto(visionController, driveController, robot, gearController, lights);
 		//lights            = new LightsController(humanControl);
 		//Initializes timekeeper variables
 		currTimeSec = 0.0;
@@ -108,7 +105,6 @@ private:
 		robot->ResetEncoders();
 
 		driveController->Reset();
-		shooterController->Reset();
 		climberController->Reset();
 
 		//Resets timer variables
@@ -137,7 +133,6 @@ private:
 		RefreshAllIni();
 		humanControl->ReadControls();
 		driveController->Update(currTimeSec, deltaTimeSec);
-		shooterController->Update(currTimeSec, deltaTimeSec);
 		climberController->Update();
 		visionController->Update();
 		gearController->Update();
@@ -157,7 +152,6 @@ private:
 
 		robot->ResetEncoders();
 		driveController->Reset();
-		shooterController->Reset();
 		climberController->Reset();
 		visionController->Disable();
 		lights->SetDisabledRoutine();
@@ -173,6 +167,7 @@ private:
 		//lights->Update(false);
 		visionController->Update();
 	    humanControl->ReadControls();
+	    gearController->Update();
 	    RefreshAllIni();
 	}
 	void RefreshAllIni() {

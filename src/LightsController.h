@@ -9,6 +9,7 @@
 #define SRC_LIGHTSCONTROLLER_H_
 
 #include "WPILib.h"
+#include "DigitalOutput.h"
 #include "RemoteControl.h"
 #include "Ports.h"
 

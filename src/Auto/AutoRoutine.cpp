@@ -37,9 +37,6 @@ void AutoRoutine::DriveInterval(DriveController* kDrive, double seconds, double 
 	RunAction(new DriveIntervalAction(kDrive, seconds, y, x));
 }
 
-void AutoRoutine::Shoot(RobotModel* robot, double seconds, double speed) {
-	RunAction(new ShootAction(robot, seconds, speed));
-}
 
 void AutoRoutine::DriveDistanceStraight(RobotModel* robot, DriveController* kDrive, double desired_distance, double maxSpeed, double timeout, bool waitForTimeout, LightsController* lights) {
   RunAction(new DriveSetPointStraightAction(robot, kDrive, desired_distance, maxSpeed, timeout, waitForTimeout, lights));

@@ -12,7 +12,8 @@
 
 class RightGear : public AutoRoutine {
  public:
-    RightGear(VisionController *vision, RobotModel *robot, DriveController* driveTrain, LightsController* lights);
+
+    RightGear(VisionController *vision, RobotModel *robot, DriveController* driveTrain, GearController* gearController, LightsController* lights);
     void Prestart();
 
  private:
@@ -20,6 +21,7 @@ class RightGear : public AutoRoutine {
     RobotModel *robot;
     VisionController *vision;
     LightsController* lights;
+    GearController* gearController;
  protected:
     void Routine();
 };

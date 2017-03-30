@@ -13,10 +13,13 @@
 #include "../DriveController.h"
 #include "../RobotModel.h"
 #include "../VisionController.h"
+#include "../GearController.h"
+
 #include "../LightsController.h"
 class Auto {
 public:
-	Auto(VisionController *vision, DriveController* kDrive, RobotModel* robot, LightsController* lights);
+	Auto(VisionController *vision, DriveController* kDrive, RobotModel* robot, GearController* gearController, LightsController* lights);
+
 	bool ReturnBool();
 	AutoRoutine* autoRoutine;
 	void Reset();
@@ -30,6 +33,7 @@ private:
 	DriveController* kDrive;
 	RobotModel* robot;
 	LightsController* lights;
+	GearController* gearController;
 };
 
 #endif /* SRC_AUTO_AUTO_H_ */

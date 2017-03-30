@@ -37,27 +37,28 @@ public:
 	double GetTime(); //returns the time
 
 	//Superstructure systems
-	void SetShooterMotorsSpeed(double speed); //sets the speed of the shooter motors
-	double GetShooterMotorASpeed(); //returns the speed of the shooter motor A
-	double GetShooterMotorBSpeed(); //returns the speed of the shooter motor B
-	void SetFeederMotorSpeed(double speed); //sets the speed of the feeder motor
-	double GetFeederMotorSpeed(); //gets the speed of the feeder motor
-    void SetGearSuckerMotorSpeed(double speed); //sets the speed of the climber motor
-    double GetGearSuckerMotorSpeed(); //gets the speed of the climber motor
 	void SetClimberMotorSpeed(double speed); //sets the speed of the climber motor
 	double GetClimberMotorSpeed(); //gets the speed of the climber motor
 	void SetClimberLockServoSpeed(double speed);
+	void SetGearIntakeSpeed(double speed);
+	void SetGearTilterSpeed(double speed);
+	double GetGearIntakeSpeed();
+	double GetGearTilterSpeed();
+	double GetGearPotReading();
 	void RefreshIni();
 	void ResetEncoders();
 
 	//Speed controllers
 	Spark *leftDriveMotorA, *leftDriveMotorB, *rightDriveMotorA,
-			*rightDriveMotorB, *gearSuckerMotor;
-	VictorSP *shooterMotorA, *shooterMotorB;
-	Talon *climberMotor, *feederMotor;
+			*rightDriveMotorB;
+
+	Talon *climberMotor;
 	Ini *pini;
 
-	Encoder *shooterEncoder;
+	VictorSP *gearTilterMotor, *gearIntakeMotor;
+
+	AnalogPotentiometer *gearPot;
+
 	Encoder *leftDriveEncoder, *rightDriveEncoder;
 
 	Servo *climberLockerServo;
@@ -67,8 +68,7 @@ private:
 	PowerDistributionPanel* pdp;
 
 	double leftDriveACurrent, leftDriveBCurrent, rightDriveACurrent,
-			rightDriveBCurrent, shooterMotorACurrent, shooterMotorBCurrent,
-			climberMotorCurrent, gearSuckerCurrent;
+			rightDriveBCurrent, climberMotorCurrent;
 };
 
 #endif /* SRC_ROBOTMODEL_H_ */

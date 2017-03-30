@@ -19,20 +19,18 @@ public:
 
 	virtual bool GetReverseDriveDesired() = 0;
 	virtual bool GetArcadeDriveDesired() = 0;
-	virtual bool GetShooterRunDesired() = 0;
 	virtual bool GetClimberDesired() = 0;
-	virtual bool GetFeederReverseDesired() = 0;
-	virtual bool GetFeederRunDesired() = 0;
 	virtual bool GetClimberReverseDesired() = 0;
 	virtual bool GetClimberLockDesired() = 0;
 	virtual bool GetSlowDriveTier1Desired() = 0;
 	virtual bool GetSlowDriveTier2Desired() = 0;
 	virtual bool GetDriveBackDesired() = 0;
 	virtual bool GetDriveBackOtherDesired() = 0;
-	virtual bool GetGearSuckReverseDesired() = 0;
-    virtual bool GetGearSuckDesired() = 0;
     virtual bool GetLightsActiveDesired() = 0;
     virtual bool GetShoutRoutineDesired() = 0;
+	virtual bool GetGearTitlerDownDesired() = 0;
+	virtual bool GetGearTitlerOuttakeDesired() = 0;
+	virtual bool GetGearTitlerIntakeDesired() = 0;
 	virtual void ReadControls() = 0;
 
 	//Drive joystick accessors

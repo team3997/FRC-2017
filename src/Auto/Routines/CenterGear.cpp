@@ -7,11 +7,12 @@
 
 #include "CenterGear.h"
 CenterGear::CenterGear(VisionController* vision, RobotModel* robot,
-                       DriveController* driveTrain, LightsController* lights) {
+                       DriveController* driveTrain, GearController* gearController, LightsController* lights) {
     this->vision = vision;
     this->robot = robot;
     this->driveTrain = driveTrain;
     this->lights = lights;
+    this->gearController = gearController;
 }
 void CenterGear::Routine() {
 

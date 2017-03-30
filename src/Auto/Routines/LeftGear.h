@@ -12,7 +12,8 @@
 
 class LeftGear : public AutoRoutine {
  public:
-    LeftGear(VisionController *vision, RobotModel *robot, DriveController* driveTrain, LightsController* lights);
+    LeftGear(VisionController *vision, RobotModel *robot, DriveController* driveTrain, GearController* gearController, LightsController* lights);
+
     void Prestart();
 
  private:
@@ -20,6 +21,7 @@ class LeftGear : public AutoRoutine {
     RobotModel *robot;
     VisionController *vision;
     LightsController* lights;
+    GearController* gearController;
  protected:
     void Routine();
 };
