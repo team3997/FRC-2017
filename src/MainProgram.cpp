@@ -140,6 +140,18 @@ private:
 		    lights->Climbing();
 		} else if(humanControl->GetShoutRoutineDesired()) {
 		    lights->SetShoutRoutine();
+		} else if(humanControl->GetGearTitlerIntakeDesired()){
+		    lights->GearIntake();
+
+		} else if(humanControl->GetGearTitlerOuttakeDesired()){
+        lights->GearOuttake();
+
+		} else if(humanControl->GetSlowDriveTier1Desired()){
+            lights->Brake1();
+
+		} else if(humanControl->GetSlowDriveTier2Desired()){
+            lights->Brake2();
+
 		} else {
 		    lights->SetEnabledRoutine();
 		}
