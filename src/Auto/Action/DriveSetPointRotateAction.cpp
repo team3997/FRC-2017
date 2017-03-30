@@ -31,7 +31,6 @@ DriveSetPointRotateAction::DriveSetPointRotateAction(RobotModel *robot, DriveCon
 
 bool DriveSetPointRotateAction::IsFinished() {
     if((Timer::GetFPGATimestamp() >= start_time + timeout) && !(reachedSetpoint)) {
-        lights->PIDFail();
     }
     if(waitForTimeout)
         return (Timer::GetFPGATimestamp() >= start_time + timeout);
@@ -43,11 +42,9 @@ bool DriveSetPointRotateAction::IsFinished() {
 void DriveSetPointRotateAction::Update() {
 	if(driveController->leftPID->OnTarget() && driveController->rightPID->OnTarget()) {
 		reachedSetpoint = true;
-		lights->PIDLockedOn();
 	}
 	else {
 		reachedSetpoint = false;
-		lights->PIDWorking();
 	}
 }
 

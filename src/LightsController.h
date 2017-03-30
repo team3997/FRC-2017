@@ -23,9 +23,9 @@ public:
 	void SetDisabledRoutine();
 	void SetEnabledRoutine();
 	void SetShoutRoutine();
-	void PIDFail();
-	void PIDWorking();
-	void PIDLockedOn();
+	void Brake2();
+	void Brake1();
+	void GearOuttake();
 	void GearIntake();
 	void Climbing();
 

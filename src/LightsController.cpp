@@ -75,14 +75,14 @@ void LightsController::SetShoutRoutine() {
     pin4->Set(HIGH);
 }
 
-void LightsController::PIDFail() {
+void LightsController::Brake2() {
     pin1->Set(HIGH);
     pin2->Set(LOW);
     pin3->Set(HIGH);
     pin4->Set(LOW);
 }
 
-void LightsController::PIDWorking() {
+void LightsController::Brake1() {
     pin1->Set(HIGH);
     pin2->Set(LOW);
     pin3->Set(LOW);
@@ -90,7 +90,7 @@ void LightsController::PIDWorking() {
 }
 
 
-void LightsController::PIDLockedOn() {
+void LightsController::GearOuttake() {
     pin1->Set(HIGH);
     pin2->Set(LOW);
     pin3->Set(HIGH);

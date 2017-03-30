@@ -30,7 +30,6 @@ DriveSetPointStraightAction::DriveSetPointStraightAction(RobotModel *robot,
 
 bool DriveSetPointStraightAction::IsFinished() {
 	if((Timer::GetFPGATimestamp() >= start_time + timeout) && !(reachedSetpoint)) {
-	    lights->PIDFail();
 	}
     if(waitForTimeout)
         return (Timer::GetFPGATimestamp() >= start_time + timeout);
@@ -42,10 +41,8 @@ bool DriveSetPointStraightAction::IsFinished() {
 void DriveSetPointStraightAction::Update() {
 	if (driveController->leftPID->OnTarget() && driveController->rightPID->OnTarget()) {
 		reachedSetpoint = true;
-		lights->PIDLockedOn();
 	} else {
 		reachedSetpoint = false;
-		lights->PIDWorking();
 	}
 	SmartDashboard::PutBoolean("ACTION_DriveSetpointStraight", true);
 }
