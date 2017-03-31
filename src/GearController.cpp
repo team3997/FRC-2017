@@ -76,7 +76,7 @@ void GearController::Update() {
         		wasDown = true;
         		wasUp = false;
         		gearTilterPID->Disable();
-        		if(robot->gearPot->Get() <= 0.294) {
+        		if(robot->gearPot->Get() <= 0.32) {
         			robot->SetGearTilterSpeed(0.1);
         		}
         	}

@@ -7,9 +7,9 @@ static const int LEFT_DRIVE_MOTOR_A_PWM_PORT            = 0; //front left
 static const int LEFT_DRIVE_MOTOR_B_PWM_PORT            = 1; //back left
 static const int RIGHT_DRIVE_MOTOR_A_PWM_PORT           = 2; //front right
 static const int RIGHT_DRIVE_MOTOR_B_PWM_PORT           = 3; //back right
-static const int CLIMBER_MOTOR_PWM_PORT                 = 4;
+static const int CLIMBER_MOTOR_PWM_PORT                 = 6;
 static const int GEAR_INTAKE_MOTOR_PWM_PORT             = 5;
-static const int GEAR_TILTER_MOTOR_PWM_PORT             = 6;
+static const int GEAR_TILTER_MOTOR_PWM_PORT             = 4;
 static const int CLIMBER_LOCKER_SERVO_PWM_PORT          = 7;
 
 // ***************** PDP CHANNELS *****************
