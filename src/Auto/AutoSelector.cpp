@@ -18,6 +18,10 @@ AutoSelector::AutoSelector(VisionController *vision, RobotModel* robot, DriveCon
   RegisterAutonomous(new PassAutoLine(robot, kDrive));
   RegisterAutonomous(new LeftHopper(robot, kDrive));
   RegisterAutonomous(new BoilerFirstHopper(robot, kDrive));
+  RegisterAutonomous(new Blank1(vision, robot, kDrive, gearController));
+  RegisterAutonomous(new Blank2(vision, robot, kDrive, gearController));
+  RegisterAutonomous(new Blank3(vision, robot, kDrive, gearController));
+
 
   autoChooser = new AutoWidget();
 }
@@ -31,6 +35,10 @@ void AutoSelector::ListOptions() {
   autoChooser->AddObject("Pass AutoLine", 5);
   autoChooser->AddObject("Left Hopper", 6);
   autoChooser->AddObject("BoilerStraightHoppers", 7);
+  autoChooser->AddObject("Blank 1", 8);
+  autoChooser->AddObject("Blank 2", 9);
+  autoChooser->AddObject("Blank 3", 10);
+
 
   SmartDashboard::PutData("Autonomous: ", autoChooser);
 
