@@ -12,10 +12,10 @@ static const double CLIMBER_HARDSET_MOTOR_SPEED        = 1.0;
 
 //GEAR HOLDER PARAMS
 static const double GEAR_WHEELS_RESTING_MOTOR_SPEED    = 0.0;
-static const double GEAR_WHEELS_ACTIVE_MOTOR_SPEED     = 0.7;
+static const double GEAR_WHEELS_ACTIVE_MOTOR_SPEED     = 0.75;
 static const double GEAR_TILTER_MAX_MOTOR_SPEED        = 0.4;
 static const double GEAR_POT_UP_POSITION               = 0.236;
-static const double GEAR_POT_DOWN_POSITION             = 0.3264;
+static const double GEAR_POT_DOWN_POSITION             = 0.3280;
 
 //DRIVE PID PARAMS
 

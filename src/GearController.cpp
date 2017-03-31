@@ -47,7 +47,7 @@ void GearController::Update() {
 				robot->SetGearIntakeSpeed(GEAR_WHEELS_RESTING_MOTOR_SPEED);
 			}
 
-        	if(!humanControl->GetGearTitlerDownDesired()){ //UP
+        	if(humanControl->GetGearTitlerDownDesired()){ //UP
         		if (wasDown) {
         			gearTilterPID->Reset();
         		}
@@ -62,8 +62,8 @@ void GearController::Update() {
         		wasUp = true;
         		gearTilterPID->Enable();
         	}
-        	else if(humanControl->GetGearTitlerDownDesired()){ //DOWN
-        		if (wasUp) {
+        	else if(!humanControl->GetGearTitlerDownDesired()){ //DOWN
+        		/*if (wasUp) {
         			gearTilterPID->Reset();
         		}
         		gearTilterPID->SetPID(
@@ -72,9 +72,13 @@ void GearController::Update() {
 						robot->pini->getf("GEAR_DOWN_PID", "gear_down_d", 0.0));
         		gearTilterPID->SetOutputRange(-0.5, 0.5);
         		gearTilterPID->SetSetpoint(GEAR_POT_DOWN_POSITION);
+        		*/
         		wasDown = true;
         		wasUp = false;
-        		gearTilterPID->Enable();
+        		gearTilterPID->Disable();
+        		if(robot->gearPot->Get() <= 0.294) {
+        			robot->SetGearTilterSpeed(0.1);
+        		}
         	}
         	else {
         		wasDown = true;
