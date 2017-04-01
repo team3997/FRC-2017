@@ -16,7 +16,6 @@
 #include "Routines/LeftGear.h"
 #include "Routines/RightGear.h"
 #include "Routines/PassAutoLine.h"
-#include "Routines/LeftHopper.h"
 #include "Routines/Blank1.h"
 #include "Routines/Blank2.h"
 #include "Routines/Blank3.h"
@@ -30,7 +29,7 @@ using namespace frc;
 
 class AutoSelector {
 public:
-	AutoSelector(VisionController *vision, RobotModel* robot, DriveController* kDrive, GearController* gearController);
+	AutoSelector(VisionController *vision, RobotModel* robot, DriveController* kDrive, GearController* gearController, LightsController* lights);
 
 	void ListOptions();
 	AutoRoutine* Pick();
@@ -44,6 +43,7 @@ private:
 	vector<AutoRoutine*>* autoRoutines;
 	void SetAutoRoutineByIndex(int input);
 	int selectedIndex = 0;
+	LightsController* lights;
 };
 
 #endif /* SRC_AUTO_AUTOSELECTOR_H_ */

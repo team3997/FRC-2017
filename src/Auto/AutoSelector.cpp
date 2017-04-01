@@ -7,21 +7,19 @@
 
 #include "AutoSelector.h"
 
-AutoSelector::AutoSelector(VisionController *vision, RobotModel* robot, DriveController* kDrive, GearController* gearController) {
+AutoSelector::AutoSelector(VisionController *vision, RobotModel* robot, DriveController* kDrive, GearController* gearController, LightsController* lights) {
 
   autoRoutines = new vector<AutoRoutine*>();
-  RegisterAutonomous(new DoNothingRoutine());
-  RegisterAutonomous(new DriveForwardRoutine(robot, kDrive));
-  RegisterAutonomous(new CenterGear(vision, robot, kDrive, gearController));
-  RegisterAutonomous(new LeftGear(vision, robot, kDrive, gearController));
-  RegisterAutonomous(new RightGear(vision, robot, kDrive, gearController));
-  RegisterAutonomous(new PassAutoLine(robot, kDrive));
-  RegisterAutonomous(new LeftHopper(robot, kDrive));
-  RegisterAutonomous(new BoilerFirstHopper(robot, kDrive));
-  RegisterAutonomous(new Blank1(vision, robot, kDrive, gearController));
-  RegisterAutonomous(new Blank2(vision, robot, kDrive, gearController));
-  RegisterAutonomous(new Blank3(vision, robot, kDrive, gearController));
+  RegisterAutonomous(new DriveForwardRoutine(robot, kDrive, lights));
+  RegisterAutonomous(new CenterGear(vision, robot, kDrive, gearController, lights));
+  RegisterAutonomous(new LeftGear(vision, robot, kDrive, gearController, lights));
+  RegisterAutonomous(new RightGear(vision, robot, kDrive, gearController, lights));
+  RegisterAutonomous(new PassAutoLine(robot, kDrive, lights));
+  RegisterAutonomous(new BoilerFirstHopper(robot, kDrive, lights));
 
+  RegisterAutonomous(new Blank1(robot, kDrive, gearController, lights));
+  RegisterAutonomous(new Blank2(robot, kDrive, gearController, lights));
+  RegisterAutonomous(new Blank3(robot, kDrive, gearController, lights));
 
   autoChooser = new AutoWidget();
 }

@@ -13,167 +13,198 @@
 
 class MainProgram : public frc::IterativeRobot {
 
-	//Creates a robot from class RobotModel
-	RobotModel *robot;
+    //Creates a robot from class RobotModel
+    RobotModel *robot;
 
-	//Creates a human control from RemoteControl, which includes ControlBoard
-	RemoteControl *humanControl;
-	VisionController *visionController;
+    //Creates a human control from RemoteControl, which includes ControlBoard
+    RemoteControl *humanControl;
+    VisionController *visionController;
 
-	//Creates a controller for drivetrain and superstructure
-	DriveController *driveController;
+    //Creates a controller for drivetrain and superstructure
+    DriveController *driveController;
 
-	//Creates an object of Dashboardlogger
-	DashboardLogger *dashboardLogger;
+    //Creates an object of Dashboardlogger
+    DashboardLogger *dashboardLogger;
 
-	ClimberController *climberController;
-	GearController *gearController;
-	Auto* auton;
-	CameraServer *camera;
+    ClimberController *climberController;
+    LightsController* lights;
 
-	//LightsController *lights;
+    GearController *gearController;
+    Auto* auton;
+    CameraServer *camera;
 
-	//Creates a time-keeper	`
-	double currTimeSec;
-	double lastTimeSec;
-	double deltaTimeSec;
+    //LightsController *lights;
 
-public:
-	MainProgram(void) {
-		robot             = new RobotModel();
-		humanControl      = new ControlBoard();
-		visionController  = new VisionController();
-		driveController   = new DriveController(robot, humanControl, visionController);
-		dashboardLogger   = new DashboardLogger(robot, humanControl);
-		climberController = new ClimberController(robot, humanControl);
-		gearController    = new GearController(robot, humanControl);
-		auton             = new Auto(visionController, driveController, robot, gearController);
+    //Creates a time-keeper	`
+    double currTimeSec;
+    double lastTimeSec;
+    double deltaTimeSec;
 
-		//lights            = new LightsController(humanControl);
-		//Initializes timekeeper variables
-		currTimeSec = 0.0;
-		lastTimeSec = 0.0;
-		deltaTimeSec = 0.0;
-	}
-private:
-	void RobotInit() {
-		RefreshAllIni();
-		robot->ResetTimer();
-		robot->Reset();
-		auton->ListOptions();
-		visionController->Disable();
+ public:
+    MainProgram(void) {
+        robot = new RobotModel();
+        humanControl = new ControlBoard();
+        lights = new LightsController(humanControl);
+        visionController = new VisionController();
+        driveController = new DriveController(robot, humanControl,
+                                              visionController);
+        dashboardLogger = new DashboardLogger(robot, humanControl);
+        climberController = new ClimberController(robot, humanControl);
+        gearController = new GearController(robot, humanControl);
+        auton = new Auto(visionController, driveController, robot,
+                         gearController, lights);
+        //lights            = new LightsController(humanControl);
+        //Initializes timekeeper variables
+        currTimeSec = 0.0;
+        lastTimeSec = 0.0;
+        deltaTimeSec = 0.0;
+    }
+ private:
+    void RobotInit() {
+        RefreshAllIni();
+        robot->ResetTimer();
+        robot->Reset();
+        auton->ListOptions();
+        visionController->Disable();
         camera = CameraServer::GetInstance();
         camera->StartAutomaticCapture();
         SmartDashboard::PutNumber("VISION_leftContour", 0.0);
         SmartDashboard::GetNumber("VISION_rightContour", 0.0);
-	}
+    }
 
-	void AutonomousInit() {
-		auton->Stop();
-		RefreshAllIni();
-		robot->ResetTimer();
-		robot->ResetEncoders();
+    void AutonomousInit() {
+        auton->Stop();
+        RefreshAllIni();
+        robot->ResetTimer();
+        robot->ResetEncoders();
 
-		driveController->Reset();
+        driveController->Reset();
 
-		//Resets timer variables
-		currTimeSec = 0.0;
-		lastTimeSec = 0.0;
-		deltaTimeSec = 0.0;
+        //Resets timer variables
+        currTimeSec = 0.0;
+        lastTimeSec = 0.0;
+        deltaTimeSec = 0.0;
 
-		visionController->Enable();
-		auton->Start();
+        visionController->Enable();
+        auton->Start();
 
-	}
+    }
 
-	void AutonomousPeriodic() {
-		//Autonoumous is running in a thread called by "auton->Start();"
-		dashboardLogger->UpdateData(); //JOystick data does NOT update during autonomous
-		visionController->Update();
-		//lights->Update(true);
-		SmartDashboard::PutNumber("LEFT", visionController->GetLeftContour());
-		SmartDashboard::PutNumber("RIGHT", visionController->GetRightContour());
-	}
+    void AutonomousPeriodic() {
+        //Autonoumous is running in a thread called by "auton->Start();"
+        dashboardLogger->UpdateData();  //JOystick data does NOT update during autonomous
+        visionController->Update();
+        //lights->Update(true);
+        SmartDashboard::PutNumber("LEFT", visionController->GetLeftContour());
+        SmartDashboard::PutNumber("RIGHT", visionController->GetRightContour());
+    }
 
-	void TeleopInit() {
-		auton->Stop();
-		RefreshAllIni();
-		robot->ResetTimer();
-		robot->ResetEncoders();
+    void TeleopInit() {
+        lights->SetEnabledRoutine();
+        auton->Stop();
+        RefreshAllIni();
+        robot->ResetTimer();
+        robot->ResetEncoders();
 
-		driveController->Reset();
-		climberController->Reset();
+        driveController->Reset();
+        climberController->Reset();
 
-		//Resets timer variables
-		currTimeSec = 0.0;
-		lastTimeSec = 0.0;
-		deltaTimeSec = 0.0;
+        //Resets timer variables
+        currTimeSec = 0.0;
+        lastTimeSec = 0.0;
+        deltaTimeSec = 0.0;
 
-		visionController->Enable();
-	}
+        visionController->Enable();
+    }
 
-	void TeleopPeriodic() {
-		dashboardLogger->UpdateData();
+    void TeleopPeriodic() {
+        dashboardLogger->UpdateData();
 
-		//Updates timer
-		lastTimeSec = currTimeSec;
-		currTimeSec = robot->GetTime();
-		deltaTimeSec = currTimeSec - lastTimeSec;
+        //Updates timer
+        lastTimeSec = currTimeSec;
+        currTimeSec = robot->GetTime();
+        deltaTimeSec = currTimeSec - lastTimeSec;
 
-		/*if (humanControl->GetResetEncodersDesired()){
-		    robot->leftDriveEncoder->Reset();
-		    robot->rightDriveEncoder->Reset();
-		    robot->shooterEncoder->Reset();
-	    }*/
+        /*if (humanControl->GetResetEncodersDesired()){
+         robot->leftDriveEncoder->Reset();
+         robot->rightDriveEncoder->Reset();
+         robot->shooterEncoder->Reset();
+         }*/
 
-		//Reads controls and updates controllers accordingly
-		RefreshAllIni();
-		humanControl->ReadControls();
-		driveController->Update(currTimeSec, deltaTimeSec);
-		climberController->Update();
-		visionController->Update();
-		gearController->Update();
-		//lights->Update(true);
-	}
+        //Reads controls and updates controllers accordingly
+        RefreshAllIni();
+        humanControl->ReadControls();
+        driveController->Update(currTimeSec, deltaTimeSec);
+        climberController->Update();
+        visionController->Update();
+        gearController->Update();
+        if (humanControl->GetClimberDesired()) {
+        lights->Climbing();
+        } else if (humanControl->GetShoutRoutineDesired()) {
+        lights->SetShoutRoutine();
+        } else if (humanControl->GetGearTitlerIntakeDesired()) {
+        lights->GearIntake();
 
-	void DisabledInit() {
-		auton->Stop();
+        } else if (humanControl->GetGearTitlerOuttakeDesired()) {
+        lights->GearOuttake();
 
-		RefreshAllIni();
+        } else if (humanControl->GetSlowDriveTier1Desired()
+                && humanControl->GetSlowDriveTier2Desired()) {
+        lights->Brake2();
 
-		robot->ResetEncoders();
-		driveController->Reset();
-		climberController->Reset();
-		visionController->Disable();
+        } else if (humanControl->GetSlowDriveTier1Desired()) {
+        lights->Brake1();
 
-	}
+        } else {
+        lights->SetEnabledRoutine();
+        }
+    }
 
-	void DisabledPeriodic() {
-		dashboardLogger->UpdateData();
-		//robot->UpdateCurrent();
-		//auton->Stop();
-		//Reads controls and updates controllers accordingly
+    void DisabledInit() {
+        auton->Stop();
 
-		//lights->Update(false);
-		visionController->Update();
-	    humanControl->ReadControls();
-	    gearController->Update();
-	    RefreshAllIni();
-	}
-	void RefreshAllIni() {
-	    robot->RefreshIni();
-	    driveController->RefreshIni();
-	    SmartDashboard::PutNumber("H_LOW", robot->pini->getf("CAMERA", "h_low", 0));
-        SmartDashboard::PutNumber("H_HIGH", robot->pini->getf("CAMERA", "h_high", 0));
-        SmartDashboard::PutNumber("S_LOW", robot->pini->getf("CAMERA", "s_low", 0));
-        SmartDashboard::PutNumber("S_HIGH", robot->pini->getf("CAMERA", "s_high", 0));
-        SmartDashboard::PutNumber("V_LOW", robot->pini->getf("CAMERA", "v_low", 0));
-        SmartDashboard::PutNumber("V_HIGH", robot->pini->getf("CAMERA", "v_HIGH", 0));
+        RefreshAllIni();
+
+        robot->ResetEncoders();
+        driveController->Reset();
+        climberController->Reset();
+        visionController->Disable();
+        lights->SetDisabledRoutine();
+    }
+
+    void DisabledPeriodic() {
+
+        dashboardLogger->UpdateData();
+        //robot->UpdateCurrent();
+        //auton->Stop();
+        //Reads controls and updates controllers accordingly
+
+        //lights->Update(false);
+        visionController->Update();
+        humanControl->ReadControls();
+        gearController->Update();
+        RefreshAllIni();
+    }
+    void RefreshAllIni() {
+        robot->RefreshIni();
+        driveController->RefreshIni();
+        SmartDashboard::PutNumber("H_LOW",
+                                  robot->pini->getf("CAMERA", "h_low", 0));
+        SmartDashboard::PutNumber("H_HIGH",
+                                  robot->pini->getf("CAMERA", "h_high", 0));
+        SmartDashboard::PutNumber("S_LOW",
+                                  robot->pini->getf("CAMERA", "s_low", 0));
+        SmartDashboard::PutNumber("S_HIGH",
+                                  robot->pini->getf("CAMERA", "s_high", 0));
+        SmartDashboard::PutNumber("V_LOW",
+                                  robot->pini->getf("CAMERA", "v_low", 0));
+        SmartDashboard::PutNumber("V_HIGH",
+                                  robot->pini->getf("CAMERA", "v_HIGH", 0));
 
         robot->pini->getf("PINI", "PINI_P", 0.0);
-		robot->pini->getf("PINI", "PINI_I", 0.0);
-		robot->pini->getf("PINI", "PINI_D", 0.0);
-	}
+        robot->pini->getf("PINI", "PINI_I", 0.0);
+        robot->pini->getf("PINI", "PINI_D", 0.0);
+    }
 };
 
 START_ROBOT_CLASS(MainProgram);
