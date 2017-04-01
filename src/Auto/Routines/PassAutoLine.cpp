@@ -23,10 +23,10 @@ void PassAutoLine::Routine() {
 
 void PassAutoLine::Prestart() {
 	gearController->gearTilterPID->SetPID(
-	        				robot->pini->getf("GEAR_PID", "gear_p", 0.0),
-							robot->pini->getf("GEAR_PID", "gear_i", 0.0),
-							robot->pini->getf("GEAR_PID", "gear_d", 0.0),
-							robot->pini->getf("GEAR_PID", "gear_f", 0.0));
+	        				gear_p,
+							gear_i,
+							gear_d,
+							gear_f);
 	        		gearController->gearTilterPID->SetOutputRange(-1.0, 1.0);
 	        		gearController->gearTilterPID->SetSetpoint(GEAR_POT_UP_POSITION);
 }

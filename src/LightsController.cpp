@@ -32,7 +32,6 @@ void LightsController::Update(bool enabled) {
 	switch (m_stateVal) {
 	case (kInitialize):
 		nextState = kTeleop;
-		SmartDashboard::PutString("LIGHTS_debug", "init reached");
 		break;
 	case (kTeleop):
         /*
@@ -42,11 +41,9 @@ void LightsController::Update(bool enabled) {
 				SetShoutRoutine();
 			} else {
 				SetEnabledRoutine();
-				SmartDashboard::PutString("LIGHTS_debug_2", "enabled reached");
 			}
 		} else {
 			SetDisabledRoutine();
-			SmartDashboard::PutString("LIGHTS_debug_3", "disabled reached");
 		}*/
 
 		nextState = kTeleop;

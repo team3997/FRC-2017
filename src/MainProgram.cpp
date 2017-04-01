@@ -68,8 +68,6 @@ class MainProgram : public frc::IterativeRobot {
         camera = CameraServer::GetInstance();
 
         camera->StartAutomaticCapture();
-        SmartDashboard::PutNumber("VISION_leftContour", 0.0);
-        SmartDashboard::GetNumber("VISION_rightContour", 0.0);
     }
 
     void AutonomousInit() {
@@ -95,8 +93,6 @@ class MainProgram : public frc::IterativeRobot {
         dashboardLogger->UpdateData();  //JOystick data does NOT update during autonomous
         visionController->Update();
         //lights->Update(true);
-        SmartDashboard::PutNumber("LEFT", visionController->GetLeftContour());
-        SmartDashboard::PutNumber("RIGHT", visionController->GetRightContour());
     }
 
     void TeleopInit() {
@@ -127,7 +123,7 @@ class MainProgram : public frc::IterativeRobot {
 
 
         //Reads controls and updates controllers accordingly
-        RefreshAllIni();
+        //RefreshAllIni();
         humanControl->ReadControls();
         driveController->Update(currTimeSec, deltaTimeSec);
         climberController->Update();
@@ -183,23 +179,6 @@ class MainProgram : public frc::IterativeRobot {
     }
     void RefreshAllIni() {
         robot->RefreshIni();
-        driveController->RefreshIni();
-        SmartDashboard::PutNumber("H_LOW",
-                                  robot->pini->getf("CAMERA", "h_low", 0));
-        SmartDashboard::PutNumber("H_HIGH",
-                                  robot->pini->getf("CAMERA", "h_high", 0));
-        SmartDashboard::PutNumber("S_LOW",
-                                  robot->pini->getf("CAMERA", "s_low", 0));
-        SmartDashboard::PutNumber("S_HIGH",
-                                  robot->pini->getf("CAMERA", "s_high", 0));
-        SmartDashboard::PutNumber("V_LOW",
-                                  robot->pini->getf("CAMERA", "v_low", 0));
-        SmartDashboard::PutNumber("V_HIGH",
-                                  robot->pini->getf("CAMERA", "v_HIGH", 0));
-
-        robot->pini->getf("PINI", "PINI_P", 0.0);
-        robot->pini->getf("PINI", "PINI_I", 0.0);
-        robot->pini->getf("PINI", "PINI_D", 0.0);
     }
 };
 

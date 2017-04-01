@@ -49,33 +49,10 @@ void GearController::Update() {
 			}
 
         	if(!humanControl->GetGearTitlerDownDesired()){ //UP
-        		if (wasDown) {
-        			gearTilterPID->Reset();
-        		}
-        		gearTilterPID->SetPID(
-        				robot->pini->getf("GEAR_PID", "gear_p", 0.0),
-						robot->pini->getf("GEAR_PID", "gear_i", 0.0),
-						robot->pini->getf("GEAR_PID", "gear_d", 0.0),
-						robot->pini->getf("GEAR_PID", "gear_f", 0.0));
-        		gearTilterPID->SetOutputRange(-1.0, 0.7);
-        		gearTilterPID->SetSetpoint(GEAR_POT_UP_POSITION);
-        		wasDown = false;
-        		wasUp = true;
-        		gearTilterPID->Enable();
+        		GearPIDUp();
         	}
         	else if(humanControl->GetGearTitlerDownDesired()){ //DOWN
-        		/*if (wasUp) {
-        			gearTilterPID->Reset();
-        		}
-        		gearTilterPID->SetPID(
-        				robot->pini->getf("GEAR_DOWN_PID", "gear_down_p", 0.0),
-						robot->pini->getf("GEAR_DOWN_PID", "gear_down_i", 0.0),
-						robot->pini->getf("GEAR_DOWN_PID", "gear_down_d", 0.0));
-        		gearTilterPID->SetOutputRange(-0.5, 0.5);
-        		gearTilterPID->SetSetpoint(GEAR_POT_DOWN_POSITION);
-        		*/
         		GearPIDDown();
-
         	}
         	else {
         		wasDown = true;
@@ -83,9 +60,6 @@ void GearController::Update() {
         		gearTilterPID->Reset();
         		gearTilterPID->Disable();
         	}
-
-        	SmartDashboard::PutBoolean("GEAR_pid_enabled", gearTilterPID->IsEnabled());
-        	SmartDashboard::PutBoolean("GEAR_pid_p", robot->pini->getf("GEAR_PID", "gear_p", 0.0));
 
             nextState = kTeleop;
             break;
@@ -99,11 +73,11 @@ void GearController::GearPIDUp(){
 		gearTilterPID->Reset();
 	}
 	gearTilterPID->SetPID(
-			robot->pini->getf("GEAR_PID", "gear_p", 0.0),
-			robot->pini->getf("GEAR_PID", "gear_i", 0.0),
-			robot->pini->getf("GEAR_PID", "gear_d", 0.0),
-			robot->pini->getf("GEAR_PID", "gear_f", 0.0));
-	gearTilterPID->SetOutputRange(-1.0, 1.0);
+			gear_p,
+			gear_i,
+			gear_d,
+			gear_f);
+	gearTilterPID->SetOutputRange(-1.0, 0.7);
 	gearTilterPID->SetSetpoint(GEAR_POT_UP_POSITION);
 	wasDown = false;
 	wasUp = true;

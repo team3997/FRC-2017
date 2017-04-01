@@ -34,8 +34,40 @@ static const int DRIVE_X_PID_SAMPLES_AVERAGE           = 10;
 
 
 //PINI UPDATES
-static double PINI_P;
+/*static double PINI_P;
 static double PINI_D;
-static double PINI_I;
+static double PINI_I;*/
+
+//[DEBUGGING]
+
+//[DRIVE_PID]
+static const double drive_p = 0.4;
+static const double drive_i = 0.0;
+static const double drive_d = 0.05;
+
+//[GEAR_PID]
+static const double gear_p = 6.5;
+static const double gear_i = 0.000;
+static const double gear_d = 0.0;
+static const double gear_f = 0.1;
+
+//[GEAR_DOWN_PID]
+static const double gear_down_p = 0.0;
+static const double gear_down_i = 0.0;
+static const double gear_down_d = 0.0;
+
+//[CAMERA]
+static const double h_low = 0;
+static const double h_high = 180;
+static const double s_low = 0;
+static const double s_high = 255;
+static const double v_low = 0;
+static const double v_high = 255;
+
+//[PINI]
+static const double PINI_P = 160.0;
+static const double PINI_I = 9000.0;
+static const double PINI_D = 700.0;
+
 
 #endif

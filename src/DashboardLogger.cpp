@@ -28,6 +28,15 @@ void DashboardLogger::UpdateData() {
 	SmartDashboard::PutNumber("POT_GearTilterPot", robot->gearPot->Get());
 }
 
+
+void DashboardLogger::UpdateEssentialData() {
+	SmartDashboard::PutNumber("DRIVERJOY_driverLeftY", humanControl->GetJoystickValue(RemoteControl::kDriverJoy, RemoteControl::kLY));
+	SmartDashboard::PutNumber("DRIVERJOY_driverRightX", humanControl->GetJoystickValue(RemoteControl::kDriverJoy, RemoteControl::kRX));
+	SmartDashboard::PutNumber("LEFTDRIVE_ENC_GetDistance()", robot->leftDriveEncoder->GetDistance());
+	SmartDashboard::PutNumber("RIGHTDRIVE_ENC_GetDistance()", robot->rightDriveEncoder->GetDistance());
+	SmartDashboard::PutNumber("POT_GearTilterPot", robot->gearPot->Get());
+}
+
 /*  double GetVoltage(); //returns the voltage
  double GetTotalEnergy(); //returns the total energy of the PDP
  double GetTotalCurrent(); //returns the total current of the PDP

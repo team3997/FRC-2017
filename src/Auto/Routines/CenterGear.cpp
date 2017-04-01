@@ -24,7 +24,6 @@ void CenterGear::Routine() {
 }
 
 void CenterGear::Prestart() {
-	SmartDashboard::PutString("CENTERGEARSTATE", "RESET");
 }
 
 

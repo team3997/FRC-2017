@@ -149,5 +149,3 @@ void DriveController::Reset() {
 void DriveController::Stop() {
 	driveTrain->ArcadeDrive(0.00, 0.00, false);
 }
-void DriveController::RefreshIni() {
-}

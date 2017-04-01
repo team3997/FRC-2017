@@ -27,9 +27,9 @@ DriveSetPointStraightAction::DriveSetPointStraightAction(RobotModel *robot,
 	target_pass = 0;
 	leftEncoderStartDistance, rightEncoderStartDistance = 0.0;
 
-	P = robot->pini->getf("DRIVE_PID", "drive_p", 0.4);
-	I = robot->pini->getf("DRIVE_PID", "drive_i", 0.0);
-	D = robot->pini->getf("DRIVE_PID", "drive_d", 0.0);
+	P = drive_p;
+	I = drive_i;
+	D = drive_d;
 }
 
 bool DriveSetPointStraightAction::IsFinished() {
@@ -52,18 +52,11 @@ void DriveSetPointStraightAction::Update() {
 	if(ejectGear)
 		robot->SetGearIntakeSpeed(-GEAR_WHEELS_ACTIVE_MOTOR_SPEED);
 
-	SmartDashboard::PutBoolean("ACTION_DriveSetpointStraight", true);
-	SmartDashboard::PutNumber("LEFT_PID_DRIVE_SETPOINT", driveController->leftPID->GetSetpoint());
-	SmartDashboard::PutNumber("RIGHT_PID_DRIVE_SETPOINT", driveController->rightPID->GetSetpoint());
-	SmartDashboard::PutNumber("LEFT_PID_ERROR", driveController->leftPID->GetError());
-	SmartDashboard::PutNumber("RIGHT_PID_ERROR", driveController->rightPID->GetError());
 }
 
 void DriveSetPointStraightAction::Done() {
-	SmartDashboard::PutString("DEBUG_SETPOINT_ACTION", "MADE IT TO DONE");
 	driveController->leftPID->Disable();
 	driveController->rightPID->Disable();
-	SmartDashboard::PutBoolean("ACTION_DriveSetpointStraight", false);
 	driveController->Stop();
 }
 
