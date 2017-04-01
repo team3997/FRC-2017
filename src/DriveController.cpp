@@ -124,8 +124,8 @@ void DriveController::ArcadeDrive(double myY, double myX, bool teleOp) {
 			SQUARE_DRIVE_AXIS_INPUT = true;
 		}
 
-		driveTrain->ArcadeDrive(myY * GLOBAL_DRIVE_SPEED_MULTIPLIER,
-				myX * GLOBAL_DRIVE_SPEED_MULTIPLIER, SQUARE_DRIVE_AXIS_INPUT);
+		driveTrain->ArcadeDrive(myY * GLOBAL_DRIVE_SPEED_MULTIPLIER * HARDSET_DRIVE_SPEED_MAX,
+				myX * GLOBAL_DRIVE_SPEED_MULTIPLIER * HARDSET_DRIVE_SPEED_MAX, SQUARE_DRIVE_AXIS_INPUT);
 
 	} else {
 		driveTrain->ArcadeDrive(myY, myX, false);

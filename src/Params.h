@@ -7,6 +7,7 @@ static bool SQUARE_DRIVE_AXIS_INPUT                    = true;
 static const bool USE_ARCADE_DRIVE                     = true;
 
 static double GLOBAL_DRIVE_SPEED_MULTIPLIER            = 1.0;
+static const double HARDSET_DRIVE_SPEED_MAX			   = 0.9;
 
 static const double CLIMBER_HARDSET_MOTOR_SPEED        = 1.0;
 

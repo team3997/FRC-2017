@@ -57,7 +57,7 @@ void GearController::Update() {
 						robot->pini->getf("GEAR_PID", "gear_i", 0.0),
 						robot->pini->getf("GEAR_PID", "gear_d", 0.0),
 						robot->pini->getf("GEAR_PID", "gear_f", 0.0));
-        		gearTilterPID->SetOutputRange(-1.0, 1.0);
+        		gearTilterPID->SetOutputRange(-1.0, 0.7);
         		gearTilterPID->SetSetpoint(GEAR_POT_UP_POSITION);
         		wasDown = false;
         		wasUp = true;
