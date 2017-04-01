@@ -50,3 +50,10 @@ void AutoRoutine::WaitTime(double timeout) {
 void AutoRoutine::VisionSetpointX(VisionController *vision, DriveController *drive, RobotModel *robot, double setpoint, double maxSpeed, double timeout, bool waitForTimeout){
 	RunAction(new VisionSetpointXAction(vision, drive, robot, setpoint, maxSpeed, timeout, waitForTimeout));
 }
+
+void AutoRoutine::GearLifterUp(RobotModel *robot, DriveController* kDrive, GearController *gearController, double desired_distance, double maxSpeed, double timeout, bool waitForTimeout){
+  RunAction(new GearLifterUpAction(robot, kDrive, gearController, desired_distance, maxSpeed, timeout, waitForTimeout));
+}
+void AutoRoutine::GearLifterDown(RobotModel *robot, DriveController* kDrive, GearController *gearController, double desired_distance, double maxSpeed, double timeout, bool waitForTimeout){
+  RunAction(new GearLifterDownAction(robot, kDrive, gearController, desired_distance, maxSpeed, timeout, waitForTimeout));
+}

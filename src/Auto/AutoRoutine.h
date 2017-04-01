@@ -16,8 +16,10 @@
 #include "Action/DriveSetPointRotateAction.h"
 #include "Action/WaitTimeAction.h"
 #include "Action/VisionSetpointXAction.h"
-class AutoRoutine {
+#include "Action/GearLifterUpAction.h"
+#include "Action/GearLifterDownAction.h"
 
+class AutoRoutine {
 public:
 
   bool m_active = false;
@@ -33,6 +35,8 @@ public:
   void DriveDistanceStraight(RobotModel *robot, DriveController* kDrive, double desired_distance, double maxSpeed, double timeout, bool waitForTimeout);
   void DriveDistanceRotate(RobotModel *robot, DriveController* kDrive, double desired_distance, double maxSpeed, double timeout, bool waitForTimeout);
   void VisionSetpointX(VisionController *vision, DriveController *drive, RobotModel *robot, double setpoint, double maxSpeed, double timeout, bool waitForTimeout);
+  void GearLifterUp(RobotModel *robot, DriveController* kDrive, GearController *gearController, double desired_distance, double maxSpeed, double timeout, bool waitForTimeout);
+  void GearLifterDown(RobotModel *robot, DriveController* kDrive, GearController *gearController, double desired_distance, double maxSpeed, double timeout, bool waitForTimeout);
 
 void WaitTime(double distance);
 protected:

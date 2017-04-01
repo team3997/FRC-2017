@@ -14,7 +14,6 @@ PassAutoLine::PassAutoLine(RobotModel *robot, DriveController* driveTrain) {
 
 void PassAutoLine::Routine() {
 	DriveDistanceStraight(robot, driveTrain, 193.0, 0.8, 10.0, false);
-
 }
 
 void PassAutoLine::Prestart() {}

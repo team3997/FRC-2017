@@ -13,9 +13,8 @@ DriveForwardRoutine::DriveForwardRoutine(RobotModel *robot, DriveController* kDr
 }
 
 void DriveForwardRoutine::Routine() {
-	// TODO Auto-generated constructor stub
-	//DriveDistanceStraight(robot, kDrive, 97.0, 0.8, 4.0, true);
 	DriveDistanceStraight(robot, kDrive, 193.0, 0.8, 10.0, false);
+	WaitTime(2.0);
 }
 
 void DriveForwardRoutine::Prestart() {
