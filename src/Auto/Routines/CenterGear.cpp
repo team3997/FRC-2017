@@ -15,8 +15,12 @@ CenterGear::CenterGear(VisionController* vision, RobotModel* robot,
     this->gearController = gearController;
 }
 void CenterGear::Routine() {
-	GearLifterUp(robot, driveTrain, gearController, 87.0, 0.4, 8.0, true);
-	GearLifterDown(robot, driveTrain, gearController, -5.0, 0.25, 1.5, true);
+	gearController->GearPIDUp();
+	DriveDistanceStraight(robot, driveTrain, gearController, 61.0, 0.4, 4.0, true, lights, false);
+	DriveDistanceStraight(robot, driveTrain, gearController, 25.0, 0.25, 2.0, false, lights, false);
+	gearController->GearPIDDown();
+	DriveDistanceStraight(robot, driveTrain, gearController, -5.0, 0.25, 1.5, true, lights, true);
+	robot->SetGearIntakeSpeed(0.0);
 }
 
 void CenterGear::Prestart() {

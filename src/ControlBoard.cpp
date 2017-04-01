@@ -53,10 +53,10 @@ void ControlBoard::ReadControls() {
 		driverRightJoyX = driverJoy->GetRawAxis(XINPUT_WIN_RIGHT_X_AXIS);
 		driverRightJoyY = -driverJoy->GetRawAxis(XINPUT_WIN_RIGHT_Y_AXIS);
 
-		/*operatorLeftJoyX = operatorJoy->GetRawAxis(XINPUT_WIN_LEFT_X_AXIS);
+		operatorLeftJoyX = operatorJoy->GetRawAxis(XINPUT_WIN_LEFT_X_AXIS);
 		 operatorLeftJoyY = -operatorJoy->GetRawAxis(XINPUT_WIN_LEFT_Y_AXIS);
 		 operatorRightJoyX = operatorJoy->GetRawAxis(XINPUT_WIN_RIGHT_X_AXIS);
-		 operatorRightJoyY = -operatorJoy->GetRawAxis(XINPUT_WIN_RIGHT_Y_AXIS);*/
+		 operatorRightJoyY = -operatorJoy->GetRawAxis(XINPUT_WIN_RIGHT_Y_AXIS);
 	} else {
 		driverLeftJoyX = driverJoy->GetRawAxis(XINPUT_LINUX_LEFT_X_AXIS);
 		driverLeftJoyY = driverJoy->GetRawAxis(XINPUT_LINUX_LEFT_Y_AXIS);
@@ -123,7 +123,7 @@ double ControlBoard::GetJoystickValue(Joysticks j, Axes a) {
 		} else if (a == kRX) {
 			return operatorRightJoyX;
 		} else if (a == kRY) {
-			return operatorRightJoyX;
+			return operatorRightJoyY;
 		}
 		break;
 	default:

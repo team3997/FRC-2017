@@ -38,8 +38,8 @@ void AutoRoutine::DriveInterval(DriveController* kDrive, double seconds, double 
 }
 
 
-void AutoRoutine::DriveDistanceStraight(RobotModel* robot, DriveController* kDrive, double desired_distance, double maxSpeed, double timeout, bool waitForTimeout, LightsController* lights) {
-  RunAction(new DriveSetPointStraightAction(robot, kDrive, desired_distance, maxSpeed, timeout, waitForTimeout, lights));
+void AutoRoutine::DriveDistanceStraight(RobotModel *robot, DriveController* kDrive, GearController *gearController, double desired_distance, double maxSpeed, double timeout, bool waitForTimeout, LightsController *lights, bool ejectGear) {
+  RunAction(new DriveSetPointStraightAction(robot, kDrive, gearController, desired_distance, maxSpeed, timeout, waitForTimeout, lights, ejectGear));
 }
 
 void AutoRoutine::DriveDistanceRotate(RobotModel* robot, DriveController* kDrive, double desired_distance, double maxSpeed, double timeout, bool waitForTimeout, LightsController* lights) {

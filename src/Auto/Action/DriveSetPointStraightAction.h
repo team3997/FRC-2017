@@ -10,12 +10,16 @@
 
 #include "../../RobotModel.h"
 #include "../../DriveController.h"
+#include "../../GearController.h"
 #include "../../LightsController.h"
 #include "WPILib.h"
 #include "Action.h"
+
 class DriveSetPointStraightAction: public Action {
 public:
-	DriveSetPointStraightAction(RobotModel *robot, DriveController *driveController, double distance, double maxSpeed, double timeout, bool waitForTimeout, LightsController* lights);
+	DriveSetPointStraightAction(RobotModel *robot, DriveController *driveController,
+			GearController *gearController, double distance, double maxSpeed, double timeout, bool waitForTimeout,
+			LightsController* lights, bool ejectGear);
 	bool IsFinished();
 	void Update();
 	void Done();
@@ -24,8 +28,9 @@ public:
 private:
 	DriveController *driveController;
 	RobotModel *robot;
+	GearController *gearController;
 	LightsController* lights;
-	bool reachedSetpoint, waitForTimeout;
+	bool reachedSetpoint, waitForTimeout, ejectGear;
 
 	double distance, maxSpeed, timeout;
 

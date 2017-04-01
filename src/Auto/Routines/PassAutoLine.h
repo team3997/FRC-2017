@@ -11,13 +11,14 @@
 #include "../AutoRoutine.h"
 class PassAutoLine : public AutoRoutine {
  public:
-    PassAutoLine(RobotModel *robot, DriveController* driveTrain, LightsController* lights);
+    PassAutoLine(RobotModel *robot, DriveController* driveTrain, GearController *gearController, LightsController* lights);
     void Prestart();
 
    private:
     DriveController *driveTrain;
     RobotModel *robot;
     LightsController* lights;
+    GearController* gearController;
    protected:
     void Routine();
 };

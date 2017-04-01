@@ -22,6 +22,8 @@ class GearController {
 
     void Reset();
     void Update();
+    void GearPIDUp();
+    void GearPIDDown();
     enum GearState {
         kInitialize, kTeleop
     };

@@ -10,10 +10,11 @@
 
 #include "../AutoRoutine.h"
 #include "../../LightsController.h"
+#include "../../GearController.h"
 
 class DriveForwardRoutine: public AutoRoutine {
 public:
-	DriveForwardRoutine(RobotModel *robot, DriveController* kDrive, LightsController* lights);
+	DriveForwardRoutine(RobotModel *robot, DriveController* kDrive, GearController *gearController, LightsController* lights);
 	void Prestart();
 
 protected:
@@ -21,6 +22,7 @@ protected:
 
 private:
 	DriveController* kDrive;
+	GearController* gearController;
 	RobotModel *robot;
 	LightsController* lights;
 };

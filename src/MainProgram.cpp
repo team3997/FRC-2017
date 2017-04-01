@@ -33,6 +33,7 @@ class MainProgram : public frc::IterativeRobot {
     Auto* auton;
     CameraServer *camera;
 
+
     //LightsController *lights;
 
     //Creates a time-keeper	`
@@ -65,6 +66,7 @@ class MainProgram : public frc::IterativeRobot {
         auton->ListOptions();
         visionController->Disable();
         camera = CameraServer::GetInstance();
+
         camera->StartAutomaticCapture();
         SmartDashboard::PutNumber("VISION_leftContour", 0.0);
         SmartDashboard::GetNumber("VISION_rightContour", 0.0);
@@ -84,7 +86,7 @@ class MainProgram : public frc::IterativeRobot {
         deltaTimeSec = 0.0;
 
         visionController->Enable();
-        //auton->Start();
+        auton->Start();
 
     }
 

@@ -21,6 +21,7 @@ GearController::GearController(RobotModel* robot, RemoteControl* humanControl) {
 	gearTilterPID->SetSetpoint(GEAR_POT_UP_POSITION);
 	gearTilterPID->Disable();
 	wasDown = true;
+	wasUp = false;
     m_stateVal = kInitialize;
     nextState = kInitialize;
 }
@@ -47,7 +48,7 @@ void GearController::Update() {
 				robot->SetGearIntakeSpeed(GEAR_WHEELS_RESTING_MOTOR_SPEED);
 			}
 
-        	if(humanControl->GetGearTitlerDownDesired()){ //UP
+        	if(!humanControl->GetGearTitlerDownDesired()){ //UP
         		if (wasDown) {
         			gearTilterPID->Reset();
         		}
@@ -62,7 +63,7 @@ void GearController::Update() {
         		wasUp = true;
         		gearTilterPID->Enable();
         	}
-        	else if(!humanControl->GetGearTitlerDownDesired()){ //DOWN
+        	else if(humanControl->GetGearTitlerDownDesired()){ //DOWN
         		/*if (wasUp) {
         			gearTilterPID->Reset();
         		}
@@ -73,12 +74,8 @@ void GearController::Update() {
         		gearTilterPID->SetOutputRange(-0.5, 0.5);
         		gearTilterPID->SetSetpoint(GEAR_POT_DOWN_POSITION);
         		*/
-        		wasDown = true;
-        		wasUp = false;
-        		gearTilterPID->Disable();
-        		if(robot->gearPot->Get() <= 0.32) {
-        			robot->SetGearTilterSpeed(0.1);
-        		}
+        		GearPIDDown();
+
         	}
         	else {
         		wasDown = true;
@@ -96,6 +93,32 @@ void GearController::Update() {
 
     m_stateVal = nextState;
 }
+
+void GearController::GearPIDUp(){
+	if (wasDown) {
+		gearTilterPID->Reset();
+	}
+	gearTilterPID->SetPID(
+			robot->pini->getf("GEAR_PID", "gear_p", 0.0),
+			robot->pini->getf("GEAR_PID", "gear_i", 0.0),
+			robot->pini->getf("GEAR_PID", "gear_d", 0.0),
+			robot->pini->getf("GEAR_PID", "gear_f", 0.0));
+	gearTilterPID->SetOutputRange(-1.0, 1.0);
+	gearTilterPID->SetSetpoint(GEAR_POT_UP_POSITION);
+	wasDown = false;
+	wasUp = true;
+	gearTilterPID->Enable();
+}
+
+void GearController::GearPIDDown(){
+	wasDown = true;
+	wasUp = false;
+	gearTilterPID->Disable();
+	if(robot->gearPot->Get() <= 0.32) {
+		robot->SetGearTilterSpeed(0.4);
+	}
+}
+
 GearController::~GearController() {
     // TODO Auto-generated destructor stub
 }

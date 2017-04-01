@@ -7,12 +7,13 @@
 
 #include "DriveSetPointStraightAction.h"
 #include "WPILib.h"
+#include "../../Params.h"
 
 //distance: distance in inches for the bot to drive
 //maxSpeed: max speed robot can drive to hit setpoint
 //timeout: amount of allowed time this action can run before ending
 DriveSetPointStraightAction::DriveSetPointStraightAction(RobotModel *robot,
-		DriveController *driveController, double distance, double maxSpeed, double timeout, bool waitForTimeout, LightsController* lights) {
+		DriveController *driveController, GearController *gearController, double distance, double maxSpeed, double timeout, bool waitForTimeout, LightsController* lights, bool ejectGear) {
 	this->driveController = driveController;
 	this->distance = distance;
 	this->timeout = timeout;
@@ -20,11 +21,13 @@ DriveSetPointStraightAction::DriveSetPointStraightAction(RobotModel *robot,
 	this->maxSpeed = maxSpeed;
 	this->waitForTimeout = waitForTimeout;
 	this->lights = lights;
+	this->gearController = gearController;
+	this->ejectGear = ejectGear;
 	reachedSetpoint = false;
 	target_pass = 0;
 	leftEncoderStartDistance, rightEncoderStartDistance = 0.0;
 
-	P = robot->pini->getf("DRIVE_PID", "drive_p", 0.0);
+	P = robot->pini->getf("DRIVE_PID", "drive_p", 0.4);
 	I = robot->pini->getf("DRIVE_PID", "drive_i", 0.0);
 	D = robot->pini->getf("DRIVE_PID", "drive_d", 0.0);
 }
@@ -45,6 +48,10 @@ void DriveSetPointStraightAction::Update() {
 	} else {
 		reachedSetpoint = false;
 	}
+
+	if(ejectGear)
+		robot->SetGearIntakeSpeed(-GEAR_WHEELS_ACTIVE_MOTOR_SPEED);
+
 	SmartDashboard::PutBoolean("ACTION_DriveSetpointStraight", true);
 	SmartDashboard::PutNumber("LEFT_PID_DRIVE_SETPOINT", driveController->leftPID->GetSetpoint());
 	SmartDashboard::PutNumber("RIGHT_PID_DRIVE_SETPOINT", driveController->rightPID->GetSetpoint());
