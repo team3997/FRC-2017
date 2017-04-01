@@ -7,17 +7,19 @@
 
 #include "AutoSelector.h"
 
-AutoSelector::AutoSelector(VisionController *vision, RobotModel* robot, DriveController* kDrive, GearController* gearController) {
+AutoSelector::AutoSelector(VisionController *vision, RobotModel* robot, DriveController* kDrive, GearController* gearController, LightsController* lights) {
 
   autoRoutines = new vector<AutoRoutine*>();
-  RegisterAutonomous(new DoNothingRoutine());
-  RegisterAutonomous(new DriveForwardRoutine(robot, kDrive));
-  RegisterAutonomous(new CenterGear(vision, robot, kDrive, gearController));
-  RegisterAutonomous(new LeftGear(vision, robot, kDrive, gearController));
-  RegisterAutonomous(new RightGear(vision, robot, kDrive, gearController));
-  RegisterAutonomous(new PassAutoLine(robot, kDrive));
-  RegisterAutonomous(new LeftHopper(robot, kDrive));
-  RegisterAutonomous(new BoilerFirstHopper(robot, kDrive));
+  RegisterAutonomous(new DriveForwardRoutine(robot, kDrive, lights));
+  RegisterAutonomous(new CenterGear(vision, robot, kDrive, gearController, lights));
+  RegisterAutonomous(new LeftGear(vision, robot, kDrive, gearController, lights));
+  RegisterAutonomous(new RightGear(vision, robot, kDrive, gearController, lights));
+  RegisterAutonomous(new PassAutoLine(robot, kDrive, lights));
+  RegisterAutonomous(new BoilerFirstHopper(robot, kDrive, lights));
+
+  RegisterAutonomous(new Blank1(robot, kDrive, gearController, lights));
+  RegisterAutonomous(new Blank2(robot, kDrive, gearController, lights));
+  RegisterAutonomous(new Blank3(robot, kDrive, gearController, lights));
 
   autoChooser = new AutoWidget();
 }
@@ -31,6 +33,10 @@ void AutoSelector::ListOptions() {
   autoChooser->AddObject("Pass AutoLine", 5);
   autoChooser->AddObject("Left Hopper", 6);
   autoChooser->AddObject("BoilerStraightHoppers", 7);
+  autoChooser->AddObject("Blank 1", 8);
+  autoChooser->AddObject("Blank 2", 9);
+  autoChooser->AddObject("Blank 3", 10);
+
 
   SmartDashboard::PutData("Autonomous: ", autoChooser);
 

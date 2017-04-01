@@ -7,13 +7,15 @@
 
 #include "PassAutoLine.h"
 
-PassAutoLine::PassAutoLine(RobotModel *robot, DriveController* driveTrain) {
+PassAutoLine::PassAutoLine(RobotModel *robot, DriveController* driveTrain, LightsController* lights) {
   this->robot = robot;
   this->driveTrain = driveTrain;
+  this->lights = lights;
 }
 
 void PassAutoLine::Routine() {
-	DriveDistanceStraight(robot, driveTrain, 193.0, 0.8, 10.0, false);
+	DriveDistanceStraight(robot, driveTrain, 193.0, 0.8, 10.0, false, lights);
+
 }
 
 void PassAutoLine::Prestart() {}

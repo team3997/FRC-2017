@@ -19,13 +19,12 @@ ControlBoard::ControlBoard() {
 		slowDriveTier2Button = new TriggerReader(driverJoy, XINPUT_WIN_LEFT_TRIGGER_AXIS);
 		driveBackButton = new ButtonReader(driverJoy, XINPUT_WIN_BACK_BUTTON);
 		driveBackOtherButton = new ButtonReader(driverJoy, XINPUT_WIN_LEFT_BUMPER);
+		shoutRoutineButton = new ButtonReader(driverJoy, XINPUT_WIN_YELLOW_BUTTON);
 
 		gearTilterIntakeButton = new ButtonReader(operatorJoy, XINPUT_WIN_GREEN_BUTTON);
         gearTilterOuttakeButton = new ButtonReader(operatorJoy, XINPUT_WIN_RED_BUTTON);
 
 		gearTilterDownButton = new TriggerReader(operatorJoy, XINPUT_WIN_RIGHT_TRIGGER_AXIS);
-		climberRunButton = new ButtonReader(operatorJoy, XINPUT_WIN_BLUE_BUTTON);
-		climberReverseButton = new ButtonReader(operatorJoy, XINPUT_WIN_RED_BUTTON);
 		climberLockButton = new ButtonReader(operatorJoy, XINPUT_WIN_YELLOW_BUTTON);
 		lightsActiveButton = new TriggerReader(operatorJoy, XINPUT_WIN_LEFT_TRIGGER_AXIS);
 	}
@@ -74,8 +73,7 @@ void ControlBoard::ReadControls() {
 	reverseDriveDesired = driveDirectionButton->IsDown();
 
 	//Superstructure Variables
-	climberDesired           = climberRunButton->IsDown();
-	climberReverseDesired    = climberReverseButton->IsDown();
+
 	climberLockDesired       = climberLockButton->IsDown();
 	slowDriveTier1Desired    = slowDriveTier1Button->IsDown();
 	slowDriveTier2Desired    = slowDriveTier2Button->IsDown();
@@ -85,6 +83,7 @@ void ControlBoard::ReadControls() {
 	gearTilterDownDesired    = gearTilterDownButton->IsDown();
 	gearTilterOuttakeDesired = gearTilterOuttakeButton->IsDown();
 	gearTilterIntakeDesired  = gearTilterIntakeButton->IsDown();
+    shoutRoutineDesired = shoutRoutineButton->IsDown();
 }
 
 //Reads the values of all buttons defined by this class
@@ -92,12 +91,11 @@ void ControlBoard::ReadAllButtons() {
 	driveDirectionButton->ReadValue();
 	slowDriveTier1Button->ReadValue();
 	slowDriveTier2Button->ReadValue();
-	climberRunButton->ReadValue();
-	climberReverseButton->ReadValue();
 	climberLockButton->ReadValue();
 	driveBackButton->ReadValue();
 	driveBackOtherButton->ReadValue();
 	lightsActiveButton->ReadValue();
+	shoutRoutineButton->ReadValue();
 	gearTilterDownButton->ReadValue();
 	gearTilterOuttakeButton->ReadValue();
 	gearTilterIntakeButton->ReadValue();
@@ -145,14 +143,6 @@ bool ControlBoard::GetArcadeDriveDesired() {
 	return arcadeDriveDesired;
 }
 
-bool ControlBoard::GetClimberDesired() {
-	return climberDesired;
-}
-
-bool ControlBoard::GetClimberReverseDesired() {
-	return climberReverseDesired;
-}
-
 bool ControlBoard::GetClimberLockDesired() {
 	return climberLockDesired;
 }
@@ -176,7 +166,9 @@ bool ControlBoard::GetDriveBackOtherDesired() {
 bool ControlBoard::GetLightsActiveDesired(){
 	return lightsActiveDesired;
 }
-
+bool ControlBoard::GetShoutRoutineDesired() {
+    return shoutRoutineDesired;
+}
 bool ControlBoard::GetGearTitlerDownDesired(){
 	return gearTilterDownDesired;
 }
