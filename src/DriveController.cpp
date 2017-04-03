@@ -46,7 +46,6 @@ DriveController::~DriveController() {
 void DriveController::Update(double currTimeSec, double deltaTimeSec) {
 	switch (m_stateVal) {
 	case (kInitialize):
-		prevBackState = false;
 		visionPID->Disable();
 		leftPID->Disable();
 		rightPID->Disable();
@@ -66,33 +65,13 @@ void DriveController::Update(double currTimeSec, double deltaTimeSec) {
 		driverRightY = humanControl->GetJoystickValue(RemoteControl::kDriverJoy,
 				RemoteControl::kRY);
 
-		if(humanControl->GetDriveBackDesired() || humanControl->GetDriveBackOtherDesired()){
-			currBackState = true;
-			if(prevBackState == false && currBackState == true){
-                robot->leftDriveEncoder->Reset();
-                robot->rightDriveEncoder->Reset();
-
-                leftPID->SetOutputRange(-0.8, 0.8);
-                leftPID->SetPID(0.125, 0.0, 0.0);
-                leftPID->SetSetpoint(-4.0);
-
-                rightPID->SetOutputRange(-0.8, 0.8);
-                rightPID->SetPID(0.125, 0.0, 0.0);
-                rightPID->SetSetpoint(-4.0);
-
-                leftPID->Enable();
-                rightPID->Enable();
-                prevBackState = true;
-			}
-		} else if (humanControl->GetArcadeDriveDesired()) {
+		if (humanControl->GetArcadeDriveDesired()) {
 			leftPID->Disable();
 			rightPID->Disable();
-			prevBackState = false;
 			ArcadeDrive(driverLeftY, -driverRightX, true);
 		} else {
 			leftPID->Disable();
 			rightPID->Disable();
-			prevBackState = false;
 			TankDrive(driverLeftY, driverRightY);
 		}
 
@@ -105,10 +84,6 @@ void DriveController::Update(double currTimeSec, double deltaTimeSec) {
 
 void DriveController::ArcadeDrive(double myY, double myX, bool teleOp) {
 	if (teleOp) {
-		if (humanControl->GetReverseDriveDesired()) {
-			myX = -myX;
-			myY = -myY;
-		}
 
 		if((humanControl->GetSlowDriveTier1Desired() && !humanControl->GetSlowDriveTier2Desired())
 				|| (!humanControl->GetSlowDriveTier1Desired() && humanControl->GetSlowDriveTier2Desired())) {

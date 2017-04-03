@@ -51,7 +51,6 @@ private:
   RemoteControl *humanControl;
   double testVariable;
   double test2Variable;
-  bool prevBackState, currBackState;
   RobotDrive *driveTrain;
   uint32_t m_stateVal;
   uint32_t nextState;

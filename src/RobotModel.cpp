@@ -19,21 +19,16 @@ RobotModel::RobotModel() {
 	leftDriveMotorB = new Spark(LEFT_DRIVE_MOTOR_B_PWM_PORT);
 	rightDriveMotorA = new Spark(RIGHT_DRIVE_MOTOR_A_PWM_PORT);
 	rightDriveMotorB = new Spark(RIGHT_DRIVE_MOTOR_B_PWM_PORT);
-	gearTilterMotor = new VictorSP(GEAR_TILTER_MOTOR_PWM_PORT);
-	gearIntakeMotor = new VictorSP(GEAR_INTAKE_MOTOR_PWM_PORT);
+	gearTilterMotor = new Talon(GEAR_TILTER_MOTOR_PWM_PORT);
+	gearIntakeMotor = new Talon(GEAR_INTAKE_MOTOR_PWM_PORT);
 	//Init superstructure motors
-	climberMotor = new Talon(CLIMBER_MOTOR_PWM_PORT);
+	climberMotor = new VictorSP(CLIMBER_MOTOR_PWM_PORT);
 
 	//Init encoders
 	leftDriveEncoder = new Encoder(LEFT_DRIVE_ENCODER_PORTS[0],
 			LEFT_DRIVE_ENCODER_PORTS[1]);
 	rightDriveEncoder = new Encoder(RIGHT_DRIVE_ENCODER_PORTS[0],
 			RIGHT_DRIVE_ENCODER_PORTS[1]);
-
-	climberLockerServo = new Servo(CLIMBER_LOCKER_SERVO_PWM_PORT);
-
-	climberLockerServo->SetSafetyEnabled(false);
-
 
 	climberMotor->SetSafetyEnabled(false);
 
@@ -184,10 +179,6 @@ void RobotModel::SetClimberMotorSpeed(double speed) {
 
 double RobotModel::GetClimberMotorSpeed() {
 	return climberMotor->Get();
-}
-
-void RobotModel::SetClimberLockServoSpeed(double speed){
-	climberLockerServo->Set(speed);
 }
 
 void RobotModel::SetGearIntakeSpeed(double speed) {

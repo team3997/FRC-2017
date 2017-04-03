@@ -52,7 +52,6 @@ class MainProgram : public frc::IterativeRobot {
         climberController = new ClimberController(robot, humanControl);
         gearController = new GearController(robot, humanControl);
         auton = new Auto(visionController, driveController, robot, gearController, lights);
-        //lights            = new LightsController(humanControl);
         //Initializes timekeeper variables
         currTimeSec = 0.0;
         lastTimeSec = 0.0;
@@ -104,6 +103,7 @@ class MainProgram : public frc::IterativeRobot {
 
         driveController->Reset();
         climberController->Reset();
+        gearController->Reset();
 
         //Resets timer variables
         currTimeSec = 0.0;
@@ -114,7 +114,7 @@ class MainProgram : public frc::IterativeRobot {
     }
 
     void TeleopPeriodic() {
-        dashboardLogger->UpdateData();
+        dashboardLogger->UpdateEssentialData();
 
         //Updates timer
         lastTimeSec = currTimeSec;
@@ -127,7 +127,7 @@ class MainProgram : public frc::IterativeRobot {
         humanControl->ReadControls();
         driveController->Update(currTimeSec, deltaTimeSec);
         climberController->Update();
-        visionController->Update();
+        //visionController->Update();
         gearController->Update();
 
         if (humanControl->GetJoystickValue(RemoteControl::kOperatorJoy, RemoteControl::kRY) > 0.2) {

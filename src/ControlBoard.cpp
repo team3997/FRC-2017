@@ -20,6 +20,7 @@ ControlBoard::ControlBoard() {
 		driveBackButton = new ButtonReader(driverJoy, XINPUT_WIN_BACK_BUTTON);
 		driveBackOtherButton = new ButtonReader(driverJoy, XINPUT_WIN_LEFT_BUMPER);
 		shoutRoutineButton = new ButtonReader(driverJoy, XINPUT_WIN_YELLOW_BUTTON);
+		toggleDisabledGearTilter = new ButtonReader(driverJoy, XINPUT_WIN_LEFT_BUMPER);
 
 		gearTilterIntakeButton = new ButtonReader(operatorJoy, XINPUT_WIN_GREEN_BUTTON);
         gearTilterOuttakeButton = new ButtonReader(operatorJoy, XINPUT_WIN_RED_BUTTON);

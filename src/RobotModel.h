@@ -52,16 +52,14 @@ public:
 	Spark *leftDriveMotorA, *leftDriveMotorB, *rightDriveMotorA,
 			*rightDriveMotorB;
 
-	Talon *climberMotor;
+	VictorSP *climberMotor;
 	Ini *pini;
 
-	VictorSP *gearTilterMotor, *gearIntakeMotor;
+	Talon *gearTilterMotor, *gearIntakeMotor;
 
 	AnalogPotentiometer *gearPot;
 
 	Encoder *leftDriveEncoder, *rightDriveEncoder;
-
-	Servo *climberLockerServo;
 
 	Timer *timer;
 private:

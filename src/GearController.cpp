@@ -35,6 +35,9 @@ void GearController::Update() {
         case (kInitialize):
         	gearTilterPID->Disable();
         	wasDown = true;
+			gearTilterPID->SetPID(gear_p, gear_i, gear_d, gear_f);
+			gearTilterPID->SetOutputRange(-1.0, 0.7);
+			gearTilterPID->SetSetpoint(GEAR_POT_UP_POSITION);
             nextState = kTeleop;
             break;
         case (kTeleop):
@@ -48,17 +51,10 @@ void GearController::Update() {
 				robot->SetGearIntakeSpeed(GEAR_WHEELS_RESTING_MOTOR_SPEED);
 			}
 
-        	if(!humanControl->GetGearTitlerDownDesired()){ //UP
+        	if (humanControl->GetGearTitlerDownDesired()){ //UP
         		GearPIDUp();
-        	}
-        	else if(humanControl->GetGearTitlerDownDesired()){ //DOWN
+        	} else { //DOWN
         		GearPIDDown();
-        	}
-        	else {
-        		wasDown = true;
-        		wasUp = false;
-        		gearTilterPID->Reset();
-        		gearTilterPID->Disable();
         	}
 
             nextState = kTeleop;
@@ -72,13 +68,6 @@ void GearController::GearPIDUp(){
 	if (wasDown) {
 		gearTilterPID->Reset();
 	}
-	gearTilterPID->SetPID(
-			gear_p,
-			gear_i,
-			gear_d,
-			gear_f);
-	gearTilterPID->SetOutputRange(-1.0, 0.7);
-	gearTilterPID->SetSetpoint(GEAR_POT_UP_POSITION);
 	wasDown = false;
 	wasUp = true;
 	gearTilterPID->Enable();
