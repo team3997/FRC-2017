@@ -65,13 +65,14 @@ void DriveController::Update(double currTimeSec, double deltaTimeSec) {
 		driverRightY = humanControl->GetJoystickValue(RemoteControl::kDriverJoy,
 				RemoteControl::kRY);
 
-		if (humanControl->GetArcadeDriveDesired()) {
+		if(leftPID->IsEnabled() || rightPID->IsEnabled()){
 			leftPID->Disable();
 			rightPID->Disable();
+		}
+
+		if (humanControl->GetArcadeDriveDesired()) {
 			ArcadeDrive(driverLeftY, -driverRightX, true);
 		} else {
-			leftPID->Disable();
-			rightPID->Disable();
 			TankDrive(driverLeftY, driverRightY);
 		}
 

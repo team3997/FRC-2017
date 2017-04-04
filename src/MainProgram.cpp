@@ -10,6 +10,8 @@
 #include "GearController.h"
 #include <string.h>
 #include "Auto/Auto.h"
+#include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/core/core.hpp>
 
 class MainProgram : public frc::IterativeRobot {
 
@@ -31,7 +33,6 @@ class MainProgram : public frc::IterativeRobot {
 
     GearController *gearController;
     Auto* auton;
-    CameraServer *camera;
 
 
     //LightsController *lights;
@@ -64,9 +65,10 @@ class MainProgram : public frc::IterativeRobot {
         robot->Reset();
         auton->ListOptions();
         visionController->Disable();
-        camera = CameraServer::GetInstance();
 
-        camera->StartAutomaticCapture();
+        std::thread cameraThread(CameraThread);
+        cameraThread.detach();
+
     }
 
     void AutonomousInit() {
@@ -180,6 +182,21 @@ class MainProgram : public frc::IterativeRobot {
     void RefreshAllIni() {
         robot->RefreshIni();
     }
+
+    static void CameraThread()
+        {
+            cs::UsbCamera camera = CameraServer::GetInstance()->StartAutomaticCapture();
+            camera.SetResolution(352, 288);
+            cs::CvSink cvSink = CameraServer::GetInstance()->GetVideo();
+            cs::CvSource outputStreamStd = CameraServer::GetInstance()->PutVideo("Gray", 640, 480);
+            cv::Mat source;
+            cv::Mat output;
+            while(true) {
+                cvSink.GrabFrame(source);
+                cvtColor(source, output, cv::COLOR_BGR2GRAY);
+                outputStreamStd.PutFrame(output);
+            }
+        }
 };
 
 START_ROBOT_CLASS(MainProgram);
