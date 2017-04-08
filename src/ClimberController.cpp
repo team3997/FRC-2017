@@ -1,5 +1,61 @@
 /*
- * ClimberController.cpp
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\]]]]]]]]]]
+
+
+=]]
+* ClimberController.cpp
  *
  *  Created on: Feb 10, 2017
  *      Author: peter
@@ -26,10 +82,8 @@ void ClimberController::Update() {
 		break;
 	case (kTeleop):
 		//Climber Behaviour
-		if (humanControl->GetClimberReverseDesired()) {
-			robot->SetClimberMotorSpeed(-CLIMBER_HARDSET_MOTOR_SPEED);
-		} else if (humanControl->GetClimberDesired()) {
-			robot->SetClimberMotorSpeed(CLIMBER_HARDSET_MOTOR_SPEED);
+		if (humanControl->GetJoystickValue(RemoteControl::kOperatorJoy, RemoteControl::kRY) > 0.2) {
+			robot->SetClimberMotorSpeed(humanControl->GetJoystickValue(RemoteControl::kOperatorJoy, RemoteControl::kRY));
 		} else {
 			robot->climberMotor->SetSpeed(0.0);
 		}
@@ -40,8 +94,3 @@ void ClimberController::Update() {
 
 	m_stateVal = nextState;
 }
-
-ClimberController::~ClimberController() {
-	// TODO Auto-generated destructor stub
-}
-

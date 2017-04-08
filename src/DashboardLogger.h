@@ -17,6 +17,7 @@ public:
 	virtual ~DashboardLogger();
 
 	void UpdateData();
+	void UpdateEssentialData();
 
 private:
 	RobotModel *robot;

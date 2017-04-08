@@ -23,7 +23,6 @@ public:
 		kInitialize, kTeleop
 	};
 
-	virtual ~ClimberController();
 private:
 	RobotModel* robot;
 	RemoteControl* humanControl;

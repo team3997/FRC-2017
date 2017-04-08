@@ -10,18 +10,18 @@
 //distance: distance in inches for the bot to rotate
 //maxSpeed: max speed robot can drive to hit setpoint
 //timeout: amount of allowed time this action can run before ending
-DriveSetPointRotateAction::DriveSetPointRotateAction(RobotModel *robot, DriveController *driveController, double angle, double maxSpeed, double minTime, double timeout, bool wantMinTime) {
+DriveSetPointRotateAction::DriveSetPointRotateAction(RobotModel *robot, DriveController *driveController, double angle, double maxSpeed, double timeout, bool waitForTimeout, LightsController* lights) {
 	this->driveController = driveController;
 	this->distance = (angle * 40.0) / (180.0);
 	this->timeout = timeout;
 	this->robot = robot;
 	this->maxSpeed = maxSpeed;
-    this->minTime = minTime;
-    this->wantMinTime = wantMinTime;
+    this->waitForTimeout = waitForTimeout;
+    this->lights = lights;
 	reachedSetpoint = false;
 	leftEncoderStartDistance, rightEncoderStartDistance = 0.0;
 
-	P = robot->pini->getf("DRIVE_PID", "drive_p", 0.0);
+	P = 0.3;
 	I = robot->pini->getf("DRIVE_PID", "drive_i", 0.0);
 	D = robot->pini->getf("DRIVE_PID", "drive_d", 0.0);
 	SmartDashboard::PutNumber("DRIVE_PID_P", P);
@@ -30,14 +30,20 @@ DriveSetPointRotateAction::DriveSetPointRotateAction(RobotModel *robot, DriveCon
 }
 
 bool DriveSetPointRotateAction::IsFinished() {
-	return (Timer::GetFPGATimestamp() >= start_time + timeout) || (reachedSetpoint);
+    if((Timer::GetFPGATimestamp() >= start_time + timeout) && !(reachedSetpoint)) {
+    }
+    if(waitForTimeout)
+        return (Timer::GetFPGATimestamp() >= start_time + timeout);
+	else
+        return (Timer::GetFPGATimestamp() >= start_time + timeout) || reachedSetpoint;
+
 }
 
 void DriveSetPointRotateAction::Update() {
-	if(driveController->leftPID->OnTarget() && driveController->rightPID->OnTarget() && (Timer::GetFPGATimestamp() >= start_time + minTime)){
+	if(driveController->leftPID->OnTarget() && driveController->rightPID->OnTarget()) {
 		reachedSetpoint = true;
 	}
-	else{
+	else {
 		reachedSetpoint = false;
 	}
 }

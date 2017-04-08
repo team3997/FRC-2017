@@ -18,7 +18,6 @@ void AutoRoutineRunner::SetAutoRoutine(AutoRoutine* new_auto_routine) {
 void AutoRoutineRunner::Start() {
 	if (routine_thread == nullptr) {
 		routine_thread = new std::thread([&] {
-
 			autoTimer->Start();
 			autoStarted = true;
 			SmartDashboard::PutString("ThreadSTATE", "startedThread");
@@ -41,8 +40,6 @@ void AutoRoutineRunner::Stop() {
 	}
 	SmartDashboard::PutString("ThreadSTATE", "killedThread");
 	routine_thread = nullptr;
-	autoTimer->Stop();
-	autoTimer->Reset();
 	autoTimer->Stop();
 }
 

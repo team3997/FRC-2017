@@ -7,16 +7,19 @@
 
 #include "AutoSelector.h"
 
-AutoSelector::AutoSelector(RobotModel* robot, DriveController* kDrive) {
+AutoSelector::AutoSelector(VisionController *vision, RobotModel* robot, DriveController* kDrive, GearController* gearController, LightsController* lights) {
 
   autoRoutines = new vector<AutoRoutine*>();
   RegisterAutonomous(new DoNothingRoutine());
-  RegisterAutonomous(new DriveForwardRoutine(kDrive));
-  RegisterAutonomous(new JustShootRoutine(robot));
-  RegisterAutonomous(new CenterGear(robot, kDrive));
-  RegisterAutonomous(new LeftGear(robot, kDrive));
-  RegisterAutonomous(new RightGear(robot, kDrive));
-  RegisterAutonomous(new ShootHighGoal(robot, kDrive));
+  RegisterAutonomous(new DriveForwardRoutine(robot, kDrive, gearController, lights));
+  RegisterAutonomous(new CenterGear(vision, robot, kDrive, gearController, lights));
+  RegisterAutonomous(new LeftGear(vision, robot, kDrive, gearController, lights));
+  RegisterAutonomous(new RightGear(vision, robot, kDrive, gearController, lights));
+  RegisterAutonomous(new PassAutoLine(robot, kDrive, gearController, lights));
+  RegisterAutonomous(new BoilerFirstHopper(robot, kDrive, gearController, lights));
+  RegisterAutonomous(new Blank1(robot, kDrive, gearController, lights));
+  RegisterAutonomous(new Blank2(robot, kDrive, gearController, lights));
+  RegisterAutonomous(new Blank3(robot, kDrive, gearController, lights));
 
   autoChooser = new AutoWidget();
 }
@@ -24,11 +27,16 @@ AutoSelector::AutoSelector(RobotModel* robot, DriveController* kDrive) {
 void AutoSelector::ListOptions() {
   autoChooser->AddDefault("Do nothing (Default)", 0);
   autoChooser->AddObject("Drive (1s)", 1);
-  autoChooser->AddObject("Shoot", 2);
-  autoChooser->AddObject("CenterField Gear", 3);
-  autoChooser->AddObject("LeftField Gear", 4);
-  autoChooser->AddObject("RightField Gear", 5);
-  autoChooser->AddObject("ShootHighGoal", 6);
+  autoChooser->AddObject("CenterField Gear", 2);
+  autoChooser->AddObject("LeftField Gear", 3);
+  autoChooser->AddObject("RightField Gear", 4);
+  autoChooser->AddObject("Pass AutoLine", 5);
+  autoChooser->AddObject("Left Hopper", 6);
+  autoChooser->AddObject("Blank 1", 7);
+  autoChooser->AddObject("Blank 2", 8);
+  autoChooser->AddObject("Blank 3", 9);
+
+
   SmartDashboard::PutData("Autonomous: ", autoChooser);
 
 }

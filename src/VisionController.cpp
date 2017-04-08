@@ -21,8 +21,8 @@ void VisionController::Reset() {
 
 void VisionController::Update() {
 	SmartDashboard::PutBoolean("VISION_isProcessing", is_enabled);
-	left_contour = SmartDashboard::GetNumber("VISION_leftContour", 0.0);
-	right_contour = SmartDashboard::GetNumber("VISION_rightContour", 0.0);
+	//left_contour = SmartDashboard::GetNumber("VISION_leftContour", 0.0);
+	//right_contour = SmartDashboard::GetNumber("VISION_rightContour", 0.0);
 }
 
 void VisionController::Enable() {

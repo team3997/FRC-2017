@@ -7,18 +7,20 @@
 
 #ifndef SRC_AUTO_AUTOROUTINE_H_
 #define SRC_AUTO_AUTOROUTINE_H_
-
+#include "LightsController.h"
+#include "../GearController.h"
 #include <Auto/Action/DriveSetPointStraightAction.h>
 #include "WPILib.h"
 #include <iostream>
 #include "Action/Action.h"
 #include "Action/DriveIntervalAction.h"
-#include "Action/ShootAction.h"
 #include "Action/DriveSetPointRotateAction.h"
 #include "Action/WaitTimeAction.h"
 #include "Action/VisionSetpointXAction.h"
-class AutoRoutine {
+#include "Action/GearLifterUpAction.h"
+#include "Action/GearLifterDownAction.h"
 
+class AutoRoutine {
 public:
 
   bool m_active = false;
@@ -31,10 +33,11 @@ public:
 
   //ACTIONS:
   void DriveInterval(DriveController* kDrive, double seconds, double y, double x);
-  void Shoot(RobotModel *robot, double seconds, double speed);
-  void DriveDistanceStraight(RobotModel *robot, DriveController* kDrive, double desired_distance, double maxSpeed, double minTime, double timeout, bool wantMinTime);
-  void DriveDistanceRotate(RobotModel *robot, DriveController* kDrive, double desired_distance, double maxSpeed, double minTime, double timeout, bool wantMinTime);
-  void VisionSetpointX(VisionController *vision, DriveController *drive, double setpoint, double maxSpeed, double timeout);
+  void DriveDistanceStraight(RobotModel *robot, DriveController* kDrive, GearController *gearController, double desired_distance, double maxSpeed, double timeout, bool waitForTimeout, LightsController *lights, bool ejectGear);
+  void DriveDistanceRotate(RobotModel *robot, DriveController* kDrive, double desired_distance, double maxSpeed, double timeout, bool waitForTimeout, LightsController *lights);
+  void VisionSetpointX(VisionController *vision, DriveController *drive, RobotModel *robot, double setpoint, double maxSpeed, double timeout, bool waitForTimeout, LightsController *lights);
+  void GearLifterUp(RobotModel *robot, DriveController* kDrive, GearController *gearController, double desired_distance, double maxSpeed, double timeout, bool waitForTimeout);
+  void GearLifterDown(RobotModel *robot, DriveController* kDrive, GearController *gearController, double desired_distance, double maxSpeed, double timeout, bool waitForTimeout);
 
 void WaitTime(double distance);
 protected:

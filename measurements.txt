@@ -1,0 +1,21 @@
+robot to pivot point: 90.96
+rotate 60 degreees, but 73 worked properly
+pivot point to the peg wall: 43.4....-19.25
+"pivot point to the spoke" 29.4......-19.25
+""
+
+
+
+Reference: 
+lay down reference line from peg
+extrustion from peg: 3.375
+extrustion to pivot point: 43.4-3.375
+lay tape perpindicular to alliance wall
+alliance wall to reference line intersection : 110.0
+
+
+HOPPERS:
+
+Reference
+Alliance wall to their white line: 464.9
+

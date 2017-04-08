@@ -6,19 +6,25 @@
  */
 
 #include "CenterGear.h"
-
-CenterGear::CenterGear(RobotModel *robot, DriveController* driveTrain) {
-  this->robot = robot;
-  this->driveTrain = driveTrain;
+CenterGear::CenterGear(VisionController* vision, RobotModel* robot,
+                       DriveController* driveTrain, GearController* gearController, LightsController* lights) {
+    this->vision = vision;
+    this->robot = robot;
+    this->driveTrain = driveTrain;
+    this->lights = lights;
+    this->gearController = gearController;
 }
-
 void CenterGear::Routine() {
-	DriveDistanceStraight(robot, driveTrain, 80.0, 0.5, 4.0, 4.0, false);
-	DriveDistanceRotate(robot, driveTrain, -180.0, 0.7, 7.0, 7.0, false);
-	DriveDistanceStraight(robot, driveTrain, 80.0, 0.5, 4.0, 4.0, false);
+	gearController->GearPIDUp();
+	DriveDistanceStraight(robot, driveTrain, gearController, 61.0, 0.4, 4.0, true, lights, false);
+	DriveDistanceStraight(robot, driveTrain, gearController, 25.0, 0.25, 2.0, false, lights, false);
+	gearController->GearPIDDown();
+	DriveDistanceStraight(robot, driveTrain, gearController, -5.0, 0.25, 1.5, true, lights, true);
+	robot->SetGearIntakeSpeed(0.0);
 }
 
-void CenterGear::Prestart() {}
+void CenterGear::Prestart() {
+}
 
 
 CenterGear::~CenterGear() {

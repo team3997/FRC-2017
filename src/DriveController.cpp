@@ -18,8 +18,7 @@ DriveController::DriveController(RobotModel *myRobot,
 	robot->rightDriveEncoder->SetSamplesToAverage(DRIVE_Y_PID_SAMPLES_AVERAGE);
 
 	leftPIDOutput = new WheelsPIDOutput(robot, robot->LeftWheels);
-	leftPID = new PIDController(0.0, 0.0, 0.0, robot->leftDriveEncoder,
-			leftPIDOutput);
+	leftPID = new PIDController(0.0, 0.0, 0.0, robot->leftDriveEncoder, leftPIDOutput);
 	leftPID->SetOutputRange(-1.0, 1.0);
 	leftPID->SetAbsoluteTolerance(0.25);
 	leftPID->Disable();
@@ -47,7 +46,9 @@ DriveController::~DriveController() {
 void DriveController::Update(double currTimeSec, double deltaTimeSec) {
 	switch (m_stateVal) {
 	case (kInitialize):
-		prevBackState = false;
+		visionPID->Disable();
+		leftPID->Disable();
+		rightPID->Disable();
 		nextState = kTeleopDrive;
 		break;
 	case (kTeleopDrive):
@@ -64,33 +65,14 @@ void DriveController::Update(double currTimeSec, double deltaTimeSec) {
 		driverRightY = humanControl->GetJoystickValue(RemoteControl::kDriverJoy,
 				RemoteControl::kRY);
 
-		if(humanControl->GetDriveBackDesired()){
-			currBackState = true;
-			if(prevBackState == false && currBackState == true){
-                robot->leftDriveEncoder->Reset();
-                robot->rightDriveEncoder->Reset();
-
-                leftPID->SetOutputRange(-0.8, 0.8);
-                leftPID->SetPID(0.125, 0.0, 0.0);
-                leftPID->SetSetpoint(-4.0);
-
-                rightPID->SetOutputRange(-0.8, 0.8);
-                rightPID->SetPID(0.125, 0.0, 0.0);
-                rightPID->SetSetpoint(-4.0);
-
-                leftPID->Enable();
-                rightPID->Enable();
-                prevBackState = true;
-			}
-		} else if (humanControl->GetArcadeDriveDesired()) {
+		if(leftPID->IsEnabled() || rightPID->IsEnabled()){
 			leftPID->Disable();
 			rightPID->Disable();
-			prevBackState = false;
+		}
+
+		if (humanControl->GetArcadeDriveDesired()) {
 			ArcadeDrive(driverLeftY, -driverRightX, true);
 		} else {
-			leftPID->Disable();
-			rightPID->Disable();
-			prevBackState = false;
 			TankDrive(driverLeftY, driverRightY);
 		}
 
@@ -103,10 +85,6 @@ void DriveController::Update(double currTimeSec, double deltaTimeSec) {
 
 void DriveController::ArcadeDrive(double myY, double myX, bool teleOp) {
 	if (teleOp) {
-		if (humanControl->GetReverseDriveDesired()) {
-			myX = -myX;
-			myY = -myY;
-		}
 
 		if((humanControl->GetSlowDriveTier1Desired() && !humanControl->GetSlowDriveTier2Desired())
 				|| (!humanControl->GetSlowDriveTier1Desired() && humanControl->GetSlowDriveTier2Desired())) {
@@ -122,8 +100,8 @@ void DriveController::ArcadeDrive(double myY, double myX, bool teleOp) {
 			SQUARE_DRIVE_AXIS_INPUT = true;
 		}
 
-		driveTrain->ArcadeDrive(myY * GLOBAL_DRIVE_SPEED_MULTIPLIER,
-				myX * GLOBAL_DRIVE_SPEED_MULTIPLIER, SQUARE_DRIVE_AXIS_INPUT);
+		driveTrain->ArcadeDrive(myY * GLOBAL_DRIVE_SPEED_MULTIPLIER * HARDSET_DRIVE_SPEED_MAX,
+				myX * GLOBAL_DRIVE_SPEED_MULTIPLIER * HARDSET_DRIVE_SPEED_MAX, SQUARE_DRIVE_AXIS_INPUT);
 
 	} else {
 		driveTrain->ArcadeDrive(myY, myX, false);
@@ -146,6 +124,4 @@ void DriveController::Reset() {
 
 void DriveController::Stop() {
 	driveTrain->ArcadeDrive(0.00, 0.00, false);
-}
-void DriveController::RefreshIni() {
 }

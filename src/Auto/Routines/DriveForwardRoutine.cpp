@@ -7,14 +7,15 @@
 
 #include "DriveForwardRoutine.h"
 
-DriveForwardRoutine::DriveForwardRoutine(DriveController* kDrive) {
-
+DriveForwardRoutine::DriveForwardRoutine(RobotModel *robot, DriveController* kDrive, GearController *gearController, LightsController* lights) {
+	this->robot = robot;
 	this->kDrive = kDrive;
+	this->lights = lights;
+	this->gearController = gearController;
 }
 
 void DriveForwardRoutine::Routine() {
-	// TODO Auto-generated constructor stub
-	DriveInterval(kDrive, 1.0, 0.2, 0);
+	DriveDistanceStraight(robot, kDrive, gearController, 193.0, 0.8, 10.0, false, lights, false);
 }
 
 void DriveForwardRoutine::Prestart() {

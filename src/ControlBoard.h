@@ -26,34 +26,36 @@ public:
 
 	bool GetReverseDriveDesired();
 	bool GetArcadeDriveDesired();
-	bool GetShooterRunDesired();
-	bool GetClimberDesired();
-	bool GetFeederRunDesired();
-	bool GetFeederReverseDesired();
-	bool GetClimberReverseDesired();
-	bool GetResetEncodersDesired();
+	bool GetClimberLockDesired();
 	bool GetSlowDriveTier1Desired();
 	bool GetSlowDriveTier2Desired();
 	bool GetDriveBackDesired();
-	bool GetGearSuckReverseDesired();
-	bool GetGearSuckDesired();
+	bool GetDriveBackOtherDesired();
+	bool GetGearTitlerDownDesired();
+	bool GetGearTitlerOuttakeDesired();
+	bool GetGearTitlerIntakeDesired();
+	bool GetLightsActiveDesired();
+	bool GetShoutRoutineDesired();
+
+	ButtonReader *driveDirectionButton, *climberLockButton, *driveBackButton, *driveBackOtherButton,
+		*gearTilterOuttakeButton, *gearTilterIntakeButton, *shoutRoutineButton, *toggleDisabledGearTilter;
+
+	TriggerReader *slowDriveTier1Button, *slowDriveTier2Button, *gearTilterDownButton, *lightsActiveButton;
+
 private:
 
 	//booleans for desired states of robot
-	bool climberReverseDesired, feederReverseDesired, feederRunDesired,
-			reverseDriveDesired, arcadeDriveDesired, shooterRunDesired,
-			climberDesired, resetEncodersDesired, slowDriveTier1Desired, slowDriveTier2Desired, driveBackDesired, gearSuckDesired, gearSuckReverseDesired;
+
+	bool reverseDriveDesired, arcadeDriveDesired, climberLockDesired, slowDriveTier1Desired, slowDriveTier2Desired, lightsActiveDesired,
+		driveBackDesired, driveBackOtherDesired, gearTilterDownDesired, gearTilterOuttakeDesired, gearTilterIntakeDesired, shoutRoutineDesired,
+		toggleDisabledGearTilterDesired;
 
 	double driverLeftJoyX, driverLeftJoyY, driverRightJoyX, driverRightJoyY;
-	double operatorLeftJoyX, operatorLeftJoyY, operatorRightJoyX,
-			operatorRightJoyY;
+	double operatorLeftJoyX, operatorLeftJoyY, operatorRightJoyX, operatorRightJoyY;
 
 	Joystick *driverJoy, *operatorJoy;
 
-	ButtonReader *climberReverseButton, *driveDirectionButton,
-			*feederReverseButton, *climberRunButton, *shooterRunButton, *resetEncodersButton, *driveBackButton, *gearSuckReverseButton, *gearSuckButton;
 
-	TriggerReader *slowDriveTier1Button, *slowDriveTier2Button, *feederRunButton;
 
 	void ReadAllButtons();
 };

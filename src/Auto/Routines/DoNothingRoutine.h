@@ -10,7 +10,7 @@
 
 #include "../AutoRoutine.h"
 
-class DoNothingRoutine: public AutoRoutine {
+class DoNothingRoutine : public AutoRoutine {
 public:
 	void Routine();
 
